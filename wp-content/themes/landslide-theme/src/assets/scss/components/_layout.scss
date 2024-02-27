@@ -1,0 +1,63 @@
+// Page Header
+.page-header {
+	@include vertical-padding;
+	.cell {
+		@include clean-last-child;
+	}
+	&+.page-section.white-bg {
+		padding-top: 0;
+	}
+}
+
+// Page Sections
+.page-section {
+	@include vertical-padding;
+
+	// Transparent background
+	&.transparent-bg {
+		background-color: inherit;
+		&+& {
+			padding-top: 0;
+		}
+	}
+
+	// White background
+	&.white-bg {
+		background-color: $white;
+		&+& {
+			padding-top: 0;
+		}
+	}
+
+	// Blue background
+	&.blue-bg {
+		background-color: $primary-color;
+		&+& {
+			padding-top: 0;
+		}
+	}
+
+	// Light grey background
+	&.light-grey-bg {
+		background-color: $light-gray;
+		&+& {
+			padding-top: 0;
+		}
+	}
+
+	// Dark grey background
+	&.dark-grey-bg {
+		background-color: $dark-gray;
+		&+& {
+			padding-top: 0;
+		}
+	}
+
+	// Intro section
+	.intro-section { 
+		@include vertical-padding( .5, false, true );
+		.cell{
+			@include clean-last-child;
+		}
+	}
+}

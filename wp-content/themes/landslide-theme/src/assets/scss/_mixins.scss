@@ -1,0 +1,178 @@
+// Vertical padding
+@mixin vertical-padding( $value:1, $top:true, $bottom:true ) {
+  @if $top {
+    padding-top: rem-calc(map-get($grid-vertical-gutters, 'small')*$value);
+    @include breakpoint(medium) {
+      padding-top: rem-calc(map-get($grid-vertical-gutters, 'medium')*$value);
+    }
+    @include breakpoint(large) {
+      padding-top: rem-calc(map-get($grid-vertical-gutters, 'large')*$value);
+    }
+  }
+
+  @if $bottom {
+    padding-bottom: rem-calc(map-get($grid-vertical-gutters, 'small')*$value);
+    @include breakpoint(medium) {
+      padding-bottom: rem-calc(map-get($grid-vertical-gutters, 'medium')*$value);
+    }
+    @include breakpoint(large) {
+      padding-bottom: rem-calc(map-get($grid-vertical-gutters, 'large')*$value);
+    }
+  }
+}
+
+// Vertical margin
+@mixin vertical-margin( $value:1, $top:true, $bottom:true ) {
+  @if $top {
+    margin-top: rem-calc(map-get($grid-vertical-gutters, 'small')*$value);
+    @include breakpoint(medium) {
+      margin-top: rem-calc(map-get($grid-vertical-gutters, 'medium')*$value);
+    }
+    @include breakpoint(large) {
+      margin-top: rem-calc(map-get($grid-vertical-gutters, 'large')*$value);
+    }
+  }
+
+  @if $bottom {
+    margin-bottom: rem-calc(map-get($grid-vertical-gutters, 'small')*$value);
+    @include breakpoint(medium) {
+      margin-bottom: rem-calc(map-get($grid-vertical-gutters, 'medium')*$value);
+    }
+    @include breakpoint(large) {
+      margin-bottom: rem-calc(map-get($grid-vertical-gutters, 'large')*$value);
+    }
+  }
+}
+
+// Vertical deduct padding
+@mixin deduct-padding( $value:1 ) {
+  margin-bottom: rem-calc(map-get($grid-vertical-gutters, 'small')*-$value);
+  @include breakpoint(medium) {
+    margin-bottom: rem-calc(map-get($grid-vertical-gutters, 'medium')*-$value);
+  }
+  @include breakpoint(large) {
+    margin-bottom: rem-calc(map-get($grid-vertical-gutters, 'large')*-$value);
+  }
+}
+
+// Horizontal padding
+@mixin horizontal-padding( $value:1, $left:true, $right:true ) {
+  @if $left {
+    padding-left: rem-calc(map-get($grid-column-gutter, 'small')*$value);
+    @include breakpoint(medium) {
+      padding-left: rem-calc(map-get($grid-column-gutter, 'medium')*$value);
+    }
+    @include breakpoint(large) {
+      padding-left: rem-calc(map-get($grid-column-gutter, 'large')*$value);
+    }
+  }
+
+  @if $right {
+    padding-right: rem-calc(map-get($grid-column-gutter, 'small')*$value);
+    @include breakpoint(medium) {
+      padding-right: rem-calc(map-get($grid-column-gutter, 'medium')*$value);
+    }
+    @include breakpoint(large) {
+      padding-right: rem-calc(map-get($grid-column-gutter, 'large')*$value);
+    }
+  }
+}
+
+// Horizontal margin
+@mixin horizontal-margin( $value:1, $left:true, $right:true ) {
+  @if $left {
+    margin-left: rem-calc(map-get($grid-column-gutter, 'small')*$value);
+    @include breakpoint(medium) {
+      margin-left: rem-calc(map-get($grid-column-gutter, 'medium')*$value);
+    }
+    @include breakpoint(large) {
+      margin-left: rem-calc(map-get($grid-column-gutter, 'large')*$value);
+    }
+  }
+
+  @if $right {
+    margin-right: rem-calc(map-get($grid-column-gutter, 'small')*$value);
+    @include breakpoint(medium) {
+      margin-right: rem-calc(map-get($grid-column-gutter, 'medium')*$value);
+    }
+    @include breakpoint(large) {
+      margin-right: rem-calc(map-get($grid-column-gutter, 'large')*$value);
+    }
+  }
+}
+
+// Card padding
+@mixin card-padding( $value:1 ) {
+  padding: rem-calc(map-get($card-padding-vertical, 'small')*$value) rem-calc(map-get($card-padding-horizontal, 'small')*$value);
+  @include breakpoint(medium) {
+    padding: rem-calc(map-get($card-padding-vertical, 'medium')*$value) rem-calc(map-get($card-padding-horizontal, 'medium')*$value);
+  }
+  @include breakpoint(large) {
+    padding: rem-calc(map-get($card-padding-vertical, 'large')*$value) rem-calc(map-get($card-padding-horizontal, 'large')*$value);
+  }
+}
+
+// Clean a list
+@mixin clean-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+// Remove last child bottom margin
+@mixin clean-last-child {
+  &>*:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// Make text white
+@mixin white-text {
+  color: $white;
+  h1, h2, h3, h4, h5, h6,
+  .h1, .h2, .h3, .h4, .h5, .h6 {
+    color: $white;
+  }
+  a {
+    color: $white;
+  }
+  .button {
+    background-color: $white;
+    color: $primary-color;
+    &.hollow {
+      background-color: inherit;
+      border-color: $white;
+      color: $white;
+    }
+  }
+}
+
+// Icon styles
+@mixin icon-styles {
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Make background image cover container
+@mixin background-cover {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+// Image Cover
+@mixin image-cover {
+  position: absolute;
+  object-fit: cover;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}

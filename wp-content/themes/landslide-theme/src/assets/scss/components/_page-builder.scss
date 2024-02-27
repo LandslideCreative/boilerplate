@@ -1,0 +1,163 @@
+// One Column
+.page-section.one-column {
+	.cell {
+		@include clean-last-child;
+	}
+}
+
+// Two Column
+.page-section.two-column {
+	.two-column-content {
+		&>.cell {
+			@include clean-last-child;
+			&:first-child {
+				@include vertical-padding(.75, false, true);
+				@include breakpoint(medium) {
+					padding-bottom: 0;
+				}
+			}
+			img+* {
+				padding-top: 15px;
+			}
+		}
+		&.reverse-mobile {
+			&>.cell:first-child {
+				padding-bottom: 0;
+			}
+			&>.cell:last-child {
+				@include vertical-padding(.75, false, true);
+				@include breakpoint(medium) {
+					padding-bottom: 0;
+				}
+			}
+		}
+	}
+}
+
+// Content Blocks
+.page-section.content-blocks {
+	.content-blocks-container {
+		@include deduct-padding(.5);
+		.cell {
+			@include vertical-padding(.5, false, true);
+			@include clean-last-child;
+			.content-blocks-image.icon {
+				img {
+					width: 100px;
+				}
+			}
+			.content-blocks-image+* {
+				padding-top: 15px;
+			}
+		}
+	}
+}
+
+// Image overlay
+.page-section.image-overlay {
+	padding-top: 0;
+	position: relative;
+	@include breakpoint(medium) {
+		@include vertical-padding(2);
+	}	
+	.image-bg {
+		@include breakpoint(medium) {
+			position: absolute;
+			z-index: 1;
+			height: auto;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+		}
+		img {
+			@include breakpoint(medium) {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				object-position: center center;
+				pointer-events: none;
+			}
+		}
+	}
+	.cell {
+		z-index: 2;
+		.image-overlay-copy {
+			@include clean-last-child;
+			@include vertical-padding(.5);
+			@include horizontal-padding(1);			
+			margin-top: -40px;
+			background-color: $white;
+			@include breakpoint(medium) {
+				margin-top: 0;
+			}
+		}
+	}
+	&.copy-center {
+		.grid-x {
+			justify-content: center;
+		}
+	}
+	&.copy-right {
+		.grid-x {
+			justify-content: right;
+		}
+	}
+}
+
+// Expandable Content
+.page-section.expandable-content {
+	.accordion {
+		margin-bottom: 0;
+		.accordion-item {
+			margin-bottom: 20px;
+			&:last-child {
+				margin-bottom: 0;
+			}
+			a.accordion-title {
+				@include card-padding;
+				background-color: $light-gray;
+				text-decoration: none;
+				padding-right: 63px;
+				@include breakpoint(medium) {
+					padding-right: 73px;
+				}
+				h4 {
+					margin-bottom: 0;
+				}
+				&::before {
+					background-color: $primary-color;
+					border-radius: 100%;
+					width: 33px;
+					height: 33px;
+					text-align: center;
+					color: $white;
+					line-height: 26px;
+					font-size: rem-calc(24);
+					top: 50%;
+					right: 20px;
+					transform: translateY(-50%);
+					margin-top: 0;
+					@include breakpoint(medium) {
+						right: 25px;
+					}
+				}
+				&:hover, &:focus {
+					color: inherit;
+				}
+			}
+		}
+		.accordion-content {
+			@include card-padding;
+			@include clean-last-child;
+		}
+	}
+}
+
+// CTA
+.page-section.cta {
+	@include white-text;
+	.cell {
+		@include clean-last-child;
+	}
+}

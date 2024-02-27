@@ -1,0 +1,67 @@
+# General Files
+*~
+.DS_Store
+.svn
+.cvs
+*.bak
+*.swp
+Thumbs.db
+.well-known
+
+# Composer Files
+/vendor/
+
+# Config files
+wp-config.php
+wp-config-*.php
+
+# Log Files
+*.log
+error_log
+wc-logs/
+
+# Temporary Files
+tmp
+temp
+
+# Generated Files
+sitemap.xml
+sitemap.xml.gz
+wp-content/blogs.dir/
+
+# License Files
+core/license.txt
+core/readme.html
+
+# Backups
+*.gz
+*.zip
+wp-content/updraft/*
+wp-content/managewp/*
+wp-content/backup-db/*
+wp-content/backups/*
+wp-snapshots/*
+
+# Dev Plugins
+wp-content/plugins/query-monitor/
+wp-content/plugins/user-switching/
+wp-content/plugins/wp-crontrol/
+
+# Cache
+wp-content/cache/*
+wp-content/cache/supercache/*
+wp-content/wp-rocket-config/*
+wp-content/advanced-cache.php
+wp-content/wp-cache-config.php
+wp-content/cachewp-content/w3tc-config/*
+wp-content/w3tc-config/*
+wp-content/w3tc/pgcache/*
+
+# Uploads
+wp-content/upgrade/
+wp-content/uploads/
+
+# Wordfence
+wp-content/wflogs
+wp-content/wfcache
+wordfence-waf.php

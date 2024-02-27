@@ -1,0 +1,127 @@
+// Body font sizes
+body {
+	@include breakpoint(medium) {
+		font-size: $medium-font-size;
+	}
+	@include breakpoint(large) {
+		font-size: $large-font-size;
+	}
+}
+
+p.large {
+	font-size: rem-calc(18);
+	@include breakpoint(medium) {
+		font-size: rem-calc(19);
+	}
+	@include breakpoint(large) {
+		font-size: rem-calc(20);
+	}
+}
+
+// Vertical center class
+.vertical-center {
+	align-items: center;
+}
+
+// Accessible but visually hidden
+.visually-hidden {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+}
+
+// Remove margin bottom
+.no-bottom-margin {
+	&>* {
+		margin-bottom: 0;
+	}
+}
+
+// Reverse columns for mobile
+.reverse-mobile {
+	@include breakpoint(small) {
+		&>.cell:first-child {
+			order: 2;
+		}
+		&>.cell:last-child {
+			order: 1;
+		}
+	}
+	@include breakpoint(medium) {
+		&>.cell:first-child {
+			order: 1;
+		}
+		&>.cell:last-child {
+			order: 2;
+		}
+	}
+}
+
+// Text button
+.text-button {
+	text-transform: uppercase;
+	color: $primary-color;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+// Additional button styles
+.button {
+	text-decoration: none;
+	text-transform: uppercase;
+	@include breakpoint(medium) {
+		font-size: $medium-font-size;
+	}
+	@include breakpoint(large) {
+		font-size: $large-font-size;
+	}
+}
+
+// Check list
+ul.checkmarks {
+	@include clean-list;
+	li {
+		@include clean-last-child;
+		padding-left: 35px;
+		margin-bottom: 25px;
+		@include breakpoint(large) {
+			padding-left: 35px;
+		}
+		&::before {
+			content: url('data:image/svg+xml,%3Csvg version="1.1" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 16 16"%3E%3Ctitle%3Echeck%3C/title%3E%3Cpath d="M13.5 2l-7.5 7.5-3.5-3.5-2.5 2.5 6 6 10-10z" fill="%23000000"%3E%3C/path%3E%3C/svg%3E');
+			display: block;
+			width: 20px;
+			height: 20px;
+			border-radius: 100%;
+			float: left;
+			margin-left: -35px;
+			text-align: center;
+			@include breakpoint(large) {
+				width: 20px;
+				height: 20px;
+				margin-left: -35px;
+				padding-top: 4px;
+			}
+		}
+	}
+}
+
+// Gravity Forms
+body .gform_wrapper.gravity-theme {
+	.gform_heading {
+		.gform_required_legend {
+			display: none;
+		}
+	}
+	select {
+		padding-right: 24px;
+	}
+	.gfield-choice-input {
+		margin-bottom: 0;
+	}
+}
