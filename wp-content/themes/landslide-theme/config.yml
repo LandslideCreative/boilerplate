@@ -2,7 +2,7 @@
 PORT: 8000
 
 # Your project's server will proxy this localhost address
-LOCALHOST: https://wordpress.localhost
+LOCALHOST: https://boilerplate.localhost
 
 SSL:
   status: true
