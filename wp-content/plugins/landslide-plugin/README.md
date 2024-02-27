@@ -25,7 +25,7 @@ A custom page builder class that manages creates the admin experience for the pa
 
 ### Site Variables
 
-Site variables are a method of reusing text content across differe pages on the site. Located in the _/functions/ls-site-variables.php_ directory.
+Site variables are a method of reusing text content across different pages on the site. Located in the _/functions/ls-site-variables.php_ directory.
 
 ### Post Types
 
