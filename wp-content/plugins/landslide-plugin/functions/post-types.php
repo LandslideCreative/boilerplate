@@ -10,7 +10,7 @@
 \*------------------------------------*/
 
 // Staff CPT
-/* function ls_create_staff_post_type()
+function ls_create_staff_post_type()
 {
     // Taxonomy
     $singular = 'Department';
@@ -68,12 +68,10 @@
 
     register_post_type('staff',
         array(
-        'labels' => array(
-            
-        ),
+        'labels' => $labels,
         'public' => true,
         'hierarchical' => false,
-        'has_archive' => true,
+        'has_archive' => false,
         'menu_icon' => 'dashicons-businessperson',
         'supports' => array(
             'title',
@@ -88,5 +86,4 @@
     ));
 }
 
-add_action('init', 'ls_create_staff_post_type'); 
-*/
+add_action('init', 'ls_create_staff_post_type');

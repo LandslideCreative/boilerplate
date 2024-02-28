@@ -1,0 +1,10 @@
+// Staff styles
+
+.staff-list-item {
+	display: block;
+	color: $black;
+	text-decoration: none;
+	&:hover {
+		color: $black;
+	}
+}

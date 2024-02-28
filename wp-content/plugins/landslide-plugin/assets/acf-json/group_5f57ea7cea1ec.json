@@ -848,6 +848,34 @@
                     ],
                     "min": "",
                     "max": ""
+                },
+                "layout_65df6b352976c": {
+                    "key": "layout_65df6b352976c",
+                    "name": "page_specific_content",
+                    "label": "Page Specific Content",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_65df6b4429772",
+                            "label": "",
+                            "name": "",
+                            "aria-label": "",
+                            "type": "message",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "No additional settings are required for this section. If there's a defined page section for your current page or template, it will be displayed. If not, this section will not show at all.",
+                            "new_lines": "wpautop",
+                            "esc_html": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
                 }
             },
             "min": "",
@@ -880,5 +908,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1709061239
+    "modified": 1709140991
 }

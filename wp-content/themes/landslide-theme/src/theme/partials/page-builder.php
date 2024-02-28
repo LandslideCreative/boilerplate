@@ -26,11 +26,10 @@ if( have_rows('page_builder') ):
 			$post = get_post( $current_post );
 			setup_postdata( $post );
 		
-		/* // Page Specific Content (Needs to be added to custom fields)
+		// Page Specific Content
 		elseif( get_row_layout() == 'page_specific_content' ):
-			if( is_page_template( 'templates/template-sample.php' ) ) {
-				get_template_part('partials/page', 'sample');
-			} */
+			// Function defined in plugin file (functions/ls-page-builder.php)
+			LSPB()->page_specific_content();
 
 		// Page Section Partials
 		else: 
