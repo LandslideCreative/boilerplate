@@ -42,7 +42,7 @@
     "minimum-stability": "dev",
     "prefer-stable" : true,
     "require": {
-        "landslidecreative/advanced-custom-fields-pro" : "6.2.6",
+        "landslidecreative/advanced-custom-fields-pro" : "6.2.7",
         "wpackagist-plugin/akismet" : "5.3.1",
         "wpackagist-plugin/classic-editor" : "1.6.3",
         "wpackagist-plugin/duplicate-post" : "4.5",

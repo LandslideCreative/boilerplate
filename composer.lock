@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "498d9ef40d2eca3a67d0f04c07ba26fc",
+    "content-hash": "0336a51444e2e52c99ed1e2bccfa0546",
     "packages": [
         {
             "name": "composer/installers",
@@ -159,16 +159,16 @@
         },
         {
             "name": "landslidecreative/advanced-custom-fields-pro",
-            "version": "6.2.6",
+            "version": "6.2.7",
             "source": {
                 "type": "git",
                 "url": "git@github.com:jsjenkins/advanced-custom-fields-pro.git",
-                "reference": "9f2dc9838fef1f6e527952c90d86aa651f6c3361"
+                "reference": "5c434618bf7b094bf3e85d41e4f388c078190de8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jsjenkins/advanced-custom-fields-pro/zipball/9f2dc9838fef1f6e527952c90d86aa651f6c3361",
-                "reference": "9f2dc9838fef1f6e527952c90d86aa651f6c3361",
+                "url": "https://api.github.com/repos/jsjenkins/advanced-custom-fields-pro/zipball/5c434618bf7b094bf3e85d41e4f388c078190de8",
+                "reference": "5c434618bf7b094bf3e85d41e4f388c078190de8",
                 "shasum": ""
             },
             "require": {
@@ -176,10 +176,10 @@
             },
             "type": "wordpress-plugin",
             "support": {
-                "source": "https://github.com/jsjenkins/advanced-custom-fields-pro/tree/6.2.6",
+                "source": "https://github.com/jsjenkins/advanced-custom-fields-pro/tree/6.2.7",
                 "issues": "https://github.com/jsjenkins/advanced-custom-fields-pro/issues"
             },
-            "time": "2024-02-12T17:19:41+00:00"
+            "time": "2024-02-28T16:38:42+00:00"
         },
         {
             "name": "landslidecreative/events-calendar-pro",
