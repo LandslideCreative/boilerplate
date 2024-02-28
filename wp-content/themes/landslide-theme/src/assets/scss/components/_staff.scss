@@ -1,10 +1,11 @@
 // Staff styles
 
 .staff-list-item {
+	@include vertical-margin(.5, false, true);
 	display: block;
-	color: $black;
+	color: $body-font-color;
 	text-decoration: none;
 	&:hover {
-		color: $black;
+		color: $body-font-color;
 	}
 }

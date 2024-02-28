@@ -66,4 +66,11 @@ $(document).ready(function() {
 		}
 	});
 
+	// Event Filter
+	$('#event-filter').submit( function(){
+    	event.stopPropagation();
+		event.preventDefault();
+        window.location.href = $(this).find('select').val();
+    });
+
 });

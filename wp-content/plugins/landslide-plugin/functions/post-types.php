@@ -9,10 +9,10 @@
 
 \*------------------------------------*/
 
-// Staff CPT
+// Staff
 function ls_create_staff_post_type()
 {
-    // Taxonomy
+    // Department Taxonomy
     $singular = 'Department';
     $plural = 'Departments';
     $menu = $plural;
@@ -43,7 +43,7 @@ function ls_create_staff_post_type()
 
     register_taxonomy( 'department', array( 'staff' ), $args );
 
-    // Post Type
+    // Staff Post Type
     $singular = 'Staff Member';
     $plural = 'Staff Members';
     $menu = 'Staff';

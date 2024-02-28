@@ -71,3 +71,20 @@ This theme uses SASS. Variable files are found at _src/assets/scss/_ while the s
 
 Theme javascript is located in the _src/assets/js/_ folder. The theme includes JQuery.
 
+## Post Types
+
+### Staff
+  - _assets/scss/\_staff.scss_
+  - _partials/staff/list.php_
+  - _partials/staff/list-item.php_
+  - _templates/template-staff.php_
+  - _single-staff.php_
+
+### Events
+  - _assets/scss/\_event.scss_
+  - _partials/event/list-item.php_
+  - _partials/header/events.php_
+  - _templates/template-events-calendar.php_
+  - _tribe-events/_
+  - _tribe/_
+

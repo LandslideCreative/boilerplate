@@ -67,3 +67,15 @@ add_filter( 'acf/admin/prevent_escaped_html_notice', '__return_true' );
 
 // Allow unsafe html in ACF WYSIWYG fields
 add_filter( 'acf/the_field/allow_unsafe_html', function() { return true; }, 10, 2);
+
+// Remove Tribe Events slug notice
+function ls_mu_remove_tribe_events_notice() {
+    
+    echo '<style>
+        .tribe-notice-archive-slug-conflict {
+            display: none !important;
+        }
+    </style>';
+
+}
+add_action('admin_head', 'ls_mu_remove_tribe_events_notice');
