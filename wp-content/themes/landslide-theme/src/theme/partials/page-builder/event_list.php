@@ -1,4 +1,4 @@
-<?php // Page Builder - Post List
+<?php // Page Builder - Event List
 
 // Background color
 $background_color = get_sub_field('background_color');
@@ -8,51 +8,51 @@ $type = get_sub_field('type');
 
 // Posts Query
 $args = array(
-	'post_type' => 'post',
+	'start_date' => 'now'
 );
 
 // Specific Posts
 if( $type=='specific' ) {
 	$args['posts_per_page'] = -1;
 
-	$specific_posts = get_sub_field('posts');
+	$specific_posts = get_sub_field('events');
 	$args['post__in'] = $specific_posts;
 
-// By Category
+// Filtered
 } else if( $type=='filtered' ) {
 	$args['posts_per_page'] = 3;
 
 	$categories = get_sub_field('category');
 	$args['tax_query'] = array(
         array(
-            'taxonomy' => 'category',
+            'taxonomy' => 'tribe_events_cat',
             'field' => 'term_id',
             'terms' => $categories
         )
     );
 
-// Newest
+// Upcoming Events
 } else {
 	$args['posts_per_page'] = 3;
 }
 
-$post_list = new WP_Query( $args );
+$event_list = tribe_get_events($args, true);
 
-if ( $post_list->have_posts() ) { 
+if ( $event_list->have_posts() ) { 
 
 	// Store current post
 	$current_post = get_the_ID(); ?>
 
-	<div class="page-section <?php echo $background_color; ?>-bg post-list">
+	<div class="page-section <?php echo $background_color; ?>-bg event-list">
 
 		<?php LSPB()->display_section_header(); ?>
 
 		<div class="grid-container">
 			<div class="grid-x grid-padding-x">
-				<?php while ( $post_list->have_posts() ) {
-	        		$post_list->the_post(); ?>
+				<?php while ( $event_list->have_posts() ) {
+	        		$event_list->the_post(); ?>
 	        		<div class="cell">
-	        			<?php get_template_part('partials/posts/list', 'item'); ?>
+	        			<?php get_template_part('partials/event/list', 'item'); ?>
 	        		</div>
 	        	<?php } ?>
 			</div>

@@ -55,3 +55,40 @@ if( function_exists('acf_add_options_page') ) {
         'parent_slug'   => 'theme-settings',
     ));
 }
+
+// Display event dates in relationship field
+function ls_events_calendar_relationship_result( $text, $post, $field, $post_id ) {
+    $args['post__in'] = array($post->ID);
+
+    $events = tribe_get_events($args, true);
+
+    if ( $events->have_posts() ) {
+        $start_date = tribe_get_start_date($events->posts[0]->ID, false, 'm/d/y');
+        $text .= ' ['.$start_date.']';
+    }
+
+    return $text;
+}
+add_filter('acf/fields/relationship/result/name=events', 'ls_events_calendar_relationship_result', 10, 4);
+
+// Filter past events from relationship field
+function ls_events_calendar_filter_relationship_result( $options, $field, $post_id ) {
+    $timezone = wp_timezone_string();
+    $now = new DateTime("now", new DateTimeZone($timezone) );
+
+    $options['meta_query'] = array(
+        array(
+            'key' => '_EventEndDate',
+            'compare' => '>=',
+            'value' =>  $now->format('Y-m-d H:i:s'),
+            'type' => 'DATETIME'
+        )
+    );
+
+    $options['meta_key'] = '_EventStartDate';
+    $options['meta_type'] = 'DATETIME';
+    $options['orderby'] = 'meta_value';
+
+    return $options;
+}
+add_filter('acf/fields/relationship/query/name=events', 'ls_events_calendar_filter_relationship_result', 10, 3);

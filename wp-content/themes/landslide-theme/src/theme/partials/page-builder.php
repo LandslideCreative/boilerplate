@@ -1,10 +1,10 @@
 <?php 
-if( have_rows('page_builder') ):
+if( have_rows('page_builder') ) {
 
 	while( have_rows('page_builder') ) : the_row();
 
 		// Global Sections
-		if( get_row_layout() == 'global_section' ):
+		if( get_row_layout() == 'global_section' ) {
 			// Save current post
 			$current_post = get_the_ID();
 
@@ -27,7 +27,7 @@ if( have_rows('page_builder') ):
 			setup_postdata( $post );
 		
 		// Page Specific Content
-		elseif( get_row_layout() == 'page_specific_content' ):
+		} else if( get_row_layout() == 'page_specific_content' ) {
 			
 			// Partials for specific templates or pages
 			if( is_page_template( 'templates/template-staff.php' ) ) {
@@ -35,7 +35,8 @@ if( have_rows('page_builder') ):
 			}
 
 		// Page Section Partials
-		else: 
+		} else {
+
 			if( locate_template( 'partials/page-builder/'.get_row_layout().'.php' ) ) {
 
 				get_template_part( 'partials/page-builder/'.get_row_layout() );
@@ -54,8 +55,8 @@ if( have_rows('page_builder') ):
 				
 			<?php }
 
-		endif;
+		}
 
 	endwhile;
 	
-endif;
+}

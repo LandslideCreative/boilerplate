@@ -1,4 +1,4 @@
-<?php /* Template Name: Events Calendar Template */ 
+<?php /* Template Name: Events Calendar */ 
 get_header(); 
 
 if( is_archive() ) {

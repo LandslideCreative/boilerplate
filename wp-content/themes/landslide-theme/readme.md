@@ -73,17 +73,22 @@ Theme javascript is located in the _src/assets/js/_ folder. The theme includes J
 
 ## Post Types
 
+### Post
+  - _assets/scss/\_post.scss_
+  - _partials/posts/_
+  - _partials/page-builder/post_list.php_
+
 ### Staff
   - _assets/scss/\_staff.scss_
-  - _partials/staff/list.php_
-  - _partials/staff/list-item.php_
+  - _partials/staff/
   - _templates/template-staff.php_
   - _single-staff.php_
 
 ### Events
   - _assets/scss/\_event.scss_
-  - _partials/event/list-item.php_
+  - _partials/event/
   - _partials/header/events.php_
+  - _partials/page-builder/event_list.php_
   - _templates/template-events-calendar.php_
   - _tribe-events/_
   - _tribe/_
