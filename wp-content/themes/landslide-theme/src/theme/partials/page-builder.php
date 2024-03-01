@@ -28,14 +28,20 @@ if( have_rows('page_builder') ):
 		
 		// Page Specific Content
 		elseif( get_row_layout() == 'page_specific_content' ):
-			// Function defined in plugin file (functions/ls-page-builder.php)
-			LSPB()->page_specific_content();
+			
+			// Partials for specific templates or pages
+			if( is_page_template( 'templates/template-staff.php' ) ) {
+				get_template_part('partials/staff/list');
+			}
 
 		// Page Section Partials
 		else: 
 			if( locate_template( 'partials/page-builder/'.get_row_layout().'.php' ) ) {
+
 				get_template_part( 'partials/page-builder/'.get_row_layout() );
+			
 			} else { ?>
+				
 				<section class="page-section" <?php LSPB()->display_section_id(); ?>>
 					<div class="grid-container">
 						<div class="grid-x grid-padding-x">
@@ -45,6 +51,7 @@ if( have_rows('page_builder') ):
 						</div>
 					</div>
 				</section>
+				
 			<?php }
 
 		endif;

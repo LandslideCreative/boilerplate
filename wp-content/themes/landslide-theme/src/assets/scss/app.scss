@@ -72,12 +72,18 @@
 // @import 'slick/slick';
 // @import 'slick/slick-theme';
 
+// Base Styles
 @import 'components/wordpress';
 @import 'components/base';
-@import 'components/header';
 @import 'components/layout';
+@import 'components/header';
+@import 'components/footer';
 @import 'components/pagination';
+
+// Page Builder
 @import 'components/page-builder';
+
+// Post Types
 @import 'components/staff';
 @import 'components/event';
-@import 'components/footer';
+

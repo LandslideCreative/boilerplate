@@ -88,14 +88,6 @@ if( ! class_exists('LSPageBuilder') ) {
 			return true;
 		}
 
-		public function page_specific_content() {
-			if( is_page_template( 'templates/template-staff.php' ) ) {
-				get_template_part('partials/staff/list');
-			}
-
-			return true;
-		}
-
 	}
 
 	function LSPB() {
