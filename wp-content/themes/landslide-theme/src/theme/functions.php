@@ -222,9 +222,14 @@ require get_template_directory() . '/inc/display.php';
 
 require get_template_directory() . '/inc/menus.php';
 
-
 /*------------------------------------*\
     Text Editor
 \*------------------------------------*/
 
 require get_template_directory() . '/inc/text-editor.php';
+
+/*------------------------------------*\
+    Events
+\*------------------------------------*/
+
+require get_template_directory() . '/inc/events.php';
