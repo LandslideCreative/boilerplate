@@ -908,6 +908,7 @@ p.imagify-section-title.imagify-section-title {
 	z-index: 2;
 	-webkit-transition: all .275s;
 	transition: all .275s;
+	cursor: pointer;
 }
 
 .imagify-inline-options input[type="radio"]:not(:checked) + label:first-of-type,
@@ -922,6 +923,12 @@ p.imagify-section-title.imagify-section-title {
 
 .imagify-inline-options input[type="radio"]:checked + label {
 	background: #8BC34A
+}
+
+.imagify-inline-options input[type="radio"]:disabled + label {
+	background: #ccc;
+	color: #999;
+	cursor:not-allowed;
 }
 
 .imagify-inline-options .imagify-info {
@@ -1445,11 +1452,6 @@ ul.imagify-datas-details.imagify-datas-details {
 }
 
 /* Attachments specifics */
-.wp_attachment_image #imagify-visual-comparison .close-btn,
-.imagify-visual-comparison .close-btn {
-	top: 0;
-}
-
 .wp_attachment_image #imagify-visual-comparison .imagify-modal-content,
 .imagify-visual-comparison .imagify-modal-content {
 	padding-top: 40px;
@@ -1584,4 +1586,12 @@ ul.imagify-datas-details.imagify-datas-details {
 
 .imagify-upsell .imagify-meteo-icon {
 	filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(104deg) brightness(103%) contrast(103%);
+}
+
+.imagify-original-fize-size {
+	display: block !important;
+}
+
+.imagify-original-fize-size .value {
+	padding-left: 15px !important;
 }

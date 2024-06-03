@@ -3,9 +3,9 @@
 Contributors: theeventscalendar, borkweb, bordoni, brianjessee, aguseo, camwynsp, GeoffBel, jentheo, leahkoerper, lucatume, neillmcshea, vicskf, zbtirrell, juanfra
 Tags: events, calendar, event, venue, organizer, dates, date, google maps, conference, workshop, concert, meeting, seminar, summit, class, the events calendar, widget, pro
 Donate link: https://evnt.is/29
-Requires at least: 6.2.0
-Stable tag: 6.3.0
-Tested up to: 6.4.2
+Requires at least: 6.3
+Stable tag: 6.5.0
+Tested up to: 6.5.3
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -131,7 +131,6 @@ The plugin is produced by <a href="https://evnt.is/45">The Events Calendar</a>.
 = Current Contributors =
 
 <a href="https://profiles.wordpress.org/brianjessee">Brian Jessee</a>
-<a href="https://profiles.wordpress.org/geoffgraham">Geoff Graham</a>
 <a href="https://profiles.wordpress.org/bordoni">Gustavo Bordoni</a>
 <a href="https://profiles.wordpress.org/leahkoerper">Leah Koerper</a>
 <a href="https://profiles.wordpress.org/lucatume">Luca Tumedei</a>
@@ -144,6 +143,7 @@ The plugin is produced by <a href="https://evnt.is/45">The Events Calendar</a>.
 = Past Contributors =
 
 <a href="https://profiles.wordpress.org/mitogh">Crisoforo Gaspar</a>
+<a href="https://profiles.wordpress.org/geoffgraham">Geoff Graham</a>
 <a href="https://profiles.wordpress.org/paulskim">Paul Kim</a>
 <a href="https://profiles.wordpress.org/peterchester">Peter Chester</a>
 <a href="https://profiles.wordpress.org/roblagatta">Rob La Gatta</a>
@@ -214,6 +214,68 @@ Remember to always make a backup of your database and files before updating!
 
 == Changelog ==
 
+= [6.5.0] 2024-05-14 =
+
+* Version - Events Calendar PRO 6.5.0 is only compatible with The Events Calendar 6.5.0 and higher.
+* Fix - Upsell Notice for Event Tickets was not dismissible. [ECP-1685]
+* Fix - Use Google geolocation API to get proper address data for Venues when importing Events via Google Calendars. [TEC-5007]
+* Fix - Replace uses of the retired moment.js with Day.js [TEC-5011]
+* Tweak - Removed filters: `tribe_distance_units`
+
+= [6.4.0.1] 2024-05-06 =
+
+* Version - Events Calendar PRO 6.4.0.1 is only compatible with The Events Calendar 6.4.0.1 and higher.
+* Fix - Ensure Elementor compatibility doesn't load until the TEC Elementor compatibility has loaded. [ECP-1789]
+* Fix - Correct a user permissions check.
+* Language - 0 new strings added, 3 updated, 0 fuzzied, and 0 obsoleted
+
+= [6.4.0] 2024-04-30 =
+
+* Feature - Elementor Compatibility. Compatible with Elementor Free 3.21+ and Elementor Pro 3.20+.
+* Feature - Added component Elementor widgets for the single event page.
+* Feature - New widgets: Additional Fields and Related Events. Can be used outside of a single-event post by specifying an event ID or event query parameters.
+* Feature - Modified widgets: Event Organizer and Venue widgets support linking to the PRO Organizer and Venue pages, respectively.
+* Feature - All widgets utilize our PHP templating system, allowing customization of the widget templates.
+* Fix - Resolved an integration bug with Elementor and the ability to save widgets on a Recurring Event page. [ECP-1660]
+* Tweak - Added filters: `tec_events_pro_elementor_event_additional_fields_widget_label_text`, `tec_events_pro_elementor_event_related_events_widget_container_class`, `tec_events_pro_elementor_event_related_events_widget_header_class`, `tec_events_pro_elementor_event_related_events_widget_list_class`, `tec_events_pro_elementor_event_related_events_widget_image_link_class`, `tec_events_pro_elementor_event_related_events_widget_title_link_class`, `tec_events_pro_elementor_event_related_events_widget_list_item_class`, `tec_events_pro_elementor_event_related_events_widget_thumbnail_class`, `tec_events_pro_elementor_event_related_events_widget_info_class`, `tec_events_pro_elementor_event_related_events_widget_title_class`, `tec_events_pro_elementor_event_related_events_widget_datetime_class`
+* Tweak - Changed views: `integrations/elementor/widgets/event-additional-fields`, `integrations/elementor/widgets/event-additional-fields/field/label`, `integrations/elementor/widgets/event-additional-fields/field/value`, `integrations/elementor/widgets/event-additional-fields/fields`, `integrations/elementor/widgets/event-additional-fields/header`, `integrations/elementor/widgets/event-organizer/names`, `integrations/elementor/widgets/event-related`, `integrations/elementor/widgets/event-related/header`, `integrations/elementor/widgets/event-related/item/datetime`, `integrations/elementor/widgets/event-related/item/thumb`, `integrations/elementor/widgets/event-related/item/title`, `integrations/elementor/widgets/event-related/list-item`, `integrations/elementor/widgets/event-related/list`, `integrations/elementor/widgets/event-venue/name`
+* Language - 14 new strings added, 201 updated, 13 fuzzied, and 32 obsoleted
+
+= [6.3.3] 2024-04-09 =
+
+* Fix - Resolve some issues around [tribe_event_inline] content parsing. [ECP-1684]
+* Tweak - Added filters: `tec_events_pro_inline_excluded_placeholders`
+* Tweak - Removed filters: `tribe_events_pro_inline_placeholders`, `tribe_events_pro_inline_protected_placeholders`, `tribe_events_pro_inline_excluded_placeholders`, `tribe_events_pro_inline_output`, `tribe_events_pro_inline_event_multi_organizer_output`
+* Tweak - Changed views: `v2/map/top-bar/datepicker`, `v2/photo/top-bar/datepicker`, `v2/summary/top-bar/datepicker`, `v2/week/top-bar/datepicker`
+* Language - 1 new strings added, 2 updated, 0 fuzzied, and 0 obsoleted
+
+= [6.3.2] 2024-03-20 =
+
+* Feature - Adding Site Editor Single Venue template for use in themes that support Site Editor. [ECP-1620]
+* Fix - Site Editor themes did not properly display the venue Google Map. This has been resolved in ECP-1620. [TEC-4938]
+* Fix - Site Editor themes did not properly display venue details such as their addresses. This has been resolved in ECP-1620. [ECP-1534]
+* Fix - When Events Calendar Pro is active the admin menu does not highlight the correct items when viewing a post type index. [ECP-1682]
+* Language - 0 new strings added, 0 updated, 0 fuzzied, and 1 obsoleted
+
+= [6.3.1.1] 2024-02-22 =
+
+* Security - Improved the Shortcode around Events display of data to ensure data is only visible to users who have the correct permissions.
+* Language - 1 new strings added, 0 updated, 0 fuzzied, and 0 obsoleted
+
+= [6.3.1] 2024-01-24 =
+
+* Version - Events Calendar PRO 6.3.1 is only compatible with The Events Calendar 6.3.1 and higher
+* Fix - Ensure the Recurring Event Description field that has been deprecated and removed no longer shows on the Event edit screen. [ECP-1582]
+* Fix - Handles a post ID to a recurring event when doing a delete with the ORM like so `tribe_events()->where('id', 123 )->delete();`. Previously it would convert to an occurrence and not delete the whole recurring event. [TEC-4935]
+* Fix - Updating validation error reporting API. [TECENG-46]
+* Fix - WPML translation metabox was failing to load on the Edit Events page when Events Pro was active. [ECP-1629]
+* Fix - Fix PHP 8.2 deprecation errors `PHP Deprecated:  strip_tags(): Passing null to parameter #1 ($string) of type string is deprecated in /.../wp-admin/admin-header.php on line 36`. [ECP-1603]
+* Fix - Prevent a potential fatal with the Featured Venue Widget if the selected venue has been deleted. [ECP-1644]
+* Tweak - Added filters: `tec_events_pro_custom_tables_v1_series_occurrent_list_columns`, `tec_events_pro_custom_tables_v1_add_to_series_available_events`, `tec_events_pro_show_recurrence_description`
+* Tweak - Added actions: `tec_events_pro_custom_tables_v1_series_occurrent_list_column_{$column_name}`, `tec_events_pro_custom_tables_v1_series_relationships_after`
+* Tweak - Removed actions: `tribe_log`
+* Language - 2 new strings added, 56 updated, 1 fuzzied, and 1 obsoleted
+
 = [6.3.0] 2024-01-22 =
 
 * Feature - New Ticket type when using with Event Tickets for Series Posts.
@@ -245,7 +307,6 @@ Remember to always make a backup of your database and files before updating!
 * Fix - Organizer and venue views were not paginating to the past events due to a `past` flag getting lost during context switching. [ECP-1591]
 * Tweak - Updated recurrence pattern warning text when tickets are already attached. [ECP-1529]
 * Language - 1 new strings added, 0 updated, 0 fuzzied, and 1 obsoleted
-
 
 = [6.2.2] 2023-10-03 =
 
@@ -279,7 +340,6 @@ Remember to always make a backup of your database and files before updating!
 * Fix - Specifying post slugs for venues and organizers within shortcodes will now find posts as expected. [ECP-1540]
 * Tweak - Added filters: `tec_events_pro_linked_post_taxonomy_singular_label_without_linked_post`, `tec_events_pro_linked_post_taxonomy_{$slug}_singular_label_without_linked_post`, `tec_events_pro_linked_post_taxonomy_plural_label_without_linked_post`, `tec_events_pro_linked_post_taxonomy_{$slug}_plural_label_without_linked_post`, `tec_events_pro_linked_post_taxonomy_rewrite_slug_singular`, `tec_events_pro_linked_post_taxonomy_{$slug}_rewrite_slug_singular`, `tec_events_pro_linked_post_taxonomy_rewrite_slug_plural`, `tec_events_pro_linked_post_taxonomy_{$slug}_rewrite_slug_plural`, `tec_events_pro_linked_post_taxonomy_linked_post_type`, `tec_events_pro_linked_post_taxonomy_{$slug}_linked_post_type`, `tec_events_pro_linked_post_taxonomy_linked_post_type_rewrite_slug_singular`, `tec_events_pro_linked_post_taxonomy_{$slug}_linked_post_type_rewrite_slug_singular`, `tec_events_pro_linked_post_taxonomy_linked_post_type_rewrite_slug_plural`, `tec_events_pro_linked_post_taxonomy_{$slug}_linked_post_type_rewrite_slug_plural`, `tec_events_pro_linked_post_taxonomy_linked_post_type_view_slug`, `tec_events_pro_linked_post_taxonomy_{$slug}_linked_post_type_view_slug`, `tec_events_pro_linked_post_taxonomy_linked_post_type_label_singular`, `tec_events_pro_linked_post_taxonomy_{$slug}_linked_post_type_label_singular`, `tec_events_pro_linked_post_taxonomy_linked_post_type_label_singular_lowercase`, `tec_events_pro_linked_post_taxonomy_{$slug}_linked_post_type_label_singular_lowercase`, `tec_events_pro_linked_post_taxonomy_linked_post_type_label_plural`, `tec_events_pro_linked_post_taxonomy_{$slug}_linked_post_type_label_plural`, `tec_events_pro_linked_post_taxonomy_linked_post_type_label_plural_lowercase`, `tec_events_pro_linked_post_taxonomy_{$slug}_linked_post_type_label_plural_lowercase`, `tec_events_pro_linked_post_taxonomy_linked_post_type_repository`, `tec_events_pro_linked_post_taxonomy_{$slug}_linked_post_type_repository`, `tec_events_pro_linked_post_taxonomy_{$slug}_configuration`, `tec_events_pro_linked_post_taxonomy_{$slug}_labels`, `tec_events_pro_{$slug}_visibility_get_setting_options`, `tec_events_pro_{$slug}_visibility_get_setting_definition`, `tec_events_pro_{$slug}_visibility_is_visible`, `tec_events_pro_{$slug}_visibility_is_visible:{$area}`, `tec_events_pro_{$slug}_visibility_is_visible:{$area}:{$post}`* Tweak - Changed views: `pro/widgets/modules/single-event`, `v2/map`, `v2/map/event-cards/event-card/event/venue`, `v2/organizer/meta`, `v2/organizer/meta/content`, `v2/organizer/meta/details`, `v2/organizer/meta/details/email`, `v2/organizer/meta/details/phone`, `v2/photo`, `v2/summary`, `v2/venue/meta`, `v2/venue/meta/details`, `v2/week/mobile-events/day/event/venue`, `v2/widgets/widget-events-list/event/venue`
 * Language - 35 new strings added, 55 updated, 0 fuzzied, and 0 obsoleted
-
 
 = [6.1.2] 2023-08-10 =
 
@@ -1091,7 +1151,6 @@ Remember to always make a backup of your database and files before updating!
 * Language - 2 new strings added, 58 updated, 0 fuzzied, and 1 obsoleted
 
 = [4.5.2.1] 2019-01-14 =
-
 * Fix - Display recurrence section in classic editor for all users that don't have blocks [119912]
 
 = [4.5.2] 2018-12-19 =
