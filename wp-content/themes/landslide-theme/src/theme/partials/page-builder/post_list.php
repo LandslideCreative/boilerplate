@@ -43,7 +43,7 @@ if ( $post_list->have_posts() ) {
 	// Store current post
 	$current_post = get_the_ID(); ?>
 
-	<div class="page-section <?php echo $background_color; ?>-bg post-list">
+	<div class="page-section <?php echo $background_color; ?>-bg post-list" <?php LSPB()->display_section_id(); ?>>
 
 		<?php LSPB()->display_section_header(); ?>
 

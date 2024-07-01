@@ -45,16 +45,24 @@ if( ! class_exists('LSPageBuilder') ) {
 			return $this->section_counter;
 		}
 
-		public function get_section_id() {
-			$section_id = 'id="page-section-';
+		public function get_section_id_number() {
+
+			$section_number = '';
 
 			if( !empty($this->nested_section_counter) ) {
 				foreach( $this->nested_section_counter as $counter ) {
-					$section_id .= $counter.'-';
+					$section_number .= $counter.'-';
 				}
 			}
 
-			$section_id .= $this->section_counter.'"';
+			$section_number .= $this->section_counter;
+
+			return $section_number;
+
+		}
+
+		public function get_section_id() {
+			$section_id = 'id="page-section-'.$this->get_section_id_number().'"';
 
 			$this->increment_section_counter();
 

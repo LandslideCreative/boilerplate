@@ -43,7 +43,7 @@ if ( $event_list->have_posts() ) {
 	// Store current post
 	$current_post = get_the_ID(); ?>
 
-	<div class="page-section <?php echo $background_color; ?>-bg event-list">
+	<div class="page-section <?php echo $background_color; ?>-bg event-list" <?php LSPB()->display_section_id(); ?>>
 
 		<?php LSPB()->display_section_header(); ?>
 

@@ -15,7 +15,7 @@ function ls_remove_user_social( $contactmethods ) {
 
     return $contactmethods;
 }
-add_filter('user_contactmethods', 'ls_remove_user_social');
+add_filter('user_contactmethods', 'ls_remove_user_social', 99, 1);
 
 // Remove extraneous dashboard widgets
 function ls_remove_dashboard_widgets() {
