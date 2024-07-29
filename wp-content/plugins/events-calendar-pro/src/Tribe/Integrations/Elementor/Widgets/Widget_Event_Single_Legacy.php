@@ -291,7 +291,7 @@ class Widget_Event_Single_Legacy extends Widget_Abstract {
 		if ( tribe_is_truthy( Arr::get( $settings, 'related-events' ) ) ) {
 			tribe_asset_enqueue( 'tribe-events-full-pro-calendar-style' );
 			tribe_asset_enqueue( 'tribe-events-calendar-pro-style' );
-			tribe_asset_enqueue( 'tribe-events-calendar-pro-override-style' );
+			tribe_asset_enqueue( 'tribe-events-calendar-pro-override-style', false );
 		}
 
 		if ( tribe_is_truthy( Arr::get( $settings, 'tickets' ) ) ) {
@@ -2667,7 +2667,7 @@ class Widget_Event_Single_Legacy extends Widget_Abstract {
 		tribe_asset_enqueue_group( 'events-styles' );
 		tribe_asset_enqueue( 'tribe-events-full-pro-calendar-style' );
 		tribe_asset_enqueue( 'tribe-events-calendar-pro-style' );
-		tribe_asset_enqueue( 'tribe-events-calendar-pro-override-style' );
+		tribe_asset_enqueue( 'tribe-events-calendar-pro-override-style', false );
 		tribe_asset_enqueue( 'tribe-events-virtual-single-skeleton' );
 
 		tribe_asset_enqueue( 'event-tickets-reset-css' );
