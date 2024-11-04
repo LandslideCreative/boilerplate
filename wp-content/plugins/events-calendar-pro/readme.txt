@@ -3,9 +3,9 @@
 Contributors: theeventscalendar, borkweb, bordoni, brianjessee, aguseo, camwynsp, GeoffBel, jentheo, leahkoerper, lucatume, neillmcshea, vicskf, zbtirrell, juanfra
 Tags: events, calendar, event, venue, organizer, dates, date, google maps, conference, workshop, concert, meeting, seminar, summit, class, the events calendar, widget, pro
 Donate link: https://evnt.is/29
-Stable tag: 7.0.0
+Stable tag: 7.3.0
 Requires at least: 6.3
-Tested up to: 6.6
+Tested up to: 6.6.2
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -214,9 +214,71 @@ Remember to always make a backup of your database and files before updating!
 
 == Changelog ==
 
+= [7.3.0] 2024-10-30 =
+
+* Version - Events Pro 7.3.0 is only compatible with The Events Calendar 6.8.0 or higher.
+* Feature - Added integration with new premium Seating product for Event Tickets.
+* Language - 0 new strings added, 0 updated, 0 fuzzied, and 0 obsoleted
+
+= [7.2.1] 2024-10-21 =
+
+* Fix - Correct some dates and strings in admin screens were not translated [TEC-4873]
+* Fix - Correct styling of "Fix geolocation data" in Maps settings page. [TEC-5282]
+* Fix - Fix an issue with Kadence where the calendar was wider than the content container. [ECP-1827]
+* Fix - Fix hook name to ensure that settings linked to a custom Google Maps API key show up. [ECP-1866]
+* Fix - Make sure that all events are updated when running a CSV import. [ECP-1684]
+* Fix - Make sure the house number is saved with the address when fetching geolocation data with a custom Google Maps API key. [ECP-1481]
+* Fix - Resolves issue where in some situations custom fields were not retained on the occurrence on recurring events. [TEC-5239]
+* Tweak - Introduce a filter to allow changing the order of the street name and house number when fetching geolocation data with a custom Google Maps API key.
+* Tweak - Added filter `tec_events_pro_enable_series_content_injection` to allow for bypassing series injection in the content [ECP-1839].
+* Language - 1 new strings added, 72 updated, 0 fuzzied, and 0 obsoleted
+
+= [7.2.0] 2024-10-09 =
+
+* Feature - Add Calendar Embed block to display any of the event views through the block editor. [ECP-1815].
+* Fix - Event cost and Tickets during event duplication [ECP-1826].
+* Fix - Remove a wrongly deprecation of the function `tribe_all_occurrences_link` [ECP-1840].
+* Tweak - Added filters: `tec_events_pro_calendar_embed_block_query_url`, `tec_events_pro_calendar_embed_rest_get_args`
+* Tweak - Added actions: `tec_events_pro_calendar_embed_iframe_head`, `frontend_iframe_footer_scripts`
+* Tweak - Changed views: `iframe/footer`, `iframe/header`
+* Language - 0 new strings added, 2 updated, 0 fuzzied, and 0 obsoleted
+
+= [7.1.0] 2024-09-26 =
+
+* Version - Events Calendar Pro 7.1.0 is only compatible with The Events Calendar 6.7.0 and higher.
+* Feature - New and improved settings layout and styles. [TEC-5124]
+* Language - 17 new strings added, 193 updated, 4 fuzzied, and 21 obsoleted
+
+= [7.0.3] 2024-09-11 =
+
+* Tweak - Fixed PHP warning regarding the attempt to read property `ID` on null.
+* Tweak - Changed views: `v2/week/grid-body/events-day/event/date`
+* Language - 1 new strings added, 51 updated, 0 fuzzied, and 0 obsoleted
+
+= [7.0.2.1] 2024-08-26 =
+
+* Security - Prevents PHP Object Serialization exploit for Widgets on Legacy Support. Thanks WordFence for the report.
+
+= [7.0.2] 2024-08-20 =
+
+* Feature - Adding the Remove Event End Time feature from the Tweaks addon to the Photo, Summary and Map views. [TEC-5080]
+* Fix - Resolves a pagination issue when using the `tec_events_pro_custom_tables_v1_series_event_view_slug` filter to override the default Series view. [ECP-1589]
+* Fix - Exporting all Attendees as a CSV file in the new Tickets Attendees Page. [ET-2094]
+* Fix - Moved event related endpoint registering for Power Automate and Zapier endpoints to Events Calendar Pro. [EVA-160]
+* Tweak - Added actions: `tec_events_pro_init`
+* Tweak - Changed views: `v2/map/event-cards/event-card/event/date-time`, `v2/photo/event/date-time`, `v2/summary/date-group/event/date/single`
+* Language - 3 new strings added, 52 updated, 0 fuzzied, and 0 obsoleted
+
+= [7.0.1] 2024-08-06 =
+
+* Fix - Ensure we don't try to enqueue nonexistent override stylesheets. [ECP-1811]
+* Fix - Replace our Elementor Legacy Single Event widget when using a single-event template [7.0.1]
+* Fix - Resolve issue with Zapier action endpoints (create, find, & update events) return the error: "Sorry, you are not allowed to do that." [TEC-5123]
+* Language - 10 new strings added, 207 updated, 0 fuzzied, and 0 obsoleted
+
 = [7.0.0] 2024-07-22 =
 
-* Version - Events Calendar Pro 7.0.0 is only compatible with The Events Calendar 6.6.0 and higher.
+* Version - Events Calendar Pro 7.1.0 is only compatible with The Events Calendar 6.7.0 and higher.
 * Feature - Added virtual events.
 * Feature - Added ability to add zoom virtual events.
 * Feature - Added live streaming ability with Facebook Live and YouTube.

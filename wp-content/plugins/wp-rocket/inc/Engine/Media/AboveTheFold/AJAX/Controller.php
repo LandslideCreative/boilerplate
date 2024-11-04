@@ -3,12 +3,16 @@ declare(strict_types=1);
 
 namespace WP_Rocket\Engine\Media\AboveTheFold\AJAX;
 
+use WP_Rocket\Engine\Common\PerformanceHints\AJAX\AJAXControllerTrait;
 use WP_Rocket\Engine\Media\AboveTheFold\Database\Queries\AboveTheFold as ATFQuery;
 use WP_Rocket\Engine\Common\Context\ContextInterface;
 use WP_Rocket\Engine\Optimization\UrlTrait;
+use WP_Rocket\Logger\Logger;
+use WP_Rocket\Engine\Common\PerformanceHints\AJAX\ControllerInterface;
 
-class Controller {
+class Controller implements ControllerInterface {
 	use UrlTrait;
+	use AJAXControllerTrait;
 
 	/**
 	 * ATFQuery instance
@@ -47,19 +51,25 @@ class Controller {
 	/**
 	 * Add LCP data to the database
 	 *
-	 * @return bool
+	 * @return array
 	 */
-	public function add_lcp_data() {
-		check_ajax_referer( 'rocket_lcp', 'rocket_lcp_nonce' );
+	public function add_data(): array {
+		$payload = [
+			'lcp' => '',
+		];
+
+		check_ajax_referer( 'rocket_beacon', 'rocket_beacon_nonce' );
 
 		if ( ! $this->context->is_allowed() ) {
-			wp_send_json_error( 'not allowed' );
-			return;
+			$payload['lcp'] = 'not allowed';
+
+			return $payload;
 		}
 
 		$url       = isset( $_POST['url'] ) ? untrailingslashit( esc_url_raw( wp_unslash( $_POST['url'] ) ) ) : '';
 		$is_mobile = isset( $_POST['is_mobile'] ) ? filter_var( wp_unslash( $_POST['is_mobile'] ), FILTER_VALIDATE_BOOLEAN ) : false;
-		$images    = isset( $_POST['images'] ) ? json_decode( wp_unslash( $_POST['images'] ) ) : []; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$results   = isset( $_POST['results'] ) ? json_decode( wp_unslash( $_POST['results'] ) ) : (object) [ 'lcp' => [] ]; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$images    = $results->lcp ?? [];
 		$lcp       = 'not found';
 		$viewport  = [];
 
@@ -88,12 +98,12 @@ class Controller {
 				continue;
 			}
 
-			if ( 'lcp' === $image->label ) {
+			if ( isset( $image->label ) && 'lcp' === $image->label ) {
 				$lcp = $image_object;
 				continue;
 			}
 
-			if ( 'above-the-fold' === $image->label && 0 < $max_atf_images_number ) {
+			if ( isset( $image->label ) && 'above-the-fold' === $image->label && 0 < $max_atf_images_number ) {
 				$viewport[] = $image_object;
 
 				--$max_atf_images_number;
@@ -103,8 +113,9 @@ class Controller {
 		$row = $this->query->get_row( $url, $is_mobile );
 
 		if ( ! empty( $row ) ) {
-			wp_send_json_error( 'item already in the database' );
-			return;
+			$payload['lcp'] = 'item already in the database';
+
+			return $payload;
 		}
 
 		$status                               = isset( $_POST['status'] ) ? sanitize_text_field( wp_unslash( $_POST['status'] ) ) : '';
@@ -115,7 +126,7 @@ class Controller {
 			'is_mobile'     => $is_mobile,
 			'status'        => $status_code,
 			'error_message' => $status_message,
-			'lcp'           => ( is_array( $lcp ) || is_object( $lcp ) ) ? wp_json_encode( $lcp ) : $lcp,
+			'lcp'           => is_object( $lcp ) ? wp_json_encode( $lcp ) : $lcp,
 			'viewport'      => wp_json_encode( $viewport ),
 			'last_accessed' => current_time( 'mysql', true ),
 		];
@@ -123,36 +134,13 @@ class Controller {
 		$result = $this->query->add_item( $item );
 
 		if ( ! $result ) {
-			wp_send_json_error( 'error when adding the entry to the database' );
-			return;
+			$payload['lcp'] = 'error when adding the entry to the database';
+
+			return $payload;
 		}
 
-		wp_send_json_success( $item );
-	}
-
-	/**
-	 * Get status code and message to be saved into the database
-	 *
-	 * @param string $status Current status code from $_POST.
-	 * @return array
-	 */
-	private function get_status_code_message( $status ) {
-		$status_code    = 'success' !== $status ? 'failed' : 'completed';
-		$status_message = '';
-
-		switch ( $status ) {
-			case 'script_error':
-				$status_message = esc_html__( 'Script error', 'rocket' );
-				break;
-			case 'timeout':
-				$status_message = esc_html__( 'Script timeout', 'rocket' );
-				break;
-		}
-
-		return [
-			$status_code,
-			$status_message,
-		];
+		$payload['lcp'] = $item;
+		return $payload;
 	}
 
 	/**
@@ -180,7 +168,24 @@ class Controller {
 				if ( isset( $image->src ) && ! empty( $image->src ) && is_string( $image->src ) ) {
 					$object->src = $this->sanitize_image_url( $image->src );
 				}
-				$object->sources = $image->sources;
+				$object->sources = array_map(
+					function ( $source ) {
+						if ( empty( $source->type ) ) {
+							Logger::notice( 'The source type is missing in the image object.', [ 'source' => $source ] );
+						}
+
+						return (object) wp_parse_args(
+							$source,
+							[
+								'media'  => '',
+								'sizes'  => '',
+								'srcset' => '',
+								'type'   => '',
+							]
+						);
+					},
+					$image->sources
+				);
 				break;
 			default:
 				// For other types, add the first non-empty key to the object.
@@ -240,20 +245,24 @@ class Controller {
 	}
 
 	/**
-	 * Checks if there is existing LCP data for the current URL and device type.
+	 * Checks if there is existing data for the current URL and device type from the beacon script.
 	 *
 	 * This method is called via AJAX. It checks if there is existing LCP data for the current URL and device type.
 	 * If the data exists, it returns a JSON success response with true. If the data does not exist, it returns a JSON success response with false.
 	 * If the context is not allowed, it returns a JSON error response with false.
 	 *
-	 * @return void
+	 * @return array
 	 */
-	public function check_lcp_data() {
-		check_ajax_referer( 'rocket_lcp', 'rocket_lcp_nonce' );
+	public function check_data(): array {
+		$payload = [
+			'lcp' => false,
+		];
+
+		check_ajax_referer( 'rocket_beacon', 'rocket_beacon_nonce' );
 
 		if ( ! $this->context->is_allowed() ) {
-			wp_send_json_error( false );
-			return;
+			$payload['lcp'] = true;
+			return $payload;
 		}
 
 		$url       = isset( $_POST['url'] ) ? untrailingslashit( esc_url_raw( wp_unslash( $_POST['url'] ) ) ) : '';
@@ -262,11 +271,11 @@ class Controller {
 		$row = $this->query->get_row( $url, $is_mobile );
 
 		if ( ! empty( $row ) ) {
-			wp_send_json_success( 'data already exists' );
-			return;
+			$payload['lcp'] = true;
+			return $payload;
 		}
 
-		wp_send_json_error( 'data does not exist' );
+		return $payload;
 	}
 
 	/**
@@ -275,7 +284,7 @@ class Controller {
 	 * @param object $image_object Image full object.
 	 * @return bool
 	 */
-	private function validate_image( $image_object ) {
+	private function validate_image( $image_object ): bool {
 		$valid_image = ! empty( $image_object->src ) ? $this->validate_image_src( $image_object->src ?? '' ) : true;
 
 		/**
@@ -294,7 +303,7 @@ class Controller {
 	 * @param string $image_src Image src url.
 	 * @return bool
 	 */
-	private function validate_image_src( $image_src ) {
+	private function validate_image_src( string $image_src ): bool {
 		if ( empty( $image_src ) ) {
 			return false;
 		}
@@ -304,11 +313,7 @@ class Controller {
 		 *
 		 * @param array  $invalid_schemes Array of invalid schemes.
 		 */
-		$invalid_schemes = apply_filters( 'rocket_atf_invalid_schemes', $this->invalid_schemes );
-
-		if ( ! is_array( $invalid_schemes ) ) {
-			$invalid_schemes = $this->invalid_schemes;
-		}
+		$invalid_schemes = wpm_apply_filters_typed( 'array', 'rocket_atf_invalid_schemes', $this->invalid_schemes );
 
 		$invalid_schemes = implode( '|', $invalid_schemes );
 

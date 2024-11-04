@@ -150,21 +150,23 @@ class Tribe__Events__Pro__Assets {
 			]
 		);
 
-		tribe_asset(
-			$pro,
-			'tribe-events-calendar-pro-override-style',
-			Tribe__Events__Templates::locate_stylesheet( 'tribe-events/pro/tribe-events-pro.css' ),
-			[],
-			'wp_enqueue_scripts',
-			[
-				'conditionals' => [
-					'operator' => 'AND',
-					[ $this, 'should_enqueue_frontend' ],
-					[ $this, 'override_style_exists' ],
-				],
-				'groups'       => [ 'events-pro-styles' ],
-			]
-		);
+
+		// Custom stylesheet.
+		$override_sheet = Tribe__Events__Templates::locate_stylesheet( 'tribe-events/pro/tribe-events-pro.css' );
+
+		if ( ! empty( $override_sheet ) && file_exists( $override_sheet ) ) {
+			tribe_asset(
+				$pro,
+				'tribe-events-calendar-pro-override-style',
+				$override_sheet,
+				[],
+				'wp_enqueue_scripts',
+				[
+					'conditionals' => [ $this, 'should_enqueue_frontend' ],
+					'groups'       => [ 'events-pro-styles' ],
+				]
+			);
+		}
 
 		tribe_asset(
 			$pro,
@@ -300,16 +302,16 @@ class Tribe__Events__Pro__Assets {
 			'full'  => 'tribe-events-pro-full.css',
 		];
 
-		// By default we go with `tribe`
-		$file = $stylesheets['tribe'];
+		// By default we go with `full`.
+		$file = $stylesheets['full'];
 
-		// if we have one we use it
+		// If we have one we use it.
 		if ( isset( $stylesheets[ $name ] ) ) {
 			$file = $stylesheets[ $name ];
 		}
 
 		/**
-		 * Allows filtering of the Stylesheet file for Events Calendar Pro
+		 * Allows filtering of the Stylesheet file for Events Calendar Pro.
 		 *
 		 * @deprecated  4.4.30
 		 *
@@ -389,6 +391,7 @@ class Tribe__Events__Pro__Assets {
 	 * @return bool
 	 */
 	public function override_style_exists(): bool {
+		_deprecated_function( __METHOD__, '7.0.1', 'Tribe__Events__Pro__Assets::should_enqueue_frontend' );
 		// This is a frontend script, let's bail early if we can.
 		if ( ! $this->should_enqueue_frontend() ) {
 			return false;

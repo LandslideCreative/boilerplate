@@ -17,14 +17,6 @@ use TEC\Event_Automator\Zapier\REST\V1\Endpoints\New_Events;
 use TEC\Event_Automator\Zapier\REST\V1\Endpoints\Updated_Events;
 use TEC\Event_Automator\Zapier\Settings;
 
-use TEC\Event_Automator\Zapier\REST\V1\Endpoints\Actions\Find_Attendees;
-use TEC\Event_Automator\Zapier\REST\V1\Endpoints\Actions\Find_Tickets;
-use TEC\Event_Automator\Zapier\REST\V1\Endpoints\Attendees;
-use TEC\Event_Automator\Zapier\REST\V1\Endpoints\Checkin;
-use TEC\Event_Automator\Zapier\REST\V1\Endpoints\Orders;
-use TEC\Event_Automator\Zapier\REST\V1\Endpoints\Refunded_Orders;
-use TEC\Event_Automator\Zapier\REST\V1\Endpoints\Updated_Attendees;
-
 /**
  * Class Zapier_Provider
  *
@@ -42,6 +34,11 @@ class Zapier_Provider extends Service_Provider {
 		if ( ! self::is_active() ) {
 			return;
 		}
+
+		// Requires single instance to use the same API class through the call.
+		$this->container->singleton( Create_Events::class );
+		$this->container->singleton( Find_Events::class );
+		$this->container->singleton( Update_Events::class );
 
 		$this->add_actions();
 		$this->add_filters();
@@ -76,7 +73,11 @@ class Zapier_Provider extends Service_Provider {
 	 * @since 7.0.0
 	 */
 	protected function add_filters() {
-		add_filter( 'tribe_addons_tab_fields', [ $this, 'filter_tec_integrations_tab_fields' ] );
+		add_filter( 'tec_settings_gmaps_js_api_start', [ $this, 'filter_tec_integrations_tab_fields' ] );
+		add_filter( 'rest_pre_dispatch', [ $this, 'pre_dispatch_verification_for_create_events' ], 10, 3 );
+		add_filter( 'rest_pre_dispatch', [ $this, 'pre_dispatch_verification_for_update_events' ], 10, 3 );
+		add_filter( 'rest_request_before_callbacks', [ $this, 'modify_rest_api_params_before_validation' ], 1, 3 );
+		add_filter( 'rest_request_before_callbacks', [ $this, 'modify_rest_api_params_before_validation_for_update_events' ], 1, 3 );
 	}
 
 	/**
@@ -105,14 +106,6 @@ class Zapier_Provider extends Service_Provider {
 		$this->container->make( Create_Events::class )->add_to_dashboard();
 		$this->container->make( Update_Events::class )->add_to_dashboard();
 		$this->container->make( Find_Events::class )->add_to_dashboard();
-
-		$this->container->make( Attendees::class )->add_to_dashboard();
-		$this->container->make( Updated_Attendees::class )->add_to_dashboard();
-		$this->container->make( Checkin::class )->add_to_dashboard();
-		$this->container->make( Orders::class )->add_to_dashboard();
-		$this->container->make( Refunded_Orders::class )->add_to_dashboard();
-		$this->container->make( Find_Attendees::class )->add_to_dashboard();
-		$this->container->make( Find_Tickets::class )->add_to_dashboard();
 	}
 
 	/**
@@ -130,5 +123,77 @@ class Zapier_Provider extends Service_Provider {
 		}
 
 		return tribe( Settings::class )->add_fields_tec( $fields );
+	}
+
+	/**
+	 * Verify token and login user before dispatching the request.
+	 * Done on `rest_pre_dispatch` to be able to set current user to pass validation capability checks.
+	 *
+	 * @since 6.0.0 Migrated to Common from Event Automator
+	 * @since 7.0.1 Migrated from Common to Events Calendar Pro
+	 *
+	 * @param mixed           $result  Response to replace the requested version with. Can be anything
+	 *                                 a normal endpoint can return, or null to not hijack the request.
+	 * @param WP_REST_Server  $server  Server instance.
+	 * @param WP_REST_Request $request Request used to generate the response.
+	 *
+	 * @return null Will always return null, failure will happen on the can_create permission check.
+	 */
+	public function pre_dispatch_verification_for_create_events( $result, $server, $request ) {
+		return $this->container->make( Create_Events::class )->pre_dispatch_verification( $result, $server, $request );
+	}
+
+	/**
+	 * Verify token and login user before dispatching the request.
+	 * Done on `rest_pre_dispatch` to be able to set current user to pass validation capability checks.
+	 *
+	 * @since 6.0.0 Migrated to Common from Event Automator
+	 * @since 7.0.1 Migrated from Common to Events Calendar Pro
+	 *
+	 * @param mixed           $result  Response to replace the requested version with. Can be anything
+	 *                                 a normal endpoint can return, or null to not hijack the request.
+	 * @param WP_REST_Server  $server  Server instance.
+	 * @param WP_REST_Request $request Request used to generate the response.
+	 *
+	 * @return null Will always return null, failure will happen on the can_create permission check.
+	 */
+	public function pre_dispatch_verification_for_update_events( $result, $server, $request ) {
+		return $this->container->make( Update_Events::class )->pre_dispatch_verification( $result, $server, $request );
+	}
+
+	/**
+	 * Modifies REST API comma seperated  parameters before validation.
+	 *
+	 * @since 6.0.0 Migrated to Common from Event Automator
+	 * @since 7.0.1 Migrated from Common to Events Calendar Pro
+	 *
+	 * @param WP_REST_Response|WP_Error $response Response to replace the requested version with. Can be anything
+	 *                                            a normal endpoint can return, or a WP_Error if replacing the
+	 *                                            response with an error.
+	 * @param WP_REST_Server            $server   ResponseHandler instance (usually WP_REST_Server).
+	 * @param WP_REST_Request           $request  Request used to generate the response.
+	 *
+	 * @return WP_REST_Response|WP_Error The response.
+	 */
+	public function modify_rest_api_params_before_validation( $response, $server, $request ) {
+		return $this->container->make( Create_Events::class )->modify_rest_api_params_before_validation( $response, $server, $request );
+	}
+
+	/**
+	 * Modifies REST API comma seperated  parameters before validation.
+	 *
+	 * @since 6.0.0 Migrated to Common from Event Automator
+	 * @since 7.0.1 Migrated from Common to Events Calendar Pro
+	 *
+	 * @param WP_REST_Response|WP_Error $response Response to replace the requested version with. Can be anything
+	 *                                            a normal endpoint can return, or a WP_Error if replacing the
+	 *                                            response with an error.
+	 * @param WP_REST_Server            $server   ResponseHandler instance (usually WP_REST_Server).
+	 * @param WP_REST_Request           $request  Request used to generate the response.
+	 *
+	 * @return WP_REST_Response|WP_Error The response.
+	 */
+	public function modify_rest_api_params_before_validation_for_update_events( $response, $server, $request ) {
+		return $this->container->make( Update_Events::class )->modify_rest_api_params_before_validation( $response, $server, $request );
 	}
 }

@@ -2,7 +2,7 @@
 /**
  * Virtual Event Template Tags.
  *
- * @since TBD Migrated to Events Pro from Events Virtual.
+ * @since 7.0.1 Migrated to Events Pro from Events Virtual.
  *
  */
 if ( ! function_exists( 'tribe_events_virtual_show_fail_message' ) ) {
@@ -15,7 +15,7 @@ if ( ! function_exists( 'tribe_events_virtual_show_fail_message' ) ) {
 	 * @param ?string $message The message to show. Defaults to null.
 	 */
 	function tribe_events_virtual_show_fail_message( string $message = null ) {
-		_deprecated_function( __FUNCTION__, 'TBD', 'tribe_show_fail_message' );
+		_deprecated_function( __FUNCTION__, '7.0.1', 'tribe_show_fail_message' );
 	}
 }
 
@@ -31,7 +31,7 @@ if ( ! function_exists( 'tribe_events_virtual_load_text_domain' ) ) {
 	 * @deprecated 1.14.0 Use `tribe_load_textdomain` instead.
 	 */
 	function tribe_events_virtual_load_text_domain() {
-		_deprecated_function( __FUNCTION__, 'TBD' );
+		_deprecated_function( __FUNCTION__, '7.0.1' );
 	}
 }
 
@@ -54,7 +54,7 @@ if ( ! function_exists( 'tribe_events_virtual_uninstall' ) ) {
 	 * @since 1.0.0
 	 */
 	function tribe_events_virtual_uninstall() {
-		_deprecated_function( __FUNCTION__, 'TBD' );
+		_deprecated_function( __FUNCTION__, '7.0.1' );
 	}
 }
 
@@ -66,7 +66,7 @@ if ( ! function_exists( 'tribe_events_virtual_preload' ) ) {
 	 * Note: the output of this function is not escaped.
 	 * You should escape it wherever you use it!
 	 *
-	 * @since TBD Migrated to Events Pro from Events Virtual.
+	 * @since 7.0.1 Migrated to Events Pro from Events Virtual.
 	 *
 	 * @return string
 	 */
@@ -94,7 +94,7 @@ if ( ! function_exists( 'tribe_get_virtual_label_lower' ) ) {
 	 * Note: the output of this function is not escaped.
 	 * You should escape it wherever you use it!
 	 *
-	 * @since TBD Migrated to Events Pro from Events Virtual.
+	 * @since 7.0.1 Migrated to Events Pro from Events Virtual.
 	 *
 	 * @return string The lowercase version of the "Virtual" Term.
 	 */
@@ -122,7 +122,7 @@ if ( ! function_exists( 'tribe_get_virtual_event_label_plural' ) ) {
 	 * Note: the output of this function is not escaped.
 	 * You should escape it wherever you use it!
 	 *
-	 * @since TBD Migrated to Events Pro from Events Virtual.
+	 * @since 7.0.1 Migrated to Events Pro from Events Virtual.
 	 *
 	 * @return string The singular version of the Event Label.
 	 */
@@ -156,7 +156,7 @@ if ( ! function_exists( 'tribe_get_virtual_event_label_singular_lowercase' ) ) {
 	 * Note: the output of this function is not escaped.
 	 * You should escape it wherever you use it!
 	 *
-	 * @since TBD Migrated to Events Pro from Events Virtual.
+	 * @since 7.0.1 Migrated to Events Pro from Events Virtual.
 	 *
 	 * @return string
 	 */
@@ -190,7 +190,7 @@ if ( ! function_exists( 'tribe_get_virtual_event_label_plural' ) ) {
 	 * Note: the output of this function is not escaped.
 	 * You should escape it wherever you use it!
 	 *
-	 * @since TBD Migrated to Events Pro from Events Virtual.
+	 * @since 7.0.1 Migrated to Events Pro from Events Virtual.
 	 *
 	 * @return string
 	 */
@@ -224,7 +224,7 @@ if ( ! function_exists( 'tribe_get_virtual_event_label_plural_lowercase' ) ) {
 	 * Note: the output of this function is not escaped.
 	 * You should escape it wherever you use it!
 	 *
-	 * @since TBD Migrated to Events Pro from Events Virtual.
+	 * @since 7.0.1 Migrated to Events Pro from Events Virtual.
 	 *
 	 * @return string
 	 */
@@ -258,7 +258,7 @@ if ( ! function_exists( 'tribe_get_hybrid_label' ) ) {
 	 * Note: the output of this function is not escaped.
 	 * You should escape it wherever you use it!
 	 *
-	 * @since TBD Migrated to Events Pro from Events Virtual.
+	 * @since 7.0.1 Migrated to Events Pro from Events Virtual.
 	 *
 	 * @return string
 	 */
@@ -286,7 +286,7 @@ if ( ! function_exists( 'tribe_get_hybrid_label_lowercase' ) ) {
 	 * Note: the output of this function is not escaped.
 	 * You should escape it wherever you use it!
 	 *
-	 * @since TBD Migrated to Events Pro from Events Virtual.
+	 * @since 7.0.1 Migrated to Events Pro from Events Virtual.
 	 *
 	 * @return string The singular version of the Event Label.
 	 */

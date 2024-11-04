@@ -2,12 +2,12 @@
 /**
  * Deprecated constants for the plugin.
  *
- * @since TBD
+ * @since 7.0.1
  */
 
 /**
  * For backwards compatibility.
  *
- * @deprecated TBD
+ * @deprecated 7.0.1
  */
 define( 'EVENTS_VIRTUAL_FILE', EVENTS_CALENDAR_PRO_FILE );
