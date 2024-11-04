@@ -68,9 +68,31 @@
 @include motion-ui-transitions;
 @include motion-ui-animations;
 
-// Slick Slider
-// @import 'slick/slick';
-// @import 'slick/slick-theme';
+// Swiper
+// @import 'swiper';
+// @import 'modules/a11y';
+// @import 'modules/autoplay';
+// @import 'modules/controller';
+// @import 'modules/effect-cards';
+// @import 'modules/effect-coverflow';
+// @import 'modules/effect-creative';
+// @import 'modules/effect-cube';
+// @import 'modules/effect-fade';
+// @import 'modules/effect-flip';
+// @import 'modules/free-mode';
+// @import 'modules/grid';
+// @import 'modules/hash-navigation';
+// @import 'modules/history';
+// @import 'modules/keyboard';
+// @import 'modules/manipulation';
+// @import 'modules/mousewheel';
+// @import 'modules/navigation';
+// @import 'modules/pagination';
+// @import 'modules/parallax';
+// @import 'modules/scrollbar';
+// @import 'modules/thumbs';
+// @import 'modules/virtual';
+// @import 'modules/zoom';
 
 // Base Styles
 @import 'components/wordpress';

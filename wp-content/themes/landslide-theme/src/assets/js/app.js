@@ -4,10 +4,10 @@ import 'what-input';
 window.$ = window.jQuery = $;
 
 import './lib/foundation-explicit-pieces';
+// import './lib/swiper-explicit-pieces';
 
 require('./lib/jquery.fitVids.js');
 require('./lib/jquery.matchHeight.js');
-// require('./lib/jquery.slick.js');
 
 $(document).ready(function() {
 
