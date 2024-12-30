@@ -118,10 +118,31 @@ body .gform_wrapper.gravity-theme {
 			display: none;
 		}
 	}
+	.gfield_label {
+		font-size: inherit;
+		font-weight: $bold;
+	}
 	select {
 		padding-right: 24px;
+	}
+	.gfield_checkbox label, 
+	.gfield_radio label {
+		font-size: inherit;
 	}
 	.gfield-choice-input {
 		margin-bottom: 0;
 	}
+	h3.gsection_title {
+		margin-top: 25px;
+		margin-bottom: 10px;
+	}
+	.gsection_description {
+		padding-top: 0;
+	}
+	.ginput_container_multiselect option {
+		font-weight: $normal;
+	}
+}
+.gravity-theme.ui-datepicker .ui-datepicker-header select {
+	background-position: calc(100% + 24px) 0% !important;
 }
