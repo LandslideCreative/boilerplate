@@ -1,12 +1,15 @@
-<?php get_header(); ?>
+<?php // Single Post
 
-<main role="main" id="main-content">
-	<?php if (have_posts()): while (have_posts()) : the_post(); ?>
+get_header(); 
 
-		<section class="page-section white-bg">
+if (have_posts()): while (have_posts()) : the_post(); ?>
+
+	<main role="main" id="main-content">
+
+		<section class="page-section white-bg single-post">
 			<div class="grid-container">
-				<div class="grid-x grid-padding-x align-center">
-					<div class="large-10 cell">
+				<div class="grid-x grid-padding-x">
+					<div class="cell">
 
 						<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
@@ -37,10 +40,8 @@
 								</div>
 							<?php } ?>
 
-							<?php // comments_template(); ?>
-
 						</article>
-						
+												
 					</div>
 				</div>
 			</div>
@@ -53,8 +54,9 @@
 				'limit' => 3
 			));
 		} ?>
+		
+	</main>
 
-	<?php endwhile; endif; ?>
-</main>
+<?php endwhile; endif;
 
-<?php get_footer(); ?>
+get_footer();

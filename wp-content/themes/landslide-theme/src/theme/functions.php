@@ -1,7 +1,7 @@
 <?php
 
 // CSS & JS Build Version auto-incremented by gulp-bump
-define( 'LS_BUILD_VERSION', '1.0.0' );
+define( 'LS_BUILD_VERSION', '1.0.1' );
 
 // Set $content_width global variable
 if( !isset($content_width) ) { $content_width = 1200; }
@@ -152,7 +152,7 @@ function ls_excerpt_default($length) {
 // Custom more link on post archives
 function ls_more_link($more) {
     global $post;
-    return ' <a class="text-button read-more" href="' . get_permalink($post->ID) . '">more...</a>';
+    return '...';
 }
 add_filter('excerpt_more', 'ls_more_link');
 

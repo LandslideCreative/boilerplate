@@ -1,4 +1,6 @@
-<?php get_header(); ?>
+<?php // 404 Page
+
+get_header(); ?>
 
 <main role="main" id="main-content">
 	<div class="page-section white-bg">

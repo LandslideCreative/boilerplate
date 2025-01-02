@@ -1,13 +1,17 @@
 /* =WordPress Core
 -------------------------------------------------------------- */
 .alignnone {
-    margin: 5px 20px 20px 0;
+    margin: 0;
+    margin-bottom: 25px;
+}
+p .alignnone {
+	margin-bottom: 0;
 }
 
 .aligncenter,
 div.aligncenter {
     display: block;
-    margin: 5px auto 5px auto;
+    margin: 25px auto;
 }
 
 .alignright {

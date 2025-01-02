@@ -19,13 +19,13 @@ Author: Landslide Creative
 		</div>
 
 		<div class="grid-container">
-			<div class="grid-x grid-padding-x align-center">
-				<?php while ( have_posts() ) :
-					the_post(); ?>
-					<div class="medium-10 large-8 cell">
-						<?php get_template_part('partials/posts/list', 'item'); ?>
-					</div>
-				<?php endwhile; ?>
+			<div class="grid-x grid-padding-x">
+				<div class="cell">
+					<?php while ( have_posts() ) :
+						the_post();
+						get_template_part('partials/posts/item');
+					endwhile; ?>
+				</div>
 			</div>
 		</div>
 

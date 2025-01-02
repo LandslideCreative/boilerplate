@@ -1,55 +1,28 @@
 <?php /* Template Name: Events Calendar */ 
-get_header(); 
+get_header();
 
-if( is_archive() ) {
-	$current_page = get_page_by_path('events'); 
-} ?>
+if (have_posts()): while (have_posts()) : the_post();
 
-<main role="main" id="main-content">
-	<?php if (have_posts()): while (have_posts()) : the_post(); ?>
+	if( is_archive() ) {
+		$current_page = get_page_by_path('events'); 
+	} ?>
+
+	<main role="main" id="main-content">
 
 		<?php if( is_archive() ) {
+
+			// Events calendar header
 			$post = $current_page;
 			setup_postdata($post); 
-			if( $post ) {
-				get_template_part('partials/header/events');
-			}
+				if( $post ) {
+					get_template_part('partials/header/events');
+				}
 			wp_reset_postdata(); ?>
 
 			<div class="page-section white-bg event-list" id="event-list">
-				<div class="grid-container intro-section">
-					<div class="grid-x grid-padding-x">
-						<div class="cell">
-							<p class="event-filter-label">Filter Events</p>
-							<form id="event-filter">
-								<div class="select-container">
-									<select name="event-category">
-										<option value="<?php echo get_post_type_archive_link('tribe_events'); ?>#event-list">
-											All Categories
-										</option>
-										<?php if( is_tax() ) {
-											$current_term = get_queried_object(); 
-											$current_slug = $current_term->slug;
-										} else {
-											$current_slug = '';
-										}
-										$terms = get_terms( array(
-											'taxonomy'	=> 'tribe_events_cat',
-											'parent' => 0
-										));
-										foreach( $terms as $term ) { ?>
-											<option value="<?php echo get_term_link($term); ?>#event-list" <?php if($term->slug==$current_slug) { echo 'selected'; } ?>>
-												<?php echo $term->name; ?>
-											</option>
-										<?php }	?>
-									</select>
-								</div>
+				
+				<?php get_template_part('partials/event/filter'); ?>
 
-								<input type="submit" class="button hollow" value="Go">
-							</form>
-						</div>
-					</div>
-				</div>
 				<div class="grid-container">
 					<div class="grid-x grid-padding-x">
 						<div class="cell">
@@ -57,21 +30,27 @@ if( is_archive() ) {
 						</div>
 					</div>
 				</div>
+
 			</div>
 
-			<?php $post = $current_page;
+			<?php // Events calendar page builder
+			$post = $current_page;
 			setup_postdata($post); 
-			if( $post ) {
-				get_template_part('partials/page', 'builder');
-			}
+				if( $post ) {
+					get_template_part('partials/page', 'builder');
+				}
 			wp_reset_postdata();
+
 		} else {
+
 			the_content();
 
 			get_template_part('partials/page', 'builder');
+			
 		} ?>
+		
+	</main>
 
-	<?php endwhile; endif; ?>
-</main>
+<?php endwhile; endif;
 
-<?php get_footer(); ?>
+get_footer();

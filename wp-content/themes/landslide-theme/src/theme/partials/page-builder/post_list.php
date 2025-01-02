@@ -52,7 +52,7 @@ if ( $post_list->have_posts() ) {
 				<?php while ( $post_list->have_posts() ) {
 	        		$post_list->the_post(); ?>
 	        		<div class="cell">
-	        			<?php get_template_part('partials/posts/list', 'item'); ?>
+	        			<?php get_template_part('partials/post/item'); ?>
 	        		</div>
 	        	<?php } ?>
 			</div>

@@ -52,7 +52,7 @@ if ( $event_list->have_posts() ) {
 				<?php while ( $event_list->have_posts() ) {
 	        		$event_list->the_post(); ?>
 	        		<div class="cell">
-	        			<?php get_template_part('partials/event/list', 'item'); ?>
+	        			<?php get_template_part('partials/event/item'); ?>
 	        		</div>
 	        	<?php } ?>
 			</div>

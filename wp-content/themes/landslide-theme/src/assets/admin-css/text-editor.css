@@ -1,6 +1,8 @@
 /* Variables */
 :root {
 	--te-body-font: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+	--te-normal: 400;
+	--te-bold: 700;
 	--te-header-font: var(--te-body-font);
 	--te-text-color: #000001;
 	--te-header-color: var(--te-text-color);
@@ -12,13 +14,14 @@
 body {
 	font-family: var(--te-body-font);
 	color: var(--te-text-color);
+	font-weight: var(--te-normal);
 	line-height: 1.6;
+	font-size: 16px;
 }
 
 p {
 	margin-top: 0;
 	margin-bottom: 25px;
-	font-size: 16px;
 }
 
 p.large {
@@ -35,6 +38,7 @@ h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
 	margin-top: 0;
 	font-family: var(--te-header-font);
+	font-weight: var(--te-bold);
 	color: var(--te-header-color);
 	line-height:  1.4;
 	margin-bottom: 20px;

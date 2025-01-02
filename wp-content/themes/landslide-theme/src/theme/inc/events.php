@@ -59,3 +59,22 @@ function ls_expire_past_events() {
     }
 }
 add_action( 'wp', 'ls_expire_past_events' );
+
+// Remove past events from SearchWP
+function ls_remove_past_events_from_searchwp( $ids ) {
+    if (function_exists('tribe_get_events')) {
+        $past_events = tribe_get_events( [
+           'end_date'     => 'now',
+           'post_per_page' => -1,
+        ] );
+
+        foreach( $past_events as $past_event ) {
+            $past_events_ids[] = $past_event->ID;
+        }
+
+        $ids = array_merge( $ids, $past_events_ids );
+    }
+
+    return array_unique( $ids );
+}
+add_filter( 'searchwp\post__not_in', 'ls_remove_past_events_from_searchwp', 20, 2 );

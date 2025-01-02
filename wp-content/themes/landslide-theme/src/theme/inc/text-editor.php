@@ -148,3 +148,39 @@ function add_editor_styles() {
     add_editor_style( 'assets/admin-css/text-editor.css' );
 }
 add_action( 'admin_init', 'add_editor_styles' );
+
+// Remove editor from admin for pages
+/* function ls_remove_editor() {
+    $hide_editor = true;
+
+    if (isset($_GET['post'])) {
+         $id = $_GET['post'];
+         $hide_editor = true;
+
+         $pages_with_editor = array(
+            'sample'
+         );
+
+         $templates_with_editor = array(
+            'templates/template-sample.php'
+         );
+
+         $slug = get_post_field( 'post_name', $id );
+         $template = get_post_meta($id, '_wp_page_template', true);
+
+         if(in_array($slug, $pages_with_editor)) {
+            $hide_editor = false;
+         } else if(in_array($template, $templates_with_editor)) {
+            $hide_editor = false;
+         }
+    }
+
+    if($hide_editor) { ?>
+        <style>
+            .post-type-page .postarea.wp-editor-expand {
+                display: none;
+            }
+        </style>
+    <?php }
+}
+add_action('admin_head', 'ls_remove_editor'); */

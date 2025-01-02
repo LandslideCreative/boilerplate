@@ -16,5 +16,5 @@
  * @see tribe_get_event() For the format of the event object.
  */
 
-get_template_part('partials/event/list', 'item');
+get_template_part('partials/event/item');
 

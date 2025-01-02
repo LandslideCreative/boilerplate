@@ -1,5 +1,3 @@
-// Styles for Tribe Events
-
 // Tribe overrides
 .tribe-common .tribe-events-l-container {
 	min-height: 0 !important;
@@ -11,28 +9,6 @@
 	margin: 0;
 	max-width: none;
 	padding: 0;
-}
-
-// Event pagination
-.tribe-events-calendar-list-nav {
-	padding-top: 0;
-	.tribe-events-c-nav__list {
-		@include clean-list;
-		@include clearfix;
-		.tribe-events-c-nav__list-item--prev {
-			float: left;
-		}
-		.tribe-events-c-nav__list-item--next {
-			float: right;
-		}
-		.button {
-			@include vertical-margin(.5, true, false);
-			margin-bottom: 0;
-		}
-		button[disabled] {
-			display: none;
-		}
-	}
 }
 
 // Event filter
@@ -56,13 +32,35 @@ form#event-filter {
 }
 
 // Event list item
-.tribe-common .event-list-item,
-.event-list-item {
+.tribe-common .event-item,
+.event-item {
 	@include vertical-margin(.5, false, true);
 	display: block;
 	color: $body-font-color;
 	text-decoration: none;
 	&:hover {
 		color: $body-font-color;
+	}
+}
+
+// Event pagination
+.tribe-events-calendar-list-nav {
+	padding-top: 0;
+	.tribe-events-c-nav__list {
+		@include clean-list;
+		@include clearfix;
+		.tribe-events-c-nav__list-item--prev {
+			float: left;
+		}
+		.tribe-events-c-nav__list-item--next {
+			float: right;
+		}
+		.button {
+			@include vertical-margin(.5, true, false);
+			margin-bottom: 0;
+		}
+		button[disabled] {
+			display: none;
+		}
 	}
 }

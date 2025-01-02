@@ -16,7 +16,7 @@ function thumbnail_image_single( $size='medium' ) {
 	return $image;
 }
 
-// Get single featured image size URL
+// Output featured image tag
 function thumbnail_image_tag( $sizes='100vw', $thumbnail='x-large' ) {
 	if ( has_post_thumbnail() ) {
 		$thumb_id = get_post_thumbnail_id();
@@ -61,7 +61,7 @@ function thumbnail_image_array() {
 	return $image;
 }
 
-// Get single acf image size URL
+// Get single ACF image size URL
 function acf_image_single( $variable_name, $size='medium', $sub=FALSE, $options='' ) {
 	if( $sub ) {
 		$variable_image = get_sub_field($variable_name);
@@ -82,7 +82,7 @@ function acf_image_single( $variable_name, $size='medium', $sub=FALSE, $options=
 	return $image;
 }
 
-// Get single featured image size URL
+// Output ACF image tag
 function acf_image_tag( $variable_name, $sizes='100vw', $thumbnail='x-large', $sub=FALSE, $options='' ) {
 	if( $sub ) {
 		$variable_image = get_sub_field($variable_name);
@@ -124,7 +124,7 @@ function acf_image_array( $variable_name, $sub=FALSE, $options='' ) {
 	return $image;
 }
 
-// Get link from link
+// Ouput link from ACF link
 function link_from_link( $variable_name, $sub=FALSE, $options='', $class='' ) {
 
 	if( $sub ) {
@@ -142,7 +142,7 @@ function link_from_link( $variable_name, $sub=FALSE, $options='', $class='' ) {
 	return TRUE;
 }
 
-// Get button from link
+// Output button from ACF link
 function button_from_link( $variable_name, $sub=FALSE, $options='', $class=''  ) {
 
 	if( $sub ) {

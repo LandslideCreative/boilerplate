@@ -54,4 +54,7 @@ if( have_rows('blocks') ): ?>
 
 	</section>
 
-<?php endif; ?>
+<?php endif;
+
+// Clear section header
+LSPB()->clear_section_header();
