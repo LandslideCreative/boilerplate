@@ -32,6 +32,8 @@ if( have_rows('page_builder') ) {
 			// Partials for specific templates or pages
 			if( is_page_template( 'templates/template-staff.php' ) ) {
 				get_template_part('partials/staff/list');
+			} else if( is_post_type_archive( 'sermon' ) ) {
+				get_template_part('partials/sermon/list');
 			}
 
 		// Page Section Partials
