@@ -1,7 +1,7 @@
 <?php
 
 // CSS & JS Build Version auto-incremented by gulp-bump
-define( 'LS_BUILD_VERSION', '1.0.1' );
+define( 'LS_BUILD_VERSION', '1.0.0' );
 
 // Set $content_width global variable
 if( !isset($content_width) ) { $content_width = 1200; }

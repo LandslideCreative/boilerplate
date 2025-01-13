@@ -1,48 +1,27 @@
 <?php // Tag Archive
+$page_slug = get_page_by_path(ls_get_archive_page_slug( 'post' ));
 
-$queried_object = get_queried_object();
+get_header();
 
-get_header(); ?>
+$post = $page_slug;
+setup_postdata($post); 
+	if( $post ) { ?>
+		<main role="main" id="main-content">
 
-<main role="main" id="main-content">
-	<div class="page-section white-bg post-list" id="post-list">
-
-		<?php // Header ?>
-		<div class="grid-container intro-section">
-			<div class="grid-x grid-padding-x">
-				<div class="cell">
-					<h1>Posts tagged <em><?php echo $queried_object->name; ?></em></h1>
-				</div>
-			</div>
-		</div>
-
-		<?php // Post List ?>
-		<div class="grid-container post-list-container">
-			<div class="grid-x grid-padding-x">
-				<div class="cell">
-					<?php get_template_part('loop'); ?>
-				</div>
-			</div>
-		</div>
-
-		<?php // Pagination
-		$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
-		$args = array(
-			'current_page' => $paged,
-			'max_pages' => $wp_query->max_num_pages
-		);
-
-		if( $args['max_pages'] > 1 ) { ?>
-			<div class="grid-container post-list-pagination">
-				<div class="grid-x grid-padding-x">
-					<div class="cell">
-						<?php get_template_part('partials/pagination/list', '', $args); ?>
+			<div class="page-header">
+				<div class="grid-container">
+					<div class="grid-x grid-padding-x align-center vertical-center">
+						<div class="cell auto">
+							<h1>Posts tagged <?php echo $queried_object->name; ?></h1>
+						</div>
 					</div>
 				</div>
 			</div>
-		<?php } ?>
-		
-	</div>
-</main>
 
-<?php get_footer(); ?>
+			<?php get_template_part('partials/page', 'builder'); ?>
+
+		</main>
+	<?php }
+wp_reset_postdata();
+
+get_footer();

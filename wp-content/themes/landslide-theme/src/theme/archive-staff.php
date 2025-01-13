@@ -1,7 +1,7 @@
-<?php // Post Archive
-$page_slug = get_page_by_path(ls_get_archive_page_slug( 'post' ));
+<?php // Staff Post Type Archive
+$page_slug = get_page_by_path(ls_get_archive_page_slug( 'staff' ));
 
-get_header();
+get_header(); 
 
 $post = $page_slug;
 setup_postdata($post); 
@@ -16,4 +16,4 @@ setup_postdata($post);
 	<?php }
 wp_reset_postdata();
 
-get_footer();
+get_footer(); ?>
