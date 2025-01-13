@@ -36,4 +36,4 @@ if( $max_pages>1 ) { ?>
 			<div class="pagination-next disabled"></div>
 		<?php } ?>
 	</div>
-<?php } 
+<?php }

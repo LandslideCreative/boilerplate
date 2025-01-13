@@ -16,4 +16,4 @@ setup_postdata($post);
 	<?php }
 wp_reset_postdata();
 
-get_footer(); ?>
+get_footer();

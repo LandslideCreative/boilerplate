@@ -14,4 +14,4 @@ $background_color = get_sub_field('cta_background_color'); ?>
 </section>
 
 <?php // Clear section header
-LSPB()->clear_section_header(); ?>
+LSPB()->clear_section_header();

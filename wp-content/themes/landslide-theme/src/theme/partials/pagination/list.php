@@ -18,4 +18,4 @@ if( $max_pages>1 ) { ?>
 	    )); ?>
 
 	</div>
-<?php } 
+<?php }

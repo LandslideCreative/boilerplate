@@ -29,4 +29,4 @@ if( $copy_position =='center' ) {
 </section>
 
 <?php // Clear section header
-LSPB()->clear_section_header(); ?>
+LSPB()->clear_section_header();
