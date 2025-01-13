@@ -1,13 +1,11 @@
-<?php // Sermon Archive
+<?php // Sermon Post Type Archive
+$page_slug = get_page_by_path(ls_get_archive_page_slug( 'sermon' ));
 
-get_header();
+get_header(); 
 
-$current_page = get_page_by_path('sermons');
-
-$post = $current_page;
+$post = $page_slug;
 setup_postdata($post); 
-if( $post ) { ?>
-
+	if( $post ) { ?>
 		<main role="main" id="main-content">
 
 			<?php get_template_part('partials/header/page'); ?>
@@ -15,7 +13,7 @@ if( $post ) { ?>
 			<?php get_template_part('partials/page', 'builder'); ?>
 
 		</main>
-	
-<?php } 
+	<?php }
+wp_reset_postdata();
 
-get_footer(); ?>
+get_footer();

@@ -15,6 +15,7 @@ function ls_archive_pages() {
     if( function_exists('tribe_is_event') ) {
         $ls_archive_pages['tribe_events'] = 'events';
     }
+    $ls_archive_pages['sermon'] = 'sermons';
 
     return $ls_archive_pages;
 }
@@ -133,7 +134,6 @@ function ls_create_staff_post_type()
 
     register_taxonomy( 'department', array( $name ), $args );
 
-    
 }
 
 add_action('init', 'ls_create_staff_post_type');
@@ -141,133 +141,8 @@ add_action('init', 'ls_create_staff_post_type');
 // Sermons
 function ls_create_sermon_post_type()
 {
-    // Speaker Taxonomy
-    $singular = 'Speaker';
-    $plural = 'Speakers';
-    $menu = $plural;
-    
-    $labels = array(
-        'name'              => $plural,
-        'singular_name'     => $singular,
-        'search_items'      => 'Search '.$plural,
-        'all_items'         => 'All '.$plural,
-        'parent_item'       => 'Parent '.$singular,
-        'parent_item_colon' => 'Parent '.$singular.':',
-        'edit_item'         => 'Edit '.$singular,
-        'update_item'       => 'Update '.$singular,
-        'add_new_item'      => 'Add New '.$singular,
-        'new_item_name'     => 'New '.$singular.' Name',
-        'menu_name'         => $menu,
-        'not_found'         => 'No '.$plural.' found.'
-    );
-
-    $args = array(
-        'hierarchical'      => true,
-        'labels'            => $labels,
-        'show_ui'           => true,
-        'show_admin_column' => false,
-        'meta_box_cb'       => false,
-        'query_var'         => true,
-        'rewrite'           => array( 'slug' => 'sermons/speaker', 'with_front' => false ),
-    );
-
-    register_taxonomy( 'speaker', array( 'sermon' ), $args );
-
-    // Topic Taxonomy
-    $singular = 'Topic';
-    $plural = 'Topics';
-    $menu = $plural;
-    
-    $labels = array(
-        'name'              => $plural,
-        'singular_name'     => $singular,
-        'search_items'      => 'Search '.$plural,
-        'all_items'         => 'All '.$plural,
-        'parent_item'       => 'Parent '.$singular,
-        'parent_item_colon' => 'Parent '.$singular.':',
-        'edit_item'         => 'Edit '.$singular,
-        'update_item'       => 'Update '.$singular,
-        'add_new_item'      => 'Add New '.$singular,
-        'new_item_name'     => 'New '.$singular.' Name',
-        'menu_name'         => $menu,
-        'not_found'         => 'No '.$plural.' found.'
-    );
-
-    $args = array(
-        'hierarchical'      => true,
-        'labels'            => $labels,
-        'show_ui'           => true,
-        'show_admin_column' => false,
-        'query_var'         => true,
-        'rewrite'           => array( 'slug' => 'sermons/topic', 'with_front' => false ),
-    );
-
-    register_taxonomy( 'topic', array( 'sermon' ), $args );
-
-    // Book of the Bible Taxonomy
-    $singular = 'Book of the Bible';
-    $plural = 'Books of the Bible';
-    $menu = $plural;
-    
-    $labels = array(
-        'name'              => $plural,
-        'singular_name'     => $singular,
-        'search_items'      => 'Search '.$plural,
-        'all_items'         => 'All '.$plural,
-        'parent_item'       => 'Parent '.$singular,
-        'parent_item_colon' => 'Parent '.$singular.':',
-        'edit_item'         => 'Edit '.$singular,
-        'update_item'       => 'Update '.$singular,
-        'add_new_item'      => 'Add New '.$singular,
-        'new_item_name'     => 'New '.$singular.' Name',
-        'menu_name'         => $menu,
-        'not_found'         => 'No '.$plural.' found.'
-    );
-
-    $args = array(
-        'hierarchical'      => true,
-        'labels'            => $labels,
-        'show_ui'           => true,
-        'show_admin_column' => false,
-        'query_var'         => true,
-        'rewrite'           => array( 'slug' => 'sermons/bible', 'with_front' => false ),
-    );
-
-    register_taxonomy( 'bible', array( 'sermon' ), $args );
-
-    // Series Taxonomy
-    $singular = 'Series';
-    $plural = 'Series';
-    $menu = $plural;
-    
-    $labels = array(
-        'name'              => $plural,
-        'singular_name'     => $singular,
-        'search_items'      => 'Search '.$plural,
-        'all_items'         => 'All '.$plural,
-        'parent_item'       => 'Parent '.$singular,
-        'parent_item_colon' => 'Parent '.$singular.':',
-        'edit_item'         => 'Edit '.$singular,
-        'update_item'       => 'Update '.$singular,
-        'add_new_item'      => 'Add New '.$singular,
-        'new_item_name'     => 'New '.$singular.' Name',
-        'menu_name'         => $menu,
-        'not_found'         => 'No '.$plural.' found.'
-    );
-
-    $args = array(
-        'hierarchical'      => true,
-        'labels'            => $labels,
-        'show_ui'           => true,
-        'show_admin_column' => false,
-        'meta_box_cb'       => false,
-        'query_var'         => true,
-        'rewrite'           => array( 'slug' => 'sermons/series', 'with_front' => false ),
-    );
-
-    register_taxonomy( 'series', array( 'sermon' ), $args );
-
     // Sermons Post Type
+    $name = 'sermon';
     $singular = 'Sermon';
     $plural = 'Sermons';
     $menu = 'Sermons';
@@ -303,11 +178,134 @@ function ls_create_sermon_post_type()
             'speaker',
         ),
         'can_export' => true,
-        'rewrite' => array( 'slug' => 'sermons', 'with_front' => false)
+        'rewrite' => array( 'slug' => ls_get_archive_page_slug( $name ), 'with_front' => false)
     ));
 
-    // Rewrite rule for sermon pagination
-    add_rewrite_rule('^sermons/page/([0-9]{1,})/?$','index.php?pagename=sermons&paged=$matches[1]', 'top');
+    // Speaker Taxonomy
+    $singular = 'Speaker';
+    $plural = 'Speakers';
+    $menu = $plural;
+    
+    $labels = array(
+        'name'              => $plural,
+        'singular_name'     => $singular,
+        'search_items'      => 'Search '.$plural,
+        'all_items'         => 'All '.$plural,
+        'parent_item'       => 'Parent '.$singular,
+        'parent_item_colon' => 'Parent '.$singular.':',
+        'edit_item'         => 'Edit '.$singular,
+        'update_item'       => 'Update '.$singular,
+        'add_new_item'      => 'Add New '.$singular,
+        'new_item_name'     => 'New '.$singular.' Name',
+        'menu_name'         => $menu,
+        'not_found'         => 'No '.$plural.' found.'
+    );
+
+    $args = array(
+        'hierarchical'      => true,
+        'labels'            => $labels,
+        'show_ui'           => true,
+        'show_admin_column' => false,
+        'meta_box_cb'       => false,
+        'query_var'         => true,
+        'rewrite'           => array( 'slug' => ls_get_archive_page_slug( $name ).'/speaker', 'with_front' => false ),
+    );
+
+    register_taxonomy( 'speaker', array( $name ), $args );
+
+    // Topic Taxonomy
+    $singular = 'Topic';
+    $plural = 'Topics';
+    $menu = $plural;
+    
+    $labels = array(
+        'name'              => $plural,
+        'singular_name'     => $singular,
+        'search_items'      => 'Search '.$plural,
+        'all_items'         => 'All '.$plural,
+        'parent_item'       => 'Parent '.$singular,
+        'parent_item_colon' => 'Parent '.$singular.':',
+        'edit_item'         => 'Edit '.$singular,
+        'update_item'       => 'Update '.$singular,
+        'add_new_item'      => 'Add New '.$singular,
+        'new_item_name'     => 'New '.$singular.' Name',
+        'menu_name'         => $menu,
+        'not_found'         => 'No '.$plural.' found.'
+    );
+
+    $args = array(
+        'hierarchical'      => true,
+        'labels'            => $labels,
+        'show_ui'           => true,
+        'show_admin_column' => false,
+        'query_var'         => true,
+        'rewrite'           => array( 'slug' => ls_get_archive_page_slug( $name ).'/topic', 'with_front' => false ),
+    );
+
+    register_taxonomy( 'topic', array( $name ), $args );
+
+    // Book of the Bible Taxonomy
+    $singular = 'Book of the Bible';
+    $plural = 'Books of the Bible';
+    $menu = $plural;
+    
+    $labels = array(
+        'name'              => $plural,
+        'singular_name'     => $singular,
+        'search_items'      => 'Search '.$plural,
+        'all_items'         => 'All '.$plural,
+        'parent_item'       => 'Parent '.$singular,
+        'parent_item_colon' => 'Parent '.$singular.':',
+        'edit_item'         => 'Edit '.$singular,
+        'update_item'       => 'Update '.$singular,
+        'add_new_item'      => 'Add New '.$singular,
+        'new_item_name'     => 'New '.$singular.' Name',
+        'menu_name'         => $menu,
+        'not_found'         => 'No '.$plural.' found.'
+    );
+
+    $args = array(
+        'hierarchical'      => true,
+        'labels'            => $labels,
+        'show_ui'           => true,
+        'show_admin_column' => false,
+        'query_var'         => true,
+        'rewrite'           => array( 'slug' => ls_get_archive_page_slug( $name ).'/bible', 'with_front' => false ),
+    );
+
+    register_taxonomy( 'bible', array( $name ), $args );
+
+    // Series Taxonomy
+    $singular = 'Series';
+    $plural = 'Series';
+    $menu = $plural;
+    
+    $labels = array(
+        'name'              => $plural,
+        'singular_name'     => $singular,
+        'search_items'      => 'Search '.$plural,
+        'all_items'         => 'All '.$plural,
+        'parent_item'       => 'Parent '.$singular,
+        'parent_item_colon' => 'Parent '.$singular.':',
+        'edit_item'         => 'Edit '.$singular,
+        'update_item'       => 'Update '.$singular,
+        'add_new_item'      => 'Add New '.$singular,
+        'new_item_name'     => 'New '.$singular.' Name',
+        'menu_name'         => $menu,
+        'not_found'         => 'No '.$plural.' found.'
+    );
+
+    $args = array(
+        'hierarchical'      => true,
+        'labels'            => $labels,
+        'show_ui'           => true,
+        'show_admin_column' => false,
+        'meta_box_cb'       => false,
+        'query_var'         => true,
+        'rewrite'           => array( 'slug' => ls_get_archive_page_slug( $name ).'/series', 'with_front' => false ),
+    );
+
+    register_taxonomy( 'series', array( $name ), $args );
 }
 
 add_action('init', 'ls_create_sermon_post_type');

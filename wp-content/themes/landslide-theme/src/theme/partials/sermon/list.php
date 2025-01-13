@@ -1,9 +1,9 @@
 <?php 
-
-$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
-
 // Store current post
-$current_post = get_the_ID(); ?>
+$current_post = get_the_ID(); 
+
+// Reset WP_Query
+wp_reset_postdata(); ?>
 
 <div class="page-section white-bg sermon-list" id="sermon-list">
 
@@ -11,19 +11,22 @@ $current_post = get_the_ID(); ?>
 
 	<?php get_template_part('partials/sermon/filter'); ?>
 
-	<?php 
-	if ( $wp_query->have_posts() ) { 
+	<?php if ( $wp_query->have_posts() ) { 
 
 		// Sermon List ?>
 		<div class="grid-container sermon-list-container">
 			<div class="grid-x grid-padding-x">
 				<div class="cell">
-					<?php get_template_part('loop'); ?>				
+					<?php while ( $wp_query->have_posts() ) { 
+						$wp_query->the_post();
+						get_template_part('partials/sermon/item');
+					} ?>		
 				</div>
 			</div>
 		</div>
 
 		<?php // Pagination
+		$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
 		$args = array(
 			'current_page' => $paged,
 			'max_pages' => $wp_query->max_num_pages
@@ -43,12 +46,12 @@ $current_post = get_the_ID(); ?>
 
 </div>
 
-<?php // Reset postdata
+<?php // Increment section counter
+LSPB()->increment_section_counter();
+
+// Reset postdata
 $post = get_post( $current_post );
 setup_postdata( $post );
-
-// Increment section counter
-LSPB()->increment_section_counter();
 
 // Clear section header
 LSPB()->clear_section_header();
