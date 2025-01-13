@@ -14,30 +14,47 @@ get_header(); ?>
 			</div>
 		</div>
 
-		<?php // Search Results ?>
-		<div class="grid-container search-results-container">
-			<div class="grid-x grid-padding-x">
-				<div class="cell">
-					<?php get_template_part('loop'); ?>
-				</div>
-			</div>
-		</div>
+		<?php if ( $wp_query->have_posts() ) { ?>
 
-		<?php // Pagination
-		$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
-		$args = array(
-			'current_page' => $paged,
-			'max_pages' => $wp_query->max_num_pages
-		);
-
-		if( $args['max_pages'] > 1 ) { ?>
-			<div class="grid-container search-results-pagination">
+			<?php // Search Results ?>
+			<div class="grid-container search-results-container">
 				<div class="grid-x grid-padding-x">
 					<div class="cell">
-						<?php get_template_part('partials/pagination/list', '', $args); ?>
+						<?php while ( $wp_query->have_posts() ) { 
+							$wp_query->the_post();
+							get_template_part('partials/post/item');
+						} ?>
 					</div>
 				</div>
 			</div>
+
+			<?php // Pagination
+			$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
+			$args = array(
+				'current_page' => $paged,
+				'max_pages' => $wp_query->max_num_pages
+			);
+
+			if( $args['max_pages'] > 1 ) { ?>
+				<div class="grid-container search-results-pagination">
+					<div class="grid-x grid-padding-x">
+						<div class="cell">
+							<?php get_template_part('partials/pagination/list', '', $args); ?>
+						</div>
+					</div>
+				</div>
+			<?php } ?>
+
+		<?php } else { ?>
+
+			<div class="grid-container search-results-container">
+				<div class="grid-x grid-padding-x">
+					<div class="cell">
+						<h2>No search results found.</h2>
+					</div>
+				</div>
+			</div>
+
 		<?php } ?>
 		
 	</div>

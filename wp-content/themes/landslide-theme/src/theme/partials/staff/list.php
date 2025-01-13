@@ -1,14 +1,11 @@
-<?php $args = array(
-	'post_type' => 'staff',
-	'posts_per_page' => -1
-); 
+<?php 
+// Store current post
+$current_post = get_the_ID();
 
-$staff_query = new WP_Query( $args );
+// Reset WP_Query
+wp_reset_postdata();
 
-if ( $staff_query->have_posts() ) { 
-
-	// Store current post
-	$current_post = get_the_ID(); ?>
+if ( $wp_query->have_posts() ) { ?>
 
 	<div class="page-section white-bg staff-list" id="staff-list">
 
@@ -17,25 +14,24 @@ if ( $staff_query->have_posts() ) {
 		<div class="grid-container staff-list-container">
 			<div class="grid-x grid-padding-x">
 				<div class="cell">
-					<?php while ( $staff_query->have_posts() ) { 
-						$staff_query->the_post();
+					<?php while ( $wp_query->have_posts() ) { 
+						$wp_query->the_post();
 						get_template_part('partials/staff/item');
-					} 
-					wp_reset_postdata(); ?>					
+					} ?>					
 				</div>
 			</div>
 		</div>
 
 	</div>
 
-	<?php // Reset postdata
-	$post = get_post( $current_post );
-	setup_postdata( $post );
-
-	// Increment section counter
+	<?php // Increment section counter
 	LSPB()->increment_section_counter();
 
 }
+
+// Reset postdata
+$post = get_post( $current_post );
+setup_postdata( $post );
 
 // Clear section header
 LSPB()->clear_section_header();

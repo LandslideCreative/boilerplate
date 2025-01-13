@@ -27,14 +27,17 @@ get_header(); ?>
 		</div>
 	</div>
 
-	<?php if( have_posts() ) { ?>
+	<?php if ( $wp_query->have_posts() ) { ?>
 		<div class="page-section white-bg post-list" id="post-list">
 
 			<?php // Post List ?>
 			<div class="grid-container post-list-container">
 				<div class="grid-x grid-padding-x">
 					<div class="cell">
-						<?php get_template_part('loop'); ?>
+						<?php while ( $wp_query->have_posts() ) { 
+							$wp_query->the_post();
+							get_template_part('partials/post/item');
+						} ?>
 					</div>
 				</div>
 			</div>

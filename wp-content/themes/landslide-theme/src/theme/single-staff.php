@@ -1,5 +1,4 @@
 <?php // Single Staff
-
 get_header(); ?>
 
 <main role="main" id="main-content">
@@ -23,6 +22,8 @@ get_header(); ?>
 						<?php endif; ?>
 
 						<?php the_content(); ?>
+
+						<a href="<?php echo get_post_type_archive_link('staff'); ?>">Back to All Staff</a>
 						
 					</div>
 				</div>

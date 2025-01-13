@@ -23,7 +23,7 @@ Author: Landslide Creative
 				<div class="cell">
 					<?php while ( have_posts() ) :
 						the_post();
-						get_template_part('partials/posts/item');
+						get_template_part('partials/post/item');
 					endwhile; ?>
 				</div>
 			</div>

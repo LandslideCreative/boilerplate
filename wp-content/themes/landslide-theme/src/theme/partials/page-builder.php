@@ -30,8 +30,12 @@ if( have_rows('page_builder') ) {
 		} else if( get_row_layout() == 'page_specific_content' ) {
 			
 			// Partials for specific templates or pages
-			if( is_page_template( 'templates/template-staff.php' ) ) {
+			if( is_home() || is_category() ) {
+				get_template_part('partials/post/list');
+			} else if( is_post_type_archive( 'staff' ) ) {
 				get_template_part('partials/staff/list');
+			} else if( is_post_type_archive( 'tribe_events' ) ) {
+				get_template_part('partials/event/list');
 			} else if( is_post_type_archive( 'sermon' ) ) {
 				get_template_part('partials/sermon/list');
 			}
