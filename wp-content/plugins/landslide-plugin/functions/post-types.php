@@ -137,3 +137,84 @@ function ls_create_staff_post_type()
 }
 
 add_action('init', 'ls_create_staff_post_type');
+
+// Authors
+function ls_create_author_taxonomy()
+{
+    // Type Taxonomy
+    $singular = 'Author';
+    $plural = 'Authors';
+    $menu = $plural;
+    
+    $labels = array(
+        'name'              => $plural,
+        'singular_name'     => $singular,
+        'search_items'      => 'Search '.$plural,
+        'all_items'         => 'All '.$plural,
+        'parent_item'       => 'Parent '.$singular,
+        'parent_item_colon' => 'Parent '.$singular.':',
+        'edit_item'         => 'Edit '.$singular,
+        'update_item'       => 'Update '.$singular,
+        'add_new_item'      => 'Add New '.$singular,
+        'new_item_name'     => 'New '.$singular.' Name',
+        'menu_name'         => $menu,
+        'not_found'         => 'No '.$plural.' found.'
+    );
+
+    $args = array(
+        'hierarchical'      => true,
+        'labels'            => $labels,
+        'show_ui'           => true,
+        'show_admin_column' => false,
+        'query_var'         => true,
+        'show_in_quick_edit'=> false,
+        'meta_box_cb'       => false,
+        'rewrite'           => array( 'slug' => 'author', 'with_front' => false ),
+    );
+
+    register_taxonomy( 'post-author', array( 'post' ), $args );
+
+}
+add_action('init', 'ls_create_author_taxonomy');
+
+// Change author name in Yoast SEO metadata
+function ls_display_author( $author_name) {
+    if( is_singular('post') ) {
+        $author = get_field('author');
+        if( $author ) {
+            $author_name = $author->name;
+        } else {
+            $author_name = false;
+        }
+    }
+
+    return $author_name;
+}
+add_filter( 'wpseo_meta_author', 'ls_display_author' );
+
+function ls_change_slack_data( $data, $presentation ) {
+    if( is_singular('post') ) {
+        $author = get_field('author');
+        if( $author ) {
+            $data['Written by'] = $author->name;
+        } else {
+            unset( $data['Written by'] );
+        }
+    }
+
+    return $data;
+}
+add_filter( 'wpseo_enhanced_slack_data', 'ls_change_slack_data', 10, 2 );
+
+// Remove author from schema
+add_filter( 'wpseo_schema_needs_author', '__return_false' );
+
+function ls_remove_author_wpseo_article_schema( $graph_piece ) {
+
+    unset( $graph_piece['author'] );
+
+    return $graph_piece;
+
+}
+add_filter( 'wpseo_schema_article', 'ls_remove_author_wpseo_article_schema' );
+add_filter( 'wpseo_schema_webpage', 'ls_remove_author_wpseo_article_schema' );

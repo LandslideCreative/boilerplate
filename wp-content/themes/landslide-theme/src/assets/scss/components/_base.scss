@@ -146,3 +146,37 @@ body .gform_wrapper.gravity-theme {
 .gravity-theme.ui-datepicker .ui-datepicker-header select {
 	background-position: calc(100% + 24px) 0% !important;
 }
+
+// Select
+.select-container {
+	position: relative;
+	&::before{
+		content: '';
+		pointer-events: none;
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		right: 14px;
+		border-top: 6px $white solid;
+		border-left: 6px transparent solid;
+		border-right: 6px transparent solid;
+		z-index: 2;
+	}
+	&::after {
+		content: '';
+		pointer-events: none;
+		background-color: $primary-color;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		width: 40px;
+	}
+	select {
+		border: 2px solid $primary-color;
+		margin-bottom: 0;
+		height: auto;
+		padding: 8px 12px;
+		padding-right: 45px;
+	}
+}

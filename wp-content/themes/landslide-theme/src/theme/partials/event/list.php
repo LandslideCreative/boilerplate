@@ -9,8 +9,10 @@ wp_reset_postdata(); ?>
 
 	<?php LSPB()->display_section_header(); ?>
 
+	<?php /* Filter */ ?>
 	<?php get_template_part('partials/event/filter'); ?>
 
+	<?php /* List */ ?>
 	<div class="grid-container">
 		<div class="grid-x grid-padding-x">
 			<div class="cell">

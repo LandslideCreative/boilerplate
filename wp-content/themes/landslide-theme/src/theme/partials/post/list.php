@@ -9,10 +9,12 @@ if ( $wp_query->have_posts() ) { ?>
 
 	<div class="page-section white-bg post-list" id="post-list">
 
-		<?php // Post Filter
-		get_template_part('partials/post/filter'); ?>
+		<?php LSPB()->display_section_header(); ?>
 
-		<?php // Post List ?>
+		<?php /* Filter */ ?>
+		<?php get_template_part('partials/post/filter'); ?>
+
+		<?php /* List */ ?>
 		<div class="grid-container post-list-container">
 			<div class="grid-x grid-padding-x">
 				<div class="cell">
@@ -24,8 +26,8 @@ if ( $wp_query->have_posts() ) { ?>
 			</div>
 		</div>
 
-		<?php // Pagination
-		$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
+		<?php /* Pagination */ ?>
+		<?php $paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
 		$args = array(
 			'current_page' => $paged,
 			'max_pages' => $wp_query->max_num_pages

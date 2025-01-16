@@ -61,3 +61,25 @@
 		}
 	}
 }
+
+// Filters
+.filter-container {
+	.filter-label {
+		font-weight: bold;
+		margin-bottom: 5px;
+	}
+	form.filter-form {
+		display: flex;
+		.select-container{
+			margin-right: 5px;
+			select {
+				min-width: 200px;
+				margin-bottom: 0;
+				height: 100%;
+			}
+		}
+		.button {
+			margin-bottom: 0;
+		}
+	}
+}

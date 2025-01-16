@@ -11,26 +11,6 @@
 	padding: 0;
 }
 
-// Event filter
-.event-filter-label {
-	font-weight: bold;
-	margin-bottom: 5px;
-}
-
-form#event-filter {
-	display: flex;
-	.select-container{
-		margin-right: 5px;
-		select {
-			min-width: 200px;
-			margin-bottom: 0;
-		}
-	}
-	.button {
-		margin-bottom: 0;
-	}
-}
-
 // Event list item
 .tribe-common .event-item,
 .event-item {

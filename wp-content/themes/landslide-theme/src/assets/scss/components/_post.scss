@@ -1,21 +1,4 @@
-// Post filter
-.post-filter-label {
-	font-weight: bold;
-	margin-bottom: 5px;
-}
-form#post-filter {
-	display: flex;
-	.select-container{
-		margin-right: 5px;
-		select {
-			min-width: 200px;
-			margin-bottom: 0;
-		}
-	}
-	.button {
-		margin-bottom: 0;
-	}
-}
+// Blog styles
 
 .post-list-container {
 	@include deduct-padding(.5);

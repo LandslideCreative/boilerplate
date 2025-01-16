@@ -55,11 +55,11 @@
         "wpackagist-plugin/the-events-calendar" : "6.9.0",
         "landslidecreative/events-calendar-pro" : "7.3.1",
         "wpackagist-plugin/user-switching" : "1.9.1",
-        "wpackagist-plugin/wordfence" : "8.0.1",
-        "wpackagist-plugin/wp-crontrol" : "1.17.1",
+        "wpackagist-plugin/wordfence" : "8.0.3",
+        "wpackagist-plugin/wp-crontrol" : "1.18.0",
         "landslidecreative/wp-migrate-db-pro" : "2.7.0",
         "landslidecreative/wp-rocket" : "3.17.3",
-        "wpackagist-plugin/wordpress-seo" : "24.1",
+        "wpackagist-plugin/wordpress-seo" : "24.2",
         "wpackagist-plugin/yet-another-related-posts-plugin" : "5.30.11"
     },
     "config": {

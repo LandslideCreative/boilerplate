@@ -6,7 +6,7 @@ get_header(); ?>
 	<?php if ( $wp_query->have_posts() ) { ?>
 		<div class="page-section white-bg">		
 		
-			<?php // List ?>
+			<?php /* List */ ?>
 			<div class="grid-container">
 				<div class="grid-x grid-padding-x">
 					<div class="cell">
@@ -18,8 +18,8 @@ get_header(); ?>
 				</div>
 			</div>
 
-			<?php // Pagination
-			$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
+			<?php /* Pagination */ ?>
+			<?php $paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
 			$args = array(
 				'current_page' => $paged,
 				'max_pages' => $wp_query->max_num_pages

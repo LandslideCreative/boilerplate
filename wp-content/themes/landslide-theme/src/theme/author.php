@@ -4,7 +4,7 @@ get_header(); ?>
 
 <main role="main" id="main-content">
 
-	<?php // Author header ?>
+	<?php /* Author Header */ ?>
 	<div class="page-section white-bg author-header">
 		<div class="grid-container">
 			<div class="grid-x grid-padding-x">
@@ -30,7 +30,7 @@ get_header(); ?>
 	<?php if ( $wp_query->have_posts() ) { ?>
 		<div class="page-section white-bg post-list" id="post-list">
 
-			<?php // Post List ?>
+			<?php /* List */ ?>
 			<div class="grid-container post-list-container">
 				<div class="grid-x grid-padding-x">
 					<div class="cell">
@@ -43,8 +43,8 @@ get_header(); ?>
 			</div>
 
 
-			<?php // Pagination
-			$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
+			<?php /* Pagination */ ?>
+			<?php $paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
 			$args = array(
 				'current_page' => $paged,
 				'max_pages' => $wp_query->max_num_pages
