@@ -2,7 +2,7 @@
 PORT: 8000
 
 # Your project's server will proxy this localhost address
-LOCALHOST: https://boilerplate.localhost
+LOCALHOST: https://boilerplate-church.localhost
 
 SSL:
   status: true
