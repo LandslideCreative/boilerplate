@@ -1,22 +1,10 @@
 <?php // Sermon Filter
 
-// Get current topic
-$current_topic = '';
-if( isset($_GET['topic']) && $_GET['topic']!='' ) {
-	$current_topic = $_GET['topic'];
-}
+$filters = array();
 
-// Get current speaker
-$current_speaker = '';
-if( isset($_GET['speaker']) && $_GET['speaker']!='' ) {
-	$current_speaker = $_GET['speaker'];
-}
-
-// Get current book of the Bible
-$current_bible = '';
-if( isset($_GET['bible']) && $_GET['bible']!='' ) {
-	$current_bible = $_GET['bible'];
-} ?>
+$filters['topic'] = get_query_var('topic', '');
+$filters['speaker'] = get_query_var('speaker', '');
+$filters['bible'] = get_query_var('bible', ''); ?>
 
 <div class="grid-container intro-section filter-container sermon-filter-container">
 	<div class="grid-x grid-padding-x">
@@ -34,7 +22,7 @@ if( isset($_GET['bible']) && $_GET['bible']!='' ) {
 							'parent' => 0
 						));
 						foreach( $terms as $term ) { ?>
-							<option value="<?php echo $term->slug; ?>" <?php if($term->slug==$current_topic) { echo 'selected'; } ?>>
+							<option value="<?php echo $term->slug; ?>" <?php if($term->slug==$filters['topic']) { echo 'selected'; } ?>>
 								<?php echo $term->name; ?>
 							</option>
 						<?php }	?>
@@ -52,7 +40,7 @@ if( isset($_GET['bible']) && $_GET['bible']!='' ) {
 							'parent' => 0
 						));
 						foreach( $terms as $term ) { ?>
-							<option value="<?php echo $term->slug; ?>" <?php if($term->slug==$current_speaker) { echo 'selected'; } ?>>
+							<option value="<?php echo $term->slug; ?>" <?php if($term->slug==$filters['speaker']) { echo 'selected'; } ?>>
 								<?php echo $term->name; ?>
 							</option>
 						<?php }	?>
@@ -70,7 +58,7 @@ if( isset($_GET['bible']) && $_GET['bible']!='' ) {
 							'parent' => 0
 						));
 						foreach( $terms as $term ) { ?>
-							<option value="<?php echo $term->slug; ?>" <?php if($term->slug==$current_bible) { echo 'selected'; } ?>>
+							<option value="<?php echo $term->slug; ?>" <?php if($term->slug==$filters['bible']) { echo 'selected'; } ?>>
 								<?php echo $term->name; ?>
 							</option>
 						<?php }	?>

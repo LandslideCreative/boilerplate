@@ -36,7 +36,7 @@ if( have_rows('page_builder') ) {
 				get_template_part('partials/staff/list');
 			} else if( is_post_type_archive( 'tribe_events' ) ) {
 				get_template_part('partials/event/list');
-			} else if( is_post_type_archive( 'sermon' ) ) {
+			} else if( is_post_type_archive( 'sermon' ) || is_tax('topic') || is_tax('speaker') || is_tax('bible') ) {
 				get_template_part('partials/sermon/list');
 			}
 
