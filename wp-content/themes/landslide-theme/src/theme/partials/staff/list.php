@@ -11,6 +11,7 @@ if ( $wp_query->have_posts() ) { ?>
 
 		<?php LSPB()->display_section_header(); ?>
 
+		<?php /* List */ ?>
 		<div class="grid-container staff-list-container">
 			<div class="grid-x grid-padding-x">
 				<div class="cell">
