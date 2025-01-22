@@ -235,8 +235,8 @@ function wp_install_defaults( $user_id ) {
 		if( array_key_exists('enable_text_link_counter', $wordpress_seo_settings) ) {
 			$wordpress_seo_settings['enable_text_link_counter'] = 0;
 		}
-		if( array_key_exists('dismiss_configuration_workout_notice', $wordpress_seo_settings) ) {
-			$wordpress_seo_settings['enable_text_link_counter'] = 1;
+		if( array_key_exists('enable_admin_bar_menu', $wordpress_seo_settings) ) {
+			$wordpress_seo_settings['enable_admin_bar_menu'] = 0;
 		}
 
 		update_option('wpseo', $wordpress_seo_settings);
