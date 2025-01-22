@@ -40,3 +40,14 @@ function ls_yoast_to_bottom() {
     return 'low';
 }
 add_filter( 'wpseo_metabox_prio', 'ls_yoast_to_bottom');
+
+// Remove comments column
+function ls_remove_comments_column($columns){
+    unset($columns['author']);
+    unset($columns['comments']);
+
+    return $columns;
+}
+add_filter('manage_edit-page_columns', 'ls_remove_comments_column');
+add_filter('manage_edit-post_columns', 'ls_remove_comments_column');
+add_filter('manage_edit-tribe_events_columns', 'ls_remove_comments_column');
