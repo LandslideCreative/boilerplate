@@ -14,6 +14,7 @@ if (have_posts()): while (have_posts()) : the_post(); ?>
 						<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
 							<?php /* Title */ ?>
+							<h5 class="label"><a href="<?php echo get_post_type_archive_link('post'); ?>">Blog Post</a></h5>
 							<h1 class="single-post-title"><?php the_title(); ?></h1>
 
 							<?php /* Image */ ?>

@@ -204,6 +204,9 @@ function get_image_directory()
     return $image_directory;
 }
 
+// Remove auto image sizes
+add_filter('wp_img_tag_add_auto_sizes', '__return_false');
+
 /*------------------------------------*\
     ACF Functions
 \*------------------------------------*/

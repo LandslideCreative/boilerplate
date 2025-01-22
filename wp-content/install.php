@@ -220,6 +220,28 @@ function wp_install_defaults( $user_id ) {
     update_option( 'duplicate_post_show_notice', 0 );
     update_option( 'duplicate_post_show_link', $duplicate_page_options );
 
+    // Yoast SEO options
+    $wordpress_seo_settings = get_option('wpseo');
+	if( $wordpress_seo_settings ) {
+		if( array_key_exists('ignore_search_engines_discouraged_notice', $wordpress_seo_settings) ) {
+			$wordpress_seo_settings['ignore_search_engines_discouraged_notice'] = 1;
+		}
+		if( array_key_exists('content_analysis_active', $wordpress_seo_settings) ) {
+			$wordpress_seo_settings['content_analysis_active'] = 0;
+		}
+		if( array_key_exists('keyword_analysis_active', $wordpress_seo_settings) ) {
+			$wordpress_seo_settings['keyword_analysis_active'] = 0;
+		}
+		if( array_key_exists('enable_text_link_counter', $wordpress_seo_settings) ) {
+			$wordpress_seo_settings['enable_text_link_counter'] = 0;
+		}
+		if( array_key_exists('dismiss_configuration_workout_notice', $wordpress_seo_settings) ) {
+			$wordpress_seo_settings['enable_text_link_counter'] = 1;
+		}
+
+		update_option('wpseo', $wordpress_seo_settings);
+	}
+
 	if ( is_multisite() ) {
 		// Flush rules to pick up the new page.
 		$wp_rewrite->init();
