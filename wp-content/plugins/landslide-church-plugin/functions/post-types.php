@@ -177,7 +177,7 @@ function ls_create_author_taxonomy()
         'hierarchical'      => true,
         'labels'            => $labels,
         'show_ui'           => true,
-        'show_admin_column' => false,
+        'show_admin_column' => true,
         'query_var'         => true,
         'show_in_quick_edit'=> false,
         'meta_box_cb'       => false,
