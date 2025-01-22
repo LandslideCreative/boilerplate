@@ -9,8 +9,8 @@ $filters['bible'] = get_query_var('bible', ''); ?>
 <div class="grid-container intro-section filter-container sermon-filter-container">
 	<div class="grid-x grid-padding-x">
 		<div class="cell">
-			<p class="filter-label sermon-filter-label">Filter Sermons</p>
-			<form id="filter sermon-filter" method="GET">
+			<p class="filter-label">Filter Sermons</p>
+			<form class="filter-form" id="sermon-filter" method="GET">
 				<div class="select-container">
 					<select name="topic" aria-label="Topic">
 						<option value="">

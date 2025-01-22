@@ -10,6 +10,7 @@ get_header(); ?>
 					<div class="cell">
 
 						<?php /* Name */ ?>
+						<h5 class="label"><a href="<?php echo get_post_type_archive_link('staff'); ?>">Staff</a></h5>
 						<h1 class="single-staff-title"><?php the_title(); ?></h1>
 
 						<?php /* Position */ ?>

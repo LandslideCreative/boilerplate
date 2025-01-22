@@ -15,7 +15,7 @@ if (have_posts()): while (have_posts()) : the_post(); ?>
 					<div class="cell">
 
 						<?php /* Title */ ?>
-						<h5 class="label"><a href="<?php echo home_url(ls_get_archive_page_slug( 'sermon' )); ?>">Sermons</a></h5>
+						<h5 class="label"><a href="<?php echo get_post_type_archive_link('sermon'); ?>">Sermon</a></h5>
 						<h1 class="single-post-title"><?php the_title(); ?></h1>
 
 						<?php /* Image/Video */ ?>

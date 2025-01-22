@@ -76,3 +76,39 @@ function ls_resize_sermon_date_column() { ?>
 <?php }
 add_action( 'admin_enqueue_scripts', 'ls_resize_sermon_date_column' );
 
+// Dashboard - Create announcement expiration date column
+function ls_add_announcement_column_header($columns)
+{
+    $columns = array(
+        'cb'        => '<input type="checkbox" />',
+        'title'     => 'Title',
+        'expiration-date' =>  'Expiration Date',
+        'taxonomy-announcement-category'     => 'Categories'
+    );
+    return $columns;
+}
+add_action('manage_announcement_posts_columns', 'ls_add_announcement_column_header');
+
+// Dashboard - Set sermon date column content
+function ls_add_announcement_column_content($column)
+{
+    global $post;
+    if($column == 'expiration-date') {
+        $expiration_date = get_field('expiration_date');
+        if( $expiration_date ) {
+            echo date('m/d/Y', strtotime($expiration_date));
+        }
+    }
+}
+add_filter('manage_announcement_posts_custom_column', 'ls_add_announcement_column_content');
+
+// Dashboard - Resize sermon date column
+function ls_resize_announcement_date_column() { ?>
+    <style type="text/css">
+        .edit-php .fixed .column-expiration-date {
+            width: 150px;
+        }
+    </style>
+<?php }
+add_action( 'admin_enqueue_scripts', 'ls_resize_announcement_date_column' );
+

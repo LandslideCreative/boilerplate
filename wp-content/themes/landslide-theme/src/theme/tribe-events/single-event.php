@@ -24,6 +24,7 @@ $end_date = tribe_get_end_date(NULL, false, 'Ymd G:i:s'); ?>
 			<div class="cell">
 
 				<?php /* Title */ ?>
+				<h5 class="label"><a href="<?php echo get_post_type_archive_link('tribe_events'); ?>">Event</a></h5>
 				<h1 class="single-event-title"><?php the_title(); ?></h1>
 
 				<?php /* Image */ ?>
