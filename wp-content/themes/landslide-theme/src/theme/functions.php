@@ -28,10 +28,15 @@ if( function_exists('add_theme_support') ) {
     // Enable HTML5 support
     add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption', 'style', 'script' ) );
 
-    // Localisation Support
-    load_theme_textdomain('landslide', get_template_directory() . '/languages');
-
 }
+
+// Localisation Support
+add_action('init', function() {
+    load_theme_textdomain('html5blank', get_template_directory() . '/languages');
+});
+
+// Remove auto sizes from images
+add_filter('wp_img_tag_add_auto_sizes', '__return_false');
 
 // Remove unused default thumbnail sizes
 function ls_remove_thumbnail_sizes( $sizes ) {
@@ -203,9 +208,6 @@ function get_image_directory()
 
     return $image_directory;
 }
-
-// Remove auto image sizes
-add_filter('wp_img_tag_add_auto_sizes', '__return_false');
 
 /*------------------------------------*\
     ACF Functions
