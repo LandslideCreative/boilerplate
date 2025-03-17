@@ -3,7 +3,7 @@
 Contributors: theeventscalendar, borkweb, bordoni, brianjessee, aguseo, camwynsp, GeoffBel, jentheo, leahkoerper, lucatume, neillmcshea, vicskf, zbtirrell, juanfra
 Tags: events, calendar, event, venue, organizer, dates, date, google maps, conference, workshop, concert, meeting, seminar, summit, class, the events calendar, widget, pro
 Donate link: https://evnt.is/29
-Stable tag: 7.3.1
+Stable tag: 7.4.2
 Requires at least: 6.5
 Tested up to: 6.7.1
 Requires PHP: 7.4
@@ -213,6 +213,37 @@ Previous versions of Events Calendar Pro are not cross-compatible with 6.X add-o
 Remember to always make a backup of your database and files before updating!
 
 == Changelog ==
+
+= [7.4.2] 2025-03-04 =
+
+* Tweak - Update calls to DateTime that are passing null for PHP 8+ compatibility. [TEC-5086]
+* Fix - Fix past events shortcode attribute [TEC-5348]
+* Fix - Stop the noindex conflict by changing the View Title class to only get posts for list-type views. [TEC-5354]
+* Compatibility - Added 404 handling for week view when disabled or accessed outside the range of earliest and latest events, with an exception for the current month when no events exist. [TEC-5356]
+* Language - 0 new strings added, 3 updated, 0 fuzzied, and 0 obsoleted.
+
+= [7.4.1] 2025-02-10 =
+
+* Fix - Preemtively update postmeta before 3rd parties to prevent metadata duplication. [ECP-1879]
+* Fix - Validating post object before accessing post_type on Widget Manager. [ECP-1886]
+* Tweak - Add caching to Zoom method to get alternative hosts to prevent accessing the API on every load of event editor. [VE-591]
+* Tweak - Move file index.umd.js from node_modules to `src/resources/includes/`. [TCMN-175]
+* Tweak - Added filters: `tec_events_pro_virtual_alternative_hosts_cache_duration`
+* Language - 0 new strings added, 51 updated, 0 fuzzied, and 0 obsoleted.
+
+= [7.4.0] 2025-01-30 =
+
+* Fix - Update asset, dependencies, customizations to align with WordPress 6.7 and React 18. [TEC-5322]
+* Language - 0 new strings added, 2 updated, 0 fuzzied, and 0 obsoleted.
+
+= [7.3.2] 2025-01-22 =
+
+* Feature - Adding Display setting option to allow forcing the Photo View to show images in a Grid, at a 16:9 aspect ratio. [TEC-5320]
+* Fix - A notice will now show when deleting your YouTube Live Channel ID within the integration settings. [ECP-1838]
+* Fix - Correct some a11y markup on the venues list. [ECP-1880]
+* Fix - Redirects no longer error when editing and updating recurring events. [ECP-1878]
+* Fix - Updated recurring events setting label for clarity.
+* Language - 2 new strings added, 27 updated, 1 fuzzied, and 0 obsoleted.
 
 = [7.3.1] 2024-12-17 =
 

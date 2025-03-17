@@ -33,6 +33,8 @@ class GF_Ajax_Handler {
 		$target_page = absint( rgpost( 'gform_target_page_number_' . $form_id ) );
 		$source_page = absint( rgpost( 'gform_source_page_number_' . $form_id ) );
 
+		$this->hydrate_get_from_current_page_url();
+
 		$result = \GFAPI::validate_form( $form_id, array(), rgpost( 'gform_field_values' ), $target_page, $source_page );
 		if ( is_wp_error( $result ) ) {
 			wp_send_json_error( $result->get_error_message() );
@@ -73,6 +75,8 @@ class GF_Ajax_Handler {
 		if ( ! $nonce_result ) {
 			wp_send_json_error( $this->nonce_validation_message() );
 		}
+
+		$this->hydrate_get_from_current_page_url();
 
 		$form_id = absint( rgpost( 'form_id' ) );
 
@@ -211,4 +215,30 @@ class GF_Ajax_Handler {
 		$result['validation_summary'] = wp_kses( $summary, wp_kses_allowed_html( 'post' ) );
 		return $result;
 	}
+
+	/**
+	 * Making the current page query string available for use with form filters.
+	 *
+	 * @since 2.9.5
+	 *
+	 * @return void
+	 */
+	private function hydrate_get_from_current_page_url() {
+		$url = rgpost( 'current_page_url' );
+
+		if ( empty( $url ) ) {
+			return;
+		}
+
+		$query_string = parse_url( rawurldecode( $url ), PHP_URL_QUERY );
+
+		if ( empty( $query_string ) || ! is_string( $query_string ) ) {
+			return;
+		}
+
+		parse_str( $query_string, $query );
+		unset( $query['gf_page'] ); // Removing so it doesn't conflict with gf_ajax_page=preview.
+		$_GET = array_merge( $_GET, $query );
+	}
+
 }
