@@ -95,10 +95,15 @@ class GF_Ajax_Handler {
 			return;
 		}
 
-		$target_page = absint( rgpost( 'gform_target_page_number_' . $form_id ) );
-		$source_page = absint( rgpost( 'gform_source_page_number_' . $form_id ) );
+		// Getting posted values.
+		$target_page       = absint( rgpost( 'gform_target_page_number_' . $form_id ) );
+		$source_page       = absint( rgpost( 'gform_source_page_number_' . $form_id ) );
+		$field_values      = rgpost( 'gform_field_values' );
+		$theme             = rgpost( 'gform_theme' );
+		$style             = rgpost( 'gform_style_settings' );
+		$submission_method = rgpost( 'gform_submission_method' );
 
-		$result = \GFAPI::submit_form( $form_id, array(), rgpost( 'gform_field_values' ), $target_page, $source_page );
+		$result = \GFAPI::submit_form( $form_id, array(), $field_values, $target_page, $source_page );
 
 		if ( is_wp_error( $result ) ) {
 			wp_send_json_error( $result->get_error_message() );
@@ -113,9 +118,17 @@ class GF_Ajax_Handler {
 
 		// Adding confirmation markup if there is a confirmation message to be displayed.
 		if ( rgar( $result, 'confirmation_type' ) == 'message' && ! empty( rgar( $result, 'confirmation_message' ) ) ) {
-
 			// Get confirmation markup from get_form(). This is necessary to ensure that confirmation markup is properly formatted.
-			$result['confirmation_markup'] = \GFFormDisplay::get_form( $form_id, false, false, false, rgpost( 'gform_field_values' ), false, 0, rgpost( 'gform_theme' ), rgpost( 'gform_style_settings') );
+			$result['confirmation_markup'] = \GFFormDisplay::get_form( $form_id, false, false, false, $field_values, false, 0, $theme, $style );
+		} elseif ( ! $result['is_valid'] ) {
+			// Refresh the form markup if single page or multipage forms have validation errors.
+			$result['form_markup'] = \GFFormDisplay::get_form( $form_id, false, false, false, $field_values, false, 0, $theme, $style );
+		} elseif ( $target_page > 0 ) {
+			// Getting the target page number taking page conditional logic into account.
+			$page_number = \GFFormDisplay::get_target_page( $form, $source_page, $field_values );
+
+			// Getting the field markup for the target page if the form is a multipage form.
+			$result['page_markup'] = \GFFormDisplay::get_page( $form_id, $page_number, $field_values, $theme, $style, $submission_method );
 		}
 
 		/**

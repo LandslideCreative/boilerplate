@@ -1,9 +1,6 @@
 <?php
 
-use TEC\Events_Pro\Admin\Controller as Admin_Controller;
 use TEC\Events_Pro\Base\Query_Filters as Base_Query_Filters;
-use TEC\Events_Pro\Compatibility\Event_Automator\Zapier\Zapier_Provider;
-use TEC\Events_Pro\Views\Hide_End_Time_Provider;
 use TEC\Events_Pro\Legacy\Query_Filters as Legacy_Query_Filters;
 use Tribe\Events\Pro\Views\V2\Views\Map_View;
 use Tribe\Events\Pro\Views\V2\Views\Photo_View;
@@ -13,6 +10,7 @@ use Tribe\Events\Views\V2\Views\Day_View;
 use Tribe\Events\Views\V2\Views\List_View;
 use Tribe\Events\Views\V2\Views\Month_View;
 use TEC\Common\StellarWP\Assets\Config;
+use TEC\Events_Pro\Controller as Events_Pro_Controller;
 
 // phpcs:disable PEAR.NamingConventions.ValidClassName.Invalid, StellarWP.Classes.ValidClassName.NotSnakeCase, WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase -- legacy naming conventions
 
@@ -94,7 +92,7 @@ if ( ! class_exists( 'Tribe__Events__Pro__Main' ) ) {
 		/**
 		 * The Events Calendar Pro Version
 		 */
-		const VERSION = '7.4.2';
+		const VERSION = '7.4.5';
 
 		/**
 		 * The Events Calendar Required Version
@@ -126,7 +124,7 @@ if ( ! class_exists( 'Tribe__Events__Pro__Main' ) ) {
 				require_once $this->pluginPath . 'src/functions/template-tags/deprecated.php';
 			}
 
-			add_action( 'admin_init', [ $this, 'run_updates' ], 10, 0 );
+			add_action( 'init', [ $this, 'run_updates' ], 10, 0 );
 
 			add_action( 'init', [ $this, 'init' ], 10 );
 			add_action( 'tribe_load_text_domains', [ $this, 'loadTextDomain' ] );
@@ -1841,47 +1839,8 @@ if ( ! class_exists( 'Tribe__Events__Pro__Main' ) ) {
 
 			tribe_register_provider( Tribe\Events\Pro\Admin\Manager\Provider::class );
 
-			// Custom tables v1 implementation.
-			if ( class_exists( '\\TEC\\Events_Pro\\Custom_Tables\\V1\\Provider' ) ) {
-				tribe_register_provider( '\\TEC\\Events_Pro\\Custom_Tables\\V1\\Provider' );
-			}
-
-			// Set up Admin Provider.
-			tribe_register_provider( Admin_Controller::class );
-
-			// Set up SEO Headers.
-			tribe_register_provider( TEC\Events_Pro\SEO\Headers\Controller::class );
-
-			// Set up Site Health.
-			tribe_register_provider( TEC\Events_Pro\Site_Health\Provider::class );
-
-			// Set up Telemetry.
-			tribe_register_provider( TEC\Events_Pro\Telemetry\Provider::class );
-
-			tribe_register_provider( TEC\Events_Pro\Linked_Posts\Controller::class );
-
-			// Set up Integrations.
-			tribe_register_provider( TEC\Events_Pro\Integrations\Controller::class );
-
-			// Site Editor Templates.
-			tribe_register_provider( TEC\Events_Pro\Block_Templates\Controller::class );
-
-			// Blocks Registration.
-			tribe_register_provider( TEC\Events_Pro\Blocks\Controller::class );
-
-			if ( class_exists( Zapier_Provider::class ) ) {
-				tribe_register_provider( Zapier_Provider::class );
-			}
-
-			// Set up Virtual Events via the compatibility layer.
-			tribe_register_provider( TEC\Events_Pro\Integrations\Events_Virtual_Provider::class );
-
-			// View modifier for end time.
-			tribe_register_provider( Hide_End_Time_Provider::class );
-
-			tribe( 'events-pro.admin.settings' );
-			tribe( 'events-pro.ical' );
-			tribe( 'events-pro.assets' );
+			// Redirect any new registrations to the new controller.
+			tribe()->register_on_action( 'tribe_common_loaded', Events_Pro_Controller::class );
 		}
 
 		/**
