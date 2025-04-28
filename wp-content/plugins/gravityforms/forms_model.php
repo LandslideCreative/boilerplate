@@ -5545,6 +5545,9 @@ class GFFormsModel {
 			//processing values so that they are in the correct format for each input type
 			$value = self::prepare_value( $form, $field, $value, $input_name, rgar( $lead, 'id' ), $lead );
 
+			// Fix for implicit conversion from float to int in depreciation notice in PHP 8.1+
+			$input_id = (string) $input_id;
+
 			//ignore fields that have not changed
 			if ( $lead != null && isset( $lead[ $input_id ] ) && $value === rgget( (string) $input_id, $lead ) ) {
 				return;

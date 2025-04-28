@@ -41,10 +41,8 @@ use Tribe\Events\Views\V2\Template;
 use Tribe__Context as Context;
 use Tribe__Customizer__Section as Customizer_Section;
 use Tribe__Events__Main as TEC;
-use Tribe__Events__Organizer as Organizer;
 use Tribe__Events__Pro__Main as Plugin;
 use Tribe__Events__Rewrite as TEC_Rewrite;
-use Tribe__Events__Venue as Venue;
 use WP_REST_Request as Request;
 use TEC\Common\Contracts\Service_Provider;
 
@@ -88,6 +86,7 @@ class Hooks extends Service_Provider {
 		add_action( 'template_redirect', [ $this, 'on_template_redirect' ], 50 );
 		add_action( 'tribe_template_after_include:events/v2/components/breadcrumbs', [ $this, 'action_include_organizer_meta' ], 10, 3 );
 		add_action( 'tribe_template_after_include:events/v2/components/breadcrumbs', [ $this, 'action_include_venue_meta' ], 10, 3 );
+		add_action( 'tec_events_calendar_embeds_enqueue_scripts', [ $this, 'include_assets' ] );
 	}
 
 	/**
@@ -151,6 +150,17 @@ class Hooks extends Service_Provider {
 		add_filter( 'tribe_is_by_date', [ $this, 'filter_tribe_is_by_date' ], 10, 2 );
 		add_filter( 'tribe_events_views_v2_cached_views', [ $this, 'filter_tribe_events_views_v2_cached_views' ], 10, 2 );
 		add_filter( 'tribe_events_views_v2_photo_view_html_classes', [ $this, 'filter_grid_photo_classes' ], 10, 1 );
+	}
+
+	/**
+	 * Includes the assets for Pro Views v2.
+	 *
+	 * @since 7.4.3
+	 *
+	 * @return void
+	 */
+	public function include_assets(): void {
+		tribe_asset_enqueue_group( Pro_Assets::$group_key );
 	}
 
 	/**

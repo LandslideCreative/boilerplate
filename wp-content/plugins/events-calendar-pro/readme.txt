@@ -3,9 +3,9 @@
 Contributors: theeventscalendar, borkweb, bordoni, brianjessee, aguseo, camwynsp, GeoffBel, jentheo, leahkoerper, lucatume, neillmcshea, vicskf, zbtirrell, juanfra
 Tags: events, calendar, event, venue, organizer, dates, date, google maps, conference, workshop, concert, meeting, seminar, summit, class, the events calendar, widget, pro
 Donate link: https://evnt.is/29
-Stable tag: 7.4.2
+Stable tag: 7.4.5
 Requires at least: 6.5
-Tested up to: 6.7.1
+Tested up to: 6.7.2
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -213,6 +213,27 @@ Previous versions of Events Calendar Pro are not cross-compatible with 6.X add-o
 Remember to always make a backup of your database and files before updating!
 
 == Changelog ==
+
+= [7.4.5] 2025-04-09 =
+
+* Fix - Restore use of post ID in event sequence. [TEC-5446]
+* Language - 0 new strings added, 0 updated, 0 fuzzied, and 0 obsoleted.
+
+= [7.4.4] 2025-04-07 =
+
+* Version - Events Pro 7.4.4 is only compatible with The Events Calendar 6.11.1 or higher.
+* Fix - Avoid running unbound queries, avoid too long queries being killed. [ECP-1898]
+* Fix - Avoids registering controllers while TCMN is not yet loaded. [TEC-5445]
+* Tweak - Avoid duplicated queries in Custom Table v1 code. [ECP-1898]
+* Language - 0 new strings added, 46 updated, 0 fuzzied, and 0 obsoleted.
+
+= [7.4.3] 2025-03-31 =
+
+* Feature - Add Recurring Event sitemap for Yoast SEO to include up to 1000 recurring events that occur with 365 days of today. [ECP-1884]
+* Tweak - Events Calendar Pro assets will be enqueued for External Calendar Embed Views. [TEC-5359]
+* Tweak - Make sure update callbacks are executed prior `wp_loaded` action. [TEC-5436]
+* Fix - Fixed an issue where creating a recurring event generated an unintended /slug single event URL instead of only the /slug-date. The /slug url now redirects to the series page. [ECP-1537]
+* Language - 0 new strings added, 4 updated, 0 fuzzied, and 0 obsoleted.
 
 = [7.4.2] 2025-03-04 =
 
