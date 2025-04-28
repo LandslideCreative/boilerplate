@@ -2,7 +2,7 @@
 
 // Staff - Show all
 function ls_show_all_staff( $query ) {
-	if ( $query->is_main_query() && is_post_type_archive( 'staff' ) ) { 
+	if ( $query->is_main_query() && !is_admin() && is_post_type_archive( 'staff' ) ) { 
 		$query->set( 'posts_per_page', -1 );
 	}
 }
@@ -10,11 +10,11 @@ add_action( 'pre_get_posts', 'ls_show_all_staff' );
 
 // Reorder sermons by sermon date
 function ls_filter_sermon_query($query) {
-    if ( is_post_type_archive('sermon') && $query->is_main_query() ) {
+    if ( is_post_type_archive('sermon') && $query->is_main_query() && !is_admin() ) {
         $query->set( 'meta_key', 'sermon_date' );
         $query->set( 'orderby', 'meta_value_num' );
         $query->set( 'order', 'DESC');
-    } else if ( is_tax('series') && $query->is_main_query() ) {
+    } else if ( is_tax('series') && $query->is_main_query() && !is_admin() ) {
     	$query->set( 'meta_key', 'sermon_date' );
         $query->set( 'orderby', 'meta_value_num' );
         $query->set( 'order', 'ASC');

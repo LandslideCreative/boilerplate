@@ -29,7 +29,8 @@ wp_reset_postdata(); ?>
 		$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
 		$args = array(
 			'current_page' => $paged,
-			'max_pages' => $wp_query->max_num_pages
+			'max_pages' => $wp_query->max_num_pages,
+			'anchor' => '#sermon-list'
 		);
 
 		if( $args['max_pages'] > 1 ) { ?>
