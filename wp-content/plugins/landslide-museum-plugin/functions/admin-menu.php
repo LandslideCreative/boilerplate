@@ -13,6 +13,8 @@ function ls_custom_menu_order($menu_ord) {
         'edit.php?post_type=page', // Pages
         'edit.php?post_type=tribe_events', // Events
         'edit.php?post_type=staff', // Staff
+        'edit.php?post_type=exhibition', // Exhibitions
+        'edit.php?post_type=artwork', // Collections
         'theme-settings', // Theme Settings
         
         'separator2', // Second separator

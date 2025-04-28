@@ -36,6 +36,14 @@ if( have_rows('page_builder') ) {
 				get_template_part('partials/staff/list');
 			} else if( is_post_type_archive( 'tribe_events' ) ) {
 				get_template_part('partials/event/list');
+			} else if( is_post_type_archive( 'artwork' ) ) {
+				get_template_part('partials/artwork/list');
+			} else if( is_post_type_archive( 'artist' ) ) {
+				get_template_part('partials/artist/list');
+			} else if( is_post_type_archive( 'exhibition' ) ) {
+				get_template_part('partials/exhibition/list');
+			} else if( is_page_template( 'templates/template-collection.php' ) ) {
+				get_template_part('partials/collection/list');
 			}
 
 		// Page Section Partials

@@ -1,9 +1,9 @@
 <?php
 
 /*
-Plugin Name: CLIENT NAME Plugin
-Plugin URI: https://CLIENT.DOMAIN
-Description: Plugin that adds necessary content options for the CLIENT NAME theme
+Plugin Name: MUSEUM NAME Plugin
+Plugin URI: https://MUSEUM.DOMAIN
+Description: Plugin that adds necessary content options for the MUSEUM NAME theme
 Version: 1.0.0
 Author: Landslide Creative
 Author URI: https://landslidecreative.com

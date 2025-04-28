@@ -1,0 +1,16 @@
+// Artist styles
+
+.artwork-list-container {
+	@include deduct-padding(.5);
+}
+
+.artwork-item {
+	@include clean-last-child;
+	@include vertical-margin(.5, false, true);
+	display: block;
+	color: $body-font-color;
+	text-decoration: none;
+	&:hover {
+		color: $body-font-color;
+	}
+}
