@@ -17,6 +17,7 @@ if( $type=='specific' ) {
 
 	$specific_posts = get_sub_field('posts');
 	$args['post__in'] = $specific_posts;
+	$args['orderby'] = 'post__in';
 
 // By Category
 } else if( $type=='filtered' ) {
