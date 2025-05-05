@@ -44,13 +44,16 @@ if (have_posts()): while (have_posts()) : the_post(); ?>
 
 		<?php 
 
+		$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
+
 		$args = array(
 			'post_type' => 'artwork',
-			'posts_per_page' => -1,
+			'posts_per_page' => get_option( 'posts_per_page' ),
+			'paged' => $paged,
 			'meta_query' => array(
                 array(
-                    'key' => 'artist', // name of custom field
-                    'value' => get_the_ID(), // matches exactly "123", not just 123. This prevents a match for "1234"
+                    'key' => 'artist',
+                    'value' => get_the_ID(),
                     'compare' => '='
                 )
             )
@@ -81,6 +84,23 @@ if (have_posts()): while (have_posts()) : the_post(); ?>
 						</div>
 					</div>
 				</div>
+
+				<?php /* Pagination */
+				$args = array(
+					'current_page' => $paged,
+					'max_pages' => $artwork_query->max_num_pages,
+					'anchor' => '#artwork-list'
+				);
+
+				if( $args['max_pages'] > 1 ) { ?>
+					<div class="grid-container artwork-list-pagination">
+						<div class="grid-x grid-padding-x">
+							<div class="cell">
+								<?php get_template_part('partials/pagination/list', '', $args); ?>
+							</div>
+						</div>
+					</div>
+				<?php } ?>
 
 			</div>
 

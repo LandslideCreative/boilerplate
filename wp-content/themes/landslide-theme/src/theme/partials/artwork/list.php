@@ -12,7 +12,7 @@ if ( $wp_query->have_posts() ) { ?>
 		<?php LSPB()->display_section_header(); ?>
 
 		<?php /* List */ ?>
-		<div class="grid-container staff-list-container">
+		<div class="grid-container artwork-list-container">
 			<div class="grid-x grid-padding-x">
 				<div class="cell">
 					<?php while ( $wp_query->have_posts() ) { 
@@ -22,6 +22,24 @@ if ( $wp_query->have_posts() ) { ?>
 				</div>
 			</div>
 		</div>
+
+		<?php /* Pagination */ ?>
+		<?php $paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
+		$args = array(
+			'current_page' => $paged,
+			'max_pages' => $wp_query->max_num_pages,
+			'anchor' => '#artwork-list'
+		);
+
+		if( $args['max_pages'] > 1 ) { ?>
+			<div class="grid-container artwork-list-pagination">
+				<div class="grid-x grid-padding-x">
+					<div class="cell">
+						<?php get_template_part('partials/pagination/list', '', $args); ?>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
 
 	</div>
 

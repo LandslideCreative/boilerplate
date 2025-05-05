@@ -54,7 +54,7 @@ get_header(); ?>
 			$args = array(
 				'current_page' => $paged,
 				'max_pages' => $wp_query->max_num_pages,
-				'anchor' => 'artwork-list'
+				'anchor' => '#artwork-list'
 			);
 
 			if( $args['max_pages'] > 1 ) { ?>

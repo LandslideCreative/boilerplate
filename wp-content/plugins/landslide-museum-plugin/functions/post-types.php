@@ -416,6 +416,21 @@ function ls_create_artwork_post_type()
 }
 add_action('init', 'ls_create_artwork_post_type');
 
+// Custom rewrite rules for artist pagination
+function ls_rewrite_artist_pagination() {
+    add_rewrite_rule('^artists/([^/]+)/page/([0-9]{1,})/?$','index.php?artist=$matches[1]&paged=$matches[2]', 'top');
+}
+add_action('init', 'ls_rewrite_artist_pagination');
+
+function ls_disable_artist_canonical_redirect($redirect_url) { 
+    if( is_singular('artist') ) {
+        $redirect_url = false; 
+    }
+
+    return $redirect_url; 
+}
+add_filter('redirect_canonical','ls_disable_artist_canonical_redirect'); 
+
 function ls_change_artwork_menu_label() {
     global $menu;
 

@@ -95,7 +95,8 @@ if (have_posts()): while (have_posts()) : the_post(); ?>
 					<?php /* Pagination */
 					$args = array(
 						'current_page' => $paged,
-						'max_pages' => $artwork_query->max_num_pages
+						'max_pages' => $artwork_query->max_num_pages,
+						'anchor' => '#artwork-list'
 					);
 
 					if( $args['max_pages'] > 1 ) { ?>

@@ -23,6 +23,24 @@ if ( $wp_query->have_posts() ) { ?>
 			</div>
 		</div>
 
+		<?php /* Pagination */ ?>
+		<?php $paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
+		$args = array(
+			'current_page' => $paged,
+			'max_pages' => $wp_query->max_num_pages,
+			'anchor' => '#artist-list'
+		);
+
+		if( $args['max_pages'] > 1 ) { ?>
+			<div class="grid-container artist-list-pagination">
+				<div class="grid-x grid-padding-x">
+					<div class="cell">
+						<?php get_template_part('partials/pagination/list', '', $args); ?>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+
 	</div>
 
 	<?php // Increment section counter

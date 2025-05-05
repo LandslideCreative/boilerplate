@@ -172,7 +172,8 @@ get_header(); ?>
 			<?php $paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
 			$args = array(
 				'current_page' => $paged,
-				'max_pages' => $wp_query->max_num_pages
+				'max_pages' => $wp_query->max_num_pages,
+				'anchor' => '#exhibition-list-past'
 			);
 
 			if( $args['max_pages'] > 1 ) { ?>
