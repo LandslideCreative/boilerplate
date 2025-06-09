@@ -1,3 +1,9 @@
+/* Hide event extras */
+#tribe_events_event_details.postbox .eventBritePluginPlug,
+#postimagediv .howto {
+    display: none;
+}
+
 .acf-field .acf-editor-wrap iframe {
     width: 100%;
     display: block;
