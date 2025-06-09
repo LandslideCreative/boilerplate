@@ -3,9 +3,9 @@
 Contributors: theeventscalendar, borkweb, bordoni, brianjessee, aguseo, camwynsp, GeoffBel, jentheo, leahkoerper, lucatume, neillmcshea, vicskf, zbtirrell, juanfra
 Tags: events, calendar, event, venue, organizer, dates, date, google maps, conference, workshop, concert, meeting, seminar, summit, class, the events calendar, widget, pro
 Donate link: https://evnt.is/29
-Stable tag: 7.4.5
-Requires at least: 6.5
-Tested up to: 6.7.2
+Stable tag: 7.6.0.1
+Requires at least: 6.6
+Tested up to: 6.8.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -214,26 +214,42 @@ Remember to always make a backup of your database and files before updating!
 
 == Changelog ==
 
-= [7.4.5] 2025-04-09 =
+= [7.6.0.1] 2025-06-05 =
 
-* Fix - Restore use of post ID in event sequence. [TEC-5446]
+* Fix - Utilize the newer version of our build process to ensure inline svgs are being handled properly. [TCMN-188]
+
+= [7.6.0] 2025-05-20 =
+
+* Version - Events Pro 7.6.0 is only compatible with The Events Calendar 6.13.0 or higher.
+* Feature - Migrated our style and script building process to stellarwp/tyson.
+* Feature - Added proper separation of asset paths for build directory and packages.
+* Feature - Updated block asset loading structure for better performance.
+* Tweak - Changed all instances of `tribe_asset()` to `tec_asset()` for compatibility with the new asset system.
+* Tweak - Updated asset registration paths to match the new build system structure.
+* Tweak - Improved asset conditionals and organization across the plugin.
+* Tweak - Updated Calendar embed block to use the new build path structure.
+* Tweak - Standardized CSS naming conventions with separate skeleton and full style files.
+* Performance - Optimized asset loading with improved grouping and conditional logic.
+* Language - 0 new strings added, 154 updated, 2 fuzzied, and 0 obsoleted.
+
+= [7.5.0.1] 2025-05-15 =
+
+* Fix - Ensure saving events with checkbox-type additional fields does not produce a fatal error. [ECP-1902]
 * Language - 0 new strings added, 0 updated, 0 fuzzied, and 0 obsoleted.
 
-= [7.4.4] 2025-04-07 =
+= [7.5.0] 2025-05-13 =
 
-* Version - Events Pro 7.4.4 is only compatible with The Events Calendar 6.11.1 or higher.
-* Fix - Avoid running unbound queries, avoid too long queries being killed. [ECP-1898]
-* Fix - Avoids registering controllers while TCMN is not yet loaded. [TEC-5445]
-* Tweak - Avoid duplicated queries in Custom Table v1 code. [ECP-1898]
-* Language - 0 new strings added, 46 updated, 0 fuzzied, and 0 obsoleted.
-
-= [7.4.3] 2025-03-31 =
-
-* Feature - Add Recurring Event sitemap for Yoast SEO to include up to 1000 recurring events that occur with 365 days of today. [ECP-1884]
-* Tweak - Events Calendar Pro assets will be enqueued for External Calendar Embed Views. [TEC-5359]
-* Tweak - Make sure update callbacks are executed prior `wp_loaded` action. [TEC-5436]
-* Fix - Fixed an issue where creating a recurring event generated an unintended /slug single event URL instead of only the /slug-date. The /slug url now redirects to the series page. [ECP-1537]
-* Language - 0 new strings added, 4 updated, 0 fuzzied, and 0 obsoleted.
+* Feature - New method to get the next Event in a Series [TEC-5407]
+* Fix - Ensure that additional field data is properly saved with the event when using the Block editor. [FBAR-294]
+* Fix - Prevent instances of the `_load_textdomain_just_in_time` warning by moving all language after the `init` hook
+* Tweak - Added actions: `tec_events_virtual_fully_loaded`, `tec_event_automator_fully_loaded`, `tec_events_pro_fully_loaded`
+* Tweak - Added filters: `tec_events_qr_next_series_event_url`
+* Tweak - Changed views: `v2/map`, `v2/photo`, `v2/summary`, `v2/week`, `v2/week/grid-body/multiday-events-day/multiday-event/bar`, `v2/week/grid-body/multiday-events-day/multiday-event/hidden`, `v2/week/grid-body/multiday-events-day/multiday-event/hidden/link`
+* Tweak - Include more Recurrence and Exclusion Telemetry data to improve functionality planning. [ECP-1900]
+* Tweak - Removed actions: `tribe_log`
+* Accessibility - Adjustments to keyboard navigation to focus on multiday and all day events properly. [ECP-1595]
+* Accessibility - Change wrapper div to a section tag to avoid multiple 'banner' landmarks. [TEC-3424]
+* Language - 9 new strings added, 121 updated, 0 fuzzied, and 0 obsoleted.
 
 = [7.4.2] 2025-03-04 =
 

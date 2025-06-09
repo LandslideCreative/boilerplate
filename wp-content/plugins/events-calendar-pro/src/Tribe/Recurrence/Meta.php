@@ -127,7 +127,7 @@ class Tribe__Events__Pro__Recurrence__Meta {
 			}
 		}
 
-		tribe_asset(
+		tec_asset(
 			Tribe__Events__Pro__Main::instance(),
 			Tribe__Events__Main::POSTTYPE . '-recurrence',
 			'events-recurrence.css',

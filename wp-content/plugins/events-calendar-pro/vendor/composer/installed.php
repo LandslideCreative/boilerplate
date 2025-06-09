@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'the-events-calendar/events-pro',
-        'pretty_version' => 'dev-release/T25.deadpool',
-        'version' => 'dev-release/T25.deadpool',
-        'reference' => 'fcd14d6e42810534bada1a7755bb13969804b26e',
+        'pretty_version' => 'dev-release/T25.enchantress.1',
+        'version' => 'dev-release/T25.enchantress.1',
+        'reference' => '2bad7c869a3c38762e20ca6810cea5fc8a009835',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -29,9 +29,9 @@
             'dev_requirement' => false,
         ),
         'the-events-calendar/events-pro' => array(
-            'pretty_version' => 'dev-release/T25.deadpool',
-            'version' => 'dev-release/T25.deadpool',
-            'reference' => 'fcd14d6e42810534bada1a7755bb13969804b26e',
+            'pretty_version' => 'dev-release/T25.enchantress.1',
+            'version' => 'dev-release/T25.enchantress.1',
+            'reference' => '2bad7c869a3c38762e20ca6810cea5fc8a009835',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

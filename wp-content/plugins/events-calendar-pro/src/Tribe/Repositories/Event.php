@@ -1044,7 +1044,7 @@ class Tribe__Events__Pro__Repositories__Event extends Tribe__Events__Repositorie
 	 * We use the `post__in` query argument when collapsing recurring event instances to show
 	 * only the first upcoming instance. In this method we "clean" the `post__in` clause
 	 *
-	 * @since TB
+	 * @since 4.7.0
 	 *
 	 * @param WP_Query $secondary_query The query object to update if required.
 	 */
