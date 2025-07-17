@@ -28,6 +28,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'mixpanel/mixpanel-php' => array(
+            'pretty_version' => '2.11.0',
+            'version' => '2.11.0.0',
+            'reference' => '4b0fafacf2129eff5d50721e129b07f0c32687e7',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../mixpanel/mixpanel-php',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'symfony/css-selector' => array(
             'pretty_version' => 'v5.4.45',
             'version' => '5.4.45.0',
@@ -38,9 +47,9 @@
             'dev_requirement' => false,
         ),
         'symfony/polyfill-php80' => array(
-            'pretty_version' => 'v1.31.0',
-            'version' => '1.31.0.0',
-            'reference' => '60328e362d4c2c802a54fcbf04f9d3fb892b4cf8',
+            'pretty_version' => 'v1.32.0',
+            'version' => '1.32.0.0',
+            'reference' => '0cc9dd0f17f61d8131e7df6b84bd344899fe2608',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/polyfill-php80',
             'aliases' => array(),
@@ -71,6 +80,17 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../wp-media/plugin-family',
             'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'wp-media/wp-mixpanel' => array(
+            'pretty_version' => 'dev-develop',
+            'version' => 'dev-develop',
+            'reference' => 'e56dd8d49d4277be1bbaedd1f4a18735849987f0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../wp-media/wp-mixpanel',
+            'aliases' => array(
+                0 => '9999999-dev',
+            ),
             'dev_requirement' => false,
         ),
         'wp-media/wp-rocket' => array(

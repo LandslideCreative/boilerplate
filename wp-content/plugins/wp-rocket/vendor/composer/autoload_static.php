@@ -4,10 +4,11 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitbf262df180bff8fdf56b4d80073812fd
+class ComposerStaticInit12e3746096d6a2ef4ea5e8c99181382c
 {
     public static $files = array (
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
+        '1f155afceeab454b94183cdd8d5248a6' => __DIR__ . '/..' . '/mixpanel/mixpanel-php/lib/Mixpanel.php',
         '6c592737b91137905268e9a0eb968869' => __DIR__ . '/..' . '/wp-media/apply-filters-typed/functions.php',
     );
 
@@ -20,6 +21,7 @@ class ComposerStaticInitbf262df180bff8fdf56b4d80073812fd
         array (
             'WP_Rocket\\' => 10,
             'WPMedia\\PluginFamily\\' => 21,
+            'WPMedia\\Mixpanel\\' => 17,
             'WPMedia\\Cloudflare\\' => 19,
         ),
         'S' => 
@@ -45,6 +47,10 @@ class ComposerStaticInitbf262df180bff8fdf56b4d80073812fd
         'WPMedia\\PluginFamily\\' => 
         array (
             0 => __DIR__ . '/..' . '/wp-media/plugin-family/src',
+        ),
+        'WPMedia\\Mixpanel\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/wp-media/wp-mixpanel/src',
         ),
         'WPMedia\\Cloudflare\\' => 
         array (
@@ -147,6 +153,9 @@ class ComposerStaticInitbf262df180bff8fdf56b4d80073812fd
         'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
         'WPMedia\\Cloudflare\\Auth\\APIKeyFactory' => __DIR__ . '/../..' . '/inc/Addon/Cloudflare/Auth/APIKeyFactory.php',
         'WPMedia\\Cloudflare\\Auth\\AuthFactoryInterface' => __DIR__ . '/../..' . '/inc/Addon/Cloudflare/Auth/AuthFactoryInterface.php',
+        'WPMedia\\Mixpanel\\Optin' => __DIR__ . '/..' . '/wp-media/wp-mixpanel/src/Optin.php',
+        'WPMedia\\Mixpanel\\Tracking' => __DIR__ . '/..' . '/wp-media/wp-mixpanel/src/Tracking.php',
+        'WPMedia\\Mixpanel\\TrackingPlugin' => __DIR__ . '/..' . '/wp-media/wp-mixpanel/src/TrackingPlugin.php',
         'WPMedia\\PluginFamily\\Controller\\PluginFamily' => __DIR__ . '/..' . '/wp-media/plugin-family/src/Controller/PluginFamily.php',
         'WPMedia\\PluginFamily\\Controller\\PluginFamilyInterface' => __DIR__ . '/..' . '/wp-media/plugin-family/src/Controller/PluginFamilyInterface.php',
         'WPMedia\\PluginFamily\\Model\\PluginFamily' => __DIR__ . '/..' . '/wp-media/plugin-family/src/Model/PluginFamily.php',
@@ -325,7 +334,9 @@ class ComposerStaticInitbf262df180bff8fdf56b4d80073812fd
         'WP_Rocket\\Engine\\Cache\\PurgeExpired\\PurgeExpiredCache' => __DIR__ . '/../..' . '/inc/Engine/Cache/PurgeExpired/PurgeExpiredCache.php',
         'WP_Rocket\\Engine\\Cache\\PurgeExpired\\Subscriber' => __DIR__ . '/../..' . '/inc/Engine/Cache/PurgeExpired/Subscriber.php',
         'WP_Rocket\\Engine\\Cache\\ServiceProvider' => __DIR__ . '/../..' . '/inc/Engine/Cache/ServiceProvider.php',
-        'WP_Rocket\\Engine\\Cache\\TaxonomySubscriber' => __DIR__ . '/../..' . '/inc/Engine/Cache/TaxonomySubscriber.php',
+        'WP_Rocket\\Engine\\Cache\\UrlValidation\\AbstractUrlValidation' => __DIR__ . '/../..' . '/inc/Engine/Cache/UrlValidation/AbstractUrlValidation.php',
+        'WP_Rocket\\Engine\\Cache\\UrlValidation\\PostSubscriber' => __DIR__ . '/../..' . '/inc/Engine/Cache/UrlValidation/PostSubscriber.php',
+        'WP_Rocket\\Engine\\Cache\\UrlValidation\\TaxonomySubscriber' => __DIR__ . '/../..' . '/inc/Engine/Cache/UrlValidation/TaxonomySubscriber.php',
         'WP_Rocket\\Engine\\Cache\\WPCache' => __DIR__ . '/../..' . '/inc/Engine/Cache/WPCache.php',
         'WP_Rocket\\Engine\\Capabilities\\Manager' => __DIR__ . '/../..' . '/inc/Engine/Capabilities/Manager.php',
         'WP_Rocket\\Engine\\Capabilities\\ServiceProvider' => __DIR__ . '/../..' . '/inc/Engine/Capabilities/ServiceProvider.php',
@@ -343,6 +354,9 @@ class ComposerStaticInitbf262df180bff8fdf56b4d80073812fd
         'WP_Rocket\\Engine\\Common\\Database\\Tables\\AbstractTable' => __DIR__ . '/../..' . '/inc/Engine/Common/Database/Tables/AbstractTable.php',
         'WP_Rocket\\Engine\\Common\\ExtractCSS\\ServiceProvider' => __DIR__ . '/../..' . '/inc/Engine/Common/ExtractCSS/ServiceProvider.php',
         'WP_Rocket\\Engine\\Common\\ExtractCSS\\Subscriber' => __DIR__ . '/../..' . '/inc/Engine/Common/ExtractCSS/Subscriber.php',
+        'WP_Rocket\\Engine\\Common\\Head\\ElementTrait' => __DIR__ . '/../..' . '/inc/Engine/Common/Head/ElementTrait.php',
+        'WP_Rocket\\Engine\\Common\\Head\\ServiceProvider' => __DIR__ . '/../..' . '/inc/Engine/Common/Head/ServiceProvider.php',
+        'WP_Rocket\\Engine\\Common\\Head\\Subscriber' => __DIR__ . '/../..' . '/inc/Engine/Common/Head/Subscriber.php',
         'WP_Rocket\\Engine\\Common\\JobManager\\APIHandler\\APIClient' => __DIR__ . '/../..' . '/inc/Engine/Common/JobManager/APIHandler/APIClient.php',
         'WP_Rocket\\Engine\\Common\\JobManager\\APIHandler\\AbstractAPIClient' => __DIR__ . '/../..' . '/inc/Engine/Common/JobManager/APIHandler/AbstractAPIClient.php',
         'WP_Rocket\\Engine\\Common\\JobManager\\APIHandler\\AbstractSafeAPIClient' => __DIR__ . '/../..' . '/inc/Engine/Common/JobManager/APIHandler/AbstractSafeAPIClient.php',
@@ -372,6 +386,7 @@ class ComposerStaticInitbf262df180bff8fdf56b4d80073812fd
         'WP_Rocket\\Engine\\Common\\PerformanceHints\\Admin\\Notices' => __DIR__ . '/../..' . '/inc/Engine/Common/PerformanceHints/Admin/Notices.php',
         'WP_Rocket\\Engine\\Common\\PerformanceHints\\Admin\\Subscriber' => __DIR__ . '/../..' . '/inc/Engine/Common/PerformanceHints/Admin/Subscriber.php',
         'WP_Rocket\\Engine\\Common\\PerformanceHints\\Cron\\Controller' => __DIR__ . '/../..' . '/inc/Engine/Common/PerformanceHints/Cron/Controller.php',
+        'WP_Rocket\\Engine\\Common\\PerformanceHints\\Cron\\CronTrait' => __DIR__ . '/../..' . '/inc/Engine/Common/PerformanceHints/Cron/CronTrait.php',
         'WP_Rocket\\Engine\\Common\\PerformanceHints\\Cron\\Subscriber' => __DIR__ . '/../..' . '/inc/Engine/Common/PerformanceHints/Cron/Subscriber.php',
         'WP_Rocket\\Engine\\Common\\PerformanceHints\\Database\\Queries\\AbstractQueries' => __DIR__ . '/../..' . '/inc/Engine/Common/PerformanceHints/Database/Queries/AbstractQueries.php',
         'WP_Rocket\\Engine\\Common\\PerformanceHints\\Database\\Queries\\QueriesInterface' => __DIR__ . '/../..' . '/inc/Engine/Common/PerformanceHints/Database/Queries/QueriesInterface.php',
@@ -471,6 +486,30 @@ class ComposerStaticInitbf262df180bff8fdf56b4d80073812fd
         'WP_Rocket\\Engine\\Media\\Lazyload\\CSS\\Subscriber' => __DIR__ . '/../..' . '/inc/Engine/Media/Lazyload/CSS/Subscriber.php',
         'WP_Rocket\\Engine\\Media\\Lazyload\\CanLazyloadTrait' => __DIR__ . '/../..' . '/inc/Engine/Media/Lazyload/CanLazyloadTrait.php',
         'WP_Rocket\\Engine\\Media\\Lazyload\\Subscriber' => __DIR__ . '/../..' . '/inc/Engine/Media/Lazyload/Subscriber.php',
+        'WP_Rocket\\Engine\\Media\\PreconnectExternalDomains\\AJAX\\Controller' => __DIR__ . '/../..' . '/inc/Engine/Media/PreconnectExternalDomains/AJAX/Controller.php',
+        'WP_Rocket\\Engine\\Media\\PreconnectExternalDomains\\Admin\\Settings' => __DIR__ . '/../..' . '/inc/Engine/Media/PreconnectExternalDomains/Admin/Settings.php',
+        'WP_Rocket\\Engine\\Media\\PreconnectExternalDomains\\Admin\\Subscriber' => __DIR__ . '/../..' . '/inc/Engine/Media/PreconnectExternalDomains/Admin/Subscriber.php',
+        'WP_Rocket\\Engine\\Media\\PreconnectExternalDomains\\Context\\Context' => __DIR__ . '/../..' . '/inc/Engine/Media/PreconnectExternalDomains/Context/Context.php',
+        'WP_Rocket\\Engine\\Media\\PreconnectExternalDomains\\Database\\Queries\\PreconnectExternalDomains' => __DIR__ . '/../..' . '/inc/Engine/Media/PreconnectExternalDomains/Database/Queries/PreconnectExternalDomains.php',
+        'WP_Rocket\\Engine\\Media\\PreconnectExternalDomains\\Database\\Row\\PreconnectExternalDomains' => __DIR__ . '/../..' . '/inc/Engine/Media/PreconnectExternalDomains/Database/Row/PreconnectExternalDomains.php',
+        'WP_Rocket\\Engine\\Media\\PreconnectExternalDomains\\Database\\Schema\\PreconnectExternalDomains' => __DIR__ . '/../..' . '/inc/Engine/Media/PreconnectExternalDomains/Database/Schema/PreconnectExternalDomains.php',
+        'WP_Rocket\\Engine\\Media\\PreconnectExternalDomains\\Database\\Table\\PreconnectExternalDomains' => __DIR__ . '/../..' . '/inc/Engine/Media/PreconnectExternalDomains/Database/Table/PreconnectExternalDomains.php',
+        'WP_Rocket\\Engine\\Media\\PreconnectExternalDomains\\Factory' => __DIR__ . '/../..' . '/inc/Engine/Media/PreconnectExternalDomains/Factory.php',
+        'WP_Rocket\\Engine\\Media\\PreconnectExternalDomains\\Frontend\\Controller' => __DIR__ . '/../..' . '/inc/Engine/Media/PreconnectExternalDomains/Frontend/Controller.php',
+        'WP_Rocket\\Engine\\Media\\PreconnectExternalDomains\\Frontend\\Subscriber' => __DIR__ . '/../..' . '/inc/Engine/Media/PreconnectExternalDomains/Frontend/Subscriber.php',
+        'WP_Rocket\\Engine\\Media\\PreconnectExternalDomains\\ServiceProvider' => __DIR__ . '/../..' . '/inc/Engine/Media/PreconnectExternalDomains/ServiceProvider.php',
+        'WP_Rocket\\Engine\\Media\\PreloadFonts\\AJAX\\Controller' => __DIR__ . '/../..' . '/inc/Engine/Media/PreloadFonts/AJAX/Controller.php',
+        'WP_Rocket\\Engine\\Media\\PreloadFonts\\Admin\\Settings' => __DIR__ . '/../..' . '/inc/Engine/Media/PreloadFonts/Admin/Settings.php',
+        'WP_Rocket\\Engine\\Media\\PreloadFonts\\Admin\\Subscriber' => __DIR__ . '/../..' . '/inc/Engine/Media/PreloadFonts/Admin/Subscriber.php',
+        'WP_Rocket\\Engine\\Media\\PreloadFonts\\Context\\Context' => __DIR__ . '/../..' . '/inc/Engine/Media/PreloadFonts/Context/Context.php',
+        'WP_Rocket\\Engine\\Media\\PreloadFonts\\Database\\Queries\\PreloadFonts' => __DIR__ . '/../..' . '/inc/Engine/Media/PreloadFonts/Database/Queries/PreloadFonts.php',
+        'WP_Rocket\\Engine\\Media\\PreloadFonts\\Database\\Rows\\PreloadFonts' => __DIR__ . '/../..' . '/inc/Engine/Media/PreloadFonts/Database/Rows/PreloadFonts.php',
+        'WP_Rocket\\Engine\\Media\\PreloadFonts\\Database\\Schema\\PreloadFonts' => __DIR__ . '/../..' . '/inc/Engine/Media/PreloadFonts/Database/Schema/PreloadFonts.php',
+        'WP_Rocket\\Engine\\Media\\PreloadFonts\\Database\\Table\\PreloadFonts' => __DIR__ . '/../..' . '/inc/Engine/Media/PreloadFonts/Database/Table/PreloadFonts.php',
+        'WP_Rocket\\Engine\\Media\\PreloadFonts\\Factory' => __DIR__ . '/../..' . '/inc/Engine/Media/PreloadFonts/Factory.php',
+        'WP_Rocket\\Engine\\Media\\PreloadFonts\\Frontend\\Controller' => __DIR__ . '/../..' . '/inc/Engine/Media/PreloadFonts/Frontend/Controller.php',
+        'WP_Rocket\\Engine\\Media\\PreloadFonts\\Frontend\\Subscriber' => __DIR__ . '/../..' . '/inc/Engine/Media/PreloadFonts/Frontend/Subscriber.php',
+        'WP_Rocket\\Engine\\Media\\PreloadFonts\\ServiceProvider' => __DIR__ . '/../..' . '/inc/Engine/Media/PreloadFonts/ServiceProvider.php',
         'WP_Rocket\\Engine\\Media\\ServiceProvider' => __DIR__ . '/../..' . '/inc/Engine/Media/ServiceProvider.php',
         'WP_Rocket\\Engine\\Optimization\\AbstractOptimization' => __DIR__ . '/../..' . '/inc/Engine/Optimization/AbstractOptimization.php',
         'WP_Rocket\\Engine\\Optimization\\AdminServiceProvider' => __DIR__ . '/../..' . '/inc/Engine/Optimization/AdminServiceProvider.php',
@@ -581,7 +620,6 @@ class ComposerStaticInitbf262df180bff8fdf56b4d80073812fd
         'WP_Rocket\\Engine\\Preload\\Database\\Rows\\CacheRow' => __DIR__ . '/../..' . '/inc/Engine/Preload/Database/Rows/CacheRow.php',
         'WP_Rocket\\Engine\\Preload\\Database\\Schemas\\Cache' => __DIR__ . '/../..' . '/inc/Engine/Preload/Database/Schemas/Cache.php',
         'WP_Rocket\\Engine\\Preload\\Database\\Tables\\Cache' => __DIR__ . '/../..' . '/inc/Engine/Preload/Database/Tables/Cache.php',
-        'WP_Rocket\\Engine\\Preload\\Fonts' => __DIR__ . '/../..' . '/inc/Engine/Preload/Fonts.php',
         'WP_Rocket\\Engine\\Preload\\Frontend\\FetchSitemap' => __DIR__ . '/../..' . '/inc/Engine/Preload/Frontend/FetchSitemap.php',
         'WP_Rocket\\Engine\\Preload\\Frontend\\SitemapParser' => __DIR__ . '/../..' . '/inc/Engine/Preload/Frontend/SitemapParser.php',
         'WP_Rocket\\Engine\\Preload\\Frontend\\Subscriber' => __DIR__ . '/../..' . '/inc/Engine/Preload/Frontend/Subscriber.php',
@@ -601,6 +639,9 @@ class ComposerStaticInitbf262df180bff8fdf56b4d80073812fd
         'WP_Rocket\\Engine\\Support\\Rest' => __DIR__ . '/../..' . '/inc/Engine/Support/Rest.php',
         'WP_Rocket\\Engine\\Support\\ServiceProvider' => __DIR__ . '/../..' . '/inc/Engine/Support/ServiceProvider.php',
         'WP_Rocket\\Engine\\Support\\Subscriber' => __DIR__ . '/../..' . '/inc/Engine/Support/Subscriber.php',
+        'WP_Rocket\\Engine\\Tracking\\ServiceProvider' => __DIR__ . '/../..' . '/inc/Engine/Tracking/ServiceProvider.php',
+        'WP_Rocket\\Engine\\Tracking\\Subscriber' => __DIR__ . '/../..' . '/inc/Engine/Tracking/Subscriber.php',
+        'WP_Rocket\\Engine\\Tracking\\Tracking' => __DIR__ . '/../..' . '/inc/Engine/Tracking/Tracking.php',
         'WP_Rocket\\Event_Management\\Event_Manager' => __DIR__ . '/../..' . '/inc/classes/event-management/class-event-manager.php',
         'WP_Rocket\\Event_Management\\Event_Manager_Aware_Subscriber_Interface' => __DIR__ . '/../..' . '/inc/classes/event-management/event-manager-aware-subscriber-interface.php',
         'WP_Rocket\\Event_Management\\Subscriber_Interface' => __DIR__ . '/../..' . '/inc/classes/event-management/subscriber-interface.php',
@@ -739,10 +780,10 @@ class ComposerStaticInitbf262df180bff8fdf56b4d80073812fd
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitbf262df180bff8fdf56b4d80073812fd::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitbf262df180bff8fdf56b4d80073812fd::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitbf262df180bff8fdf56b4d80073812fd::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitbf262df180bff8fdf56b4d80073812fd::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit12e3746096d6a2ef4ea5e8c99181382c::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit12e3746096d6a2ef4ea5e8c99181382c::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit12e3746096d6a2ef4ea5e8c99181382c::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit12e3746096d6a2ef4ea5e8c99181382c::$classMap;
 
         }, null, ClassLoader::class);
     }
