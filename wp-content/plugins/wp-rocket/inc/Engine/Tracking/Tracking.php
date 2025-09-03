@@ -59,9 +59,19 @@ class Tracking extends Abstract_Render {
 			return;
 		}
 
-		$options_to_track = [
-			'auto_preload_fonts',
-		];
+		/**
+		 * Filters the tracked options.
+		 *
+		 * @since 3.19.2
+		 *
+		 * @param string[] $options Array of options that are tracked by default.
+		 * @return string[] array of strings.
+		 */
+		$options_to_track = wpm_apply_filters_typed(
+			'string[]',
+			'rocket_mixpanel_tracked_options',
+			[]
+		);
 
 		foreach ( $options_to_track as $option_tracked ) {
 			if ( ! isset( $old_value[ $option_tracked ], $value[ $option_tracked ] ) ) {
@@ -75,8 +85,6 @@ class Tracking extends Abstract_Render {
 			$this->mixpanel->track(
 				'WPM Option Changed',
 				[
-					'brand'          => 'WP Media',
-					'product'        => 'WP Rocket',
 					'context'        => 'wp_plugin',
 					'option_name'    => $option_tracked,
 					'previous_value' => $old_value[ $option_tracked ],
@@ -147,5 +155,65 @@ class Tracking extends Abstract_Render {
 		}
 
 		wp_send_json_error( 'Invalid value parameter.' );
+	}
+
+	/**
+	 * Add opt-in status to admin scripts.
+	 *
+	 * @return void
+	 */
+	public function localize_optin_status(): void {
+		if ( ! current_user_can( 'rocket_manage_options' ) ) {
+			return;
+		}
+
+		// Get the license email and hash it for privacy.
+		$consumer_email = $this->options->get( 'consumer_email', '' );
+		$hashed_email   = ! empty( $consumer_email ) ? $this->mixpanel->hash( $consumer_email ) : '';
+
+		wp_localize_script(
+			'wpr-admin-common',
+			'rocket_mixpanel_data',
+			[
+				'optin_enabled' => $this->optin->is_enabled() ? true : false,
+				'brand'         => 'WP Media',
+				'product'       => 'WP Rocket',
+				'context'       => 'wp_plugin',
+				'path'          => isset( $_SERVER['REQUEST_URI'] ) ? esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '',
+				'user_id'       => $hashed_email,
+			]
+		);
+	}
+
+	/**
+	 * Injects Mixpanel JavaScript SDK when opt-in is enabled.
+	 *
+	 * @since 3.19.2
+	 * @return void
+	 */
+	public function inject_mixpanel_script(): void {
+		// Only inject if user has capability and opt-in is enabled.
+		if ( ! current_user_can( 'rocket_manage_options' ) || ! $this->optin->is_enabled() ) {
+			return;
+		}
+
+		$screen = get_current_screen();
+
+		if ( ! $screen || 'settings_page_wprocket' !== $screen->id ) {
+			return;
+		}
+
+		$this->mixpanel->add_script();
+	}
+
+	/**
+	 * Track opt-in change event.
+	 *
+	 * @param bool $status The new opt-in status.
+	 *
+	 * @return void
+	 */
+	public function track_optin_change( $status ): void {
+		$this->mixpanel->track_optin( $status );
 	}
 }

@@ -1838,15 +1838,15 @@ class Tribe__Events__Pro__Recurrence__Meta {
 			[
 				'hideSubsequentRecurrencesDefault' => [
 					'type'            => 'checkbox_bool',
-					'label'           => __( 'Recurring event instances', 'tribe-events-calendar-pro' ),
-					'tooltip'         => __( 'Show only the next instance of each recurring event (only affects list-style views).', 'tribe-events-calendar-pro' ),
+					'label'           => __( 'Condense events in Series', 'tribe-events-calendar-pro' ),
+					'tooltip'         => __( 'Show only the next event in each Series (only affects list-style views).', 'tribe-events-calendar-pro' ),
 					'default'         => false,
 					'validation_type' => 'boolean',
 				],
 				'userToggleSubsequentRecurrences'  => [
 					'type'            => 'checkbox_bool',
-					'label'           => __( 'Front-end recurring event instances toggle', 'tribe-events-calendar-pro' ),
-					'tooltip'         => __( 'Allow users to decide whether to show all instances of a recurring event on list-style views.', 'tribe-events-calendar-pro' ),
+					'label'           => __( 'Front-end Condense Events Series toggle', 'tribe-events-calendar-pro' ),
+					'tooltip'         => __( 'Allow users to limit list-style views to only show the next event in each Series.', 'tribe-events-calendar-pro' ),
 					'default'         => false,
 					'validation_type' => 'boolean',
 				],

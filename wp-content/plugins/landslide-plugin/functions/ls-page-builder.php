@@ -128,7 +128,7 @@ add_filter( 'acf/settings/load_json', 'ls_page_builder_acf_json_load_path' );
 function ls_add_page_builder_scripts() {
 
 	// LS Page Builder Styles
-	wp_register_style('ls-page-builder', LS_PLUGIN_URL . '/assets/css/ls-page-builder.css', array(), '1.0.0');
+	wp_register_style('ls-page-builder', LS_PLUGIN_URL . '/assets/css/ls-page-builder.css', array(), LS_BUILD_VERSION);
     wp_enqueue_style('ls-page-builder');
 
     // LS Page Builder Scripts

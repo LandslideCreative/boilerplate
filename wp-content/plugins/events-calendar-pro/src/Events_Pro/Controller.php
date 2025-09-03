@@ -13,6 +13,7 @@ use TEC\Common\Contracts\Provider\Controller as Controller_Contract;
 use TEC\Events_Pro\Compatibility\Event_Automator\Zapier\Zapier_Provider;
 use TEC\Events_Pro\Views\Hide_End_Time_Provider;
 use TEC\Events_Pro\Admin\Controller as Admin_Controller;
+use TEC\Events_Pro\REST\Controller as REST_Controller;
 
 /**
  * Class Controller - Registers and un-registers the Events_Pro namespaced sub-controllers.
@@ -69,6 +70,9 @@ class Controller extends Controller_Contract {
 		// View modifier for end time.
 		$this->container->register( Hide_End_Time_Provider::class );
 
+		// REST API implementation.
+		$this->container->register( REST\Controller::class );
+
 		$this->init_implementations();
 	}
 
@@ -92,6 +96,7 @@ class Controller extends Controller_Contract {
 		// Zapier_Provider::class has no unregister method.
 		// Integrations\Events_Virtual_Provider::class has no unregister method.
 		// Hide_End_Time_Provider::class has no unregister method.
+		$this->container->get( REST_Controller::class )->unregister();
 	}
 
 	/**

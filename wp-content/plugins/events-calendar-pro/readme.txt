@@ -3,9 +3,9 @@
 Contributors: theeventscalendar, borkweb, bordoni, brianjessee, aguseo, camwynsp, GeoffBel, jentheo, leahkoerper, lucatume, neillmcshea, vicskf, zbtirrell, juanfra
 Tags: events, calendar, event, venue, organizer, dates, date, google maps, conference, workshop, concert, meeting, seminar, summit, class, the events calendar, widget, pro
 Donate link: https://evnt.is/29
-Stable tag: 7.6.2
+Stable tag: 7.7.2
 Requires at least: 6.6
-Tested up to: 6.8.1
+Tested up to: 6.8.2
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -213,6 +213,30 @@ Previous versions of Events Calendar Pro are not cross-compatible with 6.X add-o
 Remember to always make a backup of your database and files before updating!
 
 == Changelog ==
+
+= [7.7.2] 2025-09-02 =
+
+* Fix - Alters the code in classic-editor-events.js to properly get the date and time for display and storage. [ECP-1929]
+* Tweak - Recurring settings labels updated to be more precise. [ECP-1932]
+* Language - 0 new strings added, 4 updated, 0 fuzzied, and 4 obsoleted.
+
+= [7.7.1] 2025-08-26 =
+
+* Fix - Add checks to make sure the shortcode parameters are respected during AJAX calls. [ECP-1923]
+* Tweak - Tweaked timing of initialization for APM. [ECP-1915]
+* Language - 0 new strings added, 0 updated, 0 fuzzied, and 0 obsoleted.
+
+= [7.7.0] 2025-08-19 =
+
+* Version - Events Pro 7.7.0 is only compatible with The Events Calendar 6.15.0 and higher.
+* [EXPERIMENTAL] Feature - Extending new REST endpoints, with Pro functionality. Note: This API is for experimental use only and requires the X-TEC-EEA header. It may be subject to breaking changes in upcoming releases.
+* Language - 2 new strings added, 0 updated, 0 fuzzied, and 0 obsoleted.
+
+= [7.6.3] 2025-07-22 =
+
+* Tweak - Changed views: `components/hybrid-event`, `v2/map/event-cards/nav`, `v2/organizer/meta/featured-image`, `v2/photo/event/featured-image`, `v2/venue/meta/featured-image`, `v2/week/mobile-events/day/event/featured-image`
+* Accessibility - Accessibility enhanced for calendar map and week views. [TEC-5156]
+* Language - 0 new strings added, 0 updated, 0 fuzzied, and 0 obsoleted.
 
 = [7.6.2] 2025-07-16 =
 

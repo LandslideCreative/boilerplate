@@ -4,11 +4,10 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit12e3746096d6a2ef4ea5e8c99181382c
+class ComposerStaticInitbf93452b5ab38908300fd84a4c8af40e
 {
     public static $files = array (
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
-        '1f155afceeab454b94183cdd8d5248a6' => __DIR__ . '/..' . '/mixpanel/mixpanel-php/lib/Mixpanel.php',
         '6c592737b91137905268e9a0eb968869' => __DIR__ . '/..' . '/wp-media/apply-filters-typed/functions.php',
     );
 
@@ -156,10 +155,21 @@ class ComposerStaticInit12e3746096d6a2ef4ea5e8c99181382c
         'WPMedia\\Mixpanel\\Optin' => __DIR__ . '/..' . '/wp-media/wp-mixpanel/src/Optin.php',
         'WPMedia\\Mixpanel\\Tracking' => __DIR__ . '/..' . '/wp-media/wp-mixpanel/src/Tracking.php',
         'WPMedia\\Mixpanel\\TrackingPlugin' => __DIR__ . '/..' . '/wp-media/wp-mixpanel/src/TrackingPlugin.php',
+        'WPMedia\\Mixpanel\\WPConsumer' => __DIR__ . '/..' . '/wp-media/wp-mixpanel/src/WPConsumer.php',
         'WPMedia\\PluginFamily\\Controller\\PluginFamily' => __DIR__ . '/..' . '/wp-media/plugin-family/src/Controller/PluginFamily.php',
         'WPMedia\\PluginFamily\\Controller\\PluginFamilyInterface' => __DIR__ . '/..' . '/wp-media/plugin-family/src/Controller/PluginFamilyInterface.php',
         'WPMedia\\PluginFamily\\Model\\PluginFamily' => __DIR__ . '/..' . '/wp-media/plugin-family/src/Model/PluginFamily.php',
         'WPMedia\\PluginFamily\\PostInstall' => __DIR__ . '/..' . '/wp-media/plugin-family/src/PostInstall.php',
+        'WPMedia_Base_MixpanelBase' => __DIR__ . '/..' . '/wp-media/wp-mixpanel/src/Classes/Base/MixpanelBase.php',
+        'WPMedia_ConsumerStrategies_AbstractConsumer' => __DIR__ . '/..' . '/wp-media/wp-mixpanel/src/Classes/ConsumerStrategies/AbstractConsumer.php',
+        'WPMedia_ConsumerStrategies_CurlConsumer' => __DIR__ . '/..' . '/wp-media/wp-mixpanel/src/Classes/ConsumerStrategies/CurlConsumer.php',
+        'WPMedia_ConsumerStrategies_FileConsumer' => __DIR__ . '/..' . '/wp-media/wp-mixpanel/src/Classes/ConsumerStrategies/FileConsumer.php',
+        'WPMedia_ConsumerStrategies_SocketConsumer' => __DIR__ . '/..' . '/wp-media/wp-mixpanel/src/Classes/ConsumerStrategies/SocketConsumer.php',
+        'WPMedia_Mixpanel' => __DIR__ . '/..' . '/wp-media/wp-mixpanel/src/Classes/Mixpanel.php',
+        'WPMedia_Producers_MixpanelBaseProducer' => __DIR__ . '/..' . '/wp-media/wp-mixpanel/src/Classes/Producers/MixpanelBaseProducer.php',
+        'WPMedia_Producers_MixpanelEvents' => __DIR__ . '/..' . '/wp-media/wp-mixpanel/src/Classes/Producers/MixpanelEvents.php',
+        'WPMedia_Producers_MixpanelGroups' => __DIR__ . '/..' . '/wp-media/wp-mixpanel/src/Classes/Producers/MixpanelGroups.php',
+        'WPMedia_Producers_MixpanelPeople' => __DIR__ . '/..' . '/wp-media/wp-mixpanel/src/Classes/Producers/MixpanelPeople.php',
         'WP_Rocket\\Abstract_Render' => __DIR__ . '/../..' . '/inc/classes/class-abstract-render.php',
         'WP_Rocket\\Addon\\Busting\\BustingFactory' => __DIR__ . '/../..' . '/inc/deprecated/Engine/Addon/Busting/BustingFactory.php',
         'WP_Rocket\\Addon\\Busting\\FileBustingTrait' => __DIR__ . '/../..' . '/inc/deprecated/Engine/Addon/Busting/FileBustingTrait.php',
@@ -269,6 +279,10 @@ class ComposerStaticInit12e3746096d6a2ef4ea5e8c99181382c
         'WP_Rocket\\Dependencies\\PathConverter\\Converter' => __DIR__ . '/../..' . '/inc/Dependencies/PathConverter/Converter.php',
         'WP_Rocket\\Dependencies\\PathConverter\\ConverterInterface' => __DIR__ . '/../..' . '/inc/Dependencies/PathConverter/ConverterInterface.php',
         'WP_Rocket\\Dependencies\\PathConverter\\NoConverter' => __DIR__ . '/../..' . '/inc/Dependencies/PathConverter/NoConverter.php',
+        'WP_Rocket\\Dependencies\\Psr\\Cache\\CacheException' => __DIR__ . '/../..' . '/inc/Dependencies/Psr/Cache/CacheException.php',
+        'WP_Rocket\\Dependencies\\Psr\\Cache\\CacheItemInterface' => __DIR__ . '/../..' . '/inc/Dependencies/Psr/Cache/CacheItemInterface.php',
+        'WP_Rocket\\Dependencies\\Psr\\Cache\\CacheItemPoolInterface' => __DIR__ . '/../..' . '/inc/Dependencies/Psr/Cache/CacheItemPoolInterface.php',
+        'WP_Rocket\\Dependencies\\Psr\\Cache\\InvalidArgumentException' => __DIR__ . '/../..' . '/inc/Dependencies/Psr/Cache/InvalidArgumentException.php',
         'WP_Rocket\\Dependencies\\Psr\\Container\\ContainerExceptionInterface' => __DIR__ . '/../..' . '/inc/Dependencies/Psr/Container/ContainerExceptionInterface.php',
         'WP_Rocket\\Dependencies\\Psr\\Container\\ContainerInterface' => __DIR__ . '/../..' . '/inc/Dependencies/Psr/Container/ContainerInterface.php',
         'WP_Rocket\\Dependencies\\Psr\\Container\\NotFoundExceptionInterface' => __DIR__ . '/../..' . '/inc/Dependencies/Psr/Container/NotFoundExceptionInterface.php',
@@ -280,6 +294,9 @@ class ComposerStaticInit12e3746096d6a2ef4ea5e8c99181382c
         'WP_Rocket\\Dependencies\\Psr\\Log\\LoggerInterface' => __DIR__ . '/../..' . '/inc/Dependencies/Psr/Log/LoggerInterface.php',
         'WP_Rocket\\Dependencies\\Psr\\Log\\LoggerTrait' => __DIR__ . '/../..' . '/inc/Dependencies/Psr/Log/LoggerTrait.php',
         'WP_Rocket\\Dependencies\\Psr\\Log\\NullLogger' => __DIR__ . '/../..' . '/inc/Dependencies/Psr/Log/NullLogger.php',
+        'WP_Rocket\\Dependencies\\Psr\\Log\\Test\\DummyTest' => __DIR__ . '/../..' . '/inc/Dependencies/Psr/Log/Test/DummyTest.php',
+        'WP_Rocket\\Dependencies\\Psr\\Log\\Test\\LoggerInterfaceTest' => __DIR__ . '/../..' . '/inc/Dependencies/Psr/Log/Test/LoggerInterfaceTest.php',
+        'WP_Rocket\\Dependencies\\Psr\\Log\\Test\\TestLogger' => __DIR__ . '/../..' . '/inc/Dependencies/Psr/Log/Test/TestLogger.php',
         'WP_Rocket\\Dependencies\\Psr\\SimpleCache\\CacheException' => __DIR__ . '/../..' . '/inc/Dependencies/Psr/SimpleCache/CacheException.php',
         'WP_Rocket\\Dependencies\\Psr\\SimpleCache\\CacheInterface' => __DIR__ . '/../..' . '/inc/Dependencies/Psr/SimpleCache/CacheInterface.php',
         'WP_Rocket\\Dependencies\\Psr\\SimpleCache\\InvalidArgumentException' => __DIR__ . '/../..' . '/inc/Dependencies/Psr/SimpleCache/InvalidArgumentException.php',
@@ -780,10 +797,10 @@ class ComposerStaticInit12e3746096d6a2ef4ea5e8c99181382c
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit12e3746096d6a2ef4ea5e8c99181382c::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit12e3746096d6a2ef4ea5e8c99181382c::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit12e3746096d6a2ef4ea5e8c99181382c::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit12e3746096d6a2ef4ea5e8c99181382c::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitbf93452b5ab38908300fd84a4c8af40e::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitbf93452b5ab38908300fd84a4c8af40e::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitbf93452b5ab38908300fd84a4c8af40e::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitbf93452b5ab38908300fd84a4c8af40e::$classMap;
 
         }, null, ClassLoader::class);
     }

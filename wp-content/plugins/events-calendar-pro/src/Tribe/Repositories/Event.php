@@ -5,6 +5,8 @@
  * @since 4.7
  */
 
+use Tribe\Events\Virtual\Event_Meta;
+
 /**
  * Class Tribe__Events__Pro__Repositories__Event
  *
@@ -68,6 +70,27 @@ class Tribe__Events__Pro__Repositories__Event extends Tribe__Events__Repositorie
 	 */
 	public function __construct() {
 		parent::__construct();
+
+		$this->update_fields_aliases = array_merge(
+			$this->update_fields_aliases,
+			[
+				'lat'                  => Tribe__Events__Pro__Geo_Loc::LAT,
+				'lng'                  => Tribe__Events__Pro__Geo_Loc::LNG,
+				'hybrid'               => '_tribe_events_is_hybrid',
+				'is_hybrid'            => '_tribe_events_is_hybrid',
+				'virtual'              => Event_Meta::$key_virtual,
+				'is_virtual'           => Event_Meta::$key_virtual,
+				'virtual_video_source' => Event_Meta::$key_video_source,
+				'virtual_url'          => Event_Meta::$key_virtual_url,
+			]
+		);
+
+		$this->add_simple_meta_schema_entry( 'lat', Tribe__Events__Pro__Geo_Loc::LAT );
+		$this->add_simple_meta_schema_entry( 'lng', Tribe__Events__Pro__Geo_Loc::LNG );
+		$this->add_simple_meta_schema_entry( 'virtual', Event_Meta::$key_virtual );
+		$this->add_simple_meta_schema_entry( 'hybrid', '_tribe_events_is_hybrid' );
+		$this->add_simple_meta_schema_entry( 'virtual_video_source', Event_Meta::$key_video_source );
+		$this->add_simple_meta_schema_entry( 'virtual_url', Event_Meta::$key_virtual_url );
 
 		$this->add_schema_entry( 'custom_field', [ $this, 'filter_by_custom_field' ] );
 		$this->add_schema_entry( 'custom_field_between', [ $this, 'filter_by_custom_field_between' ] );

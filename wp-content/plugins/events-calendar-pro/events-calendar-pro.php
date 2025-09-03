@@ -2,7 +2,7 @@
 /**
  * Plugin Name: The Events Calendar Pro
  * Description: The Events Calendar Pro, a premium add-on to the open source The Events Calendar plugin (required), enables recurring events, custom attributes, venue pages, new widgets and a host of other premium features.
- * Version: 7.6.2
+ * Version: 7.7.2
  * Requires at least: 6.6
  * Requires PHP: 7.4
  * Author: The Events Calendar
@@ -241,8 +241,6 @@ function tribe_events_pro_activation() {
  */
 function Tribe_ECP_Load() {
 	_deprecated_function( __FUNCTION__, '4.6', '' );
-
-	return;
 }
 
 /**

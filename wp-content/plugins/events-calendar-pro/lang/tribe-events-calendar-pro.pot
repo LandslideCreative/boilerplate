@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: The Events Calendar Pro 7.6.2\n"
+"Project-Id-Version: The Events Calendar Pro 7.7.2\n"
 "Report-Msgid-Bugs-To: https://evnt.is/191x\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-07-15T18:00:54+00:00\n"
+"POT-Creation-Date: 2025-09-01T17:34:28+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: tribe-events-calendar-pro\n"
@@ -2925,18 +2925,22 @@ msgid ""
 msgstr ""
 
 #: src/Events_Pro/Custom_Tables/V1/Legacy_Compat/Provider.php:256
+#: src/Tribe/Recurrence/Meta.php:1841
 msgid "Condense events in Series"
 msgstr ""
 
 #: src/Events_Pro/Custom_Tables/V1/Legacy_Compat/Provider.php:257
+#: src/Tribe/Recurrence/Meta.php:1842
 msgid "Show only the next event in each Series (only affects list-style views)."
 msgstr ""
 
 #: src/Events_Pro/Custom_Tables/V1/Legacy_Compat/Provider.php:260
+#: src/Tribe/Recurrence/Meta.php:1848
 msgid "Front-end Condense Events Series toggle"
 msgstr ""
 
 #: src/Events_Pro/Custom_Tables/V1/Legacy_Compat/Provider.php:262
+#: src/Tribe/Recurrence/Meta.php:1849
 msgid "Allow users to limit list-style views to only show the next event in each Series."
 msgstr ""
 
@@ -3574,6 +3578,14 @@ msgstr ""
 #: src/Events_Pro/Linked_Posts/Venue/Taxonomy/Category.php:78
 msgctxt "Plural name of Venue Category, without the Linked Post label, for rewrite purposes."
 msgid "categories"
+msgstr ""
+
+#: src/Events_Pro/REST/TEC/V1/Pro_Extension.php:295
+msgid "The video source for the virtual event"
+msgstr ""
+
+#: src/Events_Pro/REST/TEC/V1/Pro_Extension.php:302
+msgid "The URL for the virtual event"
 msgstr ""
 
 #: src/Events_Pro/Site_Health/Info_Section.php:79
@@ -5490,22 +5502,6 @@ msgstr ""
 
 #: src/Tribe/Recurrence/Meta.php:1816
 msgid ", "
-msgstr ""
-
-#: src/Tribe/Recurrence/Meta.php:1841
-msgid "Recurring event instances"
-msgstr ""
-
-#: src/Tribe/Recurrence/Meta.php:1842
-msgid "Show only the next instance of each recurring event (only affects list-style views)."
-msgstr ""
-
-#: src/Tribe/Recurrence/Meta.php:1848
-msgid "Front-end recurring event instances toggle"
-msgstr ""
-
-#: src/Tribe/Recurrence/Meta.php:1849
-msgid "Allow users to decide whether to show all instances of a recurring event on list-style views."
 msgstr ""
 
 #: src/Tribe/Recurrence/Meta.php:1857

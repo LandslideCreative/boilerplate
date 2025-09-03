@@ -87,58 +87,6 @@
             "install-path": "../cloudflare/cf-ip-rewrite"
         },
         {
-            "name": "mixpanel/mixpanel-php",
-            "version": "2.11.0",
-            "version_normalized": "2.11.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/mixpanel/mixpanel-php.git",
-                "reference": "4b0fafacf2129eff5d50721e129b07f0c32687e7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/mixpanel/mixpanel-php/zipball/4b0fafacf2129eff5d50721e129b07f0c32687e7",
-                "reference": "4b0fafacf2129eff5d50721e129b07f0c32687e7",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.0"
-            },
-            "require-dev": {
-                "phpdocumentor/phpdocumentor": "2.9.*",
-                "phpunit/phpunit": "5.6.*"
-            },
-            "time": "2023-04-11T23:03:57+00:00",
-            "type": "library",
-            "installation-source": "dist",
-            "autoload": {
-                "files": [
-                    "lib/Mixpanel.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "Mixpanel <dev@mixpanel.com>",
-                    "homepage": "https://mixpanel.com/"
-                }
-            ],
-            "description": "The Official PHP library for Mixpanel",
-            "homepage": "https://mixpanel.com/help/reference/php",
-            "keywords": [
-                "mixpanel",
-                "mixpanel php"
-            ],
-            "support": {
-                "issues": "https://github.com/mixpanel/mixpanel-php/issues",
-                "source": "https://github.com/mixpanel/mixpanel-php/tree/2.11.0"
-            },
-            "install-path": "../mixpanel/mixpanel-php"
-        },
-        {
             "name": "symfony/css-selector",
             "version": "v5.4.45",
             "version_normalized": "5.4.45.0",
@@ -209,8 +157,8 @@
         },
         {
             "name": "symfony/polyfill-php80",
-            "version": "v1.32.0",
-            "version_normalized": "1.32.0.0",
+            "version": "v1.33.0",
+            "version_normalized": "1.33.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php80.git",
@@ -272,7 +220,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-php80/tree/v1.32.0"
+                "source": "https://github.com/symfony/polyfill-php80/tree/v1.33.0"
             },
             "funding": [
                 {
@@ -281,6 +229,10 @@
                 },
                 {
                     "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nicolas-grekas",
                     "type": "github"
                 },
                 {
@@ -423,17 +375,17 @@
         },
         {
             "name": "wp-media/plugin-family",
-            "version": "v1.0.4",
-            "version_normalized": "1.0.4.0",
+            "version": "v1.0.6",
+            "version_normalized": "1.0.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-media/plugin-family.git",
-                "reference": "83714bdfb7d98d4fe74781844c325be909db13a4"
+                "reference": "ab5067661eef2d04f645d74de797ae2193d8c58f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wp-media/plugin-family/zipball/83714bdfb7d98d4fe74781844c325be909db13a4",
-                "reference": "83714bdfb7d98d4fe74781844c325be909db13a4",
+                "url": "https://api.github.com/repos/wp-media/plugin-family/zipball/ab5067661eef2d04f645d74de797ae2193d8c58f",
+                "reference": "ab5067661eef2d04f645d74de797ae2193d8c58f",
                 "shasum": ""
             },
             "require-dev": {
@@ -444,7 +396,7 @@
                 "wp-coding-standards/wpcs": "^3",
                 "wp-media/phpunit": "^3"
             },
-            "time": "2024-12-30T10:08:18+00:00",
+            "time": "2025-07-21T12:25:10+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -466,27 +418,26 @@
             "description": "Organizes and displays WP Media plugin family across other members.",
             "support": {
                 "issues": "https://github.com/wp-media/plugin-family/issues",
-                "source": "https://github.com/wp-media/plugin-family/tree/v1.0.4"
+                "source": "https://github.com/wp-media/plugin-family/tree/v1.0.6"
             },
             "install-path": "../wp-media/plugin-family"
         },
         {
             "name": "wp-media/wp-mixpanel",
-            "version": "dev-develop",
-            "version_normalized": "dev-develop",
+            "version": "v1.1.2",
+            "version_normalized": "1.1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-media/wp-mixpanel.git",
-                "reference": "e56dd8d49d4277be1bbaedd1f4a18735849987f0"
+                "reference": "1eddae0d32f802ac14003c80c7ff096adf8e232f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wp-media/wp-mixpanel/zipball/e56dd8d49d4277be1bbaedd1f4a18735849987f0",
-                "reference": "e56dd8d49d4277be1bbaedd1f4a18735849987f0",
+                "url": "https://api.github.com/repos/wp-media/wp-mixpanel/zipball/1eddae0d32f802ac14003c80c7ff096adf8e232f",
+                "reference": "1eddae0d32f802ac14003c80c7ff096adf8e232f",
                 "shasum": ""
             },
             "require": {
-                "mixpanel/mixpanel-php": "2.*",
                 "php": ">=7.3"
             },
             "require-dev": {
@@ -500,14 +451,16 @@
                 "wp-coding-standards/wpcs": "^3",
                 "wp-media/phpunit": "^3"
             },
-            "time": "2025-06-13T15:39:13+00:00",
-            "default-branch": true,
+            "time": "2025-08-20T18:28:16+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "WPMedia\\Mixpanel\\": "src/"
-                }
+                },
+                "classmap": [
+                    "src/Classes/"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -523,7 +476,7 @@
             "description": "WordPress Mixpanel Integration",
             "support": {
                 "issues": "https://github.com/wp-media/wp-mixpanel/issues",
-                "source": "https://github.com/wp-media/wp-mixpanel/tree/develop"
+                "source": "https://github.com/wp-media/wp-mixpanel/tree/v1.1.2"
             },
             "install-path": "../wp-media/wp-mixpanel"
         }
