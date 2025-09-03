@@ -82,6 +82,24 @@ function wp_install_defaults( $user_id ) {
 		$first_page .= "<p><a class=\"button\" href=\"/\">Test Button</a></p>";
 
 		$first_page .= "<p><a class=\"button hollow\" href=\"/\">Test Button</a></p>";
+
+		$first_page .= "<ul>
+			<li>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec convallis risus eget interdum rutrum.</li>
+			<li>Praesent volutpat nisl lorem, non gravida elit commodo in.</li>
+			<li>Etiam lacinia elit ac eros consectetur malesuada.</li>
+		</ul>";
+
+		$first_page .= "<ol>
+			<li>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec convallis risus eget interdum rutrum.</li>
+			<li>Praesent volutpat nisl lorem, non gravida elit commodo in.</li>
+			<li>Etiam lacinia elit ac eros consectetur malesuada.</li>
+		</ol>";
+
+		$first_page .= "<ul class=\"checkmarks\">
+			<li>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec convallis risus eget interdum rutrum.</li>
+			<li>Praesent volutpat nisl lorem, non gravida elit commodo in.</li>
+			<li>Etiam lacinia elit ac eros consectetur malesuada.</li>
+		</ul>";
 	}
 
 	$first_post_guid = get_option( 'home' ) . '/?page_id=1';

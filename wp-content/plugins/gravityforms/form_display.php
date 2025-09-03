@@ -24,6 +24,12 @@ class GFFormDisplay {
 	const SUBMISSION_METHOD_AJAX     = 'ajax';
 	const SUBMISSION_METHOD_IFRAME   = 'iframe';
 
+	const SUBMISSION_TYPE_SAVE_AND_CONTINUE = 'save-continue';
+	const SUBMISSION_TYPE_SEND_LINK         = 'send-link';
+	const SUBMISSION_TYPE_SUBMIT            = 'submit';
+	const SUBMISSION_TYPE_NEXT              = 'next';
+	const SUBMISSION_TYPE_PREVIOUS          = 'previous';
+
 	/**
 	 * Starting point for the form submission process. Handles the following tasks: Form validation, save for later logic, entry creation, notification and confirmation.
 	 *
@@ -37,6 +43,7 @@ class GFFormDisplay {
 		GFCommon::timer_start( __METHOD__ );
 		GFCommon::log_debug( "GFFormDisplay::process_form(): Starting to process form (#{$form_id}) submission." );
 
+		GFCache::flush();
 		self::$submission_initiated_by = $initiated_by;
 
 		$form = GFAPI::get_form( $form_id );
@@ -163,6 +170,7 @@ class GFFormDisplay {
 				// Display confirmation but doesn't process the form. Useful for spam filters.
 				$confirmation = self::handle_confirmation( $form, $lead, $ajax );
 				$is_valid     = false;
+				self::set_submission_if_null( $form_id, 'abort_with_confirmation', true );
 			} elseif ( ! $saving_for_later ) {
 
 				GFCommon::log_debug( 'GFFormDisplay::process_form(): Submission is valid. Moving forward.' );
@@ -908,9 +916,9 @@ class GFFormDisplay {
 	public static function post_render_script( $form_id, $current_page = 'current_page' ) {
 		$post_render_script = '
 			jQuery(document).trigger("gform_pre_post_render", [{ formId: "' . $form_id . '", currentPage: "' . $current_page . '", abort: function() { this.preventDefault(); } }]);
-	        
+
 	        if (event && event.defaultPrevented) {
-            	    return; 
+            	    return;
         	}
 	        const gformWrapperDiv = document.getElementById( "gform_wrapper_' . $form_id . '" );
 	        if ( gformWrapperDiv ) {
@@ -920,7 +928,7 @@ class GFFormDisplay {
 	        }
 	        const visibilityTestDiv = document.getElementById( "gform_visibility_test_' . $form_id . '" );
 	        let postRenderFired = false;
-	        
+
 	        function triggerPostRender() {
 	            if ( postRenderFired ) {
 	                return;
@@ -931,7 +939,7 @@ class GFFormDisplay {
 	                visibilityTestDiv.parentNode.removeChild( visibilityTestDiv );
 	            }
 	        }
-	
+
 	        function debounce( func, wait, immediate ) {
 	            var timeout;
 	            return function() {
@@ -946,11 +954,11 @@ class GFFormDisplay {
 	                if ( callNow ) func.apply( context, args );
 	            };
 	        }
-	
+
 	        const debouncedTriggerPostRender = debounce( function() {
 	            triggerPostRender();
 	        }, 200 );
-	
+
 	        if ( visibilityTestDiv && visibilityTestDiv.offsetParent === null ) {
 	            const observer = new MutationObserver( ( mutations ) => {
 	                mutations.forEach( ( mutation ) => {
@@ -1049,7 +1057,7 @@ class GFFormDisplay {
 		// Setting form style and theme
 		$form = self::set_form_styles( $form, $style_settings, $form_theme );
 
-		$action = remove_query_arg( 'gf_token' );
+		$action = wp_doing_ajax() ? remove_query_arg( 'gf_token', wp_get_referer() ) : remove_query_arg( 'gf_token' );
 
 		if ( rgpost( 'gform_send_resume_link' ) == $form_id ) {
 			$save_email_confirmation = self::handle_save_email_confirmation( $form, $ajax );
@@ -2020,7 +2028,7 @@ class GFFormDisplay {
 
 		gf_feed_processor()->save()->dispatch();
 
-		RGFormsModel::set_current_lead( $lead );
+		RGFormsModel::set_current_lead( $lead, false );
 
 		if ( ! $is_spam ) {
 			GFCommon::create_post( $form, $lead );
@@ -4397,9 +4405,10 @@ class GFFormDisplay {
 		$field_setting_label_placement = $field->labelPlacement;
 		$label_placement               = empty( $field_setting_label_placement ) ? '' : $field_setting_label_placement;
 
-		$span_class = $field->get_css_grid_class( $form );
+		$span_class           = $field->get_css_grid_class( $form );
+		$column_display_class = self::get_field_column_display( $field );
 
-		$css_class = "gfield gfield--type-{$field->type} $choice_input_type_class $choice_input_image_shape_class $choice_input_image_style_class $field_input_type_class $field_specific_class $selectable_class $span_class $error_class $section_class $admin_only_class $custom_class $hidden_class $html_block_class $html_formatted_class $html_no_follows_desc_class $option_class $quantity_class $product_class $total_class $donation_class $shipping_class $page_class $required_class $hidden_product_class $creditcard_warning_class $submit_width_class $calculation_class $sublabel_class $has_description_class $description_class $label_placement $validation_class $visibility_class $admin_hidden_class $choice_alignment_class";
+		$css_class = "gfield gfield--type-{$field->type} $choice_input_type_class $choice_input_image_shape_class $choice_input_image_style_class $field_input_type_class $column_display_class $field_specific_class $selectable_class $span_class $error_class $section_class $admin_only_class $custom_class $hidden_class $html_block_class $html_formatted_class $html_no_follows_desc_class $option_class $quantity_class $product_class $total_class $donation_class $shipping_class $page_class $required_class $hidden_product_class $creditcard_warning_class $submit_width_class $calculation_class $sublabel_class $has_description_class $description_class $label_placement $validation_class $visibility_class $admin_hidden_class $choice_alignment_class";
 		$css_class = preg_replace( '/\s+/', ' ', $css_class ); // removing extra spaces
 
 		/*
@@ -4450,6 +4459,39 @@ class GFFormDisplay {
 		$field_markup = str_replace( '{FIELD_CONTENT}', $field_content, $field_container );
 
 		return $field_markup;
+	}
+
+	/**
+	 * Generate CSS class for field column display configuration.
+	 *
+	 * @param object $field The form field object.
+	 * @return string CSS class string for column display.
+	 */
+	private static function get_field_column_display( $field ) {
+		if ( ! $field->enableDisplayInColumns || absint( $field->displayColumns ) === 1 ) {
+			return '';
+		}
+
+		$column_class = '';
+		$field_type   = RGFormsModel::get_input_type( $field );
+
+		// Only add column to checkbox and radio fields
+		if ( in_array( $field_type, [ 'checkbox', 'radio' ] ) ) {
+			if ( isset( $field->displayColumns ) ) {
+				$columns         = absint( $field->displayColumns );
+				$allowed_columns = [ 2, 3, 4, 5 ];
+
+				if ( in_array( $columns, $allowed_columns ) ) {
+					$column_class .= 'gf_list_' . $columns . 'col';
+				}
+			}
+
+			// Add vertical alignment class if specified
+			if ( isset( $field->displayAlignment ) && $field->displayAlignment === 'vertical' ) {
+				return $column_class . '_vertical';
+			}
+		}
+		return trim( $column_class );
 	}
 
 	private static function prev_field_has_description( $form, $field_id ) {

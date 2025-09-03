@@ -3,6 +3,7 @@
  * Main Tribe Events Calendar class.
  */
 
+use TEC\Common\StellarWP\Assets\Config as Assets_Config;
 use Tribe\DB_Lock;
 use Tribe\Events\Views\V2;
 use Tribe\Events\Admin\Settings;
@@ -39,7 +40,7 @@ if ( ! class_exists( 'Tribe__Events__Main' ) ) {
 		const POSTTYPE            = 'tribe_events';
 		const VENUE_POST_TYPE     = 'tribe_venue';
 		const ORGANIZER_POST_TYPE = 'tribe_organizer';
-		const VERSION             = '6.11.2';
+		const VERSION             = '6.15.1.1';
 
 		/**
 		 * Min Pro Addon.
@@ -76,7 +77,7 @@ if ( ! class_exists( 'Tribe__Events__Main' ) ) {
 		 *
 		 * @since 4.8
 		 */
-		protected $min_et_version = '5.20.0-dev';
+		protected $min_et_version = '5.26.0-dev';
 
 		/**
 		 * Maybe display data wrapper
@@ -354,9 +355,9 @@ if ( ! class_exists( 'Tribe__Events__Main' ) ) {
 			$this->maybe_set_common_lib_info();
 
 			// let's initialize tec
-			add_action( 'plugins_loaded', [ $this, 'maybe_bail_if_old_et_is_present' ], -1 );
-			add_action( 'plugins_loaded', [ $this, 'maybe_bail_if_invalid_wp_or_php' ], -1 );
-			add_action( 'plugins_loaded', [ $this, 'plugins_loaded' ], 0 );
+			add_action( 'plugins_loaded', [ $this, 'maybe_bail_if_old_et_is_present' ], -3 );
+			add_action( 'plugins_loaded', [ $this, 'maybe_bail_if_invalid_wp_or_php' ], -3 );
+			add_action( 'plugins_loaded', [ $this, 'plugins_loaded' ], -2 );
 
 			add_filter( 'tribe_tickets_integrations_should_load_freemius', '__return_false' );
 
@@ -523,13 +524,42 @@ if ( ! class_exists( 'Tribe__Events__Main' ) ) {
 		 * Load Text Domain on tribe_common_loaded as it requires common
 		 *
 		 * @since 4.8
-		 *
 		 */
 		public function bootstrap() {
+			/*
+			 * Register the `/build` directory assets as a different group to ensure back-compatibility.
+			 * This needs to happen here, early enough for the assets registration to find the group already defined.
+			 */
+			Assets_Config::add_group_path(
+				self::class,
+				self::instance()->plugin_path,
+				'build/',
+				true
+			);
+
+			/*
+			 * Register the `/build` directory as root for packages.
+			 * The difference from the group registration above is that packages are not expected to use prefix directories
+			 * like `/js` or `/css`.
+			 */
+			Assets_Config::add_group_path(
+				self::class . '-packages',
+				self::instance()->plugin_path,
+				'build/',
+				false
+			);
+
 			$this->bind_implementations();
 			$this->loadLibraries();
 			$this->addHooks();
 			$this->register_active_plugin();
+
+			/**
+			 * Fires when The Events Calendar is fully loaded.
+			 *
+			 * @since 6.12.0
+			 */
+			do_action( 'tec_events_fully_loaded' );
 		}
 
 		/**
@@ -672,52 +702,7 @@ if ( ! class_exists( 'Tribe__Events__Main' ) ) {
 			// Database locks.
 			tribe_singleton( 'db-lock', DB_Lock::class );
 
-			// Custom tables v1 implementation.
-			if ( class_exists( '\\TEC\\Events\\Custom_Tables\\V1\\Provider' ) ) {
-				tribe()->register_on_action( 'tribe_common_loaded', '\\TEC\\Events\\Custom_Tables\\V1\\Provider' );
-			}
-
-			// Blocks.
-			tribe_register_provider( TEC\Events\Blocks\Controller::class );
-
-			// Site Editor.
-			tribe_register_provider( TEC\Events\Block_Templates\Controller::class );
-
-			// Load the new third-party integration system.
-			tribe_register_provider( TEC\Events\Integrations\Provider::class );
-
-			// Set up the installer.
-			tribe_register_provider( TEC\Events\Installer\Provider::class );
-
-			// Set up Site Health.
-			tribe_register_provider( TEC\Events\Site_Health\Provider::class );
-
-			// Set up Telemetry.
-			tribe_register_provider( TEC\Events\Telemetry\Provider::class );
-
-			// Set up IAN Client - In-App Notifications.
-			tribe_register_provider( TEC\Events\Notifications\Provider::class );
-
-			// SEO support.
-			tribe_register_provider( TEC\Events\SEO\Controller::class );
-
-			// SEO Header support.
-			tribe_register_provider( TEC\Events\SEO\Headers\Controller::class );
-
-			// Register new Admin Notice system.
-			tribe_register_provider( TEC\Events\Admin\Notice\Provider::class );
-
-			// Register new Admin Settings system.
-			tribe_register_provider( TEC\Events\Admin\Settings\Provider::class );
-
-			// Register the Onboarding Wizard.
-			tribe_register_provider( TEC\Events\Admin\Onboarding\Controller::class );
-
-			// Register the Help Hub system.
-			tribe_register_provider( TEC\Events\Admin\Help_Hub\Provider::class );
-
-			// Register the Calendar Embeds feature.
-			tribe_register_provider( TEC\Events\Calendar_Embeds\Controller::class );
+			tribe_register_provider( TEC\Events\Controller::class );
 
 			/**
 			 * Allows other plugins and services to override/change the bound implementations.

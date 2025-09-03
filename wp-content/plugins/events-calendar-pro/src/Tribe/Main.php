@@ -9,7 +9,7 @@ use Tribe\Events\Pro\Views\V2\Views\Week_View;
 use Tribe\Events\Views\V2\Views\Day_View;
 use Tribe\Events\Views\V2\Views\List_View;
 use Tribe\Events\Views\V2\Views\Month_View;
-use TEC\Common\StellarWP\Assets\Config;
+use TEC\Common\StellarWP\Assets\Config as Assets_Config;
 use TEC\Events_Pro\Controller as Events_Pro_Controller;
 
 // phpcs:disable PEAR.NamingConventions.ValidClassName.Invalid, StellarWP.Classes.ValidClassName.NotSnakeCase, WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase -- legacy naming conventions
@@ -92,7 +92,7 @@ if ( ! class_exists( 'Tribe__Events__Pro__Main' ) ) {
 		/**
 		 * The Events Calendar Pro Version
 		 */
-		const VERSION = '7.4.5';
+		const VERSION = '7.7.2';
 
 		/**
 		 * The Events Calendar Required Version
@@ -100,7 +100,7 @@ if ( ! class_exists( 'Tribe__Events__Pro__Main' ) ) {
 		 *
 		 * @deprecated 4.6
 		 */
-		const REQUIRED_TEC_VERSION = '6.7.0';
+		const REQUIRED_TEC_VERSION = '6.12.0';
 
 		/**
 		 * Constructor.
@@ -182,7 +182,7 @@ if ( ! class_exists( 'Tribe__Events__Pro__Main' ) ) {
 			add_action( 'post_updated_messages', [ $this, 'updatePostMessages' ], 20 );
 
 			add_filter( 'tribe_events_default_value_strategy', [ $this, 'set_default_value_strategy' ] );
-			add_action( 'plugins_loaded', [ $this, 'init_apm_filters' ] );
+			add_action( 'init', [ $this, 'init_apm_filters' ] );
 
 			// Event CSV import additions.
 			add_filter( 'tribe_events_import_event_duplicate_matches', [ $this, 'normalize_post_ids_for_csv_import' ], 10, 1 );
@@ -479,7 +479,9 @@ if ( ! class_exists( 'Tribe__Events__Pro__Main' ) ) {
 			$this->singular_event_label_lowercase = tribe_get_event_label_singular_lowercase();
 			$this->plural_event_label_lowercase   = tribe_get_event_label_plural_lowercase();
 
-			Config::add_group_path( 'tec-events-pro-vendor', $this->pluginPath . 'src/resources/', 'includes/' );
+			$this->all_slug  = sanitize_title( __( 'all', 'tribe-events-calendar-pro' ) );
+			$this->weekSlug  = sanitize_title( __( 'week', 'tribe-events-calendar-pro' ) );
+			$this->photoSlug = sanitize_title( __( 'photo', 'tribe-events-calendar-pro' ) );
 
 			// if enabled views have never been set then set those to all PRO views.
 			if ( false === tribe_get_option( 'tribeEnableViews', false ) ) {
@@ -1807,9 +1809,34 @@ if ( ! class_exists( 'Tribe__Events__Pro__Main' ) ) {
 		 * built calling the `tribe` function.
 		 */
 		public function on_plugins_loaded() {
-			$this->all_slug  = sanitize_title( __( 'all', 'tribe-events-calendar-pro' ) );
-			$this->weekSlug  = sanitize_title( __( 'week', 'tribe-events-calendar-pro' ) );
-			$this->photoSlug = sanitize_title( __( 'photo', 'tribe-events-calendar-pro' ) );
+			$this->all_slug  = 'all';
+			$this->weekSlug  = 'week';
+			$this->photoSlug = 'photo';
+
+			Assets_Config::add_group_path( 'tec-events-pro-vendor', $this->pluginPath . 'src/resources/', 'includes/' );
+
+			/*
+			* Register the `/build` directory assets as a different group to ensure back-compatibility.
+			* This needs to happen early in the plugin bootstrap routine.
+			*/
+			Assets_Config::add_group_path(
+				self::class,
+				$this->pluginPath,
+				'build/',
+				true
+			);
+
+			/*
+			* Register the `/build` directory as root for packages.
+			* The difference from the group registration above is that packages are not expected to use prefix directories
+			* like `/js` or `/css`.
+			*/
+			Assets_Config::add_group_path(
+				self::class . '-packages',
+				$this->pluginPath,
+				'build/',
+				false
+			);
 
 			tribe_singleton( 'events-pro.main', $this );
 
@@ -1841,6 +1868,13 @@ if ( ! class_exists( 'Tribe__Events__Pro__Main' ) ) {
 
 			// Redirect any new registrations to the new controller.
 			tribe()->register_on_action( 'tribe_common_loaded', Events_Pro_Controller::class );
+
+			/**
+			 * Fires when Events Calendar Pro is fully loaded.
+			 *
+			 * @since 7.5.0
+			 */
+			do_action( 'tec_events_pro_fully_loaded' );
 		}
 
 		/**

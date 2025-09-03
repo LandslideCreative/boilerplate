@@ -22,7 +22,7 @@ $end_date = tribe_get_end_date(NULL, false, 'Ymd G:i:s'); ?>
 
 	<?php /* Time */ ?>
 	<?php if( !tribe_event_is_all_day() ) { ?>
-		<div class="event-item-date">
+		<div class="event-item-time">
 			<?php echo ls_get_times($start_date, $end_date); ?>
 		</div>
 	<?php } ?>

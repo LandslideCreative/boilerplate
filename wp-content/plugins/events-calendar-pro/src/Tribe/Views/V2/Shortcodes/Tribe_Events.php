@@ -739,6 +739,7 @@ class Tribe_Events extends Shortcode_Abstract {
 	 * Filters the View repository args to add the ones required by shortcodes to work.
 	 *
 	 * @since 4.7.9
+	 * @since 7.7.1 Add support for shortcode ID in context.
 	 *
 	 * @param array           $repository_args An array of repository arguments that will be set for all Views.
 	 * @param \Tribe__Context $context         The current render context object.
@@ -752,6 +753,16 @@ class Tribe_Events extends Shortcode_Abstract {
 		}
 
 		$shortcode_id = $context->get( 'shortcode', false );
+
+		// If no shortcode ID in context and not in AJAX/REST request, bail early.
+		if ( false === $shortcode_id && ! tribe( 'context' )->doing_ajax() && ( ! defined( 'REST_REQUEST' ) || ! REST_REQUEST ) ) {
+			return $repository_args;
+		}
+
+		// If no shortcode ID in context, try to get it from URL parameters.
+		if ( false === $shortcode_id ) {
+			$shortcode_id = tribe_get_query_var( 'shortcode', false );
+		}
 
 		if ( false === $shortcode_id ) {
 			return $repository_args;
