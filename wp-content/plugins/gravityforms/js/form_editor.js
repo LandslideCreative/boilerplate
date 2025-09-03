@@ -256,9 +256,10 @@ function InitializeFieldSettings(){
 			var field = GetSelectedField();
 			if (this.checked ){
 				var disablePlaceHolder = true;
+
 				//see if a field is using this in conditional logic and warn it will not work with rich text editor
 				if ( HasConditionalLogicDependency(field.id,field.value) ){
-					gform.instances.dialogConfirmAsync(gf_vars.conditionalLogicRichTextEditorWarning).then((confirmed) => {
+					gform.instances.dialogConfirmAsync(gf_vars.conditionalLogicWarningTitle, gf_vars.conditionalLogicRichTextEditorWarning).then((confirmed) => {
 						if (!confirmed) {
 							jQuery('#field_rich_text_editor').prop('checked', false);
 							disablePlaceHolder = false;
@@ -687,6 +688,7 @@ function LoadFieldSettings() {
 	jQuery("#field_default_value").val(field.defaultValue == undefined ? "" : field.defaultValue);
 	jQuery("#field_default_value_textarea").val(field.defaultValue == undefined ? "" : field.defaultValue);
 	jQuery("#field_autocomplete_attribute").val(field.autocompleteAttribute);
+	jQuery("#field_display_columns").val(field.displayColumns == undefined ? "1" : field.displayColumns);
 	jQuery("#field_description").val(field.description == undefined ? "" : field.description);
 	jQuery("#field_description").attr('placeholder', field.descriptionPlaceholder == undefined ? "" : field.descriptionPlaceholder);
 	jQuery("#field_checkbox_label").val(field.checkboxLabel == undefined ? "" : field.checkboxLabel);
@@ -906,6 +908,7 @@ function LoadFieldSettings() {
 	ToggleInputMaskOptions(true);
 
 	InitAutocompleteOptions(true);
+	InitDisplayInColumns( true )
 
 	if (inputType == "creditcard") {
 		field = UpgradeCreditCardField(field);
@@ -1285,6 +1288,13 @@ function LoadFieldSettings() {
 		jQuery( "#choice_alignment_vertical" ).prop( "checked", true );
 	}
 
+	if (field.displayAlignment == "horizontal" || field.displayAlignment == undefined) {
+		jQuery( "#display_choice_alignment_horizontal" ).prop( "checked", true );
+
+	} else if (field.displayAlignment == "vertical") {
+		jQuery( "#display_choice_alignment_vertical" ).prop( "checked", true );
+	}
+
 	SetProductField(field);
 
 	Placeholders.enable();
@@ -1311,6 +1321,13 @@ function getAllFieldSettings(field) {
 	}
 
 	var settingsArray = allSettings.split(', ');
+
+	// Remove display_choices_columns_setting from the image choice and multiple choice fields
+	if (field.type === 'image_choice' || field.type === 'multi_choice') {
+		settingsArray = settingsArray.filter(function(setting) {
+			return setting !== '.display_choices_columns_setting';
+		});
+	}
 
 	/**
 	 * gform_editor_field_settings
@@ -1923,6 +1940,26 @@ function InitAutocompleteOptions( isInit ) {
 	ToggleAutocompleteAttribute( true) ;
 }
 
+// handles the display in columns setting.
+function SetDisplayInColumns( isInit, value ) {
+	SetFieldProperty('enableDisplayInColumns', value)
+	ToggleDisplayInColumns( isInit );
+}
+
+function ToggleDisplayInColumns( isInit ) {
+	if( jQuery( "#field_display_in_columns" ).is( ":checked" ) ) {
+		jQuery( "#display_in_columns_container" ).show();
+	}
+	else{
+		jQuery( "#display_in_columns_container" ).hide();
+	}
+}
+
+function InitDisplayInColumns( isInit ) {
+	jQuery( '#field_display_in_columns' ).prop( "checked", field.enableDisplayInColumns ? true : false );
+	ToggleDisplayInColumns( true );
+}
+
 function HasPostContentField(){
 	for(var i=0; i<form.fields.length; i++){
 		var type = form.fields[i].type;
@@ -2115,7 +2152,7 @@ function EditField( element ) {
 *
 * @param element The field element being deleted.
 */
-function DeleteField( element ) {
+async function DeleteField( element ) {
 	event.stopPropagation();
 
 	// Get field ID from element.
@@ -2123,7 +2160,8 @@ function DeleteField( element ) {
 	var field = GetFieldById( fieldId );
 	var confirmDeleteMessage = field.displayOnly ? gf_vars.confirmationDeleteDisplayField : gf_vars.confirmationDeleteField;
 
-	if (!HasConditionalLogicDependency(fieldId)) {
+	var conditionalLogicDependency = await HasConditionalLogicDependency(fieldId);
+	if (!conditionalLogicDependency) {
 		gform.instances.dialogConfirmAsync( gf_vars.confirmationDeleteDisplayFieldTitle, confirmDeleteMessage ).then((userConfirmed) => {
 			if (!userConfirmed) {
 				return;
@@ -2131,7 +2169,8 @@ function DeleteField( element ) {
 			proceedWithDeletion(fieldId);
 		});
 	} else {
-		gform.instances.dialogConfirmAsync( gf_vars.conditionalLogicWarningTitle, gf_vars.conditionalLogicDependency ).then((userConfirmed) => {
+		var message = gf_vars.conditionalLogicDependency.replace('{type}', conditionalLogicDependency);
+		gform.instances.dialogConfirmAsync( gf_vars.conditionalLogicWarningTitle, message ).then((userConfirmed) => {
 			if (!userConfirmed) {
 				return;
 			}
@@ -2226,46 +2265,70 @@ function proceedWithDeletion(fieldId) {
 *
 * @returns {Boolean}
 */
-function HasConditionalLogicDependencyLegwork(fieldId, value) {
+async function HasConditionalLogicDependencyLegwork(fieldId, value) {
+	const completeForm = await getCompleteForm( form );
 
 	// check form button conditional logic
-	if(form.button && ObjectHasConditionalLogicDependency(form.button, fieldId, value) )
-		return true;
+	if(completeForm.button && ObjectHasConditionalLogicDependency(completeForm.button, fieldId, value) ) {
+		return gf_vars.conditionalLogicTypeButton;
+	}
+
 
 	// check confirmations conditional logic
-	for(i in form.confirmations) {
+	for(i in completeForm.confirmations) {
 
-		if(!form.confirmations.hasOwnProperty(i))
+		if(!completeForm.confirmations.hasOwnProperty(i))
 			continue;
 
-		if( ObjectHasConditionalLogicDependency(form.confirmations[i], fieldId, value) )
-			return true;
+		if( ObjectHasConditionalLogicDependency(completeForm.confirmations[i], fieldId, value) ) {
+			return gf_vars.conditionalLogicTypeConfirmation;
+		}
+
 	}
 
 	// check notifications conditional logic
-	for(i in form.notifications) {
+	for(i in completeForm.notifications) {
 
-		if(!form.notifications.hasOwnProperty(i))
+		if(!completeForm.notifications.hasOwnProperty(i))
 			continue;
 
-		if( ObjectHasConditionalLogicDependency(form.notifications[i], fieldId, value) )
-			return true;
+		if( ObjectHasConditionalLogicDependency(completeForm.notifications[i], fieldId, value) ) {
+			return gf_vars.conditionalLogicTypeNotification;
+		}
+
+		if( ObjectHasRoutingDependency(completeForm.notifications[i], fieldId, value) ) {
+			return gf_vars.conditionalLogicTypeNoficationRouting;
+		}
 	}
 
 	// check field conditional logic
-	for(i in form.fields) {
+	for(i in completeForm.fields) {
 
-		if(!form.fields.hasOwnProperty(i))
+		if(!completeForm.fields.hasOwnProperty(i))
 			continue;
 
-		var field = form.fields[i];
+		var field = completeForm.fields[i];
 
-		if( ObjectHasConditionalLogicDependency(field, fieldId, value) )
-			return true;
+		if( ObjectHasConditionalLogicDependency(field, fieldId, value) ) {
+			return gf_vars.conditionalLogicTypeField;
+		}
 
 		// if this is a page field, check the next button conditional logic as well
-		if( GetInputType(field) == 'page' && ObjectHasConditionalLogicDependency(field.nextButton, fieldId, value) )
-			return true;
+		if( GetInputType(field) == 'page' && ObjectHasConditionalLogicDependency(field.nextButton, fieldId, value) ) {
+			return gf_vars.conditionalLogicTypeField;
+		}
+
+	}
+
+	// check feed conditional logic
+	for(i in completeForm.feeds_conditions) {
+
+		if(!completeForm.feeds_conditions.hasOwnProperty(i))
+			continue;
+
+		if( ObjectHasConditionalLogicDependency(completeForm.feeds_conditions[i], fieldId, value) ) {
+			return gf_vars.conditionalLogicTypeFeed;
+		}
 
 	}
 
@@ -2282,8 +2345,8 @@ function HasConditionalLogicDependencyLegwork(fieldId, value) {
 * @param fieldId
 * @param value
 */
-function HasConditionalLogicDependency(fieldId, value) {
-	var result = HasConditionalLogicDependencyLegwork(fieldId, value);
+async function HasConditionalLogicDependency(fieldId, value) {
+	var result = await HasConditionalLogicDependencyLegwork(fieldId, value);
 	return gform.applyFilters('gform_has_conditional_logic_dependency', result, fieldId, value);
 }
 
@@ -2338,6 +2401,51 @@ function ObjectHasConditionalLogicDependency(object, fieldId, value) {
 	return false;
 }
 
+/* Determine if an object has a routing rule dependent on the field and/or value provided.
+ *
+ * @since 2.9.9
+ *
+ * @param object The GF Object that has conditional logic property (fields, buttons, confirmation, notifications, paging)
+ * @param fieldId The fieldId being modified and on which a dependency is being searched for
+ * @param value Optional The value of the choice being being modified or deleted
+ *
+ * @returns {Boolean}
+ */
+function ObjectHasRoutingDependency(object, fieldId, value = false ) {
+
+	if(!object || !object.routing)
+		return false;
+
+	var rules = object.routing;
+
+	for(var i in rules) {
+
+		if(! rules.hasOwnProperty(i))
+			continue;
+
+		var rule = rules[i];
+
+		// if rule field ID does not match the field ID of the field being modified, continue
+		if(rule.fieldId != fieldId)
+			continue;
+
+		// if value is provided and the rule value does not match provided value, continue
+		if(value !== false && rule.value != value)
+			continue;
+
+		if (!value && !rule.value) {
+			var ruleField = GetFieldById(fieldId);
+			if (ruleField && ruleField.choices && ruleField.placeholder) {
+				continue;
+			}
+		}
+
+		return true;
+	}
+
+	return false;
+}
+
 function HasDependentRule(rules, fieldId, value) {
 
 	if(typeof value == 'undefined')
@@ -2364,7 +2472,7 @@ function HasDependentRule(rules, fieldId, value) {
 	return false;
 }
 
-function CheckChoiceConditionalLogicDependency(input) {
+async function CheckChoiceConditionalLogicDependency(input) {
 	var field = GetSelectedField();
 	var previousValue = jQuery(input).data('previousValue'); // Get the value before checking. Fixes an issue in Chrome on Windows.
 	if (previousValue == undefined){
@@ -2372,15 +2480,18 @@ function CheckChoiceConditionalLogicDependency(input) {
 		previousValue = '';
 	}
 
-	if(HasConditionalLogicDependency(field.id, previousValue)) {
+	const hasDependency = await HasConditionalLogicDependency(field.id, previousValue);
+	if( hasDependency) {
 		// Only call the confirmation dialog if the value has changed.
 		if ( jQuery(input).val() === previousValue ) {
 			return;
 		}
 
+		var message = gf_vars.conditionalLogicDependencyChoiceEdit.replace('{type}', hasDependency);
+
 		// confirm that the user wants to make the modification.
 		setTimeout( ()=>
-			gform.instances.dialogConfirmAsync( gf_vars.conditionalLogicWarningTitle, gf_vars.conditionalLogicDependencyChoiceEdit ).then( ( confirmed ) => {
+			gform.instances.dialogConfirmAsync( gf_vars.conditionalLogicWarningTitle, message ).then( ( confirmed ) => {
 				if ( ! confirmed ) {
 					// if user does not want to make modification, replace with original value.
 					jQuery( input ).val( previousValue ).trigger( 'blur' );
@@ -3272,6 +3383,7 @@ function SetFieldChoice(inputType, index, refresh = true){
 	var price = jQuery("#" + inputType + "_choice_price_" + index).val();
 
 	field = GetSelectedField();
+	fieldBeforeUpdate = field;
 
 	field.choices[index].text = text;
 	field.choices[index].value = field.enableChoiceValue ? value : text;
@@ -3553,12 +3665,14 @@ function InsertInputChoice($ul, inputId, index){
 	UpdateInputChoices(input);
 }
 
-function DeleteFieldChoice(index){
+async function DeleteFieldChoice(index){
 	field = GetSelectedField();
 	var value = jQuery('#' + GetInputType(field) + '_choice_value_' + index).val();
 
-	if( HasConditionalLogicDependency(field.id, value) ) {
-		gform.instances.dialogConfirmAsync( gf_vars.conditionalLogicWarningTitle , gf_vars.conditionalLogicDependencyChoice ).then( ( confirmed ) => {
+	var hasDependency = await HasConditionalLogicDependency(field.id, value);
+	if( hasDependency ) {
+		var message = gf_vars.conditionalLogicDependencyChoice.replace('{type}', hasDependency);
+		gform.instances.dialogConfirmAsync( gf_vars.conditionalLogicWarningTitle , message ).then( ( confirmed ) => {
 			if ( ! confirmed ) {
 				return;
 			}
@@ -4213,9 +4327,11 @@ function SetFieldSubLabelPlacement( subLabelPlacement ) {
 	RefreshSelectedFieldPreview();
 }
 
-function SetFieldVisibility( visibility, handleInputs, isInit ) {
-	if (!isInit && visibility === 'administrative' && HasConditionalLogicDependency(field.id)) {
-		gform.instances.dialogConfirmAsync(gf_vars.conditionalLogicWarningTitle , gf_vars.conditionalLogicDependencyAdminOnly).then((confirmed) => {
+async function SetFieldVisibility( visibility, handleInputs, isInit ) {
+	var hasDependency = await HasConditionalLogicDependency(field.id);
+	if (!isInit && visibility === 'administrative' && hasDependency) {
+		var message =  gf_vars.conditionalLogicDependencyAdminOnly.replace('{type}', hasDependency);
+		gform.instances.dialogConfirmAsync(gf_vars.conditionalLogicWarningTitle , message).then((confirmed) => {
 			if (confirmed) {
 				proceedWithVisibilityChange(visibility, handleInputs);
 			} else {
@@ -5008,7 +5124,7 @@ function setSidebarFieldMessage() {
 				jQuery( '#sidebar_field_message_container .gform-alert' ).addClass( 'gform-alert--' + ( type === 'warning' ? 'error' : type ) );
 				iconClasses.forEach(
 					( className ) => {
-						jQuery( '#sidebar_field_message_container .gform-icon' ).addClass( className );
+						jQuery( '#sidebar_field_message_container .gform-alert__icon' ).addClass( className );
 					}
 				);
 				// Add class to force this notice visible, as all field notices are reset when a field is selected.
