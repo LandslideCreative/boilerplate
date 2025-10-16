@@ -1,16 +1,20 @@
 <?php
 /**
  * Plugin Name: The Events Calendar Pro
+ * Requires Plugins: the-events-calendar
  * Description: The Events Calendar Pro, a premium add-on to the open source The Events Calendar plugin (required), enables recurring events, custom attributes, venue pages, new widgets and a host of other premium features.
- * Version: 7.7.2
+ * Version: 7.7.8
  * Requires at least: 6.6
  * Requires PHP: 7.4
+ * Requires Plugins: the-events-calendar
  * Author: The Events Calendar
  * Author URI: https://evnt.is/20
  * Text Domain: tribe-events-calendar-pro
  * License: GPLv2 or later
  * Elementor tested up to: 3.23.1
  * Elementor Pro tested up to: 3.23.0
+ * WC requires at least: 7.1
+ * WC tested up to: 10.0.4
  */
 
 /*

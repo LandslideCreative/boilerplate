@@ -10,9 +10,10 @@
  * @link https://evnt.is/1aiy
  *
  * @since 5.2.0
- * @since 7.6.1 Added $icon_description parameter and updated the template to use it for the accessible label.
+ * @since 7.6.1 Add the $icon_description parameter and update the template to use it for the accessible label.
+ * @since 7.7.6 Change the class and the target of the `<a>` tag for better accessibility.
  *
- * @version 7.6.1
+ * @version 7.7.6
  *
  * @var WP_Post $venue The venue post object.
  * @var string $icon_description The description of the icon. Used for the accessible label. (optional)
@@ -39,7 +40,8 @@ $address = tribe_get_full_address( $venue->ID );
 		<?php echo $address; ?>
 		<a
 			href="<?php echo esc_url( $venue->directions_link ) ;?>"
-			class="tribe-events-pro-venue__meta-address-directions-link tribe-common-anchor"
+			class="tribe-events-pro-venue__meta-address-directions-link tribe-common-anchor-alt"
+			target="_blank"
 		><?php esc_html_e( 'Get Directions', 'tribe-events-calendar-pro' ); ?></a>
 	</div>
 </div>

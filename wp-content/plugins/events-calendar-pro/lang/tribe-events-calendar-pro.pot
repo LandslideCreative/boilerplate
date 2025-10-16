@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: The Events Calendar Pro 7.7.2\n"
+"Project-Id-Version: The Events Calendar Pro 7.7.8\n"
 "Report-Msgid-Bugs-To: https://evnt.is/191x\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-09-01T17:34:28+00:00\n"
+"POT-Creation-Date: 2025-10-13T20:51:40+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: tribe-events-calendar-pro\n"
@@ -26,8 +26,8 @@ msgstr ""
 
 #. Author of the plugin
 #: events-calendar-pro.php
-#: events-calendar-pro.php:172
-#: events-calendar-pro.php:173
+#: events-calendar-pro.php:176
+#: events-calendar-pro.php:177
 #: src/Tribe/Integrations/Elementor/Service_Provider.php:126
 #: src/modules/blocks/single-venue/index.js:30
 msgid "The Events Calendar"
@@ -38,11 +38,11 @@ msgstr ""
 msgid "https://evnt.is/20"
 msgstr ""
 
-#: events-calendar-pro.php:56
+#: events-calendar-pro.php:60
 msgid "Events Calendar Pro"
 msgstr ""
 
-#: events-calendar-pro.php:170
+#: events-calendar-pro.php:174
 msgid "To begin using Events Calendar Pro, please install the latest version of"
 msgstr ""
 
@@ -64,7 +64,7 @@ msgstr ""
 #: src/Events_Pro/Integrations/Plugins/Elementor/Widgets/Event_Additional_Fields.php:257
 #: src/Tribe/Editor.php:213
 #: src/Tribe/Editor.php:251
-#: src/Tribe/Main.php:726
+#: src/Tribe/Main.php:734
 #: src/modules/blocks/additional-fields/elements/settings/template.js:28
 msgid "Additional Fields"
 msgstr ""
@@ -280,7 +280,7 @@ msgstr ""
 
 #: src/admin-views/event-recurrence.php:224
 #: src/admin-views/event-recurrence.php:630
-#: src/Tribe/Main.php:483
+#: src/Tribe/Main.php:491
 #: src/Tribe/Rewrite/Provider.php:162
 #: src/modules/custom-tables-v1/data/shared/constants.js:9
 #: src/resources/js/custom-tables-v1/app/ct1.js:590
@@ -440,7 +440,7 @@ msgstr ""
 msgid "Use this field if you want to override the auto-generated descriptions of event recurrence"
 msgstr ""
 
-#: src/admin-views/facebook/find-app-id.php:25
+#: src/admin-views/facebook/find-app-id.php:26
 msgctxt "The link label to get the Facebook App ID."
 msgid "How to find your Facebook App ID."
 msgstr ""
@@ -535,7 +535,7 @@ msgctxt "The screen reader text of the label for the Facebook page id."
 msgid "Enter a Facebook Page ID."
 msgstr ""
 
-#: src/admin-views/facebook/save.php:27
+#: src/admin-views/facebook/save.php:28
 msgctxt "Save a Facebook App ID and App Secret."
 msgid "Save Facebook App"
 msgstr ""
@@ -596,12 +596,12 @@ msgctxt "API connection header"
 msgid "Google"
 msgstr ""
 
-#: src/admin-views/manager/create-new-event.php:39
+#: src/admin-views/manager/create-new-event.php:41
 #, php-format
 msgid "Add New %1$s on %2$s"
 msgstr ""
 
-#: src/admin-views/manager/create-new-event.php:46
+#: src/admin-views/manager/create-new-event.php:48
 #: src/modules/elements/month-picker/element.js:67
 msgid "Add"
 msgstr ""
@@ -1410,7 +1410,7 @@ msgstr ""
 #: src/Tribe/Integrations/Elementor/Widgets/Widget_Event_Single_Legacy.php:1647
 #: src/Tribe/Integrations/Elementor/Widgets/Widget_Event_Single_Legacy.php:1895
 #: src/views/v2/organizer/meta/details/website.php:23
-#: src/views/v2/venue/meta/details/website.php:29
+#: src/views/v2/venue/meta/details/website.php:30
 #: src/views/v2/widgets/widget-featured-venue/venue/website.php:26
 #: src/views/v2/widgets/widget-featured-venue/venue/website.php:27
 msgid "Website"
@@ -1584,22 +1584,22 @@ msgid "Zoom"
 msgstr ""
 
 #: src/Events_Pro/Admin/Settings.php:40
-#: src/Tribe/Main.php:765
+#: src/Tribe/Main.php:773
 msgid "Hide related events"
 msgstr ""
 
 #: src/Events_Pro/Admin/Settings.php:41
-#: src/Tribe/Main.php:766
+#: src/Tribe/Main.php:774
 msgid "Remove related events from the single event view (with classic editor)"
 msgstr ""
 
 #: src/Events_Pro/Admin/Settings.php:47
-#: src/Tribe/Main.php:772
+#: src/Tribe/Main.php:780
 msgid "Hide weekends on Week View"
 msgstr ""
 
 #: src/Events_Pro/Admin/Settings.php:48
-#: src/Tribe/Main.php:773
+#: src/Tribe/Main.php:781
 msgid "Check this to only show weekdays on Week View. This also affects the Events by Week widget."
 msgstr ""
 
@@ -1611,45 +1611,45 @@ msgstr ""
 msgid "Check this to enforce an aspect ratio of 16:9 for photos on the photo view."
 msgstr ""
 
-#: src/Events_Pro/Admin/Settings.php:106
-#: src/Tribe/Main.php:812
+#: src/Events_Pro/Admin/Settings.php:107
+#: src/Tribe/Main.php:820
 msgid "Week day format"
 msgstr ""
 
 #. Translators: %1$s: Example date
-#: src/Events_Pro/Admin/Settings.php:109
-#: src/Tribe/Main.php:815
+#: src/Events_Pro/Admin/Settings.php:110
+#: src/Tribe/Main.php:823
 #, php-format
 msgid "Enter the format to use for week days. Used when showing days of the week in Week view. Example: %1$s"
 msgstr ""
 
-#: src/Events_Pro/Admin/Settings.php:136
-#: src/Tribe/Main.php:785
+#: src/Events_Pro/Admin/Settings.php:137
+#: src/Tribe/Main.php:793
 msgid "Enable the Before HTML (below) on shortcodes."
 msgstr ""
 
-#: src/Events_Pro/Admin/Settings.php:137
-#: src/Tribe/Main.php:786
+#: src/Events_Pro/Admin/Settings.php:138
+#: src/Tribe/Main.php:794
 msgid "Check this to show the Before HTML from the text area below on events displayed via shortcode."
 msgstr ""
 
-#: src/Events_Pro/Admin/Settings.php:150
-#: src/Tribe/Main.php:798
+#: src/Events_Pro/Admin/Settings.php:151
+#: src/Tribe/Main.php:806
 msgid "Enable the After HTML (below) on shortcodes."
 msgstr ""
 
-#: src/Events_Pro/Admin/Settings.php:151
-#: src/Tribe/Main.php:799
+#: src/Events_Pro/Admin/Settings.php:152
+#: src/Tribe/Main.php:807
 msgid "Check this to show the After HTML from the text area below on events displayed via shortcode."
 msgstr ""
 
 #. Translators: %s:post_type slug for tribe_events. This line starts with a space as this sentence is appended to the existing one.
-#: src/Events_Pro/Admin/Settings.php:177
+#: src/Events_Pro/Admin/Settings.php:178
 #, php-format
 msgid " Please note that you are using The Events Calendar's default Google Maps API key, which will limit the Map View's functionality. Visit <a href=\"edit.php?page=tribe-common&tab=addons&post_type=%s\">the Integrations Settings page</a> to learn more and add your own Google Maps API key."
 msgstr ""
 
-#: src/Events_Pro/Admin/Settings.php:195
+#: src/Events_Pro/Admin/Settings.php:196
 msgid "The number of events per page on the List, Photo, and Map Views. Does not affect other views."
 msgstr ""
 
@@ -2833,76 +2833,76 @@ msgstr ""
 msgid "Error: "
 msgstr ""
 
-#: src/Events_Pro/Custom_Tables/V1/Gettext.php:74
+#: src/Events_Pro/Custom_Tables/V1/Gettext.php:75
 msgid "Edit Recurring Event"
 msgstr ""
 
-#: src/Events_Pro/Custom_Tables/V1/Gettext.php:75
+#: src/Events_Pro/Custom_Tables/V1/Gettext.php:76
 msgid "Break from Recurring Event"
 msgstr ""
 
-#: src/Events_Pro/Custom_Tables/V1/Gettext.php:76
+#: src/Events_Pro/Custom_Tables/V1/Gettext.php:77
 msgid "Edit all occurrences of this recurring event"
 msgstr ""
 
-#: src/Events_Pro/Custom_Tables/V1/Gettext.php:77
+#: src/Events_Pro/Custom_Tables/V1/Gettext.php:78
 msgid "Move all occurrences of this recurring event to the Trash"
 msgstr ""
 
-#: src/Events_Pro/Custom_Tables/V1/Gettext.php:78
+#: src/Events_Pro/Custom_Tables/V1/Gettext.php:79
 msgid "Trash Recurring Event"
 msgstr ""
 
-#: src/Events_Pro/Custom_Tables/V1/Gettext.php:79
+#: src/Events_Pro/Custom_Tables/V1/Gettext.php:80
 msgid "Delete all occurrences of this recurring event permanently"
 msgstr ""
 
-#: src/Events_Pro/Custom_Tables/V1/Gettext.php:80
+#: src/Events_Pro/Custom_Tables/V1/Gettext.php:81
 msgid "Delete Recurring Event Permanently"
 msgstr ""
 
-#: src/Events_Pro/Custom_Tables/V1/Gettext.php:81
+#: src/Events_Pro/Custom_Tables/V1/Gettext.php:82
 msgid "Restore Recurring Event"
 msgstr ""
 
-#: src/Events_Pro/Custom_Tables/V1/Gettext.php:82
+#: src/Events_Pro/Custom_Tables/V1/Gettext.php:83
 msgid "Recurring Event:"
 msgstr ""
 
-#: src/Events_Pro/Custom_Tables/V1/Gettext.php:83
+#: src/Events_Pro/Custom_Tables/V1/Gettext.php:84
 msgid "Recurring Event Day of Week"
 msgstr ""
 
-#: src/Events_Pro/Custom_Tables/V1/Gettext.php:84
+#: src/Events_Pro/Custom_Tables/V1/Gettext.php:85
 msgid "Recurring event ends on this date"
 msgstr ""
 
-#: src/Events_Pro/Custom_Tables/V1/Gettext.php:85
+#: src/Events_Pro/Custom_Tables/V1/Gettext.php:86
 msgid "Recurring event ends"
 msgstr ""
 
-#: src/Events_Pro/Custom_Tables/V1/Gettext.php:86
+#: src/Events_Pro/Custom_Tables/V1/Gettext.php:87
 #: src/modules/elements/exception-add-field/element.js:14
 msgid "Add Exception"
 msgstr ""
 
-#: src/Events_Pro/Custom_Tables/V1/Gettext.php:87
+#: src/Events_Pro/Custom_Tables/V1/Gettext.php:88
 msgid "Are you sure you want to delete this exception?"
 msgstr ""
 
-#: src/Events_Pro/Custom_Tables/V1/Gettext.php:88
+#: src/Events_Pro/Custom_Tables/V1/Gettext.php:89
 msgid "Restore all occurrences of this recurring event from the Trash"
 msgstr ""
 
-#: src/Events_Pro/Custom_Tables/V1/Gettext.php:89
+#: src/Events_Pro/Custom_Tables/V1/Gettext.php:90
 msgid "Break this occurrence out of the recurring event and edit it independently"
 msgstr ""
 
-#: src/Events_Pro/Custom_Tables/V1/Gettext.php:90
+#: src/Events_Pro/Custom_Tables/V1/Gettext.php:91
 msgid "Split the recurring event in two at this point, creating a new recurring event out of this and all subsequent events"
 msgstr ""
 
-#: src/Events_Pro/Custom_Tables/V1/Gettext.php:91
+#: src/Events_Pro/Custom_Tables/V1/Gettext.php:92
 msgid ""
 "You are about to break this occurrence out of its recurring event.\n"
 "\n"
@@ -2913,7 +2913,7 @@ msgid ""
 "When you break occurrences from a recurring event their URLs will change, so any users trying to use the original URLs will receive a 404 Not Found error. If this is a concern, consider using a suitable plugin to setup and manage redirects."
 msgstr ""
 
-#: src/Events_Pro/Custom_Tables/V1/Gettext.php:92
+#: src/Events_Pro/Custom_Tables/V1/Gettext.php:93
 msgid ""
 "You are about to split this recurring event in two.\n"
 "\n"
@@ -3413,77 +3413,77 @@ msgstr ""
 msgid "Section Header"
 msgstr ""
 
-#: src/Events_Pro/Linked_Posts/Contracts/Taxonomy_Abstract.php:1081
-#: src/Events_Pro/Linked_Posts/Contracts/Taxonomy_Abstract.php:1086
+#: src/Events_Pro/Linked_Posts/Contracts/Taxonomy_Abstract.php:1087
+#: src/Events_Pro/Linked_Posts/Contracts/Taxonomy_Abstract.php:1092
 #, php-format
 msgid "%1$s %2$s"
 msgstr ""
 
-#: src/Events_Pro/Linked_Posts/Contracts/Taxonomy_Abstract.php:1091
+#: src/Events_Pro/Linked_Posts/Contracts/Taxonomy_Abstract.php:1097
 #, php-format
 msgid "Search %1$s %2$s"
 msgstr ""
 
-#: src/Events_Pro/Linked_Posts/Contracts/Taxonomy_Abstract.php:1096
+#: src/Events_Pro/Linked_Posts/Contracts/Taxonomy_Abstract.php:1102
 #, php-format
 msgid "All %1$s %2$s"
 msgstr ""
 
-#: src/Events_Pro/Linked_Posts/Contracts/Taxonomy_Abstract.php:1101
+#: src/Events_Pro/Linked_Posts/Contracts/Taxonomy_Abstract.php:1107
 #, php-format
 msgid "Parent %1$s %2$s"
 msgstr ""
 
-#: src/Events_Pro/Linked_Posts/Contracts/Taxonomy_Abstract.php:1106
+#: src/Events_Pro/Linked_Posts/Contracts/Taxonomy_Abstract.php:1112
 #, php-format
 msgid "Parent %1$s %2$s:"
 msgstr ""
 
-#: src/Events_Pro/Linked_Posts/Contracts/Taxonomy_Abstract.php:1111
+#: src/Events_Pro/Linked_Posts/Contracts/Taxonomy_Abstract.php:1117
 #, php-format
 msgid "Edit %1$s %2$s"
 msgstr ""
 
-#: src/Events_Pro/Linked_Posts/Contracts/Taxonomy_Abstract.php:1116
+#: src/Events_Pro/Linked_Posts/Contracts/Taxonomy_Abstract.php:1122
 #, php-format
 msgid "Update %1$s %2$s"
 msgstr ""
 
-#: src/Events_Pro/Linked_Posts/Contracts/Taxonomy_Abstract.php:1121
+#: src/Events_Pro/Linked_Posts/Contracts/Taxonomy_Abstract.php:1127
 #, php-format
 msgid "Add New %1$s %2$s"
 msgstr ""
 
-#: src/Events_Pro/Linked_Posts/Contracts/Taxonomy_Abstract.php:1126
+#: src/Events_Pro/Linked_Posts/Contracts/Taxonomy_Abstract.php:1132
 #, php-format
 msgid "New %1$s %2$s Name"
 msgstr ""
 
 #. Translators: %s: Linked Post Type singular label.
-#: src/Events_Pro/Linked_Posts/Contracts/Taxonomy_Abstract.php:1132
+#: src/Events_Pro/Linked_Posts/Contracts/Taxonomy_Abstract.php:1138
 #, php-format
 msgid "%1$s %2$s Link"
 msgstr ""
 
 #. Translators: %s: Linked Post Type singular label.
-#: src/Events_Pro/Linked_Posts/Contracts/Taxonomy_Abstract.php:1138
+#: src/Events_Pro/Linked_Posts/Contracts/Taxonomy_Abstract.php:1144
 #, php-format
 msgid "A link to a particular %1$s %2$s."
 msgstr ""
 
-#: src/Events_Pro/Linked_Posts/Contracts/Taxonomy_Abstract.php:1380
+#: src/Events_Pro/Linked_Posts/Contracts/Taxonomy_Abstract.php:1386
 #, php-format
 msgctxt "Breadcrumb for the Archive of the Linked Post type by a given taxonomy"
 msgid "By %1$s"
 msgstr ""
 
-#: src/Events_Pro/Linked_Posts/Contracts/Taxonomy_Abstract.php:1437
+#: src/Events_Pro/Linked_Posts/Contracts/Taxonomy_Abstract.php:1443
 #, php-format
 msgctxt "Content title for the Taxonomy View"
 msgid "%1$s from this %3$s of %2$s"
 msgstr ""
 
-#: src/Events_Pro/Linked_Posts/Contracts/Taxonomy_Abstract.php:1754
+#: src/Events_Pro/Linked_Posts/Contracts/Taxonomy_Abstract.php:1760
 #, php-format
 msgid "No %1$s."
 msgstr ""
@@ -3992,128 +3992,128 @@ msgstr ""
 msgid "Add Rule"
 msgstr ""
 
-#: src/Tribe/Geo_Loc.php:159
-#: src/Tribe/Geo_Loc.php:617
+#: src/Tribe/Geo_Loc.php:162
+#: src/Tribe/Geo_Loc.php:620
 #: src/Tribe/Rewrite/Provider.php:164
 msgid "map"
 msgstr ""
 
-#: src/Tribe/Geo_Loc.php:167
+#: src/Tribe/Geo_Loc.php:170
 msgid "Distance"
 msgstr ""
 
-#: src/Tribe/Geo_Loc.php:213
+#: src/Tribe/Geo_Loc.php:216
 msgid "Map view search distance limit"
 msgstr ""
 
-#: src/Tribe/Geo_Loc.php:215
+#: src/Tribe/Geo_Loc.php:218
 msgid "Set the distance that the location search covers (find events within X distance units of location search input)."
 msgstr ""
 
-#: src/Tribe/Geo_Loc.php:222
+#: src/Tribe/Geo_Loc.php:225
 msgid "Distance unit"
 msgstr ""
 
-#: src/Tribe/Geo_Loc.php:229
+#: src/Tribe/Geo_Loc.php:232
 #: src/Tribe/Geo_Loc_Filter.php:23
 #: src/Tribe/Views/V2/Views/Map_View.php:563
 msgid "Miles"
 msgstr ""
 
-#: src/Tribe/Geo_Loc.php:230
+#: src/Tribe/Geo_Loc.php:233
 #: src/Tribe/Geo_Loc_Filter.php:26
 #: src/Tribe/Views/V2/Views/Map_View.php:559
 msgid "Kilometers"
 msgstr ""
 
-#: src/Tribe/Geo_Loc.php:248
+#: src/Tribe/Geo_Loc.php:251
 msgid "Hide location search"
 msgstr ""
 
-#: src/Tribe/Geo_Loc.php:249
+#: src/Tribe/Geo_Loc.php:252
 msgid "Removes location search field from the Events Bar on all views."
 msgstr ""
 
-#: src/Tribe/Geo_Loc.php:354
+#: src/Tribe/Geo_Loc.php:357
 #: src/Tribe/Integrations/Elementor/Widgets/Widget_Event_Single_Legacy.php:531
 msgid "Map"
 msgstr ""
 
-#: src/Tribe/Geo_Loc.php:392
+#: src/Tribe/Geo_Loc.php:395
 msgid "Venue Overwrite Coordinates"
 msgstr ""
 
-#: src/Tribe/Geo_Loc.php:423
+#: src/Tribe/Geo_Loc.php:426
 msgid "Near"
 msgstr ""
 
-#: src/Tribe/Geo_Loc.php:424
+#: src/Tribe/Geo_Loc.php:427
 #: src/Tribe/Integrations/Elementor/Widgets/Widget_Event_Single_Legacy.php:528
 #: src/Tribe/Integrations/Elementor/Widgets/Widget_Event_Single_Legacy.php:1765
 msgid "Location"
 msgstr ""
 
-#: src/Tribe/Geo_Loc.php:451
+#: src/Tribe/Geo_Loc.php:454
 msgid "Use latitude + longitude"
 msgstr ""
 
-#: src/Tribe/Geo_Loc.php:462
+#: src/Tribe/Geo_Loc.php:465
 msgid "Latitude"
 msgstr ""
 
-#: src/Tribe/Geo_Loc.php:463
+#: src/Tribe/Geo_Loc.php:466
 msgid "Longitude"
 msgstr ""
 
-#: src/Tribe/Geo_Loc.php:484
+#: src/Tribe/Geo_Loc.php:487
 msgid "Enter a custom Google Maps API key"
 msgstr ""
 
-#: src/Tribe/Geo_Loc.php:485
+#: src/Tribe/Geo_Loc.php:488
 msgid "for latitude and longitude to be auto-generated; otherwise, you'll only be able to enter the values manually."
 msgstr ""
 
-#: src/Tribe/Geo_Loc.php:825
+#: src/Tribe/Geo_Loc.php:828
 #, php-format
 msgid "The latitude and longitude for your venue could not be fetched. The Google Maps API daily query limit has been reached!. %1$s "
 msgstr ""
 
-#: src/Tribe/Geo_Loc.php:829
+#: src/Tribe/Geo_Loc.php:832
 msgid "Enter your API Key"
 msgstr ""
 
 #. translators: 1: Error response text, 2: URL
-#: src/Tribe/Geo_Loc.php:1376
+#: src/Tribe/Geo_Loc.php:1379
 #, php-format
 msgctxt "debug geodata"
 msgid "Geocode request failed (%1$s - %2$s)"
 msgstr ""
 
-#: src/Tribe/Geo_Loc.php:1405
+#: src/Tribe/Geo_Loc.php:1408
 #, php-format
 msgid "There was an error while trying to fix the Venues geolocation information: %s"
 msgstr ""
 
-#: src/Tribe/Geo_Loc.php:1500
+#: src/Tribe/Geo_Loc.php:1503
 msgid "Fix venues data"
 msgstr ""
 
-#: src/Tribe/Geo_Loc.php:1555
+#: src/Tribe/Geo_Loc.php:1558
 #, php-format
 msgid "You have venues for which we don't have geolocation information. <a href='%s'>Click here to generate it</a>."
 msgstr ""
 
-#: src/Tribe/Geo_Loc.php:1591
+#: src/Tribe/Geo_Loc.php:1594
 #, php-format
 msgid "Fixed geolocation data for %d venues"
 msgstr ""
 
-#: src/Tribe/Geo_Loc.php:1735
+#: src/Tribe/Geo_Loc.php:1738
 msgctxt "The text of the link that will take the user to the Venue edit screen."
 msgid "update the venue address or use latitude & longitude"
 msgstr ""
 
-#: src/Tribe/Geo_Loc.php:1745
+#: src/Tribe/Geo_Loc.php:1748
 msgctxt "The text of the link that will trigger an attempt to fix the Venues geolocation information."
 msgid "try again"
 msgstr ""
@@ -5016,6 +5016,15 @@ msgstr ""
 msgid "The Legacy Event widget is not supported in this layout. <a href=\"%1$s\" target=\"_blank\">Learn more</a>."
 msgstr ""
 
+#: src/Tribe/Integrations/Event_Automator/Power_Automate_Provider.php:150
+#: src/Tribe/Integrations/Event_Automator/Power_Automate_Provider.php:159
+msgid "Power Automate"
+msgstr ""
+
+#: src/Tribe/Integrations/Event_Automator/Power_Automate_Provider.php:162
+msgid "Connect your site to Microsoft Power Automate to automate your event and ticket workflows."
+msgstr ""
+
 #. translators: %1$s is the plugin that was deactivated, %2$s is the plugin name, %3$s is the opening anchor tag, %4$s is the closing anchor tag.
 #: src/Tribe/Integrations/Event_Automator/Service_Provider.php:107
 #, php-format
@@ -5030,189 +5039,198 @@ msgctxt "Notice message for the forced deactivation of the Event Automator plugi
 msgid "%1$s could not be activated. The %1$s functionality has been merged into %2$s. %3$sLearn More%4$s."
 msgstr ""
 
+#: src/Tribe/Integrations/Event_Automator/Zapier_Provider.php:159
+#: src/Tribe/Integrations/Event_Automator/Zapier_Provider.php:168
+msgid "Zapier"
+msgstr ""
+
+#: src/Tribe/Integrations/Event_Automator/Zapier_Provider.php:171
+msgid "Connect your site to Zapier to automate your event and ticket workflows with thousands of apps."
+msgstr ""
+
 #. Translators: 1: Plural event label, 2: Title of the current page
-#: src/Tribe/Main.php:435
+#: src/Tribe/Main.php:437
 #: src/Tribe/Views/V2/Template/Title.php:60
 #, php-format
 msgid "All %1$s for %2$s"
 msgstr ""
 
 #. Translators: 1: Plural event label, 2: Date of the current view
-#: src/Tribe/Main.php:445
+#: src/Tribe/Main.php:447
 #: src/Tribe/Views/V2/Template/Title.php:78
 #, php-format
 msgid "%1$s for week of %2$s"
 msgstr ""
 
-#: src/Tribe/Main.php:482
+#: src/Tribe/Main.php:490
 #: src/Tribe/Rewrite/Provider.php:161
 msgid "all"
 msgstr ""
 
-#: src/Tribe/Main.php:484
+#: src/Tribe/Main.php:492
 #: src/Tribe/Rewrite/Provider.php:163
 msgid "photo"
 msgstr ""
 
-#: src/Tribe/Main.php:528
+#: src/Tribe/Main.php:536
 msgctxt "debug recurrence"
 msgid "Unknown"
 msgstr ""
 
-#: src/Tribe/Main.php:546
+#: src/Tribe/Main.php:554
 msgctxt "debug recurrence"
 msgid "invalid date"
 msgstr ""
 
-#: src/Tribe/Main.php:577
-#: src/Tribe/Main.php:590
+#: src/Tribe/Main.php:585
+#: src/Tribe/Main.php:598
 msgctxt "debug recurrence"
 msgid "incorrect slug"
 msgstr ""
 
 #. Translators: 1: Error message, 2: URL
-#: src/Tribe/Main.php:614
+#: src/Tribe/Main.php:622
 #, php-format
 msgctxt "debug recurrence"
 msgid "Invalid instance of a recurring event was requested (%1$s) redirecting to %2$s"
 msgstr ""
 
 #. Translators: %1$s: PHP date function, %2$s: Link to WordPress.org
-#: src/Tribe/Main.php:831
+#: src/Tribe/Main.php:839
 #, php-format
 msgid "The first four fields accept the date format options available to the PHP %1$s function. <a href=\"%2$s\" target=\"_blank\">Learn how to make your own date format here</a>."
 msgstr ""
 
-#: src/Tribe/Main.php:860
+#: src/Tribe/Main.php:868
 msgid "Thanks for buying Events Calendar PRO! From all of us at The Events Calendar, we sincerely appreciate it. If you're looking for help with Events Calendar PRO, you've come to the right place. We are committed to helping make your calendar be spectacular... and hope the resources provided below will help get you there."
 msgstr ""
 
-#: src/Tribe/Main.php:875
+#: src/Tribe/Main.php:883
 msgid "If this is your first time using The Events Calendar Pro, you're in for a treat and are already well on your way to creating a first event. Here are some basics we've found helpful for users jumping into it for the first time:"
 msgstr ""
 
 #. Translators: %1$s: Opening anchor tag, %2$s: Closing anchor tag
-#: src/Tribe/Main.php:880
+#: src/Tribe/Main.php:888
 #, php-format
 msgid "%1$sOur New User Primer%2$s was designed for folks in your exact position. Featuring both step-by-step videos and written walkthroughs that feature accompanying screenshots, the primer aims to take you from zero to hero in no time."
 msgstr ""
 
 #. Translators: %1$s: Opening anchor tag, %2$s: Closing anchor tag
-#: src/Tribe/Main.php:890
+#: src/Tribe/Main.php:898
 #, php-format
 msgid "%1$sInstallation/Setup FAQs%2$s from our support page can help give an overview of what the plugin can and cannot do. This section of the FAQs may be helpful as it aims to address any basic install questions not addressed by the new user primer."
 msgstr ""
 
 #. Translators: %1$s: Opening anchor tag, %2$s: Closing anchor tag
-#: src/Tribe/Main.php:900
+#: src/Tribe/Main.php:908
 #, php-format
 msgid "Take care of your license key. Though not required to create your first event, you'll want to get it in place as soon as possible to guarantee your access to support and upgrades. %1$sHere's how to find your license key%2$s, if you don't have it handy."
 msgstr ""
 
-#: src/Tribe/Main.php:908
+#: src/Tribe/Main.php:916
 msgid "Otherwise, if you're feeling adventurous, you can get started by heading to the Events menu and adding your first event."
 msgstr ""
 
 #. Translators: %1$s: Opening anchor tag, %2$s: Closing anchor tag
-#: src/Tribe/Main.php:925
+#: src/Tribe/Main.php:933
 #, php-format
 msgid "Written documentation can only take things so far...sometimes, you need help from a real person. This is where our %1$ssupport forums%2$s come into play."
 msgstr ""
 
 #. Translators: %1$s: Opening anchor tag, %2$s: Closing anchor tag, %3$s: Opening anchor tag, %4$s: Closing anchor tag
-#: src/Tribe/Main.php:934
+#: src/Tribe/Main.php:942
 #, php-format
 msgid "Users who have purchased an Events Calendar PRO license are granted total access to our %1$spremium support forums%2$s. Unlike at the %3$sWordPress.org support forum%4$s, where our involvement is limited to identifying and patching bugs, we have a dedicated support team for PRO users. We're on the PRO forums daily throughout the business week, and no thread should go more than 24-hours without a response."
 msgstr ""
 
-#: src/Tribe/Main.php:943
+#: src/Tribe/Main.php:951
 msgid "Our number one goal is helping you succeed, and to whatever extent possible, we'll help troubleshoot and guide your customizations or tweaks. While we won't build your site for you, and we can't guarantee we'll be able to get you 100% integrated with every theme or plugin out there, we'll do all we can to point you in the right direction and to make you -- and your client, as is often more importantly the case -- satisfied."
 msgstr ""
 
-#: src/Tribe/Main.php:947
+#: src/Tribe/Main.php:955
 msgid "Before posting a new thread, please do a search to make sure your issue hasn't already been addressed. When posting please make sure to provide as much detail about the problem as you can (with screenshots or screencasts if feasible), and make sure that you've identified whether a plugin / theme conflict could be at play in your initial message."
 msgstr ""
 
-#: src/Tribe/Main.php:1206
+#: src/Tribe/Main.php:1214
 msgid "Settings"
 msgstr ""
 
 #. Translators: %1$s: URL to the post
-#: src/Tribe/Main.php:1237
+#: src/Tribe/Main.php:1245
 #, php-format
 msgid "Venue updated. <a href=\"%1$s\">View venue</a>"
 msgstr ""
 
 #. Translators: %1$s: URL to the post
-#: src/Tribe/Main.php:1246
+#: src/Tribe/Main.php:1254
 #, php-format
 msgid "Venue published. <a href=\"%1$s\">View venue</a>"
 msgstr ""
 
 #. Translators: %1$s: URL to the post
-#: src/Tribe/Main.php:1254
+#: src/Tribe/Main.php:1262
 #, php-format
 msgid "Venue submitted. <a target=\"_blank\" href=\"%1$s\">Preview venue</a>"
 msgstr ""
 
 #. Translators: %1$s: date and time of the revision, %2$s: URL to the post
-#: src/Tribe/Main.php:1262
+#: src/Tribe/Main.php:1270
 #, php-format
 msgid "Venue scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s\">Preview venue</a>"
 msgstr ""
 
 #. Translators: Publish box date format, see http://php.net/date.
 #. Translators: Publish box date format, see http://php.net/date
-#: src/Tribe/Main.php:1264
-#: src/Tribe/Main.php:1307
+#: src/Tribe/Main.php:1272
+#: src/Tribe/Main.php:1315
 msgid "M j, Y @ G:i"
 msgstr ""
 
 #. Translators: %1$s: URL to the post
-#: src/Tribe/Main.php:1269
+#: src/Tribe/Main.php:1277
 #, php-format
 msgid "Venue draft updated. <a target=\"_blank\" href=\"%1$s\">Preview venue</a>"
 msgstr ""
 
 #. Translators: %1$s: URL to the post
-#: src/Tribe/Main.php:1278
+#: src/Tribe/Main.php:1286
 #, php-format
 msgid "Organizer updated. <a href=\"%1$s\">View organizer</a>"
 msgstr ""
 
 #. Translators: %1$s: URL to the post
-#: src/Tribe/Main.php:1286
+#: src/Tribe/Main.php:1294
 #, php-format
 msgid "Organizer published. <a href=\"%1$s\">View organizer</a>"
 msgstr ""
 
 #. Translators: %1$s: URL to the post
-#: src/Tribe/Main.php:1294
+#: src/Tribe/Main.php:1302
 #, php-format
 msgid "Organizer submitted. <a target=\"_blank\" href=\"%1$s\">Preview organizer</a>"
 msgstr ""
 
 #. Translators: %1$s: date and time of the revision, %2$s: URL to the post
-#: src/Tribe/Main.php:1302
+#: src/Tribe/Main.php:1310
 #, php-format
 msgid "Organizer scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s\">Preview organizer</a>"
 msgstr ""
 
 #. Translators: %1$s: URL to the post
-#: src/Tribe/Main.php:1312
+#: src/Tribe/Main.php:1320
 #, php-format
 msgid "Organizer draft updated. <a target=\"_blank\" href=\"%1$s\">Preview organizer</a>"
 msgstr ""
 
-#: src/Tribe/Main.php:1369
+#: src/Tribe/Main.php:1377
 msgid "Support"
 msgstr ""
 
-#: src/Tribe/Main.php:1371
+#: src/Tribe/Main.php:1379
 msgid "View All Add-Ons"
 msgstr ""
 
-#: src/Tribe/Main.php:1708
+#: src/Tribe/Main.php:1716
 msgid "Events Calendar PRO"
 msgstr ""
 
@@ -6165,12 +6183,12 @@ msgstr ""
 msgid "summary"
 msgstr ""
 
-#: src/Tribe/Views/V2/Hooks.php:948
+#: src/Tribe/Views/V2/Hooks.php:1001
 msgctxt "The default text label for the \"today\" button on the Week View."
 msgid "This Week"
 msgstr ""
 
-#: src/Tribe/Views/V2/Hooks.php:968
+#: src/Tribe/Views/V2/Hooks.php:1021
 msgctxt "The default text for the 'today' button's title and aria-label on the Week View."
 msgid "Click to select the current week"
 msgstr ""
@@ -6264,7 +6282,7 @@ msgctxt "Label for link to map view."
 msgid "View %1s."
 msgstr ""
 
-#: src/Tribe/Views/V2/Views/Organizer_View.php:526
+#: src/Tribe/Views/V2/Views/Organizer_View.php:550
 #, php-format
 msgctxt "Content title for the View, displays right above the date selector on the Organizer View."
 msgid "%1$s from this %2$s"
@@ -6285,7 +6303,7 @@ msgctxt "The text label for the Venue View."
 msgid "Venue"
 msgstr ""
 
-#: src/Tribe/Views/V2/Views/Venue_View.php:515
+#: src/Tribe/Views/V2/Views/Venue_View.php:539
 #, php-format
 msgctxt "Content title for the View, displays right above the date selector on the Venue View."
 msgid "%1$s at this %2$s"
@@ -6381,183 +6399,181 @@ msgctxt "The label for the option to enable website display in the List Widget."
 msgid "Website"
 msgstr ""
 
-#: src/Tribe/Views/V2/Widgets/Widget_Countdown.php:93
-msgctxt "The name of the Countdown Widget."
-msgid "Events Countdown"
-msgstr ""
-
-#: src/Tribe/Views/V2/Widgets/Widget_Countdown.php:105
-msgctxt "The description of the Countdown Widget."
-msgid "Displays the time remaining until a specified event."
-msgstr ""
-
-#: src/Tribe/Views/V2/Widgets/Widget_Countdown.php:151
-msgctxt "The label for the title field of the Countdown Widget."
-msgid "Title:"
-msgstr ""
-
-#: src/Tribe/Views/V2/Widgets/Widget_Countdown.php:160
-msgctxt "The label for the type field of the Countdown Widget."
-msgid "Countdown to:"
-msgstr ""
-
-#: src/Tribe/Views/V2/Widgets/Widget_Countdown.php:168
-msgctxt "Label for the \"countdown to a single event\" option."
-msgid "Next upcoming event"
-msgstr ""
-
-#: src/Tribe/Views/V2/Widgets/Widget_Countdown.php:177
-msgctxt "Label for the \"countdown to a single event\" option."
-msgid "Specific event"
-msgstr ""
-
-#: src/Tribe/Views/V2/Widgets/Widget_Countdown.php:195
-msgctxt "The label for the event field of the Countdown Widget."
-msgid "Event:"
-msgstr ""
-
-#. Translators: 1: single event term
-#: src/Tribe/Views/V2/Widgets/Widget_Countdown.php:202
-#: src/Tribe/Views/V2/Widgets/Widget_Featured_Venue.php:130
-#, php-format
-msgid "Select an %1$s"
-msgstr ""
-
-#: src/Tribe/Views/V2/Widgets/Widget_Countdown.php:219
-msgctxt "The label for the field to change the displayed text on countdown completion."
-msgid "Countdown Completed Text"
-msgstr ""
-
-#: src/Tribe/Views/V2/Widgets/Widget_Countdown.php:224
-msgctxt "A note about what this shows when \"Next Event\" is the countdown type."
-msgid "On “Next Event” type of countdown, this text will only show when there are no events to show."
-msgstr ""
-
-#: src/Tribe/Views/V2/Widgets/Widget_Countdown.php:232
-msgctxt "The label for the option to show seconds in the countdown widget."
-msgid "Show seconds?"
-msgstr ""
-
-#: src/Tribe/Views/V2/Widgets/Widget_Countdown.php:240
-msgctxt "The label for the option to enable JSON-LD in the List Widget."
-msgid "Generate JSON-LD data"
-msgstr ""
-
-#: src/Tribe/Views/V2/Widgets/Widget_Countdown.php:268
-msgid "Hooray!"
-msgstr ""
-
-#: src/Tribe/Views/V2/Widgets/Widget_Featured_Venue.php:80
-msgctxt "The name of the Featured Venue."
-msgid "Events Featured Venue"
-msgstr ""
-
-#: src/Tribe/Views/V2/Widgets/Widget_Featured_Venue.php:88
-msgctxt "The description of the Featured Venue Widget."
-msgid "Displays a list of upcoming events at a specific venue."
-msgstr ""
-
-#: src/Tribe/Views/V2/Widgets/Widget_Featured_Venue.php:124
-msgctxt "The label for the field of the title of the Featured Venue Widget."
-msgid "Title:"
-msgstr ""
-
-#: src/Tribe/Views/V2/Widgets/Widget_Featured_Venue.php:129
-msgctxt "The label for the venue field of the Featured Venue Widget."
-msgid "Venue:"
-msgstr ""
-
-#: src/Tribe/Views/V2/Widgets/Widget_Featured_Venue.php:134
-msgctxt "The label to choose the venue to show in the Featured Venue Widget."
-msgid "Choose a venue."
-msgstr ""
-
-#: src/Tribe/Views/V2/Widgets/Widget_Featured_Venue.php:141
-msgctxt "The label for the amount of events to show in the Featured Venue Widget."
-msgid "Show:"
-msgstr ""
-
-#: src/Tribe/Views/V2/Widgets/Widget_Featured_Venue.php:149
-msgctxt "The label for the option to hide the Featured Venue Widget if no upcoming events."
-msgid "Hide this widget if there are no upcoming events."
-msgstr ""
-
-#: src/Tribe/Views/V2/Widgets/Widget_Featured_Venue.php:153
-msgctxt "The label for the option to enable JSON-LD in the Featured Venue Widget."
-msgid "Generate JSON-LD data"
-msgstr ""
-
-#: src/Tribe/Views/V2/Widgets/Widget_Month.php:101
-#, php-format
-msgctxt "The name of the Month Widget."
-msgid "%1$s Calendar"
-msgstr ""
-
-#: src/Tribe/Views/V2/Widgets/Widget_Month.php:115
-msgctxt "Description of the Events Calendar Widget."
-msgid "Displays this month's events."
-msgstr ""
-
-#: src/Tribe/Views/V2/Widgets/Widget_Month.php:341
-msgctxt "The default title of the Month Widget."
-msgid "Events Calendar"
-msgstr ""
-
-#: src/Tribe/Views/V2/Widgets/Widget_Month.php:369
-msgctxt "The label for the title field of the Month Widget."
-msgid "Title:"
-msgstr ""
-
-#: src/Tribe/Views/V2/Widgets/Widget_Month.php:375
-#, php-format
-msgctxt "The title of the Month Widget."
-msgid "%1$s Calendar"
-msgstr ""
-
-#: src/Tribe/Views/V2/Widgets/Widget_Month.php:401
-msgctxt "The label for the option to enable JSON-LD in the Month Widget."
-msgid "Generate JSON-LD data"
-msgstr ""
-
-#: src/Tribe/Views/V2/Widgets/Widget_Week.php:98
+#. translators: %1$s is the Events label
+#: src/Tribe/Views/V2/Widgets/Widget_Countdown.php:104
 #, php-format
 msgctxt "The name of the Events By Week Widget."
 msgid "%1$s By Week"
 msgstr ""
 
-#: src/Tribe/Views/V2/Widgets/Widget_Week.php:112
-#: src/Tribe/Views/V2/Widgets/Widget_Week.php:118
+#. translators: %1$s is the Events label in lowercase
+#: src/Tribe/Views/V2/Widgets/Widget_Countdown.php:133
+#: src/Tribe/Views/V2/Widgets/Widget_Week.php:122
 #, php-format
 msgctxt "Description of the Events By Week Widget."
 msgid "Display %1$s by day for the week."
 msgstr ""
 
-#: src/Tribe/Views/V2/Widgets/Widget_Week.php:211
+#: src/Tribe/Views/V2/Widgets/Widget_Countdown.php:181
+msgctxt "The label for the title field of the Countdown Widget."
+msgid "Title:"
+msgstr ""
+
+#: src/Tribe/Views/V2/Widgets/Widget_Countdown.php:190
+msgctxt "The label for the type field of the Countdown Widget."
+msgid "Countdown to:"
+msgstr ""
+
+#: src/Tribe/Views/V2/Widgets/Widget_Countdown.php:198
+msgctxt "Label for the \"countdown to a single event\" option."
+msgid "Next upcoming event"
+msgstr ""
+
+#: src/Tribe/Views/V2/Widgets/Widget_Countdown.php:207
+msgctxt "Label for the \"countdown to a single event\" option."
+msgid "Specific event"
+msgstr ""
+
+#: src/Tribe/Views/V2/Widgets/Widget_Countdown.php:225
+msgctxt "The label for the event field of the Countdown Widget."
+msgid "Event:"
+msgstr ""
+
+#. Translators: 1: single event term
+#: src/Tribe/Views/V2/Widgets/Widget_Countdown.php:232
+#: src/Tribe/Views/V2/Widgets/Widget_Featured_Venue.php:153
+#, php-format
+msgid "Select an %1$s"
+msgstr ""
+
+#: src/Tribe/Views/V2/Widgets/Widget_Countdown.php:249
+msgctxt "The label for the field to change the displayed text on countdown completion."
+msgid "Countdown Completed Text"
+msgstr ""
+
+#: src/Tribe/Views/V2/Widgets/Widget_Countdown.php:254
+msgctxt "A note about what this shows when \"Next Event\" is the countdown type."
+msgid "On “Next Event” type of countdown, this text will only show when there are no events to show."
+msgstr ""
+
+#: src/Tribe/Views/V2/Widgets/Widget_Countdown.php:262
+msgctxt "The label for the option to show seconds in the countdown widget."
+msgid "Show seconds?"
+msgstr ""
+
+#: src/Tribe/Views/V2/Widgets/Widget_Countdown.php:270
+msgctxt "The label for the option to enable JSON-LD in the List Widget."
+msgid "Generate JSON-LD data"
+msgstr ""
+
+#: src/Tribe/Views/V2/Widgets/Widget_Countdown.php:298
+msgid "Hooray!"
+msgstr ""
+
+#: src/Tribe/Views/V2/Widgets/Widget_Featured_Venue.php:86
+msgctxt "The name of the Featured Venue."
+msgid "Events Featured Venue"
+msgstr ""
+
+#: src/Tribe/Views/V2/Widgets/Widget_Featured_Venue.php:102
+msgctxt "The description of the Featured Venue Widget."
+msgid "Displays a list of upcoming events at a specific venue."
+msgstr ""
+
+#: src/Tribe/Views/V2/Widgets/Widget_Featured_Venue.php:147
+msgctxt "The label for the field of the title of the Featured Venue Widget."
+msgid "Title:"
+msgstr ""
+
+#: src/Tribe/Views/V2/Widgets/Widget_Featured_Venue.php:152
+msgctxt "The label for the venue field of the Featured Venue Widget."
+msgid "Venue:"
+msgstr ""
+
+#: src/Tribe/Views/V2/Widgets/Widget_Featured_Venue.php:157
+msgctxt "The label to choose the venue to show in the Featured Venue Widget."
+msgid "Choose a venue."
+msgstr ""
+
+#: src/Tribe/Views/V2/Widgets/Widget_Featured_Venue.php:164
+msgctxt "The label for the amount of events to show in the Featured Venue Widget."
+msgid "Show:"
+msgstr ""
+
+#: src/Tribe/Views/V2/Widgets/Widget_Featured_Venue.php:172
+msgctxt "The label for the option to hide the Featured Venue Widget if no upcoming events."
+msgid "Hide this widget if there are no upcoming events."
+msgstr ""
+
+#: src/Tribe/Views/V2/Widgets/Widget_Featured_Venue.php:176
+msgctxt "The label for the option to enable JSON-LD in the Featured Venue Widget."
+msgid "Generate JSON-LD data"
+msgstr ""
+
+#. translators: %1$s is the Event label
+#: src/Tribe/Views/V2/Widgets/Widget_Month.php:109
+#, php-format
+msgctxt "The name of the Month Widget."
+msgid "%1$s Calendar"
+msgstr ""
+
+#: src/Tribe/Views/V2/Widgets/Widget_Month.php:133
+msgctxt "Description of the Events Calendar Widget."
+msgid "Displays this month's events."
+msgstr ""
+
+#: src/Tribe/Views/V2/Widgets/Widget_Month.php:366
+msgctxt "The default title of the Month Widget."
+msgid "Events Calendar"
+msgstr ""
+
+#: src/Tribe/Views/V2/Widgets/Widget_Month.php:394
+msgctxt "The label for the title field of the Month Widget."
+msgid "Title:"
+msgstr ""
+
+#: src/Tribe/Views/V2/Widgets/Widget_Month.php:400
+#, php-format
+msgctxt "The title of the Month Widget."
+msgid "%1$s Calendar"
+msgstr ""
+
+#: src/Tribe/Views/V2/Widgets/Widget_Month.php:426
+msgctxt "The label for the option to enable JSON-LD in the Month Widget."
+msgid "Generate JSON-LD data"
+msgstr ""
+
+#: src/Tribe/Views/V2/Widgets/Widget_Week.php:103
+msgctxt "The name of the Countdown Widget."
+msgid "Events Countdown"
+msgstr ""
+
+#: src/Tribe/Views/V2/Widgets/Widget_Week.php:219
 msgctxt "The label for the title field of the Week Widget."
 msgid "Title:"
 msgstr ""
 
-#: src/Tribe/Views/V2/Widgets/Widget_Week.php:219
+#: src/Tribe/Views/V2/Widgets/Widget_Week.php:227
 msgctxt "The label for the layout field of the Week Widget."
 msgid "Layout:"
 msgstr ""
 
-#: src/Tribe/Views/V2/Widgets/Widget_Week.php:240
+#: src/Tribe/Views/V2/Widgets/Widget_Week.php:248
 msgctxt "The text for the vertical layout option."
 msgid "Vertical"
 msgstr ""
 
-#: src/Tribe/Views/V2/Widgets/Widget_Week.php:248
+#: src/Tribe/Views/V2/Widgets/Widget_Week.php:256
 msgctxt "The text for the horizontal layout option."
 msgid "Horizontal"
 msgstr ""
 
-#: src/Tribe/Views/V2/Widgets/Widget_Week.php:295
+#: src/Tribe/Views/V2/Widgets/Widget_Week.php:303
 msgctxt "The label for the option to enable JSON-LD in the Week View Widget."
 msgid "Generate JSON-LD data"
 msgstr ""
 
-#: src/Tribe/Views/V2/Widgets/Widget_Week.php:430
+#: src/Tribe/Views/V2/Widgets/Widget_Week.php:438
 #, php-format
 msgctxt "The \"week of\" header"
 msgid "Week of %s"
@@ -6684,12 +6700,12 @@ msgctxt "Moved Online event status label"
 msgid "Moved Online"
 msgstr ""
 
-#: src/Tribe/Virtual/Hooks.php:1029
+#: src/Tribe/Virtual/Hooks.php:1033
 msgctxt "The label of the video source option."
 msgid "Search for video or meeting link"
 msgstr ""
 
-#: src/Tribe/Virtual/Hooks.php:1066
+#: src/Tribe/Virtual/Hooks.php:1070
 msgctxt "The name of the autodetect source."
 msgid "OEmbed"
 msgstr ""
@@ -6829,7 +6845,7 @@ msgstr ""
 
 #: src/Tribe/Virtual/Integrations/Editor/Abstract_Classic.php:395
 msgctxt "The message for smart url/autodetect when there are no valid api accounts."
-msgid "No accounts found. Use the link to authorize a new account or reauthorize an existing account:"
+msgid "No Zoom account detected. Your link will still work if valid, but to access additional features, please"
 msgstr ""
 
 #: src/Tribe/Virtual/Integrations/Editor/Abstract_Classic.php:412
@@ -6992,7 +7008,7 @@ msgctxt "The message to complete the Facebook setup."
 msgid "No connected Facebook Pages found. You must connect a Facebook App to your site before you can add Facebook Live videos to events."
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Facebook/Classic_Editor.php:146
+#: src/Tribe/Virtual/Meetings/Facebook/Classic_Editor.php:151
 msgctxt "The label of the link to setup Facebook Live."
 msgid "Set up Facebook Live"
 msgstr ""
@@ -7067,65 +7083,65 @@ msgctxt "The start of the message for smart url/autodetect when there is no Face
 msgid "No connected Facebook Pages found. You must"
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Facebook/Page_API.php:924
+#: src/Tribe/Virtual/Meetings/Facebook/Page_API.php:929
 msgctxt "The link text in message for smart url/autodetect when there is no Facebook App ID."
 msgid "connect a Facebook App"
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Facebook/Page_API.php:929
+#: src/Tribe/Virtual/Meetings/Facebook/Page_API.php:934
 msgctxt "The end of the message for smart url/autodetect when there is no Facebook App ID."
 msgid "to your site before you can add a Facebook video to an event."
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Facebook/Settings.php:140
+#: src/Tribe/Virtual/Meetings/Facebook/Settings.php:143
 msgid "Facebook App ID"
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Facebook/Settings.php:141
+#: src/Tribe/Virtual/Meetings/Facebook/Settings.php:144
 msgctxt "The Facebook App ID to use for Facebook Live."
 msgid "Enter your Facebook App ID."
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Facebook/Settings.php:146
+#: src/Tribe/Virtual/Meetings/Facebook/Settings.php:149
 msgid "Facebook App Secret"
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Facebook/Settings.php:147
+#: src/Tribe/Virtual/Meetings/Facebook/Settings.php:150
 msgctxt "The Facebook App secret key to use for Facebook Live."
 msgid "Enter your Facebook App Secret."
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Facebook/Settings.php:176
+#: src/Tribe/Virtual/Meetings/Facebook/Settings.php:179
 msgctxt "The label for the Facebook Video settings."
 msgid "Facebook Video"
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Facebook/Settings.php:180
+#: src/Tribe/Virtual/Meetings/Facebook/Settings.php:183
 msgctxt "The label to disable Facebook JS sdk."
 msgid "Disable Facebook JS SDK for Facebook Video"
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Facebook/Settings.php:181
+#: src/Tribe/Virtual/Meetings/Facebook/Settings.php:184
 msgctxt "The tooltip for the option to disable the Facebook JS SDK."
 msgid "Disable the Facebook JS SDK script for single events on the frontend. This may be necessary to prevent conflicts with other Facebook plugins or scripts."
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Facebook/Settings.php:308
+#: src/Tribe/Virtual/Meetings/Facebook/Settings.php:311
 msgctxt "Facebook App ID is missing error message."
 msgid "The Facebook App ID field is missing."
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Facebook/Settings.php:322
+#: src/Tribe/Virtual/Meetings/Facebook/Settings.php:325
 msgctxt "Facebook App Secret is missing error message."
 msgid "The Facebook App Secret field is missing."
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Facebook/Settings.php:343
+#: src/Tribe/Virtual/Meetings/Facebook/Settings.php:346
 msgctxt "The message after a Facebook app id and secret have been saved."
 msgid "The Facebook App was successfully saved."
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Facebook/Settings.php:356
+#: src/Tribe/Virtual/Meetings/Facebook/Settings.php:359
 msgctxt "The message after a Facebook app id and secret did not save successfully."
 msgid "The Facebook App was not saved."
 msgstr ""
@@ -7164,47 +7180,47 @@ msgctxt "Facebook video valid success message."
 msgid "Success! Save your event to add this video."
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Facebook_Provider.php:250
+#: src/Tribe/Virtual/Meetings/Facebook_Provider.php:251
 msgctxt "The name of the video source."
 msgid "Facebook Live"
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Facebook_Provider.php:308
+#: src/Tribe/Virtual/Meetings/Facebook_Provider.php:309
 msgctxt "The name of the autodetect source."
 msgid "Facebook Video"
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Facebook_Provider.php:469
+#: src/Tribe/Virtual/Meetings/Facebook_Provider.php:470
 msgctxt "The message to display if no local id is found when trying to authorize a facebook page."
 msgid "The local id for the Facebook is not set."
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Facebook_Provider.php:484
+#: src/Tribe/Virtual/Meetings/Facebook_Provider.php:485
 msgctxt "The message to display if no Facebook page wrap found."
 msgid "No Facebook Page data found."
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Facebook_Provider.php:499
+#: src/Tribe/Virtual/Meetings/Facebook_Provider.php:500
 msgctxt "The message to display if no connection is established to the Facebook sdk."
 msgid "The Facebook Page could not be connected to your site, please try again."
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Facebook_Provider.php:514
+#: src/Tribe/Virtual/Meetings/Facebook_Provider.php:515
 msgctxt "The message to display if a Facebook user could not obtain an extended access token."
 msgid "The attempt to get an extended Facebook user access token failed with error"
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Facebook_Provider.php:529
+#: src/Tribe/Virtual/Meetings/Facebook_Provider.php:530
 msgctxt "The message to display if a Facebook Page could not obtain an access token."
 msgid "Unable to capture the Facebook page’s access token. Please verify your Facebook app credentials. The attempt failed with error"
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Facebook_Provider.php:544
+#: src/Tribe/Virtual/Meetings/Facebook_Provider.php:545
 msgctxt "The message to display to confirm when deleting a Facebook Page."
 msgid "Are you sure you want to delete the Facebook Page? Deleting it will disconnect any upcoming virtual events using this Facebook Page."
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Facebook_Provider.php:559
+#: src/Tribe/Virtual/Meetings/Facebook_Provider.php:560
 msgctxt "The message to display to confirm clear Facebook Page's access token."
 msgid "Are you sure you want to clear the access token? Clearing it will disconnect any upcoming virtual events using this Facebook Page until you authorize the page again."
 msgstr ""
@@ -7224,20 +7240,20 @@ msgctxt "Google account loading error message."
 msgid "The Google Account to access to API could not be loaded."
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Google/Account_API.php:135
+#: src/Tribe/Virtual/Meetings/Google/Account_API.php:136
 msgctxt "The message shown to a user providing a wrong Google API OAuth authorization nonce."
 msgid "You are not authorized to do this."
 msgstr ""
 
 #. Translators: %1$s: the name of the account that has been refreshed from Google .
-#: src/Tribe/Virtual/Meetings/Google/Account_API.php:201
+#: src/Tribe/Virtual/Meetings/Google/Account_API.php:210
 #, php-format
 msgctxt "The refresh message for a Google account."
 msgid "Google connection refreshed for %1$s"
 msgstr ""
 
 #. Translators: %1$s: the name of the account that has been added from Google .
-#: src/Tribe/Virtual/Meetings/Google/Account_API.php:210
+#: src/Tribe/Virtual/Meetings/Google/Account_API.php:219
 #, php-format
 msgctxt "The Google account added message."
 msgid "Google Account added for %1$s"
@@ -7248,7 +7264,7 @@ msgctxt "The start of the message for smart url/autodetect when there is no Goog
 msgid "No Google account found."
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Google/Api.php:417
+#: src/Tribe/Virtual/Meetings/Google/Api.php:422
 msgctxt "The link in of the message for smart url/autodetect when no Google account is found."
 msgid "Please check your account connection."
 msgstr ""
@@ -7333,14 +7349,23 @@ msgctxt "Google Meet connected success message."
 msgid "Google Meet successfully connected!"
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Google_Provider.php:123
+#: src/Tribe/Virtual/Meetings/Google_Provider.php:124
 msgctxt "The name of the video source."
 msgid "Google Meet"
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Google_Provider.php:146
+#: src/Tribe/Virtual/Meetings/Google_Provider.php:147
 msgctxt "The name of the autodetect source."
 msgid "Google Meet"
+msgstr ""
+
+#: src/Tribe/Virtual/Meetings/Meetings_Settings_Provider.php:75
+#: src/Tribe/Virtual/Meetings/Meetings_Settings_Provider.php:110
+msgid "Meetings"
+msgstr ""
+
+#: src/Tribe/Virtual/Meetings/Meetings_Settings_Provider.php:113
+msgid "Connect your site to various meeting and video conferencing platforms to create and manage virtual events."
 msgstr ""
 
 #: src/Tribe/Virtual/Meetings/Microsoft/Abstract_Meetings.php:127
@@ -7369,45 +7394,45 @@ msgid "You are not authorized to do this."
 msgstr ""
 
 #. Translators: %1$s: the name of the account that has been added or refreshed from Microsoft .
-#: src/Tribe/Virtual/Meetings/Microsoft/Account_API.php:172
+#: src/Tribe/Virtual/Meetings/Microsoft/Account_API.php:179
 #, php-format
 msgctxt "The refresh message for a Microsoft account."
 msgid "Microsoft connection refreshed for %1$s"
 msgstr ""
 
 #. Translators: %1$s: the name of the account that has been added or refreshed from Microsoft .
-#: src/Tribe/Virtual/Meetings/Microsoft/Account_API.php:181
+#: src/Tribe/Virtual/Meetings/Microsoft/Account_API.php:188
 #, php-format
 msgctxt "The Microsoft account added message."
 msgid "Microsoft Account added for %1$s"
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Microsoft/Account_API.php:304
+#: src/Tribe/Virtual/Meetings/Microsoft/Account_API.php:311
 msgctxt "The name of the online meeting provider for Microsoft API."
 msgid "Teams"
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Microsoft/Account_API.php:307
+#: src/Tribe/Virtual/Meetings/Microsoft/Account_API.php:314
 msgctxt "Explains when the Skype for personal is active when creating a meeting link for the Microsoft API."
 msgid "Teams is active when you have it enabled in your work or school account. (it is not available in personal accounts)"
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Microsoft/Account_API.php:316
+#: src/Tribe/Virtual/Meetings/Microsoft/Account_API.php:323
 msgctxt "The name of the online meeting provider for Microsoft API."
 msgid "Skype (business)"
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Microsoft/Account_API.php:319
+#: src/Tribe/Virtual/Meetings/Microsoft/Account_API.php:326
 msgctxt "Explains when the Skype for personal is active when creating a meeting link for the Microsoft API."
 msgid "Skype for business use is active when you have it enabled in your work or school account. (it is not available in personal accounts)"
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Microsoft/Account_API.php:328
+#: src/Tribe/Virtual/Meetings/Microsoft/Account_API.php:335
 msgctxt "The name of the online meeting provider for Microsoft API."
 msgid "Skype (personal)"
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Microsoft/Account_API.php:331
+#: src/Tribe/Virtual/Meetings/Microsoft/Account_API.php:338
 msgctxt "Explains when the Skype for personal is active when creating a meeting link for the Microsoft API."
 msgid "Skype for personal use is active when you have a paid Office 365 subscription."
 msgstr ""
@@ -7417,7 +7442,7 @@ msgctxt "The start of the message for smart url/autodetect when there is no Micr
 msgid "No Microsoft account found."
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Microsoft/Api.php:331
+#: src/Tribe/Virtual/Meetings/Microsoft/Api.php:336
 msgctxt "The link in of the message for smart url/autodetect when no Microsoft account is found."
 msgid "Please check your account connection."
 msgstr ""
@@ -7492,12 +7517,12 @@ msgctxt "Microsoft Meet connected success message."
 msgid "Microsoft Meet successfully connected!"
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Microsoft_Provider.php:140
+#: src/Tribe/Virtual/Meetings/Microsoft_Provider.php:141
 msgctxt "The name of the video source."
 msgid "Microsoft (Teams and Skype)"
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Microsoft_Provider.php:163
+#: src/Tribe/Virtual/Meetings/Microsoft_Provider.php:164
 msgctxt "The name of the autodetect source."
 msgid "Microsoft (Teams and Skype)"
 msgstr ""
@@ -7533,14 +7558,14 @@ msgid "You are not authorized to do this."
 msgstr ""
 
 #. Translators: %1$s: the name of the account that has been added or refreshed from Webex .
-#: src/Tribe/Virtual/Meetings/Webex/Account_API.php:205
+#: src/Tribe/Virtual/Meetings/Webex/Account_API.php:212
 #, php-format
 msgctxt "The refresh message for a Webex account."
 msgid "Webex connection refreshed for %1$s"
 msgstr ""
 
 #. Translators: %1$s: the name of the account that has been added or refreshed from Webex .
-#: src/Tribe/Virtual/Meetings/Webex/Account_API.php:214
+#: src/Tribe/Virtual/Meetings/Webex/Account_API.php:221
 #, php-format
 msgctxt "The Webex account added message."
 msgid "Webex Account added for %1$s"
@@ -7551,7 +7576,7 @@ msgctxt "The start of the message for smart url/autodetect when there is no Webe
 msgid "No Webex account found. "
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Webex/Api.php:340
+#: src/Tribe/Virtual/Meetings/Webex/Api.php:345
 msgctxt "The link in of the message for smart url/autodetect when no Webex account is found."
 msgid "Please check your account connection."
 msgstr ""
@@ -7639,97 +7664,97 @@ msgctxt "Webex meeting/webinar connected success message."
 msgid "Webex meeting successfully connected!"
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Webex_Provider.php:316
+#: src/Tribe/Virtual/Meetings/Webex_Provider.php:317
 msgctxt "The name of the video source."
 msgid "Webex"
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Webex_Provider.php:339
+#: src/Tribe/Virtual/Meetings/Webex_Provider.php:340
 msgctxt "The name of the autodetect source."
 msgid "Webex"
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/YouTube/Settings.php:169
+#: src/Tribe/Virtual/Meetings/YouTube/Settings.php:172
 msgctxt "YouTube default setting"
 msgid "Autoplay Video"
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/YouTube/Settings.php:174
+#: src/Tribe/Virtual/Meetings/YouTube/Settings.php:177
 msgctxt "YouTube default setting tooltip"
 msgid "Autoplay is being deprecated by most browsers and is prevented in Chrome and Safari, it maybe removed in all the browsers soon."
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/YouTube/Settings.php:185
+#: src/Tribe/Virtual/Meetings/YouTube/Settings.php:188
 msgctxt "YouTube default setting"
 msgid "Include live chat"
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/YouTube/Settings.php:197
+#: src/Tribe/Virtual/Meetings/YouTube/Settings.php:200
 msgctxt "YouTube default setting"
 msgid "Mute Video"
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/YouTube/Settings.php:202
+#: src/Tribe/Virtual/Meetings/YouTube/Settings.php:205
 msgctxt "YouTube default setting tooltip"
 msgid "Best used with autoplay."
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/YouTube/Settings.php:213
+#: src/Tribe/Virtual/Meetings/YouTube/Settings.php:216
 msgctxt "YouTube default setting"
 msgid "Modest Branding"
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/YouTube/Settings.php:218
+#: src/Tribe/Virtual/Meetings/YouTube/Settings.php:221
 msgctxt "YouTube default setting tooltip"
 msgid "Hides the YouTube logo in the control bar."
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/YouTube/Settings.php:229
+#: src/Tribe/Virtual/Meetings/YouTube/Settings.php:232
 msgctxt "YouTube default setting"
 msgid "Restrict Related Videos"
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/YouTube/Settings.php:234
+#: src/Tribe/Virtual/Meetings/YouTube/Settings.php:237
 msgctxt "YouTube default setting tooltip"
 msgid "Restricts related videos to only come from your channel."
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/YouTube/Settings.php:245
+#: src/Tribe/Virtual/Meetings/YouTube/Settings.php:248
 msgctxt "YouTube default setting"
 msgid "Hide Controls"
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/YouTube/Settings.php:250
+#: src/Tribe/Virtual/Meetings/YouTube/Settings.php:253
 msgctxt "YouTube default setting tooltip"
 msgid "Hides the video control bar."
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/YouTube/Settings.php:305
+#: src/Tribe/Virtual/Meetings/YouTube/Settings.php:308
 msgctxt "Settings help text for finding a YouTube channel id."
 msgid "Click here to find channel ID"
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/YouTube/Settings.php:314
+#: src/Tribe/Virtual/Meetings/YouTube/Settings.php:317
 msgctxt "The field label for the default YouTube channel ID"
 msgid "Default YouTube Live Channel ID"
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/YouTube/Settings.php:315
+#: src/Tribe/Virtual/Meetings/YouTube/Settings.php:318
 msgctxt "The field placeholder for the default YouTube channel ID"
 msgid "Enter your YouTube Live ID"
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/YouTube/Settings.php:355
+#: src/Tribe/Virtual/Meetings/YouTube/Settings.php:358
 msgctxt "YouTube channel ID is missing on delete error message."
 msgid "The YouTube channel ID field is missing."
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/YouTube/Settings.php:364
+#: src/Tribe/Virtual/Meetings/YouTube/Settings.php:367
 msgctxt "The message after a YouTube channel ID has been deleted from the Website."
 msgid "The YouTube channel ID was successfully deleted."
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/YouTube/Settings.php:374
+#: src/Tribe/Virtual/Meetings/YouTube/Settings.php:377
 msgctxt "The message to display if a YouTube channel ID could not be deleted."
 msgid "The YouTube channel ID could not be deleted."
 msgstr ""
@@ -7744,12 +7769,12 @@ msgctxt "YouTube offline message"
 msgid "The Live Stream is Offline."
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/YouTube_Provider.php:150
+#: src/Tribe/Virtual/Meetings/YouTube_Provider.php:151
 msgctxt "The name of the video source."
 msgid "YouTube Live"
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/YouTube_Provider.php:292
+#: src/Tribe/Virtual/Meetings/YouTube_Provider.php:293
 msgctxt "The message to display to confirm a user would like to delete a YouTube channel ID."
 msgid "Are you sure you want to delete your default YouTube channel ID?"
 msgstr ""
@@ -7776,13 +7801,13 @@ msgctxt "The message shown to a user providing a wrong Zoom API OAuth authorizat
 msgid "You are not authorized to do this"
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Zoom/Account_API.php:311
+#: src/Tribe/Virtual/Meetings/Zoom/Account_API.php:318
 #, php-format
 msgctxt "The refresh message if the account exists."
 msgid "Zoom connection refreshed for %1$s"
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Zoom/Account_API.php:312
+#: src/Tribe/Virtual/Meetings/Zoom/Account_API.php:319
 #, php-format
 msgctxt "The refresh message if the account exists."
 msgid "Zoom Account added for %1$s"
@@ -7810,12 +7835,12 @@ msgstr ""
 
 #: src/Tribe/Virtual/Meetings/Zoom/Api.php:488
 msgctxt "The start of the message for smart url/autodetect when there is no Zoom account found."
-msgid "No Zoom account found. Please check"
+msgid "No connected Zoom account found. Your link will still work if it is valid, but to integrate with Zoom, check"
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Zoom/Api.php:494
+#: src/Tribe/Virtual/Meetings/Zoom/Api.php:499
 msgctxt "The link in of the message for smart url/autodetect when no Zoom account is found."
-msgid "check your account connection."
+msgid "your account connection."
 msgstr ""
 
 #: src/Tribe/Virtual/Meetings/Zoom/Classic_Editor.php:172
@@ -7903,7 +7928,8 @@ msgctxt "Zoom account loading error message."
 msgid "The Zoom Account could not be loaded to access the API. Please try refreshing the account in the Events API Settings."
 msgstr ""
 
-#: src/Tribe/Virtual/Meetings/Zoom/Migration_Notice.php:69
+#. translators: %1$s: The URL to the Zoom application credentials.
+#: src/Tribe/Virtual/Meetings/Zoom/Migration_Notice.php:71
 #, php-format
 msgctxt "The migration notice to authorize the new Zoom App."
 msgid "Thank you for updating to the latest version of Virtual Events. You will need to <a href=\"%1$s\">reconnect your Zoom account</a> for the plugin to work as intended."
@@ -8079,7 +8105,7 @@ msgid "In a location"
 msgstr ""
 
 #: src/views/v2/map.php:46
-#: src/views/v2/photo.php:49
+#: src/views/v2/photo.php:50
 #: src/views/v2/summary.php:48
 #: src/views/v2/week.php:54
 msgid "Loading..."
@@ -8120,7 +8146,7 @@ msgstr ""
 
 #: src/views/v2/map/event-cards/event-card/actions/directions-spacer.php:24
 #: src/views/v2/map/event-cards/event-card/actions/directions.php:30
-#: src/views/v2/venue/meta/details/address.php:43
+#: src/views/v2/venue/meta/details/address.php:45
 msgid "Get Directions"
 msgstr ""
 
@@ -8258,6 +8284,10 @@ msgstr ""
 msgid "Select date."
 msgstr ""
 
+#: src/views/v2/photo.php:67
+msgid "List of events in Photo View"
+msgstr ""
+
 #. translators: %s: Events (plural)
 #: src/views/v2/recurrence/hide-recurring.php:34
 #, php-format
@@ -8297,7 +8327,7 @@ msgctxt "\"onwards\" as in \"from TIME onwards\""
 msgid "%1$s onwards"
 msgstr ""
 
-#: src/views/v2/venue/meta/details/address.php:27
+#: src/views/v2/venue/meta/details/address.php:28
 #: src/views/v2/widgets/widget-featured-venue/venue/address.php:44
 msgid "Address"
 msgstr ""
@@ -8361,7 +8391,7 @@ msgstr[1] ""
 msgid "Toggle multiday %s"
 msgstr ""
 
-#: src/views/v2/week/grid-header.php:30
+#: src/views/v2/week/grid-header.php:31
 #, php-format
 msgid "Week of %s"
 msgstr ""

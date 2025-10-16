@@ -37,6 +37,6 @@ if ( empty( $url ) ) {
 	</span>
 	<a
 		href="<?php echo esc_url( $url ); ?>"
-		class="tribe-events-pro-organizer__meta-website-link tribe-common-anchor"
+		class="tribe-events-pro-organizer__meta-website-link tribe-common-anchor-alt"
 	><?php echo esc_html( $url ); ?></a>
 </div>

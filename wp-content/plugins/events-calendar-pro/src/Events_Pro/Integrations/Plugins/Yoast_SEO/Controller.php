@@ -2,7 +2,7 @@
 /**
  * Controller for Events Calendar Pro Yoast SEO integrations.
  *
- * @since   7.4.3
+ * @since 7.4.3
  *
  * @package TEC\Events_Pro\Integrations\Plugins\Yoast_SEO
  */
@@ -14,7 +14,7 @@ use TEC\Common\Contracts\Provider\Controller as Controller_Contract;
 /**
  * Class Controller
  *
- * @since   7.4.3
+ * @since 7.4.3
  *
  * @package TEC\Events_Pro\Integrations\Plugins\Yoast_SEO
  */
@@ -98,8 +98,8 @@ class Controller extends Controller_Contract {
 		$sitemap_date = $this->get_latest_modified_date();
 
 		$output  = "\t<sitemap>\n";
-		$output .= "\t\t<loc>" . htmlspecialchars( $sitemap_url ) . "</loc>\n";
-		$output .= "\t\t<lastmod>" . htmlspecialchars( $sitemap_date ) . "</lastmod>\n";
+		$output .= "\t\t<loc>" . htmlspecialchars( $sitemap_url, ENT_QUOTES, $this->output_charset ) . "</loc>\n";
+		$output .= "\t\t<lastmod>" . htmlspecialchars( $sitemap_date, ENT_QUOTES, $this->output_charset ) . "</lastmod>\n";
 		$output .= "\t</sitemap>\n";
 
 		return $sitemap_index . $output;
@@ -220,7 +220,7 @@ class Controller extends Controller_Contract {
 
 		$output  = "\t<url>\n";
 		$output .= "\t\t<loc>" . $this->encode_and_escape( $url['loc'] ) . "</loc>\n";
-		$output .= empty( $date ) ? '' : "\t\t<lastmod>" . htmlspecialchars( $date, ENT_COMPAT, $this->output_charset, false ) . "</lastmod>\n";
+		$output .= empty( $date ) ? '' : "\t\t<lastmod>" . htmlspecialchars( $date, ENT_QUOTES, $this->output_charset, false ) . "</lastmod>\n";
 
 		if ( empty( $url['images'] ) ) {
 			$url['images'] = [];

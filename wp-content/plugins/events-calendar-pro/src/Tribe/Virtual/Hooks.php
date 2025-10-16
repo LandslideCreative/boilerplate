@@ -28,6 +28,7 @@ use Tribe\Events\Virtual\Event_Status\Compatibility\Filter_Bar\Service_Provider 
 use Tribe\Events\Virtual\Event_Status\Status_Labels;
 use Tribe\Events\Virtual\Meetings\Facebook_Provider;
 use Tribe\Events\Virtual\Meetings\Google_Provider;
+use Tribe\Events\Virtual\Meetings\Meetings_Settings_Provider;
 use Tribe\Events\Virtual\Meetings\Microsoft_Provider;
 use Tribe\Events\Virtual\Meetings\Webex_Provider;
 use Tribe\Events\Virtual\Meetings\YouTube_Provider;
@@ -472,6 +473,9 @@ class Hooks extends Service_Provider {
 		if ( ! Plugin::meetings_enabled() ) {
 			return;
 		}
+
+		// Register the meetings settings provider to coordinate the settings tab structure.
+		$this->container->register( Meetings_Settings_Provider::class );
 
 		$this->container->register( Facebook_Provider::class );
 		$this->container->register( Google_Provider::class );

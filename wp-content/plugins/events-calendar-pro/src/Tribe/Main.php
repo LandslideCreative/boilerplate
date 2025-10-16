@@ -92,7 +92,7 @@ if ( ! class_exists( 'Tribe__Events__Pro__Main' ) ) {
 		/**
 		 * The Events Calendar Pro Version
 		 */
-		const VERSION = '7.7.2';
+		const VERSION = '7.7.8';
 
 		/**
 		 * The Events Calendar Required Version
@@ -104,6 +104,8 @@ if ( ! class_exists( 'Tribe__Events__Pro__Main' ) ) {
 
 		/**
 		 * Constructor.
+		 *
+		 * @since 7.7.3 Reorganized includes to correct issue with translations. [CE-329]
 		 */
 		private function __construct() {
 			$this->pluginDir  = trailingslashit( basename( EVENTS_CALENDAR_PRO_DIR ) );
@@ -111,10 +113,10 @@ if ( ! class_exists( 'Tribe__Events__Pro__Main' ) ) {
 			$this->pluginUrl  = plugins_url( $this->pluginDir, EVENTS_CALENDAR_PRO_DIR );
 			$this->pluginSlug = 'events-calendar-pro';
 
+			// Load template tags early (these don't use translations).
 			require_once $this->pluginPath . 'src/functions/template-tags/general.php';
 			require_once $this->pluginPath . 'src/functions/template-tags/organizer.php';
 			require_once $this->pluginPath . 'src/functions/template-tags/venue.php';
-			require_once $this->pluginPath . 'src/functions/template-tags/organizer.php';
 			require_once $this->pluginPath . 'src/functions/template-tags/widgets.php';
 			require_once $this->pluginPath . 'src/functions/template-tags/ical.php';
 			require_once $this->pluginPath . 'src/functions/template-tags/series.php';
@@ -124,10 +126,10 @@ if ( ! class_exists( 'Tribe__Events__Pro__Main' ) ) {
 				require_once $this->pluginPath . 'src/functions/template-tags/deprecated.php';
 			}
 
-			add_action( 'init', [ $this, 'run_updates' ], 10, 0 );
-
-			add_action( 'init', [ $this, 'init' ], 10 );
 			add_action( 'tribe_load_text_domains', [ $this, 'loadTextDomain' ] );
+
+			add_action( 'init', [ $this, 'init' ], 15 );
+			add_action( 'init', [ $this, 'run_updates' ], 15, 0 );
 
 			tribe_singleton( Base_Query_Filters::class, Base_Query_Filters::class );
 			tribe_singleton( Legacy_Query_Filters::class, Legacy_Query_Filters::class );
@@ -466,19 +468,25 @@ if ( ! class_exists( 'Tribe__Events__Pro__Main' ) ) {
 		 * @return void
 		 */
 		public function init() {
+			// Initialize components that need translations.
 			Tribe__Events__Pro__Custom_Meta::init();
 			Tribe__Events__Pro__Geo_Loc::instance();
 			Tribe__Events__Pro__Community_Modifications::init();
-			$this->custom_meta_tools              = new Tribe__Events__Pro__Admin__Custom_Meta_Tools();
-			$this->single_event_meta              = new Tribe__Events__Pro__Single_Event_Meta();
-			$this->single_event_overrides         = new Tribe__Events__Pro__Recurrence__Single_Event_Overrides();
-			$this->embedded_maps                  = new Tribe__Events__Pro__Embedded_Maps();
-			$this->shortcodes                     = new Tribe__Events__Pro__Shortcodes__Register();
+
+			// Initialize other components.
+			$this->custom_meta_tools      = new Tribe__Events__Pro__Admin__Custom_Meta_Tools();
+			$this->single_event_meta      = new Tribe__Events__Pro__Single_Event_Meta();
+			$this->single_event_overrides = new Tribe__Events__Pro__Recurrence__Single_Event_Overrides();
+			$this->embedded_maps          = new Tribe__Events__Pro__Embedded_Maps();
+			$this->shortcodes             = new Tribe__Events__Pro__Shortcodes__Register();
+
+			// Set labels.
 			$this->singular_event_label           = tribe_get_event_label_singular();
 			$this->plural_event_label             = tribe_get_event_label_plural();
 			$this->singular_event_label_lowercase = tribe_get_event_label_singular_lowercase();
 			$this->plural_event_label_lowercase   = tribe_get_event_label_plural_lowercase();
 
+			// Set slugs.
 			$this->all_slug  = sanitize_title( __( 'all', 'tribe-events-calendar-pro' ) );
 			$this->weekSlug  = sanitize_title( __( 'week', 'tribe-events-calendar-pro' ) );
 			$this->photoSlug = sanitize_title( __( 'photo', 'tribe-events-calendar-pro' ) );
