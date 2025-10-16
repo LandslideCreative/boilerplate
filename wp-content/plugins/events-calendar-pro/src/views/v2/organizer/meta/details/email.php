@@ -42,7 +42,7 @@ if ( empty( $icon_description ) ) {
 	</span>
 	<a
 		href="mailto:<?php echo esc_attr( $email ); ?>"
-		class="tribe-events-pro-organizer__meta-email-link tribe-common-anchor"
+		class="tribe-events-pro-organizer__meta-email-link tribe-common-anchor-alt"
 	><?php echo esc_html( $email ); ?></a>
 
 </div>
