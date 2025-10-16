@@ -34,10 +34,11 @@ class Gettext {
 	 * Note: the hooking is done here and not in the Provider to avoid infinite loops.
 	 *
 	 * @since 6.0.0
+	 * @since 7.7.3 Updated init action to priority 20. [CE-329]
 	 */
 	public function hook() {
 		add_filter( 'gettext_tribe-events-calendar-pro', [ $this, 'filter_gettext' ], 10, 2 );
-		add_action( 'init', [ $this, 'prime_translations' ] );
+		add_action( 'init', [ $this, 'prime_translations' ], 20 );
 	}
 
 	/**

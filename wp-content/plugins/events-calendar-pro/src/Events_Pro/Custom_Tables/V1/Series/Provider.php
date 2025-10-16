@@ -35,7 +35,7 @@ class Provider extends Service_Provider {
 	 * required for the Series to work correctly.
 	 *
 	 * @since 6.0.0
-	 *
+	 * @since 7.7.3 Updated `register_post_type_or_fail` action to priority 20. [CE-329]
 	 */
 	public function register() {
 		$series_post_type_name = Series::POSTTYPE;
@@ -98,9 +98,8 @@ class Provider extends Service_Provider {
 		if ( did_action( 'init' ) || doing_action( 'init' ) ) {
 			$this->container->get( Series::class )->register_post_type_or_fail();
 		} else {
-			add_action( 'init', $this->container->callback( Series::class, 'register_post_type_or_fail' ) );
+			add_action( 'init', $this->container->callback( Series::class, 'register_post_type_or_fail' ), 20 );
 		}
-
 		add_filter( 'tec_events_qr_valid_screens', [ $this, 'add_series_screens' ] );
 		add_filter( 'tec_events_qr_code_supported_post_types', [ $this, 'add_series_to_qr_types' ] );
 		add_filter( 'tec_events_qr_code_redirection_type', [ $this, 'add_series_to_qr_redirection' ], 10, 2 );

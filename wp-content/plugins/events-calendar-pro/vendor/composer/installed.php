@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'the-events-calendar/events-pro',
-        'pretty_version' => 'dev-release/T25.huntress',
-        'version' => 'dev-release/T25.huntress',
-        'reference' => 'c7923c2d71bea6f18b09c52e9e5872ff7c4e2e17',
+        'pretty_version' => 'dev-release/T25.krypto',
+        'version' => 'dev-release/T25.krypto',
+        'reference' => 'e1237d268f298ca1e48f5bf88ad79abb4ceae225',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -29,9 +29,9 @@
             'dev_requirement' => false,
         ),
         'the-events-calendar/events-pro' => array(
-            'pretty_version' => 'dev-release/T25.huntress',
-            'version' => 'dev-release/T25.huntress',
-            'reference' => 'c7923c2d71bea6f18b09c52e9e5872ff7c4e2e17',
+            'pretty_version' => 'dev-release/T25.krypto',
+            'version' => 'dev-release/T25.krypto',
+            'reference' => 'e1237d268f298ca1e48f5bf88ad79abb4ceae225',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

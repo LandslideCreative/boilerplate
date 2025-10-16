@@ -3,7 +3,7 @@
 Contributors: theeventscalendar, borkweb, bordoni, brianjessee, aguseo, camwynsp, GeoffBel, jentheo, leahkoerper, lucatume, neillmcshea, vicskf, zbtirrell, juanfra
 Tags: events, calendar, event, venue, organizer, dates, date, google maps, conference, workshop, concert, meeting, seminar, summit, class, the events calendar, widget, pro
 Donate link: https://evnt.is/29
-Stable tag: 7.7.2
+Stable tag: 7.7.8
 Requires at least: 6.6
 Tested up to: 6.8.2
 Requires PHP: 7.4
@@ -64,7 +64,7 @@ If this is your first time using The Events Calendar and Events Calendar Pro, yo
 * Our <a href="https://evnt.is/3t">New User Primer</a> was designed for folks in your exact position. Featuring both step-by-step videos and written walkthroughs that feature accompanying screenshots, the primer aims to take you from zero to hero in no time.
 * <a href="https://evnt.is/3v">Installation/Setup FAQs</a> from our Support page can help give an overview of what the plugin can and cannot do. This section of the FAQs may be helpful as it aims to address any basic install questions not addressed by the new user primer.
 * <a href="https://evnt.is/9u">Tutorials</a>, based on commonly-requested hacks and tweaks, which will provide you guidance towards accomplishing some highly sought-after tweaks.
-* Are you a developer looking to build a custom frontend view? We created an example plugin that demonstrates how to register a new view. You can download the plugin at GitHub here: https://github.com/moderntribe/tribe-events-agenda-view
+* Are you a developer looking to build a custom frontend view? We created an example plugin that demonstrates how to register a new view. You can download the plugin at GitHub here: https://github.com/the-events-calendar/tribe-events-agenda-view
 * Take care of your license key. Though not required to create your first event, you'll want to get it in place as soon as possible to guarantee your access to support and upgrades. Need help finding your license key? Check out https://evnt.is/3w
 
 Otherwise, if you're feeling adventurous, you can get started by heading to the Events menu and adding your first event.
@@ -213,6 +213,60 @@ Previous versions of Events Calendar Pro are not cross-compatible with 6.X add-o
 Remember to always make a backup of your database and files before updating!
 
 == Changelog ==
+
+= [7.7.8] 2025-10-14 =
+
+* Tweak - Week view updated to improve accesibility for individual event cards. [TEC-5219]
+* Accessibility - Use semantic list structure and hidden heading in Photo View. [TEC-5218]
+* Language - 1 new strings added, 2 updated, 0 fuzzied, and 0 obsoleted.
+
+= [7.7.7] 2025-10-07 =
+
+* Tweak - Week view headers structure updated for improved accessibility. [TEC-5238]
+* Tweak - Add ARIA landmark roles and aria-current attributes to breadcrumbs to improve screen reader support. [TEC-5205]
+* Tweak - Added underline to the email and website fields on the Organizer Single template. [TEC-5206]
+* Tweak - Changed views: `v2/organizer/meta/details/email`, `v2/organizer/meta/details/website`, `v2/week/grid-header/header-column`
+* Language - 0 new strings added, 4 updated, 0 fuzzied, and 0 obsoleted.
+
+= [7.7.6] 2025-09-30 =
+
+* Version - Events Pro 7.7.6 is only compatible with The Events Calendar 6.15.6 and higher.
+* Fix - Declare support for WooCommerce HPOS to avoid showing an incompatible notice. [ECP-1988]
+* Tweak - Added filters: `tec_events_pro_meetings_tab_fields`, `tec_events_pro_virtual_meetings_tab_fields`
+* Tweak - Changed views: `v2/venue/meta/categories`, `v2/venue/meta/details/address`, `v2/venue/meta/details/website`, `v2/week/grid-header/header-column`
+* Tweak - Move Power Automate, Zapier, and Meeting settings to their own subtab under Integrations. [ECP-1956]
+* Accessibility - Add an underline to the mini calendar widget 'View Calendar' link for improved accessibility. [ECP-1955]
+* Accessibility - Add aria-label to week view day links. [ECP-1954]
+* Accessibility - Use alternative styling for links on the venue page. [TEC-5204]
+* Language - 6 new strings added, 77 updated, 0 fuzzied, and 0 obsoleted.
+
+= [7.7.5] 2025-09-23 =
+
+* Tweak - Adds aria-hidden attribute to ECP virtual lock icon. [ECP-1834]
+* Tweak - Changes views: `components/hybrid-event`, `components/icons/lock`, `components/virtual-event`, `single/hybrid-marker-mobile`, `single/hybrid-marker`, `single/virtual-marker-mobile`, `single/virtual-marker`
+* Tweak - Ensures icon has aria-hidden and no alt text. [TEC-5235]
+* Tweak - Improves messages for failed Zoom account detection, adding clarity for users. [ECP-1892]
+* Language - 2 new strings added, 0 updated, 1 fuzzied, and 2 obsoleted.
+
+= [7.7.4] 2025-09-16 =
+
+* Fix - Add "WC tested up to" and "WC requires at least" headers to events-calendar-pro.php [ECP-1925]
+* Fix - Add plugin requires header to events-calendar-pro.php [ECP-1928]
+* Fix - Correct "Closures / anonymous functions declared as static do not have access to $this" [ECP-1927]
+* Fix - Corrected an issue with JIT translatations. [CE-329]
+* Fix - Remove deprecated FILTER_SANITIZE_MAGIC_QUOTES [ECP-1927]
+* Fix - Update htmlspecialchars() and html_entity_decode() usage to make them PHP 8.1 compatible. [ECP-1927]
+* Tweak - Changed views: `v2/organizer/meta`, `v2/venue/meta`, `v2/widgets/widget-countdown/complete`
+* Tweak - Ensure that the correct header is shows for the Date & Time settings. [ECP-1951]
+* Tweak - Leverage WP's new "requires plugin" header to prevent activating ECP if TEC is not active. [ECP-1928]
+* Compatibility - Update single-venue template handling to avoid warnings in PHP 8.3 [ECP-1918]
+* Language - 0 new strings added, 145 updated, 0 fuzzied, and 1 obsoleted.
+
+= [7.7.3] 2025-09-10 =
+
+* Tweak - Changed views: `pro/single-organizer`, `v2/organizer/meta`, `v2/venue/meta`
+* Security - Ensures password protected Venues and Organizers have their data protected. [SVUL-19]
+* Language - 0 new strings added, 0 updated, 0 fuzzied, and 0 obsoleted.
 
 = [7.7.2] 2025-09-02 =
 
@@ -2414,7 +2468,7 @@ Some things to consider before posting on the forum:
 * Your issue will be solved more quickly if you run a few checks before making a support request. Deactivate your plugins one by one - if the issue is fixed by deactivating a plugin you know you've got a plugin conflict. To test your Theme, revert to the default Twenty Twelve Theme to see if you are still experiencing the problem. If not, your Theme is the issue. Please provide this information when making your supper request.
 * Sometimes, just resetting your permalinks can fix the issue. Visit Events -> Settings -> Permalinks, save your permalinks with a different option and then save with your preferred choice again. This can solve events-related problems and can is worth a shot before creating a new thread.
 
-Still not happy? Shoot us an email to pro@tri.be or tweet to @moderntribeinc and tell us why. We'll do what we can to make it right.
+Still not happy? Shoot us an email to pro@tri.be or tweet to @TheEventsCal and tell us why. We'll do what we can to make it right.
 
 == Upgrade Notice ==
 

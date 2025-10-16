@@ -118,6 +118,9 @@ class Tribe__Events__Pro__Geo_Loc { // phpcs:ignore -- legacy class name
 
 	/**
 	 * Class constructor.
+	 *
+	 * @since 4.4.0
+	 * @since 7.7.3 Updated `init` to priority 20. [CE-329]
 	 */
 	public function __construct() {
 		$this->rewrite_slug = 'map'; // Converted to translated string on init, below.
@@ -145,7 +148,7 @@ class Tribe__Events__Pro__Geo_Loc { // phpcs:ignore -- legacy class name
 
 		add_action( 'admin_notices', [ $this, 'maybe_notify_about_google_over_limit' ] );
 		add_filter( 'tribe_events_google_map_link', [ $this, 'google_map_link' ], 10, 2 );
-		add_action( 'init', [ $this, 'init' ] );
+		add_action( 'init', [ $this, 'init' ], 20 );
 	}
 
 	/**

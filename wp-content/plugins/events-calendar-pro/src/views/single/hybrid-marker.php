@@ -35,10 +35,12 @@ $hybrid_label = tribe_get_hybrid_event_label_singular();
 ?>
 <div class="tribe-events-hybrid-single-marker">
 	<em class="tribe-events-hybrid-single-marker__icon" >
-		<?php $this->template(
+		<?php
+		$this->template(
 			'v2/components/icons/hybrid',
 			[ 'classes' => [ 'tribe-events-hybrid-single-marker__icon-svg' ] ]
-		); ?>
+		);
+		?>
 	</em>
 	<?php echo esc_html( $hybrid_label ); ?>
 </div>

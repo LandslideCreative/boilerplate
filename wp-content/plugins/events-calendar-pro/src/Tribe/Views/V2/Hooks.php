@@ -86,8 +86,8 @@ class Hooks extends Service_Provider {
 		add_action( 'init', [ $this, 'init' ] );
 		add_action( 'tribe_events_pre_rewrite', [ $this, 'on_pre_rewrite' ], 6 );
 		add_action( 'template_redirect', [ $this, 'on_template_redirect' ], 50 );
-		add_action( 'tribe_template_after_include:events/v2/components/breadcrumbs', [ $this, 'action_include_organizer_meta' ], 10, 3 );
-		add_action( 'tribe_template_after_include:events/v2/components/breadcrumbs', [ $this, 'action_include_venue_meta' ], 10, 3 );
+		add_action( 'tribe_template_before_include:events/v2/components/content-title', [ $this, 'action_include_organizer_meta' ], 10, 3 );
+		add_action( 'tribe_template_before_include:events/v2/components/content-title', [ $this, 'action_include_venue_meta' ], 10, 3 );
 		add_action( 'tec_events_calendar_embeds_enqueue_scripts', [ $this, 'include_assets' ] );
 	}
 
@@ -113,8 +113,8 @@ class Hooks extends Service_Provider {
 
 		add_filter( 'tribe_events_views_v2_view_all_breadcrumbs', [ $this, 'filter_view_all_breadcrumbs' ], 10, 2 );
 		add_filter( 'tribe_events_views_v2_view_page_reset_ignored_params', [ $this, 'filter_page_reset_ignored_params' ], 10, 2 );
-		add_filter( 'tribe_events_views_v2_view_venue_breadcrumbs', [ $this, 'filter_view_venue_breadcrumbs' ], 10, 2 );
-		add_filter( 'tribe_events_views_v2_view_organizer_breadcrumbs', [ $this, 'filter_view_organizer_breadcrumbs' ], 10, 2 );
+		add_filter( 'tec_events_views_v2_view_venue_back_link', [ $this, 'filter_view_venue_back_link' ], 10, 2 );
+		add_filter( 'tec_events_views_v2_view_organizer_back_link', [ $this, 'filter_view_organizer_back_link' ], 10, 2 );
 		add_filter( 'tec_events_views_v2_view_venue_header_title', [ $this, 'filter_view_venue_header_title' ], 10, 2 );
 		add_filter( 'tec_events_views_v2_view_organizer_header_title', [ $this, 'filter_view_organizer_header_title' ], 10, 2 );
 		add_filter( 'tec_events_views_v2_view_venue_content_title', [ $this, 'filter_view_venue_content_title' ], 10, 2 );
@@ -652,7 +652,8 @@ class Hooks extends Service_Provider {
 	/**
 	 * Filters Organizer view breadcrumbs
 	 *
-	 * @see   \Tribe\Events\Views\V2\View::get_breadcrumbs() for where this code is applying.
+	 * @deprecated 7.7.7 Use `filter_view_organizer_back_link` instead.
+	 * @see \Tribe\Events\Views\V2\View::get_breadcrumbs() for where this code is applying.
 	 * @since 4.7.9
 	 *
 	 * @param View  $view        The instance of the view being rendered.
@@ -663,13 +664,15 @@ class Hooks extends Service_Provider {
 	 *
 	 */
 	public function filter_view_organizer_breadcrumbs( $breadcrumbs, $view ) {
+		_deprecated_function( __METHOD__, '7.7.7', 'filter_view_organizer_back_link' );
 		return $this->container->make( Organizer_View::class )->setup_breadcrumbs( $breadcrumbs, $view );
 	}
 
 	/**
 	 * Filters Venue view breadcrumbs
 	 *
-	 * @see   \Tribe\Events\Views\V2\View::get_breadcrumbs() for where this code is applying.
+	 * @deprecated 7.7.7 Use `filter_view_venue_back_link` instead.
+	 * @see View::get_breadcrumbs() for where this code is applying.
 	 * @since 4.7.9
 	 *
 	 * @param array $view        The instance of the view being rendered.
@@ -680,8 +683,58 @@ class Hooks extends Service_Provider {
 	 *
 	 */
 	public function filter_view_venue_breadcrumbs( $breadcrumbs, $view ) {
+		_deprecated_function( __METHOD__, '7.7.7', 'filter_view_venue_back_link' );
 		return $this->container->make( Venue_View::class )->setup_breadcrumbs( $breadcrumbs, $view );
 	}
+
+	/**
+	 * Filters the Venue View back link data.
+	 *
+	 * Hooked into `tribe_events_views_v2_view_venue_back_link` to provide
+	 * the back link shown in place of breadcrumbs on single Venue views.
+	 *
+	 * @since 7.7.7
+	 *
+	 * @see View::get_back_link() For where this filter is applied.
+	 *
+	 * @param array|false $back_link   Back link data, or false to fall back to breadcrumbs.
+	 *                                 Expected array shape:
+	 *                                 [
+	 *                                     'url'   => (string) The URL for the back link.
+	 *                                     'label' => (string) The label for the back link.
+	 *                                 ].
+	 * @param array       $breadcrumbs The breadcrumbs array (may be empty).
+	 *
+	 * @return array|false Filtered back link data, or false to display breadcrumbs.
+	 */
+	public function filter_view_venue_back_link( $back_link, $breadcrumbs ) {
+		return $this->container->make( Venue_View::class )->setup_back_link( $back_link, $breadcrumbs );
+	}
+
+	/**
+	 * Filters the Organizer View back link data.
+	 *
+	 * Hooked into `tribe_events_views_v2_view_organizer_back_link` to provide
+	 * the back link shown in place of breadcrumbs on single Organizer views.
+	 *
+	 * @since 7.7.7
+	 *
+	 * @see View::get_back_link() For where this filter is applied.
+	 *
+	 * @param array|false $back_link   Back link data, or false to fall back to breadcrumbs.
+	 *                                 Expected array shape:
+	 *                                 [
+	 *                                     'url'   => (string) The URL for the back link.
+	 *                                     'label' => (string) The label for the back link.
+	 *                                 ].
+	 * @param array       $breadcrumbs The breadcrumbs array (may be empty).
+	 *
+	 * @return array|false Filtered back link data, or false to display breadcrumbs.
+	 */
+	public function filter_view_organizer_back_link( $back_link, $breadcrumbs ) {
+		return $this->container->make( Organizer_View::class )->setup_back_link( $back_link, $breadcrumbs );
+	}
+
 
 	/**
 	 * Filters Organizer view header title.

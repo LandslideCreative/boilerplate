@@ -11,12 +11,14 @@
     ),
     'versions' => array(
         'berlindb/core' => array(
-            'pretty_version' => '2.0.1',
-            'version' => '2.0.1.0',
-            'reference' => '7dcddaddcffb69c58800d2fb3f6f169791cab1f7',
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => '4d5f7386f99464cf89d121878a7a25b014eddefe',
             'type' => 'library',
             'install_path' => __DIR__ . '/../berlindb/core',
-            'aliases' => array(),
+            'aliases' => array(
+                0 => '9999999-dev',
+            ),
             'dev_requirement' => false,
         ),
         'cloudflare/cf-ip-rewrite' => array(
@@ -74,9 +76,9 @@
             'dev_requirement' => false,
         ),
         'wp-media/wp-mixpanel' => array(
-            'pretty_version' => 'v1.1.2',
-            'version' => '1.1.2.0',
-            'reference' => '1eddae0d32f802ac14003c80c7ff096adf8e232f',
+            'pretty_version' => 'v1.3.0',
+            'version' => '1.3.0.0',
+            'reference' => '402d47230c2118c0cd40e64b0aa8d936b30d4e4f',
             'type' => 'library',
             'install_path' => __DIR__ . '/../wp-media/wp-mixpanel',
             'aliases' => array(),

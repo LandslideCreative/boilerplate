@@ -95,13 +95,13 @@ class Zoom_Provider extends Meeting_Provider {
 	}
 
 	/**
-	 * Filters the fields in the Events > Settings > APIs tab to add the ones provided by the extension.
+	 * Adds Zoom settings fields to the Meetings settings tab.
 	 *
 	 * @since 7.0.0 Migrated to Events Pro from Events Virtual.
 	 *
 	 * @param array<string,array> $fields The current fields.
 	 *
-	 * @return array<string,array> The fields, as updated by the settings.
+	 * @return array<string,array> The fields, as updated by the Zoom settings.
 	 */
 	public function filter_addons_tab_fields( $fields ) {
 		if ( ! is_array( $fields ) ) {
@@ -607,9 +607,10 @@ class Zoom_Provider extends Meeting_Provider {
 	 * Hooks the filters required for the Zoom API integration to work correctly.
 	 *
 	 * @since 7.0.0 Migrated to Events Pro from Events Virtual.
+	 * @since 7.7.6 Change the hook used to add the settings fields.
 	 */
 	protected function add_filters() {
-		add_filter( 'tec_settings_gmaps_js_api_start', [ $this, 'filter_addons_tab_fields' ] );
+		add_filter( 'tec_events_pro_meetings_tab_fields', [ $this, 'filter_addons_tab_fields' ] );
 
 		foreach ( [ Meetings::$meeting_type, Webinars::$meeting_type ] as $meeting_type ) {
 			add_filter(
