@@ -28,9 +28,9 @@ if ( empty( $icon_description ) ) {
 	$icon_description = __( 'Featured', 'tribe-events-calendar-pro' );
 }
 ?>
-<em class="tribe-events-widget-featured-venue__event-datetime-featured-icon">
+<span class="tribe-events-widget-featured-venue__event-datetime-featured-icon">
 	<?php $this->template( 'components/icons/featured', [ 'classes' => [ 'tribe-events-widget-featured-venue__event-datetime-featured-icon-svg' ] ] ); ?>
-</em>
+</span>
 <span class="tribe-events-widget-featured-venue__event-datetime-featured-text tribe-common-a11y-visual-hide">
 	<?php echo esc_html( $icon_description ); ?>
 </span>

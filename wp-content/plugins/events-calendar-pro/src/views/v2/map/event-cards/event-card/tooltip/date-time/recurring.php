@@ -28,9 +28,9 @@ if ( empty( $icon_description ) ) {
 	$icon_description = __( 'Recurring', 'tribe-events-calendar-pro' );
 }
 ?>
-<em class="tribe-events-pro-map__event-tooltip-datetime-recurring-icon">
+<span class="tribe-events-pro-map__event-tooltip-datetime-recurring-icon">
 	<?php $this->template( 'components/icons/recurring', [ 'classes' => [ 'tribe-events-pro-map__event-tooltip-datetime-recurring-icon-svg' ] ] ); ?>
-</em>
+</span>
 <span class="tribe-events-pro-map__event-tooltip-datetime-recurring-text tribe-common-a11y-visual-hide">
 	<?php echo esc_html( $icon_description ); ?>
 </span>

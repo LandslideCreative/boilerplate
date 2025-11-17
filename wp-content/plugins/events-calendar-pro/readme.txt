@@ -3,7 +3,7 @@
 Contributors: theeventscalendar, borkweb, bordoni, brianjessee, aguseo, camwynsp, GeoffBel, jentheo, leahkoerper, lucatume, neillmcshea, vicskf, zbtirrell, juanfra
 Tags: events, calendar, event, venue, organizer, dates, date, google maps, conference, workshop, concert, meeting, seminar, summit, class, the events calendar, widget, pro
 Donate link: https://evnt.is/29
-Stable tag: 7.7.8
+Stable tag: 7.7.10
 Requires at least: 6.6
 Tested up to: 6.8.2
 Requires PHP: 7.4
@@ -213,6 +213,23 @@ Previous versions of Events Calendar Pro are not cross-compatible with 6.X add-o
 Remember to always make a backup of your database and files before updating!
 
 == Changelog ==
+
+= [7.7.10] 2025-11-04 =
+
+* Fix - Convert em tags to span tags in icons to prevent announcement of "Empty emphasis". [TEC-5718]
+* Fix - Correct aria attribute use in featured event icons. [TEC-5718]
+* Tweak - Changed views: `components/hybrid-event`, `components/virtual-event`, `custom-tables-v1/single/series-relationship-marker`, `single/hybrid-marker-mobile`, `single/hybrid-marker`, `single/virtual-marker-mobile`, `single/virtual-marker`, `v2/day/event/recurring`, `v2/list/event/recurring`, `v2/map/event-cards/event-card/event/date-time/featured`, `v2/map/event-cards/event-card/event/date-time/recurring`, `v2/map/event-cards/event-card/tooltip/date-time/featured`, `v2/map/event-cards/event-card/tooltip/date-time/recurring`, `v2/month/calendar-event/multiday/recurring`, `v2/month/calendar-event/recurring`, `v2/month/calendar-event/tooltip/recurring`, `v2/month/mobile-event/recurring`, `v2/photo/event/date-time/featured`, `v2/photo/event/date-time/recurring`, `v2/summary`, `v2/summary/date-group`, `v2/summary/date-group/event`, `v2/summary/date-group/event/date/recurring`, `v2/summary/date-group/event/title/featured`, `v2/summary/date-separator`, `v2/summary/month-separator`, `v2/week/day-selector/days`, `v2/week/day-selector/days/day`, `v2/week/grid-body/events-day/event/date/featured`, `v2/week/grid-body/events-day/event/date/recurring`, `v2/week/grid-body/events-day/event/title/featured`, `v2/week/grid-body/events-day/event/tooltip/date/featured`, `v2/week/grid-body/events-day/event/tooltip/date/recurring`, `v2/week/grid-body/multiday-events-day/multiday-event/bar/featured`, `v2/week/grid-body/multiday-events-day/multiday-event/bar/recurring`, `v2/week/grid-body/multiday-events-day/multiday-event/hidden/link/featured`, `v2/week/grid-body/multiday-events-day/multiday-event/hidden/link/recurring`, `v2/week/mobile-events/day`, `v2/week/mobile-events/day/event/date/featured`, `v2/week/mobile-events/day/event/date/recurring`, `v2/widgets/widget-events-list/event/date/recurring`, `v2/widgets/widget-featured-venue/events-list/event/date/featured`, `v2/widgets/widget-featured-venue/events-list/event/date/recurring`, `v2/widgets/widget-featured-venue/venue/address`, `v2/widgets/widget-featured-venue/venue/phone`, `v2/widgets/widget-featured-venue/venue/website`
+* Accessibility - Add visible underlines to venue and organizer links on Events List Widget. [TEC-5225]
+* Accessibility - Adjust summary view markup to make use of unordered lists for better accessibility. [TEC-5223]
+* Accessibility - Change Week View Widget day selector to use proper tab pattern instead of accordion pattern for improved screen reader accessibility. [TEC-5234]
+* Language - 0 new strings added, 5 updated, 0 fuzzied, and 0 obsoleted.
+
+= [7.7.9] 2025-10-21 =
+
+* Tweak - Add event titles to map view action links for improved screen reader context. [TEC-5220]
+* Tweak - Changed views: `v2/map/event-cards`, `v2/map/event-cards/event-card`, `v2/map/event-cards/event-card/actions/details`, `v2/map/event-cards/event-card/actions/directions`
+* Tweak - Mark event cards as list items in Map View for improved screen reader accessibility. [TEC-5221]
+* Language - 3 new strings added, 3 updated, 0 fuzzied, and 0 obsoleted.
 
 = [7.7.8] 2025-10-14 =
 

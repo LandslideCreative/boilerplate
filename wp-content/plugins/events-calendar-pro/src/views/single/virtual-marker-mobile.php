@@ -35,13 +35,13 @@ $virtual_event_label = tribe_get_virtual_event_label_singular();
 
 ?>
 <div class="tribe-events-virtual-single-marker tribe-events-virtual-single-marker--mobile">
-	<em class="tribe-events-virtual-single-marker__icon" >
+	<span class="tribe-events-virtual-single-marker__icon" >
 		<?php
 		$this->template(
 			'v2/components/icons/virtual',
 			[ 'classes' => [ 'tribe-events-virtual-single-marker__icon-svg' ] ]
 		);
 		?>
-	</em>
+	</span>
 	<?php echo esc_html( $virtual_event_label ); ?>
 </div>

@@ -38,14 +38,14 @@ $virtual_event_label = tribe_get_virtual_event_label_singular();
 
 ?>
 <div class="tribe-common-b2 tribe-common-b2--bold tribe-events-virtual-virtual-event">
-	<em class="tribe-events-virtual-virtual-event__icon" aria-hidden="true">
+	<span class="tribe-events-virtual-virtual-event__icon" aria-hidden="true">
 		<?php
 		$this->template(
 			'components/icons/virtual',
 			[ 'classes' => [ 'tribe-events-virtual-virtual-event__icon-svg' ] ]
 		);
 		?>
-	</em>
+	</span>
 	<span class="tribe-events-virtual-virtual-event__text">
 		<?php echo esc_html( $virtual_event_label ); ?>
 	</span>
