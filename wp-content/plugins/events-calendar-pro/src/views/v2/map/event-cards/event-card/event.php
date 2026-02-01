@@ -30,8 +30,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		<div class="tribe-events-pro-map__event-details tribe-common-g-col">
 
-			<?php $this->template( 'map/event-cards/event-card/event/date-time', [ 'event' => $event ] ); ?>
 			<?php $this->template( 'map/event-cards/event-card/event/title', [ 'event' => $event ] ); ?>
+			<?php $this->template( 'map/event-cards/event-card/event/date-time', [ 'event' => $event ] ); ?>
 			<?php $this->template( 'map/event-cards/event-card/event/category', [ 'event' => $event ] ); ?>
 			<?php $this->template( 'map/event-cards/event-card/event/venue', [ 'event' => $event ] ); ?>
 			<?php $this->template( 'map/event-cards/event-card/event/distance', [ 'event' => $event ] ); ?>

@@ -9,11 +9,12 @@
  *
  * @link https://evnt.is/1aiy
  *
+ * @version 7.7.12
+ *
  * @since 5.0.0
  * @since 5.9.2 Remove incorrect aria-selected attribute.
  * @since 7.7.8 Remove invalid role attributes.
- *
- * @version 7.7.8
+ * @since 7.7.12 Add aria-colindex to header columns for accessibility.
  *
  * @var bool  $has_multiday_events Boolean whether the week has multiday events or not.
  * @var array $days_of_week        An array of data of each day of the week, with '<Y-m-d>' as the key.
@@ -35,14 +36,22 @@ $empty_header_column_classes = [
 
 		<div
 			<?php tec_classes( $empty_header_column_classes ); ?>
-			role="gridcell"
+			role="presentation"
 		>
 		</div>
 
-		<?php foreach ( $days_of_week as $day ) : ?>
-
-			<?php $this->template( 'week/grid-header/header-column', [ 'day' => $day ] ); ?>
-
-		<?php endforeach; ?>
+		<?php
+		$day_index = 1;
+		foreach ( $days_of_week as $day ) :
+			$this->template(
+				'week/grid-header/header-column',
+				[
+					'day'       => $day,
+					'day_index' => $day_index,
+				]
+			);
+			++$day_index;
+		endforeach;
+		?>
 	</div>
 </div>

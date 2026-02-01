@@ -21,7 +21,7 @@
 
 $nav_aria_label = sprintf(
 	// Translators: %s: Events (plural).
-	__( '%s Pagination', 'events-pro' ),
+	__( '%s Pagination', 'tribe-events-calendar-pro' ),
 	tribe_get_event_label_plural()
 );
 ?>

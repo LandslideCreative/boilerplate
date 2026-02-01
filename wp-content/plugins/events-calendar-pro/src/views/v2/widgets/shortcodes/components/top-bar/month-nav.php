@@ -9,7 +9,10 @@
  *
  * @link http://evnt.is/1aiy
  *
- * @version 5.6.0
+ * @version 7.7.11
+ *
+ * @since 5.6.0
+ * @since 7.7.11 Improved accessibility by removing the static month label from the navigation list. [TEC-5632]
  *
  * @var string $prev_url     The URL to the previous page, if any, or an empty string.
  * @var string $next_url     The URL to the next page, if any, or an empty string.
@@ -26,7 +29,7 @@
 		}
 		?>
 
-		<li class="tribe-events-c-top-bar__nav-list-date"><?php echo $request_date; ?></li>
+		<li class="tribe-events-c-top-bar__nav-list-date" role="presentation" aria-hidden="true"><?php echo esc_html( $request_date ); ?></li>
 
 		<?php
 		if ( ! empty( $next_url ) ) {
