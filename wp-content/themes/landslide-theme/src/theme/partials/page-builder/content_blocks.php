@@ -21,7 +21,7 @@ if( $columns == 2 ) {
 
 if( have_rows('blocks') ): ?>
 
-	<section class="page-section <?php echo $background_color; ?>-bg content-blocks <?php echo $columns; ?>-column" <?php LSPB()->display_section_id(); ?>>
+	<section class="page-section <?php echo $background_color; ?>-bg content-blocks columns-<?php echo $columns; ?>" <?php LSPB()->display_section_id(); ?>>
 		
 		<?php LSPB()->display_section_header(); ?>
 		

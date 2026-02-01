@@ -1,6 +1,6 @@
 <?php 
 
-// Save site variables field to plugin
+// ACF - Save site variables field to plugin
 function ls_site_variables_acf_json_save_path( $path ) {
     
     $path = LS_PLUGIN_PATH . '/assets/acf-json';
@@ -10,16 +10,7 @@ function ls_site_variables_acf_json_save_path( $path ) {
 }
 add_filter('acf/settings/save_json/name=Site Variables', 'ls_site_variables_acf_json_save_path');
 
-// Load site variables field from plugin
-function ls_site_variables_acf_json_load_path( $paths ) {
-
-    $paths[] = LS_PLUGIN_PATH . '/assets/acf-json';
-
-    return $paths;    
-}
-add_filter( 'acf/settings/load_json', 'ls_site_variables_acf_json_load_path' );
-
-// Add Site variables ACF page
+// ACF - Add Site variables ACF page
 function ls_site_variables_acf() {
 	
 	if( function_exists('acf_add_options_page') ) {

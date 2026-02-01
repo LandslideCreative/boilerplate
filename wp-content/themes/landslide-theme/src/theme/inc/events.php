@@ -85,12 +85,13 @@ function ls_remove_past_events_from_searchwp( $ids ) {
            'end_date'     => 'now',
            'posts_per_page' => -1,
         ] );
+        if( $past_events ) {
+            foreach( $past_events as $past_event ) {
+                $past_events_ids[] = $past_event->ID;
+            }
 
-        foreach( $past_events as $past_event ) {
-            $past_events_ids[] = $past_event->ID;
+            $ids = array_merge( $ids, $past_events_ids );
         }
-
-        $ids = array_merge( $ids, $past_events_ids );
     }
 
     return array_unique( $ids );

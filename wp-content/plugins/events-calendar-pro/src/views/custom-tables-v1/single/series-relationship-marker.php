@@ -42,9 +42,9 @@ $series = tec_event_series( $id );
 $title_classes = tec_get_series_marker_label_classes( $series, $id );
 ?>
 <div <?php tec_classes( $classes ); ?>>
-	<em class="tribe-events-series-relationship-single-marker__icon">
+	<span class="tribe-events-series-relationship-single-marker__icon">
 		<?php $this->template( 'components/icons/series', [ 'classes' => [ 'tribe-events-series-relationship-single-marker__icon-svg' ] ] ); ?>
-	</em>
+	</span>
 	<span class="tribe-events-series-relationship-single-marker__prefix">
 		<?php echo esc_html( $series_relationship_label ); ?>
 	</span>

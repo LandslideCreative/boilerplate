@@ -33,25 +33,28 @@ add_filter('acf/settings/load_json', 'ls_acf_json_load_path');
 add_action('acf/init', 'ls_acf_maps_key'); */
 
 // Add ACF options page
-if( function_exists('acf_add_options_page') ) {
+function ls_acf_add_options_pages() {
+    if( function_exists('acf_add_options_page') ) {
 
-    acf_add_options_page(array(
-        'page_title'    => 'Theme Settings',
-        'menu_title'    => 'Theme Settings',
-        'menu_slug'     => 'theme-settings',
-        'capability'    => 'edit_posts',
-        'redirect'      => false
-    ));
+        acf_add_options_page(array(
+            'page_title'    => 'Theme Settings',
+            'menu_title'    => 'Theme Settings',
+            'menu_slug'     => 'theme-settings',
+            'capability'    => 'edit_posts',
+            'redirect'      => false
+        ));
 
-    acf_add_options_sub_page(array(
-        'page_title'    => 'General Information',
-        'menu_title'    => 'General Info',
-        'parent_slug'   => 'theme-settings',
-    ));
+        acf_add_options_sub_page(array(
+            'page_title'    => 'General Information',
+            'menu_title'    => 'General Info',
+            'parent_slug'   => 'theme-settings',
+        ));
 
-    acf_add_options_sub_page(array(
-        'page_title'    => 'Social Media',
-        'menu_title'    => 'Social Media',
-        'parent_slug'   => 'theme-settings',
-    ));
+        acf_add_options_sub_page(array(
+            'page_title'    => 'Social Media',
+            'menu_title'    => 'Social Media',
+            'parent_slug'   => 'theme-settings',
+        ));
+    }
 }
+add_filter('acf/init', 'ls_acf_add_options_pages');

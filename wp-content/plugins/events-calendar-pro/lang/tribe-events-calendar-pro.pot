@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: The Events Calendar Pro 7.7.8\n"
+"Project-Id-Version: The Events Calendar Pro 7.7.10\n"
 "Report-Msgid-Bugs-To: https://evnt.is/191x\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-10-13T20:51:40+00:00\n"
+"POT-Creation-Date: 2025-11-04T16:02:10+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: tribe-events-calendar-pro\n"
@@ -1387,8 +1387,7 @@ msgstr ""
 #: src/Tribe/Integrations/Elementor/Widgets/Widget_Event_Single_Legacy.php:1818
 #: src/views/v2/organizer/meta/details/phone.php:32
 #: src/views/v2/venue/meta/details/phone.php:29
-#: src/views/v2/widgets/widget-featured-venue/venue/phone.php:25
-#: src/views/v2/widgets/widget-featured-venue/venue/phone.php:26
+#: src/views/v2/widgets/widget-featured-venue/venue/phone.php:38
 msgid "Phone"
 msgstr ""
 
@@ -1411,8 +1410,7 @@ msgstr ""
 #: src/Tribe/Integrations/Elementor/Widgets/Widget_Event_Single_Legacy.php:1895
 #: src/views/v2/organizer/meta/details/website.php:23
 #: src/views/v2/venue/meta/details/website.php:30
-#: src/views/v2/widgets/widget-featured-venue/venue/website.php:26
-#: src/views/v2/widgets/widget-featured-venue/venue/website.php:27
+#: src/views/v2/widgets/widget-featured-venue/venue/website.php:38
 msgid "Website"
 msgstr ""
 
@@ -4547,6 +4545,7 @@ msgstr ""
 #: src/Tribe/Integrations/Elementor/Widgets/Widget_Events_View.php:2885
 #: src/Tribe/Integrations/Elementor/Widgets/Widget_Event_Single_Legacy.php:461
 #: src/Tribe/Integrations/Elementor/Widgets/Widget_Event_Single_Legacy.php:1232
+#: src/views/v2/map/event-cards/event-card/actions/details.php:30
 msgid "Event Details"
 msgstr ""
 
@@ -8106,9 +8105,13 @@ msgstr ""
 
 #: src/views/v2/map.php:46
 #: src/views/v2/photo.php:50
-#: src/views/v2/summary.php:48
+#: src/views/v2/summary.php:53
 #: src/views/v2/week.php:54
 msgid "Loading..."
+msgstr ""
+
+#: src/views/v2/map/event-cards.php:27
+msgid "Map view events list"
 msgstr ""
 
 #: src/views/v2/map/event-cards/event-card.php:75
@@ -8139,15 +8142,26 @@ msgstr ""
 
 #. translators: %s: Event (singular)
 #: src/views/v2/map/event-cards/event-card/actions/details-spacer.php:21
-#: src/views/v2/map/event-cards/event-card/actions/details.php:31
 #, php-format
 msgid "%s Details"
 msgstr ""
 
+#. translators: %s: The title of the event.
+#: src/views/v2/map/event-cards/event-card/actions/details.php:23
+#, php-format
+msgid "Event Details: %s"
+msgstr ""
+
 #: src/views/v2/map/event-cards/event-card/actions/directions-spacer.php:24
-#: src/views/v2/map/event-cards/event-card/actions/directions.php:30
+#: src/views/v2/map/event-cards/event-card/actions/directions.php:35
 #: src/views/v2/venue/meta/details/address.php:45
 msgid "Get Directions"
+msgstr ""
+
+#. translators: %s: The name of the venue.
+#: src/views/v2/map/event-cards/event-card/actions/directions.php:28
+#, php-format
+msgid "Get Directions: %s"
 msgstr ""
 
 #: src/views/v2/map/event-cards/event-card/event/date-time.php:37
@@ -8328,7 +8342,7 @@ msgid "%1$s onwards"
 msgstr ""
 
 #: src/views/v2/venue/meta/details/address.php:28
-#: src/views/v2/widgets/widget-featured-venue/venue/address.php:44
+#: src/views/v2/widgets/widget-featured-venue/venue/address.php:45
 msgid "Address"
 msgstr ""
 
@@ -8338,7 +8352,7 @@ msgid "Google maps iframe displaying the address to %s"
 msgstr ""
 
 #. translators: events (plural)
-#: src/views/v2/week/day-selector/days/day.php:37
+#: src/views/v2/week/day-selector/days/day.php:39
 #, php-format
 msgid "Has %s"
 msgstr ""

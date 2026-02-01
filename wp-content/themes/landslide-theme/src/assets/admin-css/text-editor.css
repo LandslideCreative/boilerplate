@@ -124,3 +124,28 @@ ul.checkmarks li::before {
 .no-bottom-margin>* {
 	margin-bottom: 0;
 }
+
+.match-height {
+	position: relative;
+	border: 1px dashed #CCC;
+	&::before {
+		content: "Match height";
+        display: block;
+        position: absolute;
+        text-transform: uppercase;
+        line-height: 1;
+        background-color: white;
+        font-size: 10px;
+        font-weight: 500;
+        top: -5px;
+        left: 10px;
+        padding: 0 5px;
+        color: #CCCCCC;
+	}
+}
+.match-height>*:last-child {
+	margin-bottom: 0;
+}
+.match-height+* {
+	margin-top: 25px;
+}

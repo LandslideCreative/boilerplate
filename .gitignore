@@ -59,6 +59,7 @@ wp-content/w3tc/pgcache/*
 
 # Uploads
 wp-content/upgrade/
+wp-content/upgrade-temp-backup/
 wp-content/uploads/
 
 # Wordfence
