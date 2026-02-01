@@ -49,6 +49,83 @@ function ls_disable_archive_permalink_changes( $html ) {
 }
 add_filter( 'get_sample_permalink_html', 'ls_disable_archive_permalink_changes');
 
+// Add messages for pages with page specific content sections
+function ls_add_page_specific_messages($field) {
+
+    global $post;
+    
+    $archive_pages = ls_archive_pages();
+
+    /*
+        $page_specific_messages['page'] - Page to display message on
+        $page_specific_messages['pb_message'] - Message to display above page builder
+        $page_specific_messages['ps_message'] - Message to display in page specific section
+    */
+
+    $page_specific_messages = array();
+
+    // Post archive message
+    $page_specific_messages[] = array(
+        'page' => $archive_pages['post'],
+        'pb_message' => 'The <strong>Page Specific Content</strong> section will display an archive of blog posts.',
+        'ps_message' => 'This section displays an archive of blog posts.',
+    );
+
+    // Staff archive message
+    $page_specific_messages[] = array(
+        'page' => $archive_pages['staff'],
+        'pb_message' => 'The <strong>Page Specific Content</strong> section will display an archive of staff members.',
+        'ps_message' => 'This section displays an archive of staff members.',
+    );
+
+    // Events archive message
+    $page_specific_messages[] = array(
+        'page' => $archive_pages['tribe_events'],
+        'pb_message' => 'The <strong>Page Specific Content</strong> section will display a calendar of upcoming events.',
+        'ps_message' => 'This section displays a calendar of upcoming events.',
+    );
+
+    // Exhibitions archive message
+    $page_specific_messages[] = array(
+        'page' => $archive_pages['exhibition'],
+        'pb_message' => 'The <strong>Page Specific Content</strong> section will display an archive of permanent and rotating exhibitions.',
+        'ps_message' => 'This section displays an archive of permanent and rotating exhibitions.',
+    );
+
+    // Artwork archive message
+    $page_specific_messages[] = array(
+        'page' => $archive_pages['artwork'],
+        'pb_message' => 'The <strong>Page Specific Content</strong> section will display an archive of artwork.',
+        'ps_message' => 'This section displays an an archive of artwork.',
+    );
+
+    // Artists archive message
+    $page_specific_messages[] = array(
+        'page' => $archive_pages['artists'],
+        'pb_message' => 'The <strong>Page Specific Content</strong> section will display an archive of artists.',
+        'ps_message' => 'This section displays an an archive of artists.',
+    );
+
+    if( is_admin() && $page_specific_messages ) {
+        if( $post->post_type=='page' ) {
+            foreach( $page_specific_messages as $message) {
+                if( $post->post_name == $message['page'] ) {
+                    if( $field['type']== 'flexible_content' ) {
+                        $field['instructions'] = $message['pb_message'];
+                    } else if( $field['type']== 'message' ) {
+                        $field['message'] = $message['ps_message'].' No additional settings are required for this section.';
+                    }
+                }
+            }
+        }
+    }
+
+    return $field;
+
+}
+add_filter('acf/load_field/name=page_builder', 'ls_add_page_specific_messages');
+add_filter('acf/load_field/key=field_65df6b4429772', 'ls_add_page_specific_messages');
+
 /*------------------------------------*\
     
     Custom Post Types
