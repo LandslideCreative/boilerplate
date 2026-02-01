@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'the-events-calendar/events-pro',
-        'pretty_version' => 'dev-release/T25.krypto',
-        'version' => 'dev-release/T25.krypto',
-        'reference' => 'e1237d268f298ca1e48f5bf88ad79abb4ceae225',
+        'pretty_version' => 'dev-release/T25.missmartian',
+        'version' => 'dev-release/T25.missmartian',
+        'reference' => '4ce2a268f4e1a7e1db678d32a26d75ac61858bab',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -29,9 +29,9 @@
             'dev_requirement' => false,
         ),
         'the-events-calendar/events-pro' => array(
-            'pretty_version' => 'dev-release/T25.krypto',
-            'version' => 'dev-release/T25.krypto',
-            'reference' => 'e1237d268f298ca1e48f5bf88ad79abb4ceae225',
+            'pretty_version' => 'dev-release/T25.missmartian',
+            'version' => 'dev-release/T25.missmartian',
+            'reference' => '4ce2a268f4e1a7e1db678d32a26d75ac61858bab',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

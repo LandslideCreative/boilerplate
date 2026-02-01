@@ -18,6 +18,15 @@ p.large {
 	}
 }
 
+ol, ul {
+	li {
+		margin-bottom: 10px;
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
 // Vertical center class
 .vertical-center {
 	align-items: center;
@@ -40,6 +49,14 @@ p.large {
 	&>* {
 		margin-bottom: 0;
 	}
+}
+
+// Match height
+.match-height {
+	@include clean-last-child;
+}
+.match-height+* {
+	margin-top: 25px;
 }
 
 // Reverse columns for mobile

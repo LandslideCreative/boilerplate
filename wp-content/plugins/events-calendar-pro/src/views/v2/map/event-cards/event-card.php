@@ -108,11 +108,12 @@ $aria_label = sprintf(
 	$event_title
 );
 ?>
-<div
+<li
 	<?php tec_classes( $wrapper_classes ); ?>
 	<?php echo $data_src_attr; ?>
 	data-js="tribe-events-pro-map-event-card-wrapper"
 	data-event-id="<?php echo esc_attr( $event->ID ); ?>"
+	role="listitem"
 >
 
 	<button
@@ -147,4 +148,4 @@ $aria_label = sprintf(
 
 	<?php $this->template( 'map/event-cards/event-card/tooltip', [ 'event' => $event ] ); ?>
 
-</div>
+</li>
