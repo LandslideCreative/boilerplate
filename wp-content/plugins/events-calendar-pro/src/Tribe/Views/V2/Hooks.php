@@ -182,13 +182,17 @@ class Hooks extends Service_Provider {
 	 * Checks if our Photo Grid View option is selected and applies classes appropriately.
 	 *
 	 * @since 7.3.2
+	 * @since 7.7.12 Added check to avoid duplicates.
 	 *
 	 * @param array $classes List of container classes.
 	 * @return mixed The modified list of classes.
 	 */
 	public function filter_grid_photo_classes( $classes ) {
 		if ( tribe_get_option( 'photo_view_force_grid' ) ) {
-			$classes[] = 'tribe-events-pro-photo--grid';
+			// Only add the class if it's not already present to avoid duplicates.
+			if ( ! in_array( 'tribe-events-pro-photo--grid', $classes, true ) ) {
+				$classes[] = 'tribe-events-pro-photo--grid';
+			}
 		}
 
 		return $classes;

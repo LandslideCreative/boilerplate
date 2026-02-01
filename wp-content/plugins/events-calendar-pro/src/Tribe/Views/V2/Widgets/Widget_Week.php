@@ -149,6 +149,7 @@ class Widget_Week extends Widget_Abstract {
 		add_filter( 'tribe_events_virtual_assets_should_enqueue_widget_groups', [ $this, 'add_self_to_virtual_widget_groups' ] );
 		add_filter( 'tribe_template_include_html:events-pro/v2/week/grid-body/events-row-header', '__return_false' );
 		add_filter( 'tribe_template_include_html:events-pro/v2/week/grid-body/multiday-events-row-header', '__return_false' );
+		add_filter( 'tribe_template_include_html:events-pro/v2/week/grid-header', '__return_false' );
 		add_filter( 'tribe_template_include_html:events-pro/v2/week/mobile-events/nav', '__return_false' );
 		add_filter( 'tribe_template_include_html:events-pro/v2/week/top-bar', [ $this, 'filter_top_bar' ], 10, 4 );
 
@@ -167,6 +168,7 @@ class Widget_Week extends Widget_Abstract {
 		remove_filter( 'tribe_events_virtual_assets_should_enqueue_widget_groups', [ $this, 'add_self_to_virtual_widget_groups' ] );
 		remove_filter( 'tribe_template_include_html:events-pro/v2/week/grid-body/events-row-header', '__return_false' );
 		remove_filter( 'tribe_template_include_html:events-pro/v2/week/grid-body/multiday-events-row-header', '__return_false' );
+		remove_filter( 'tribe_template_include_html:events-pro/v2/week/grid-header', '__return_false' );
 		remove_filter( 'tribe_template_include_html:events-pro/v2/week/top-bar', [ $this, 'filter_top_bar' ], 10 );
 		remove_filter( 'tribe_template_include_html:events-pro/v2/week/mobile-events/nav', '__return_false' );
 		remove_filter( 'tribe_template_include_html:events-pro/v2/week/grid-body/events-day/more-events', [ $this, 'filter_html_remove_managed_link' ], 15 );

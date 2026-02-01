@@ -30,6 +30,7 @@ class Controller extends Controller_Contract {
 	 */
 	protected function do_register(): void {
 		$this->container->register( Pro_Extension::class );
+		$this->container->register( Endpoints::class );
 	}
 
 	/**
@@ -41,5 +42,6 @@ class Controller extends Controller_Contract {
 	 */
 	public function unregister(): void {
 		$this->container->get( Pro_Extension::class )->unregister();
+		$this->container->get( Endpoints::class )->unregister();
 	}
 }

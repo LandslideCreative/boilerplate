@@ -9,10 +9,11 @@
  *
  * @link https://evnt.is/1aiy
  *
+ * @version 7.7.12
+ *
  * @since 5.0.0 Initial template.
  * @since 7.7.8 Removed `aria-describedby` attribute event link.
- *
- * @version 7.7.8
+ * @since 7.7.12 Improve accessibility for Week View markup and ARIA structure.
  *
  * @var WP_Post $event The event post object with properties added by the `tribe_get_event` function.
  *
@@ -48,26 +49,28 @@ $start = Timezones::is_mode( 'site' ) ? $event->dates->start_site : $event->date
 
 $start_time = Dates::time_between( $start->format( 'Y-m-d 0:0:0' ), $start->format( Dates::DBDATETIMEFORMAT ) );
 ?>
-<article
-	<?php tec_classes( $classes ); ?>
-	data-js="tribe-events-pro-week-grid-event"
-	data-start-time="<?php echo esc_attr( $start_time ); ?>"
-	data-event-id="<?php echo esc_attr( $event->ID ); ?>"
->
-	<a
-		href="<?php echo esc_url( $event->permalink ); ?>"
-		class="tribe-events-pro-week-grid__event-link"
-		data-js="<?php echo esc_attr( implode( ' ', $data_js ) ); ?>"
-		data-tooltip-content="#tribe-events-tooltip-content-<?php echo esc_attr( $event->ID ); ?>"
+<li>
+	<article
+		<?php tec_classes( $classes ); ?>
+		data-js="tribe-events-pro-week-grid-event"
+		data-start-time="<?php echo esc_attr( $start_time ); ?>"
+		data-event-id="<?php echo esc_attr( $event->ID ); ?>"
 	>
-		<div class="tribe-events-pro-week-grid__event-link-inner">
+		<a
+			href="<?php echo esc_url( $event->permalink ); ?>"
+			class="tribe-events-pro-week-grid__event-link"
+			data-js="<?php echo esc_attr( implode( ' ', $data_js ) ); ?>"
+			data-tooltip-content="#tribe-events-tooltip-content-<?php echo esc_attr( $event->ID ); ?>"
+			aria-describedby="tribe-events-tooltip-content-<?php echo esc_attr( $event->ID ); ?>"
+		>
+			<div class="tribe-events-pro-week-grid__event-link-inner">
 
-			<?php $this->template( 'week/grid-body/events-day/event/featured-image', [ 'event' => $event ] ); ?>
-			<?php $this->template( 'week/grid-body/events-day/event/date', [ 'event' => $event ] ); ?>
-			<?php $this->template( 'week/grid-body/events-day/event/title', [ 'event' => $event ] ); ?>
+				<?php $this->template( 'week/grid-body/events-day/event/featured-image', [ 'event' => $event ] ); ?>
+				<?php $this->template( 'week/grid-body/events-day/event/date', [ 'event' => $event ] ); ?>
+				<?php $this->template( 'week/grid-body/events-day/event/title', [ 'event' => $event ] ); ?>
 
-		</div>
-	</a>
-</article>
-
+			</div>
+		</a>
+	</article>
+</li>
 <?php $this->template( 'week/grid-body/events-day/event/tooltip', [ 'event' => $event ] ); ?>

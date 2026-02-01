@@ -7,45 +7,45 @@ namespace Composer\Autoload;
 class ComposerStaticInitb6419b0ae9faa4285491e5b54cfd48d4
 {
     public static $prefixLengthsPsr4 = array (
-        'T' => 
+        'T' =>
         array (
             'Tribe\\Events\\Virtual\\' => 21,
             'Tribe\\Events\\Pro\\' => 17,
             'TEC\\Events_Virtual\\' => 19,
             'TEC\\Events_Pro\\' => 15,
         ),
-        'R' => 
+        'R' =>
         array (
             'RRule\\' => 6,
         ),
-        'D' => 
+        'D' =>
         array (
             'Defuse\\Crypto\\' => 14,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Tribe\\Events\\Virtual\\' => 
+        'Tribe\\Events\\Virtual\\' =>
         array (
             0 => __DIR__ . '/../..' . '/src/Tribe/Virtual',
         ),
-        'Tribe\\Events\\Pro\\' => 
+        'Tribe\\Events\\Pro\\' =>
         array (
             0 => __DIR__ . '/../..' . '/src/Tribe',
         ),
-        'TEC\\Events_Virtual\\' => 
+        'TEC\\Events_Virtual\\' =>
         array (
             0 => __DIR__ . '/../..' . '/src/Events_Virtual',
         ),
-        'TEC\\Events_Pro\\' => 
+        'TEC\\Events_Pro\\' =>
         array (
             0 => __DIR__ . '/../..' . '/src/Events_Pro',
         ),
-        'RRule\\' => 
+        'RRule\\' =>
         array (
             0 => __DIR__ . '/..' . '/rlanvin/php-rrule/src',
         ),
-        'Defuse\\Crypto\\' => 
+        'Defuse\\Crypto\\' =>
         array (
             0 => __DIR__ . '/..' . '/defuse/php-encryption/src',
         ),

@@ -3,9 +3,9 @@
 Contributors: theeventscalendar, borkweb, bordoni, brianjessee, aguseo, camwynsp, GeoffBel, jentheo, leahkoerper, lucatume, neillmcshea, vicskf, zbtirrell, juanfra
 Tags: events, calendar, event, venue, organizer, dates, date, google maps, conference, workshop, concert, meeting, seminar, summit, class, the events calendar, widget, pro
 Donate link: https://evnt.is/29
-Stable tag: 7.7.10
-Requires at least: 6.6
-Tested up to: 6.8.2
+Stable tag: 7.7.12
+Requires at least: 6.7
+Tested up to: 6.9
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -213,6 +213,38 @@ Previous versions of Events Calendar Pro are not cross-compatible with 6.X add-o
 Remember to always make a backup of your database and files before updating!
 
 == Changelog ==
+
+= [7.7.12] 2026-01-13 =
+
+* Fix - Add a filter to allow skipping updating the series post status, for example during old event cleanup.
+* Fix - Add filters to control Venue and Organizer page titles. [ECP-1508]
+* Fix - Fix recurring event view links in admin dashboard when using WPML with different domains per language by including get_option( 'home' ) in URL stripping logic. [ECP-1997]
+* Fix - Handle ignored imported events in Event Manager list view. [ECP-1678]
+* Tweak - Added filters: `wpml_post_language_details`, `wpml_permalink`, `tec_events_skip_updating_series_status`
+* Tweak - Adjust focus order for Events by Week widget so it follows a logical left to right pattern. [ECP-1989]
+* Tweak - Automatically move focus to events when using a keyboard to navigate the Events By Week widget. [ECP-2001]
+* Tweak - Changed views: `v2/map/event-cards/event-card/event`, `v2/photo/event`, `v2/week`, `v2/week/day-selector`, `v2/week/grid-body`, `v2/week/grid-body/events-day`, `v2/week/grid-body/events-day/event`, `v2/week/grid-body/events-day/event/tooltip/title`, `v2/week/grid-header`, `v2/week/grid-header/header-column`
+* Tweak - Improve accessibility for Week View by reorganizing heading hierarchy, adding ARIA roles and labels, and refining screen reader behavior. [TEC-5624]
+* Tweak - Increase contrast of pagination arrows for the Week Widget for improved accessibility. [ECP-1998]
+* Tweak - Increase contrast on focus for mini calendar. [ECP-1999] [ECP-2000]
+* Tweak - Reorder event markup in archive and widget views so event titles precede their date and time for improved screen reader navigation. [TEC-5621]
+* Language - 6 new strings added, 15 updated, 0 fuzzied, and 0 obsoleted.
+
+= [7.7.11] 2025-11-18 =
+
+* Version - Events Pro 7.7.11 is only compatible with The Events Calendar 6.15.12 or higher.
+* Feature - Introduce new REST endpoint for the Series archive.
+* Tweak - Added filters: `tec_is_rest_tec_v1_request`, `tec_rest_swagger_{$type}_definition`, `tec_rest_swagger_definition`, `tec_events_pro_rest_v1_series_read_params`
+* Tweak - Changed views: `iframe/header`, `v2/map/event-cards/nav`, `v2/summary/date-group/date-tag`, `v2/summary/date-group/event`, `v2/summary/date-group/event/title`, `v2/widgets/shortcodes/components/top-bar/month-nav`, `v2/widgets/shortcodes/components/top-bar/nav/next`, `v2/widgets/shortcodes/components/top-bar/nav/prev`
+* Tweak - Change AJAX-based navigation from anchor tags to button elements for better semantic accessibility, as they trigger state changes rather than page navigation. [TEC-5633]
+* Tweak - Improve mini calendar navigation semantics by removing static month label from navigation list. [ECP-1995]
+* Tweak - Improve Summary View heading hierarchy by restructuring markup to use H2 for event list, H3 for dates, and H4 for event titles for better screen reader navigation. [ECP-1996]
+* Tweak - Increase visual contrast for focus indicator on events by week widget. [ECP-1994]
+* Tweak - Increase visual contrast for focus indicator on mini calendar widget. [ECP-1992]
+* Tweak - Make mini calendar event markers accessible by adding descriptive focus styles and contextual information for color-based indicators. [TEC-5630]
+* Accessibility - Increase visual contrast for focus indicator on virtual event link button. [ECP-1993]
+* Language - 56 new strings added, 4 updated, 0 fuzzied, and 0 obsoleted.
+* Language - Set correct text domain is some files using the wrong one.
 
 = [7.7.10] 2025-11-04 =
 
