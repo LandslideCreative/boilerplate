@@ -24,6 +24,7 @@
 /* Sticky publishing actions */
 #side-sortables {
     position: relative !important;
+    top: 0 !important;
 }
 
 #major-publishing-actions.sticky-publishing-actions {
