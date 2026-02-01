@@ -124,6 +124,15 @@ function add_custom_formats( $init_array ) {
                         'block' => 'div',
                         'classes' => 'no-bottom-margin',
                         'wrapper' => true
+                    ),
+                    array(
+                        'title' => 'Match Height',
+                        'block' => 'div',
+                        'classes' => 'match-height',
+                        'attributes' => array (
+                            'data-mh' => 'match-height' 
+                        ),
+                        'wrapper' => true
                     )
                 )
             )

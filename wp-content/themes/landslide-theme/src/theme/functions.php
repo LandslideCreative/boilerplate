@@ -1,7 +1,7 @@
 <?php
 
 // CSS & JS Build Version auto-incremented by gulp-bump
-define( 'LS_BUILD_VERSION', '1.0.0' );
+define( 'LS_BUILD_VERSION', '1.0.1' );
 
 // Set $content_width global variable
 if( !isset($content_width) ) { $content_width = 1200; }
@@ -197,6 +197,18 @@ add_filter('the_excerpt', 'shortcode_unautop'); // Remove auto <p> tags in excer
 
 // Remove Filters
 remove_filter('the_excerpt', 'wpautop'); // Remove <p> tags from Excerpt
+
+// Remove attachment URLs
+function ls_remove_attachment_rewrite_rule( $rules ) {
+    foreach ( $rules as $regex => $query ) {
+        if ( strpos( $regex, 'attachment' ) || strpos( $query, 'attachment' ) ) {
+            unset( $rules[ $regex ] );
+        }
+    }
+
+    return $rules;
+}
+add_filter( 'rewrite_rules_array', 'ls_remove_attachment_rewrite_rule' );
 
 /*------------------------------------*\
     Custom Functions
