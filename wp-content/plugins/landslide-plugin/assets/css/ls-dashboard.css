@@ -22,6 +22,10 @@
 }
 
 /* Sticky publishing actions */
+#side-sortables {
+    position: relative !important;
+}
+
 #major-publishing-actions.sticky-publishing-actions {
     position: fixed;
     z-index: 99999;
