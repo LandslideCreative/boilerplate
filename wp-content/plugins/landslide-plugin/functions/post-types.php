@@ -46,6 +46,18 @@ function ls_disable_archive_permalink_changes( $html ) {
 }
 add_filter( 'get_sample_permalink_html', 'ls_disable_archive_permalink_changes');
 
+// Disable Yoast settings on archive pages
+function ls_disable_archive_yoast() {
+    global $post;
+    $ls_archive_pages = ls_archive_pages();
+
+    if( is_admin() && $post->post_type=='page' && in_array($post->post_name, $ls_archive_pages) ) {
+        remove_meta_box( 'wpseo_meta', 'page', 'normal' );
+    }
+    
+}
+add_action( 'add_meta_boxes', 'ls_disable_archive_yoast', 99 );
+
 // Add messages for pages with page specific content sections
 function ls_add_page_specific_messages($field) {
 
