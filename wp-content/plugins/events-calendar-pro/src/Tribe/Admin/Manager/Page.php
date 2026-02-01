@@ -613,23 +613,63 @@ class Page {
 	}
 
 	/**
-	 * Gets the requested post stati based on $_REQUEST['post_status'] or $_REQUEST['url'] parameters.
+	 * Gets the requested post status from various sources in order of priority.
+	 *
+	 * Checks multiple sources to find the post_status parameter, which is especially
+	 * important for AJAX view switches where the parameter may be in the referrer URL
+	 * or request URL rather than directly in $_REQUEST. This ensures the correct post
+	 * status is preserved when switching between views in the Events Manager.
 	 *
 	 * @since 5.9.0
+	 * @since 7.7.12 Enhanced to check referrer and REQUEST_URI for AJAX view switches.
 	 *
-	 * @return array
+	 * @return string|null The requested post status, or null if not found.
 	 */
 	public function get_requested_post_status() {
 		$requested_status = tribe_get_request_var( 'post_status' );
 
-		if ( ! $requested_status && isset( $_REQUEST['url'] ) ) {
-			if ( $query_string = wp_parse_url( $_REQUEST['url'], PHP_URL_QUERY ) ) {
-				$query_args = wp_parse_args( $query_string );
-				$requested_status = Arr::get( $query_args, 'post_status', null );
-			}
+		if ( ! $requested_status ) {
+			$url              = tec_get_request_var( 'url', null );
+			$url              = $url ? esc_url_raw( $url ) : null;
+			$requested_status = $this->get_post_status_from_url_string( $url );
+		}
+
+		if ( ! $requested_status ) {
+			$referer          = wp_get_raw_referer();
+			$referer          = $referer ? esc_url_raw( $referer ) : null;
+			$requested_status = $this->get_post_status_from_url_string( $referer );
+		}
+
+		if ( ! $requested_status ) {
+			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			$request_uri      = isset( $_SERVER['REQUEST_URI'] ) ? esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : null;
+			$requested_status = $this->get_post_status_from_url_string( $request_uri );
 		}
 
 		return $requested_status;
+	}
+
+	/**
+	 * Extracts post_status from a URL's query string.
+	 *
+	 * @since 7.7.12
+	 *
+	 * @param string|null $url The URL to parse, or null.
+	 *
+	 * @return string|null The post_status if found, or null.
+	 */
+	private function get_post_status_from_url_string( $url ) {
+		if ( ! $url ) {
+			return null;
+		}
+
+		$query_string = wp_parse_url( $url, PHP_URL_QUERY );
+		if ( ! $query_string ) {
+			return null;
+		}
+
+		$query_args = wp_parse_args( $query_string );
+		return Arr::get( $query_args, 'post_status', null );
 	}
 
 	/**
@@ -656,11 +696,17 @@ class Page {
 	 * Gets all of the relevant post stati for the current request.
 	 *
 	 * @since 5.9.0
+	 * @since 7.7.12 Added optional $requested_status parameter to allow passing status directly.
+	 *
+	 * @param string|null $requested_status Optional. The post status to use. If not provided, will be determined from the request.
 	 *
 	 * @return array
 	 */
-	public function get_implicitly_requested_post_stati() {
-		$requested_status = $this->get_requested_post_status();
+	public function get_implicitly_requested_post_stati( $requested_status = null ) {
+		// Use provided status or get it from the request.
+		if ( null === $requested_status ) {
+			$requested_status = $this->get_requested_post_status();
+		}
 
 		$post_stati = get_post_stati( [], 'objects' );
 		unset( $post_stati['auto-draft'] );

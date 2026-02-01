@@ -9,13 +9,15 @@
  *
  * @link https://evnt.is/1aiy
  *
- * @version 7.7.6
+ * @version 7.7.12
  *
  * @since 5.0.0
  * @since 7.7.6 Add aria-label to header column daynum link.
+ * @since 7.7.12 Improve accessibility for Week View markup and ARIA structure.
  *
- * @var array $day Array of data for the day.
+ * @var array  $day Array of data for the day.
  * @var string $today_date Today's date in the `Y-m-d` format.
+ * @var int    $day_index Number of the day (Mon - 1, Tues - 2).
  */
 $classes = [
 	'tribe-events-pro-week-grid__header-column'          => true,
@@ -25,6 +27,7 @@ $classes = [
 <div
 	<?php tec_classes( $classes ); ?>
 	role="columnheader"
+	aria-colindex="<?php echo esc_attr( $day_index ); ?>"
 	aria-label="<?php echo esc_attr( $day[ 'full_date' ] ); ?>"
 >
 	<div

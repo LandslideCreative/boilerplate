@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ef83923ceff66e0a5eacbe3d88052f99",
+    "content-hash": "d01da54905325f56290884dd4a72bfb8",
     "packages": [
         {
             "name": "composer/installers",
@@ -159,16 +159,16 @@
         },
         {
             "name": "landslidecreative/advanced-custom-fields-pro",
-            "version": "6.6.2",
+            "version": "6.7.0",
             "source": {
                 "type": "git",
                 "url": "git@github.com:jsjenkins/advanced-custom-fields-pro.git",
-                "reference": "90998b6031ef4dfcb46628efa19bbb30647f424a"
+                "reference": "a08648fc369b47322bc9388c82416da6bc73d8ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jsjenkins/advanced-custom-fields-pro/zipball/90998b6031ef4dfcb46628efa19bbb30647f424a",
-                "reference": "90998b6031ef4dfcb46628efa19bbb30647f424a",
+                "url": "https://api.github.com/repos/jsjenkins/advanced-custom-fields-pro/zipball/a08648fc369b47322bc9388c82416da6bc73d8ba",
+                "reference": "a08648fc369b47322bc9388c82416da6bc73d8ba",
                 "shasum": ""
             },
             "require": {
@@ -176,23 +176,23 @@
             },
             "type": "wordpress-plugin",
             "support": {
-                "source": "https://github.com/jsjenkins/advanced-custom-fields-pro/tree/6.6.2",
+                "source": "https://github.com/jsjenkins/advanced-custom-fields-pro/tree/6.7.0",
                 "issues": "https://github.com/jsjenkins/advanced-custom-fields-pro/issues"
             },
-            "time": "2025-11-06T20:40:50+00:00"
+            "time": "2025-12-18T18:29:39+00:00"
         },
         {
             "name": "landslidecreative/events-calendar-pro",
-            "version": "7.7.10",
+            "version": "7.7.12",
             "source": {
                 "type": "git",
                 "url": "git@github.com:jsjenkins/events-calendar-pro.git",
-                "reference": "e52608bb0d92c1c1cf9ac3f4f6dc4d34f08b736f"
+                "reference": "8e411dd57aac53a4bcc10eb8d3ec18fc4f40d3bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jsjenkins/events-calendar-pro/zipball/e52608bb0d92c1c1cf9ac3f4f6dc4d34f08b736f",
-                "reference": "e52608bb0d92c1c1cf9ac3f4f6dc4d34f08b736f",
+                "url": "https://api.github.com/repos/jsjenkins/events-calendar-pro/zipball/8e411dd57aac53a4bcc10eb8d3ec18fc4f40d3bd",
+                "reference": "8e411dd57aac53a4bcc10eb8d3ec18fc4f40d3bd",
                 "shasum": ""
             },
             "require": {
@@ -200,23 +200,23 @@
             },
             "type": "wordpress-plugin",
             "support": {
-                "source": "https://github.com/jsjenkins/events-calendar-pro/tree/7.7.10",
+                "source": "https://github.com/jsjenkins/events-calendar-pro/tree/7.7.12",
                 "issues": "https://github.com/jsjenkins/events-calendar-pro/issues"
             },
-            "time": "2025-11-06T20:53:41+00:00"
+            "time": "2026-01-27T18:19:14+00:00"
         },
         {
             "name": "landslidecreative/gravityforms",
-            "version": "2.9.22",
+            "version": "2.9.26",
             "source": {
                 "type": "git",
                 "url": "git@github.com:jsjenkins/gravityforms.git",
-                "reference": "80823f0d6a71dfad30426bfbd250f3fe8fe17f4c"
+                "reference": "04aa9fcf90fb12ebc3b28de17a57ea77dbd7bf6b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jsjenkins/gravityforms/zipball/80823f0d6a71dfad30426bfbd250f3fe8fe17f4c",
-                "reference": "80823f0d6a71dfad30426bfbd250f3fe8fe17f4c",
+                "url": "https://api.github.com/repos/jsjenkins/gravityforms/zipball/04aa9fcf90fb12ebc3b28de17a57ea77dbd7bf6b",
+                "reference": "04aa9fcf90fb12ebc3b28de17a57ea77dbd7bf6b",
                 "shasum": ""
             },
             "require": {
@@ -224,10 +224,10 @@
             },
             "type": "wordpress-plugin",
             "support": {
-                "source": "https://github.com/jsjenkins/gravityforms/tree/2.9.22",
+                "source": "https://github.com/jsjenkins/gravityforms/tree/2.9.26",
                 "issues": "https://github.com/jsjenkins/gravityforms/issues"
             },
-            "time": "2025-11-17T20:32:34+00:00"
+            "time": "2026-01-27T18:15:22+00:00"
         },
         {
             "name": "landslidecreative/wp-migrate-db-pro",
@@ -255,16 +255,16 @@
         },
         {
             "name": "landslidecreative/wp-rocket",
-            "version": "3.20.0",
+            "version": "3.20.3",
             "source": {
                 "type": "git",
                 "url": "git@github.com:jsjenkins/wp-rocket.git",
-                "reference": "0c93ca1df6373965abe6ad436a36a209da7b7cb2"
+                "reference": "14e84da8ec205bca7714bb51f793adbe48ccb7b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jsjenkins/wp-rocket/zipball/0c93ca1df6373965abe6ad436a36a209da7b7cb2",
-                "reference": "0c93ca1df6373965abe6ad436a36a209da7b7cb2",
+                "url": "https://api.github.com/repos/jsjenkins/wp-rocket/zipball/14e84da8ec205bca7714bb51f793adbe48ccb7b6",
+                "reference": "14e84da8ec205bca7714bb51f793adbe48ccb7b6",
                 "shasum": ""
             },
             "require": {
@@ -272,10 +272,10 @@
             },
             "type": "wordpress-plugin",
             "support": {
-                "source": "https://github.com/jsjenkins/wp-rocket/tree/3.20.0",
+                "source": "https://github.com/jsjenkins/wp-rocket/tree/3.20.3",
                 "issues": "https://github.com/jsjenkins/wp-rocket/issues"
             },
-            "time": "2025-10-16T17:27:51+00:00"
+            "time": "2026-01-27T18:22:21+00:00"
         },
         {
             "name": "wpackagist-plugin/akismet",
@@ -333,15 +333,15 @@
         },
         {
             "name": "wpackagist-plugin/imagify",
-            "version": "2.2.6",
+            "version": "2.2.7",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/imagify/",
-                "reference": "tags/2.2.6"
+                "reference": "tags/2.2.7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/imagify.2.2.6.zip"
+                "url": "https://downloads.wordpress.org/plugin/imagify.2.2.7.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -369,15 +369,15 @@
         },
         {
             "name": "wpackagist-plugin/query-monitor",
-            "version": "3.20.0",
+            "version": "3.20.2",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/query-monitor/",
-                "reference": "tags/3.20.0"
+                "reference": "tags/3.20.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/query-monitor.3.20.0.zip"
+                "url": "https://downloads.wordpress.org/plugin/query-monitor.3.20.2.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -423,15 +423,15 @@
         },
         {
             "name": "wpackagist-plugin/the-events-calendar",
-            "version": "6.15.11",
+            "version": "6.15.15",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/the-events-calendar/",
-                "reference": "tags/6.15.11"
+                "reference": "tags/6.15.15"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/the-events-calendar.6.15.11.zip"
+                "url": "https://downloads.wordpress.org/plugin/the-events-calendar.6.15.15.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -441,15 +441,15 @@
         },
         {
             "name": "wpackagist-plugin/user-switching",
-            "version": "1.11.0",
+            "version": "1.11.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/user-switching/",
-                "reference": "tags/1.11.0"
+                "reference": "tags/1.11.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/user-switching.1.11.0.zip"
+                "url": "https://downloads.wordpress.org/plugin/user-switching.1.11.1.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -459,15 +459,15 @@
         },
         {
             "name": "wpackagist-plugin/wordfence",
-            "version": "8.1.2",
+            "version": "8.1.4",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wordfence/",
-                "reference": "tags/8.1.2"
+                "reference": "tags/8.1.4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wordfence.8.1.2.zip"
+                "url": "https://downloads.wordpress.org/plugin/wordfence.8.1.4.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -477,15 +477,15 @@
         },
         {
             "name": "wpackagist-plugin/wordpress-seo",
-            "version": "26.3",
+            "version": "26.8",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wordpress-seo/",
-                "reference": "tags/26.3"
+                "reference": "tags/26.8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wordpress-seo.26.3.zip"
+                "url": "https://downloads.wordpress.org/plugin/wordpress-seo.26.8.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -495,15 +495,15 @@
         },
         {
             "name": "wpackagist-plugin/wp-crontrol",
-            "version": "1.19.3",
+            "version": "1.21.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wp-crontrol/",
-                "reference": "tags/1.19.3"
+                "reference": "tags/1.21.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wp-crontrol.1.19.3.zip"
+                "url": "https://downloads.wordpress.org/plugin/wp-crontrol.1.21.0.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"

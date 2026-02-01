@@ -1,15 +1,15 @@
-# Copyright (C) 2025 The Events Calendar
+# Copyright (C) 2026 The Events Calendar
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: The Events Calendar Pro 7.7.10\n"
+"Project-Id-Version: The Events Calendar Pro 7.7.12\n"
 "Report-Msgid-Bugs-To: https://evnt.is/191x\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-11-04T16:02:10+00:00\n"
+"POT-Creation-Date: 2026-01-13T16:59:03+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: tribe-events-calendar-pro\n"
@@ -192,12 +192,14 @@ msgstr ""
 
 #: src/admin-views/event-recurrence.php:110
 #: src/admin-views/event-recurrence.php:519
+#: src/Events_Pro/REST/TEC/V1/Pro_Extension.php:335
 #: src/modules/elements/series-ends/template.js:64
 msgid "event"
 msgstr ""
 
 #: src/admin-views/event-recurrence.php:111
 #: src/admin-views/event-recurrence.php:520
+#: src/Events_Pro/REST/TEC/V1/Pro_Extension.php:336
 #: src/modules/elements/series-ends/template.js:63
 msgid "events"
 msgstr ""
@@ -3486,6 +3488,22 @@ msgstr ""
 msgid "No %1$s."
 msgstr ""
 
+#. translators: %1$s: Organizer name, %2$s: Events plural, %3$s: Event date range.
+#. translators: %1$s: Venue name, %2$s: Events plural, %3$s: Event date range.
+#: src/Events_Pro/Linked_Posts/Organizer/Controller.php:253
+#: src/Events_Pro/Linked_Posts/Venue/Controller.php:331
+#, php-format
+msgid "%1$s - Past %2$s from %3$s"
+msgstr ""
+
+#. translators: %1$s: Organizer name, %2$s: Events plural, %3$s: Event date range.
+#. translators: %1$s: Venue name, %2$s: Events plural, %3$s: Event date range.
+#: src/Events_Pro/Linked_Posts/Organizer/Controller.php:255
+#: src/Events_Pro/Linked_Posts/Venue/Controller.php:333
+#, php-format
+msgid "%1$s - %2$s from %3$s"
+msgstr ""
+
 #: src/Events_Pro/Linked_Posts/Organizer/Email_Visibility_Modifier.php:29
 #: src/Tribe/Integrations/Elementor/Widgets/Widget_Event_Single_Legacy.php:501
 #: src/Tribe/Integrations/Elementor/Widgets/Widget_Event_Single_Legacy.php:1570
@@ -3554,7 +3572,7 @@ msgstr ""
 msgid "We recommend a 16:9 aspect ratio for featured images."
 msgstr ""
 
-#: src/Events_Pro/Linked_Posts/Venue/Controller.php:188
+#: src/Events_Pro/Linked_Posts/Venue/Controller.php:192
 msgid "This setting applies to all of the venues added to the event."
 msgstr ""
 
@@ -3578,12 +3596,189 @@ msgctxt "Plural name of Venue Category, without the Linked Post label, for rewri
 msgid "categories"
 msgstr ""
 
+#: src/Events_Pro/REST/TEC/V1/Documentation/Series_Definition.php:61
+msgid "A series"
+msgstr ""
+
+#: src/Events_Pro/REST/TEC/V1/Endpoints/Series.php:113
+msgid "Retrieve Series"
+msgstr ""
+
+#: src/Events_Pro/REST/TEC/V1/Endpoints/Series.php:114
+msgid "Returns a list of series"
+msgstr ""
+
+#: src/Events_Pro/REST/TEC/V1/Endpoints/Series.php:125
+msgid "The total number of series matching the request."
+msgstr ""
+
+#: src/Events_Pro/REST/TEC/V1/Endpoints/Series.php:134
+msgid "The total number of pages for the request."
+msgstr ""
+
+#: src/Events_Pro/REST/TEC/V1/Endpoints/Series.php:143
+msgid ""
+"RFC 5988 Link header for pagination. Contains navigation links with relationships:\n"
+"\t\t\t\t`rel=\"next\"` for the next page (if not on last page),\n"
+"\t\t\t\t`rel=\"prev\"` for the previous page (if not on first page).\n"
+"\t\t\t\tHeader is omitted entirely if there's only one page"
+msgstr ""
+
+#: src/Events_Pro/REST/TEC/V1/Endpoints/Series.php:161
+msgid "Returns the list of series"
+msgstr ""
+
+#: src/Events_Pro/REST/TEC/V1/Endpoints/Series.php:169
+msgid "A required parameter is missing or an input parameter is in the wrong format"
+msgstr ""
+
+#: src/Events_Pro/REST/TEC/V1/Endpoints/Series.php:174
+msgid "The requested page was not found"
+msgstr ""
+
+#: src/Events_Pro/REST/TEC/V1/Endpoints/Series.php:192
+msgid "The collection page number."
+msgstr ""
+
+#: src/Events_Pro/REST/TEC/V1/Endpoints/Series.php:199
+msgid "Limit result set to series assigned to specific event post IDs."
+msgstr ""
+
+#: src/Events_Pro/REST/TEC/V1/Endpoints/Series.php:205
+msgid "Maximum number of items to be returned in result set."
+msgstr ""
+
+#: src/Events_Pro/REST/TEC/V1/Endpoints/Series.php:213
+msgid "Limit results to those matching a string."
+msgstr ""
+
+#: src/Events_Pro/REST/TEC/V1/Endpoints/Series.php:218
+msgid "Limit result set to events with specific status."
+msgstr ""
+
+#: src/Events_Pro/REST/TEC/V1/Endpoints/Series.php:227
+msgid "Limit result set to events with tickets."
+msgstr ""
+
+#: src/Events_Pro/REST/TEC/V1/Endpoints/Series.php:232
+msgid "Sort collection by event attribute."
+msgstr ""
+
+#: src/Events_Pro/REST/TEC/V1/Endpoints/Series.php:239
+msgid "Order sort attribute ascending or descending."
+msgstr ""
+
+#: src/Events_Pro/REST/TEC/V1/Pro_Extension.php:87
+msgid "Filter by events that are part of a series"
+msgstr ""
+
+#: src/Events_Pro/REST/TEC/V1/Pro_Extension.php:92
+msgid "Filter by events that are part of specified series IDs"
+msgstr ""
+
+#: src/Events_Pro/REST/TEC/V1/Pro_Extension.php:98
+msgid "Filter by events that are related to a specific event ID."
+msgstr ""
+
+#: src/Events_Pro/REST/TEC/V1/Pro_Extension.php:103
+msgid "Filter by events that are recurring"
+msgstr ""
+
+#: src/Events_Pro/REST/TEC/V1/Pro_Extension.php:108
+msgid "Filter by events that are virtual"
+msgstr ""
+
+#: src/Events_Pro/REST/TEC/V1/Pro_Extension.php:125
+msgid "venue"
+msgstr ""
+
+#: src/Events_Pro/REST/TEC/V1/Pro_Extension.php:125
+msgid "venues"
+msgstr ""
+
+#: src/Events_Pro/REST/TEC/V1/Pro_Extension.php:146
+#: src/Events_Pro/REST/TEC/V1/Pro_Extension.php:288
+msgid "Whether the event is virtual"
+msgstr ""
+
+#: src/Events_Pro/REST/TEC/V1/Pro_Extension.php:152
+msgid "The latitude of the event"
+msgstr ""
+
+#: src/Events_Pro/REST/TEC/V1/Pro_Extension.php:159
+msgid "The longitude of the event"
+msgstr ""
+
+#: src/Events_Pro/REST/TEC/V1/Pro_Extension.php:173
+msgid "The request body for the event endpoint, with Pro-specific properties"
+msgstr ""
+
+#: src/Events_Pro/REST/TEC/V1/Pro_Extension.php:195
+#: src/Events_Pro/REST/TEC/V1/Pro_Extension.php:238
+msgid "The latitude of the venue"
+msgstr ""
+
+#: src/Events_Pro/REST/TEC/V1/Pro_Extension.php:202
+#: src/Events_Pro/REST/TEC/V1/Pro_Extension.php:245
+msgid "The longitude of the venue"
+msgstr ""
+
+#: src/Events_Pro/REST/TEC/V1/Pro_Extension.php:216
+msgid "The request body for the venue endpoint, with Pro-specific properties"
+msgstr ""
+
+#: src/Events_Pro/REST/TEC/V1/Pro_Extension.php:259
+msgid "The venue definition, with Pro-specific properties"
+msgstr ""
+
+#: src/Events_Pro/REST/TEC/V1/Pro_Extension.php:281
+msgid "The occurrence ID of the event, if the event is a recurring event occurrence"
+msgstr ""
+
 #: src/Events_Pro/REST/TEC/V1/Pro_Extension.php:295
 msgid "The video source for the virtual event"
 msgstr ""
 
 #: src/Events_Pro/REST/TEC/V1/Pro_Extension.php:302
 msgid "The URL for the virtual event"
+msgstr ""
+
+#: src/Events_Pro/REST/TEC/V1/Pro_Extension.php:316
+msgid "The event definition, with Pro-specific properties"
+msgstr ""
+
+#. translators: %s is the singular entity name.
+#: src/Events_Pro/REST/TEC/V1/Pro_Extension.php:343
+#, php-format
+msgid "The latitude of the %s"
+msgstr ""
+
+#. translators: %s is the singular entity name.
+#: src/Events_Pro/REST/TEC/V1/Pro_Extension.php:348
+#, php-format
+msgid "The longitude of the %s"
+msgstr ""
+
+#. translators: %s is the plural entity name.
+#: src/Events_Pro/REST/TEC/V1/Pro_Extension.php:353
+#, php-format
+msgid "The distance of the %s relative to the geolocation"
+msgstr ""
+
+#. translators: %s is the plural entity name.
+#: src/Events_Pro/REST/TEC/V1/Pro_Extension.php:358
+#, php-format
+msgid "Filter by %s that have geolocation data"
+msgstr ""
+
+#. translators: %s is the plural entity name.
+#: src/Events_Pro/REST/TEC/V1/Pro_Extension.php:363
+#, php-format
+msgid "Filter by %s near an address"
+msgstr ""
+
+#: src/Events_Pro/REST/TEC/V1/Tags/Events_Pro_Tag.php:45
+msgid "These operations are introduced by Events Pro."
 msgstr ""
 
 #: src/Events_Pro/Site_Health/Info_Section.php:79
@@ -3867,19 +4062,19 @@ msgstr ""
 msgid "Enable the Events Manager as the default page for viewing Events on the Administration page."
 msgstr ""
 
-#: src/Tribe/Admin/Manager/Shortcode.php:464
+#: src/Tribe/Admin/Manager/Shortcode.php:554
 msgid "Draft"
 msgstr ""
 
-#: src/Tribe/Admin/Manager/Shortcode.php:466
+#: src/Tribe/Admin/Manager/Shortcode.php:556
 msgid "Pending"
 msgstr ""
 
-#: src/Tribe/Admin/Manager/Shortcode.php:468
+#: src/Tribe/Admin/Manager/Shortcode.php:558
 msgid "Trashed"
 msgstr ""
 
-#: src/Tribe/Admin/Manager/Shortcode.php:470
+#: src/Tribe/Admin/Manager/Shortcode.php:560
 msgid "Ignored"
 msgstr ""
 
@@ -6182,12 +6377,12 @@ msgstr ""
 msgid "summary"
 msgstr ""
 
-#: src/Tribe/Views/V2/Hooks.php:1001
+#: src/Tribe/Views/V2/Hooks.php:1005
 msgctxt "The default text label for the \"today\" button on the Week View."
 msgid "This Week"
 msgstr ""
 
-#: src/Tribe/Views/V2/Hooks.php:1021
+#: src/Tribe/Views/V2/Hooks.php:1025
 msgctxt "The default text for the 'today' button's title and aria-label on the Week View."
 msgid "Click to select the current week"
 msgstr ""
@@ -6238,6 +6433,85 @@ msgstr ""
 #: src/Tribe/Views/V2/Rewrite.php:68
 msgctxt "The archive for events for multiple organizers, \"/organizers/\" URL string component."
 msgid "organizers"
+msgstr ""
+
+#: src/Tribe/Views/V2/Shortcodes/REST/V1/Calender_Embed.php:118
+msgctxt "Description for the view argument in the Calendar Embed REST endpoint."
+msgid "Specifies the format in which events are displayed, with options including Month, List, Day, Photo, Week, Map, and Summary view."
+msgstr ""
+
+#: src/Tribe/Views/V2/Shortcodes/REST/V1/Calender_Embed.php:125
+#: src/Tribe/Views/V2/Shortcodes/REST/V1/Calender_Embed.php:204
+#: src/Tribe/Views/V2/Shortcodes/REST/V1/Calender_Embed.php:211
+#: src/Tribe/Views/V2/Shortcodes/REST/V1/Calender_Embed.php:218
+msgctxt "Description for the category argument in the Calendar Embed REST endpoint."
+msgid "Filters the view to only show events in the specified category."
+msgstr ""
+
+#: src/Tribe/Views/V2/Shortcodes/REST/V1/Calender_Embed.php:132
+msgctxt "Description for the exclude-category argument in the Calendar Embed REST endpoint."
+msgid "Excludes a specified category from the events displayed."
+msgstr ""
+
+#: src/Tribe/Views/V2/Shortcodes/REST/V1/Calender_Embed.php:139
+msgctxt "Description for the tag argument in the Calendar Embed REST endpoint."
+msgid "Filters the view to only show events in the specified tag."
+msgstr ""
+
+#: src/Tribe/Views/V2/Shortcodes/REST/V1/Calender_Embed.php:146
+msgctxt "Description for the tag-category argument in the Calendar Embed REST endpoint."
+msgid "Excludes a specified tag from the events displayed."
+msgstr ""
+
+#: src/Tribe/Views/V2/Shortcodes/REST/V1/Calender_Embed.php:153
+msgctxt "Description for the tax-operand argument in the Calendar Embed REST endpoint."
+msgid "Determines whether to include events that match all or any of the specified categories/tags."
+msgstr ""
+
+#: src/Tribe/Views/V2/Shortcodes/REST/V1/Calender_Embed.php:160
+msgctxt "Description for the events_per_page argument in the Calendar Embed REST endpoint."
+msgid "Controls the number of events displayed per page in list-style views."
+msgstr ""
+
+#: src/Tribe/Views/V2/Shortcodes/REST/V1/Calender_Embed.php:167
+msgctxt "Description for the month_events_per_day argument in the Calendar Embed REST endpoint."
+msgid "Limits the number of events displayed per day in Month View."
+msgstr ""
+
+#: src/Tribe/Views/V2/Shortcodes/REST/V1/Calender_Embed.php:173
+msgctxt "Description for the featured argument in the Calendar Embed REST endpoint."
+msgid "Events should be filtered by their featured status."
+msgstr ""
+
+#: src/Tribe/Views/V2/Shortcodes/REST/V1/Calender_Embed.php:178
+msgctxt "Description for the past argument in the Calendar Embed REST endpoint."
+msgid "Past events should display."
+msgstr ""
+
+#: src/Tribe/Views/V2/Shortcodes/REST/V1/Calender_Embed.php:183
+msgctxt "Description for the tribe_bar argument in the Calendar Embed REST endpoint."
+msgid "Whether to display the tribe bar above the views."
+msgstr ""
+
+#: src/Tribe/Views/V2/Shortcodes/REST/V1/Calender_Embed.php:188
+msgctxt "Description for the filter_bar argument in the Calendar Embed REST endpoint."
+msgid "Whether to display the Filter Bar with the views."
+msgstr ""
+
+#: src/Tribe/Views/V2/Shortcodes/REST/V1/Calender_Embed.php:193
+msgctxt "Description for the date argument in the Calendar Embed REST endpoint."
+msgid "Sets the specific date for the view to start displaying events."
+msgstr ""
+
+#: src/Tribe/Views/V2/Shortcodes/REST/V1/Calender_Embed.php:198
+msgctxt "Description for the keyword argument in the Calendar Embed REST endpoint."
+msgid "Filters events by a specified keyword in the title or description."
+msgstr ""
+
+#: src/Tribe/Views/V2/Shortcodes/REST/V1/Calender_Embed.php:311
+#: src/views/iframe/header.php:27
+msgctxt "The title for the calendar embed iframe."
+msgid "Calendar Embed Iframe"
 msgstr ""
 
 #. translators: %s: events label plural
@@ -6547,32 +6821,32 @@ msgctxt "The name of the Countdown Widget."
 msgid "Events Countdown"
 msgstr ""
 
-#: src/Tribe/Views/V2/Widgets/Widget_Week.php:219
+#: src/Tribe/Views/V2/Widgets/Widget_Week.php:221
 msgctxt "The label for the title field of the Week Widget."
 msgid "Title:"
 msgstr ""
 
-#: src/Tribe/Views/V2/Widgets/Widget_Week.php:227
+#: src/Tribe/Views/V2/Widgets/Widget_Week.php:229
 msgctxt "The label for the layout field of the Week Widget."
 msgid "Layout:"
 msgstr ""
 
-#: src/Tribe/Views/V2/Widgets/Widget_Week.php:248
+#: src/Tribe/Views/V2/Widgets/Widget_Week.php:250
 msgctxt "The text for the vertical layout option."
 msgid "Vertical"
 msgstr ""
 
-#: src/Tribe/Views/V2/Widgets/Widget_Week.php:256
+#: src/Tribe/Views/V2/Widgets/Widget_Week.php:258
 msgctxt "The text for the horizontal layout option."
 msgid "Horizontal"
 msgstr ""
 
-#: src/Tribe/Views/V2/Widgets/Widget_Week.php:303
+#: src/Tribe/Views/V2/Widgets/Widget_Week.php:305
 msgctxt "The label for the option to enable JSON-LD in the Week View Widget."
 msgid "Generate JSON-LD data"
 msgstr ""
 
-#: src/Tribe/Views/V2/Widgets/Widget_Week.php:438
+#: src/Tribe/Views/V2/Widgets/Widget_Week.php:440
 #, php-format
 msgctxt "The \"week of\" header"
 msgid "Week of %s"
@@ -8106,7 +8380,7 @@ msgstr ""
 #: src/views/v2/map.php:46
 #: src/views/v2/photo.php:50
 #: src/views/v2/summary.php:53
-#: src/views/v2/week.php:54
+#: src/views/v2/week.php:59
 msgid "Loading..."
 msgstr ""
 
@@ -8198,6 +8472,12 @@ msgstr ""
 #: src/views/v2/week/mobile-events/nav/next-disabled.php:23
 #: src/views/v2/week/mobile-events/nav/next.php:27
 msgid "Next"
+msgstr ""
+
+#. Translators: %s: Events (plural).
+#: src/views/v2/map/event-cards/nav.php:24
+#, php-format
+msgid "%s Pagination"
 msgstr ""
 
 #. translators: %s: Event (plural or singular).
@@ -8385,6 +8665,17 @@ msgstr ""
 msgid "Previous week"
 msgstr ""
 
+#. translators: 1: Start date, 2: End date of the week
+#: src/views/v2/week/grid-body.php:30
+#, php-format
+msgid "Week of %1$s – %2$s"
+msgstr ""
+
+#. Translators: Accessibility text announcing there are no events for this date.
+#: src/views/v2/week/grid-body/events-day.php:48
+msgid "No events on this day."
+msgstr ""
+
 #: src/views/v2/week/grid-body/events-day/more-events.php:49
 #: src/views/v2/week/mobile-events/day/more-events.php:49
 #, php-format
@@ -8405,7 +8696,7 @@ msgstr[1] ""
 msgid "Toggle multiday %s"
 msgstr ""
 
-#: src/views/v2/week/grid-header.php:31
+#: src/views/v2/week/grid-header.php:32
 #, php-format
 msgid "Week of %s"
 msgstr ""
@@ -8421,15 +8712,13 @@ msgstr ""
 
 #: src/views/v2/widgets/shortcodes/components/top-bar/nav/next-disabled.php:19
 #: src/views/v2/widgets/shortcodes/components/top-bar/nav/next-disabled.php:20
-#: src/views/v2/widgets/shortcodes/components/top-bar/nav/next.php:22
-#: src/views/v2/widgets/shortcodes/components/top-bar/nav/next.php:23
+#: src/views/v2/widgets/shortcodes/components/top-bar/nav/next.php:25
 msgid "Next month"
 msgstr ""
 
 #: src/views/v2/widgets/shortcodes/components/top-bar/nav/prev-disabled.php:19
 #: src/views/v2/widgets/shortcodes/components/top-bar/nav/prev-disabled.php:20
-#: src/views/v2/widgets/shortcodes/components/top-bar/nav/prev.php:22
-#: src/views/v2/widgets/shortcodes/components/top-bar/nav/prev.php:23
+#: src/views/v2/widgets/shortcodes/components/top-bar/nav/prev.php:24
 msgid "Previous month"
 msgstr ""
 
@@ -8951,3 +9240,14 @@ msgstr ""
 #: src/modules/widgets/mini-calendar/index.js:21
 msgid "Displays this month's events."
 msgstr ""
+
+#: src/resources/js/views/week-day-selector.js:90
+msgid "No events"
+msgstr ""
+
+#: src/resources/js/views/week-day-selector.js:95
+#, js-format
+msgid "%d event"
+msgid_plural "%d events"
+msgstr[0] ""
+msgstr[1] ""

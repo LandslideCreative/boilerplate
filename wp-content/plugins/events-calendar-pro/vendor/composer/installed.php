@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'the-events-calendar/events-pro',
-        'pretty_version' => 'dev-release/T25.missmartian',
-        'version' => 'dev-release/T25.missmartian',
-        'reference' => '4ce2a268f4e1a7e1db678d32a26d75ac61858bab',
+        'pretty_version' => 'dev-release/T26.amethyst',
+        'version' => 'dev-release/T26.amethyst',
+        'reference' => 'c707040b84787e1303ba1e7e8c52e1e2aa14a481',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -29,9 +29,9 @@
             'dev_requirement' => false,
         ),
         'the-events-calendar/events-pro' => array(
-            'pretty_version' => 'dev-release/T25.missmartian',
-            'version' => 'dev-release/T25.missmartian',
-            'reference' => '4ce2a268f4e1a7e1db678d32a26d75ac61858bab',
+            'pretty_version' => 'dev-release/T26.amethyst',
+            'version' => 'dev-release/T26.amethyst',
+            'reference' => 'c707040b84787e1303ba1e7e8c52e1e2aa14a481',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

@@ -13,7 +13,7 @@
         'berlindb/core' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '4d5f7386f99464cf89d121878a7a25b014eddefe',
+            'reference' => 'cff87fafedda560dd4ad768d4dd1afb68a36b8c0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../berlindb/core',
             'aliases' => array(
@@ -67,18 +67,18 @@
             'dev_requirement' => false,
         ),
         'wp-media/plugin-family' => array(
-            'pretty_version' => 'v1.0.6',
-            'version' => '1.0.6.0',
-            'reference' => 'ab5067661eef2d04f645d74de797ae2193d8c58f',
+            'pretty_version' => 'v1.0.8',
+            'version' => '1.0.8.0',
+            'reference' => 'b763b3338e19ca672c407213da4cd8739e9327c2',
             'type' => 'library',
             'install_path' => __DIR__ . '/../wp-media/plugin-family',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
         'wp-media/wp-mixpanel' => array(
-            'pretty_version' => 'v1.3.0',
-            'version' => '1.3.0.0',
-            'reference' => '402d47230c2118c0cd40e64b0aa8d936b30d4e4f',
+            'pretty_version' => 'v1.4.0',
+            'version' => '1.4.0.0',
+            'reference' => 'dfedab2014e816a1040c57d544a6180f1d446624',
             'type' => 'library',
             'install_path' => __DIR__ . '/../wp-media/wp-mixpanel',
             'aliases' => array(),

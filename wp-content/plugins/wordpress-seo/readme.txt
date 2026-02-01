@@ -4,8 +4,8 @@ Donate link: https://yoa.st/1up
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 Tags: SEO, XML sitemap, Content analysis, Readability, Schema
-Tested up to: 6.8
-Stable tag: 26.3
+Tested up to: 6.9
+Stable tag: 26.8
 Requires PHP: 7.4
 
 Improve your SEO with real-time feedback, schema, and clear guidance. Upgrade for AI tools, Google Docs integration, and 24/7 support, no hidden fees.
@@ -303,38 +303,51 @@ Your question has most likely been answered on our help center: [yoast.com/help/
 
 == Changelog ==
 
-= 26.3 =
+= 26.8 =
 
-Release date: 2025-11-04
+Release date: 2026-01-20
 
-Yoast SEO 26.3 brings more enhancements and bugfixes. [Find more information about our software releases and updates here](https://yoa.st/releases).
-
-#### Bugfixes
-
-*  Fixes a bug where the llms.txt file template contained a spelling error "can by found" instead of "can be found". Props to [aditya241104](https://github.com/aditya241104).
-
-#### Other
-
-* Introduces the `wpseo_llmstxt_link_description` filter for link descriptions in the `llms.txt` file. Props to @Godzilaa.
-* Removes the external link icon from the `Customize llms.txt file` button in the `Site features` section of the plugin's Settings page.
-
-= 26.2 =
-
-Release date: 2025-10-21
-
-Yoast SEO 26.2 brings more enhancements and bugfixes. [Find more information about our software releases and updates here](https://yoa.st/releases).
+Yoast SEO 26.8 brings more enhancements and bugfixes. [Find more information about our software releases and updates here](https://yoa.st/releases).
 
 #### Enhancements
 
-* Adds a `Pronouns` field to the user profile and includes these pronouns in the Schema.org output. Props to [jdevalk](https://github.com/jdevalk).
-* Adds edit buttons next to the _keyphrase in meta description_, _keyphrase in slug_, and _keyphrase in SEO title_ assessments when there is no keyphrase and/or no meta description, slug, or SEO title.
-* Improves the _transition words_ assessment for Arabic by expanding the list of recognized transition words. Props to [Reem76-ar](https://github.com/Reem76-ar).
-* Introduces Content blocks collapsible inside Yoast Metabox and Sidebar to improve Yoast custom blocks discoverability.
+* Adds a schema settings page to allow users more control over the Yoast Schema Framework API.
+* Implements a new, easy-to-use design for the site features settings.
+
+#### Bugfixes
+
+* Fixes a bug where inserting Yoast blocks via Content blocks collapsible was not possible when editing in `template-locked` mode inside Block Editor.
+* Fixes a bug where the alert for signing up to the newsletter didn't support rtl direction for buttons and inputs in RTL languages.
+* Fixes a bug where the assessments highlighting feature did not work when editing in template-locked mode in the Block Editor.
+* Fixes a bug where the Search and Social appearance modals looked off on WordPress 7.0 or with Gutenberg 22.3.0.
+* Fixes a bug where WordPress link classes were not being recognized when Yoast SEO was active. Props to [benoitchantre](https://github.com/benoitchantre).
 
 #### Other
 
-* Adapts the behavior of the `Contact our support team` button in the `Support` page to our new Premium and WooCommerce SEO subscription plans.
-* Disables opcache invalidation on plugin upgrade for a subset of the userbase.
+* Adds an opt-in notification for the task list feature on the general page.
+* Improves the translatability of some tasks' title in the task list.
+* Replaces Yoast product logos with new designs across the plugin’s interface.
+* Updates the product URL inside the marker presenter for Yoast SEO and Yoast SEO Premium.
+
+= 26.7 =
+
+Release date: 2026-01-07
+
+*New:* Yoast SEO (free) now includes full access to the Site Kit by Google integration in your Dashboard. [Read the full release post here](https://yoa.st/551).
+
+#### Enhancements
+
+* Changes the Schema output to render `Article` entities even when the `publisher` property is left empty.
+* Rolls out the Site Kit integration for all Yoast users.
+
+#### Bugfixes
+
+* Fixes a bug where the Yoast AI consent modal would incorrectly pop up when interacting with unrelated buttons or fields on Profile setting page.
+
+#### Other
+
+* Hides the llms.txt task in multisites, since the feature is disabled in such setups.
+* Increases disabling opcache invalidation on plugin upgrade, now applied to a bigger subset of the userbase.
 
 = Earlier versions =
 For the changelog of earlier versions, please refer to [the changelog on yoast.com](https://yoa.st/yoast-seo-changelog).

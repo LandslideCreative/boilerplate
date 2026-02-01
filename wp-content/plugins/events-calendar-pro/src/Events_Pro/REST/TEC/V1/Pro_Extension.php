@@ -42,8 +42,8 @@ class Pro_Extension extends Controller_Contract {
 	 * @return void
 	 */
 	protected function do_register(): void {
-		add_filter( 'tec_events_rest_v1_events_read_args', [ $this, 'filter_events_read_args' ], 10, 2 );
-		add_filter( 'tec_events_rest_v1_venues_read_args', [ $this, 'filter_venues_read_args' ], 10, 2 );
+		add_filter( 'tec_events_rest_v1_events_read_params', [ $this, 'filter_events_read_params' ], 10, 2 );
+		add_filter( 'tec_events_rest_v1_venues_read_params', [ $this, 'filter_venues_read_params' ], 10, 2 );
 		add_filter( 'tec_rest_swagger_event_request_body_definition', [ $this, 'filter_event_request_body_definition' ] );
 		add_filter( 'tec_rest_swagger_venue_request_body_definition', [ $this, 'filter_venue_request_body_definition' ] );
 		add_filter( 'tec_rest_swagger_event_definition', [ $this, 'filter_event_definition' ] );
@@ -58,8 +58,8 @@ class Pro_Extension extends Controller_Contract {
 	 * @return void
 	 */
 	public function unregister(): void {
-		remove_filter( 'tec_events_rest_v1_events_read_args', [ $this, 'filter_events_read_args' ], 10 );
-		remove_filter( 'tec_events_rest_v1_venues_read_args', [ $this, 'filter_venues_read_args' ], 10 );
+		remove_filter( 'tec_events_rest_v1_events_read_params', [ $this, 'filter_events_read_params' ], 10 );
+		remove_filter( 'tec_events_rest_v1_venues_read_params', [ $this, 'filter_venues_read_params' ], 10 );
 		remove_filter( 'tec_rest_swagger_event_request_body_definition', [ $this, 'filter_event_request_body_definition' ] );
 		remove_filter( 'tec_rest_swagger_venue_request_body_definition', [ $this, 'filter_venue_request_body_definition' ] );
 		remove_filter( 'tec_rest_swagger_event_definition', [ $this, 'filter_event_definition' ] );
@@ -77,35 +77,35 @@ class Pro_Extension extends Controller_Contract {
 	 *
 	 * @return QueryArgumentCollection The filtered collection of arguments.
 	 */
-	public function filter_events_read_args( QueryArgumentCollection $collection, Events $endpoint ): QueryArgumentCollection {
+	public function filter_events_read_params( QueryArgumentCollection $collection, Events $endpoint ): QueryArgumentCollection {
 		foreach ( $this->get_geo_related_props() as $prop ) {
 			$collection[] = $prop;
 		}
 
 		$collection[] = ( new Boolean(
 			'in_series',
-			fn() => __( 'Filter by events that are part of a series', 'events-pro' ),
+			fn() => __( 'Filter by events that are part of a series', 'tribe-events-calendar-pro' ),
 		) )->set_example( true );
 
 		$collection[] = ( new Array_Of_Type(
 			'series',
-			fn() => __( 'Filter by events that are part of specified series IDs', 'events-pro' ),
+			fn() => __( 'Filter by events that are part of specified series IDs', 'tribe-events-calendar-pro' ),
 			Positive_Integer::class,
 		) )->set_example( [ 1, 2, 3 ] );
 
 		$collection[] = ( new Positive_Integer(
 			'related_to',
-			fn() => __( 'Filter by events that are related to a specific event ID.', 'events-pro' ),
+			fn() => __( 'Filter by events that are related to a specific event ID.', 'tribe-events-calendar-pro' ),
 		) )->set_example( 123 );
 
 		$collection[] = ( new Boolean(
 			'recurring',
-			fn() => __( 'Filter by events that are recurring', 'events-pro' ),
+			fn() => __( 'Filter by events that are recurring', 'tribe-events-calendar-pro' ),
 		) )->set_example( true );
 
 		$collection[] = ( new Boolean(
 			'virtual',
-			fn() => __( 'Filter by events that are virtual', 'events-pro' ),
+			fn() => __( 'Filter by events that are virtual', 'tribe-events-calendar-pro' ),
 		) )->set_example( false );
 
 		return $collection;
@@ -121,8 +121,8 @@ class Pro_Extension extends Controller_Contract {
 	 *
 	 * @return QueryArgumentCollection The filtered collection of arguments.
 	 */
-	public function filter_venues_read_args( QueryArgumentCollection $collection, Venues $endpoint ): QueryArgumentCollection {
-		foreach ( $this->get_geo_related_props( __( 'venue', 'events-pro' ), __( 'venues', 'events-pro' ) ) as $prop ) {
+	public function filter_venues_read_params( QueryArgumentCollection $collection, Venues $endpoint ): QueryArgumentCollection {
+		foreach ( $this->get_geo_related_props( __( 'venue', 'tribe-events-calendar-pro' ), __( 'venues', 'tribe-events-calendar-pro' ) ) as $prop ) {
 			$collection[] = $prop;
 		}
 
@@ -143,20 +143,20 @@ class Pro_Extension extends Controller_Contract {
 
 		$pro_properties[] = ( new Boolean(
 			'virtual',
-			fn() => __( 'Whether the event is virtual', 'events-pro' ),
+			fn() => __( 'Whether the event is virtual', 'tribe-events-calendar-pro' ),
 		) )->set_example( false );
 
 		$pro_properties[] = (
 			new Number(
 				'lat',
-				fn() => __( 'The latitude of the event', 'events-pro' ),
+				fn() => __( 'The latitude of the event', 'tribe-events-calendar-pro' ),
 			)
 		)->set_example( 37.774929 );
 
 		$pro_properties[] = (
 			new Number(
 				'lng',
-				fn() => __( 'The longitude of the event', 'events-pro' ),
+				fn() => __( 'The longitude of the event', 'tribe-events-calendar-pro' ),
 			)
 		)->set_example( -122.419416 );
 
@@ -170,7 +170,7 @@ class Pro_Extension extends Controller_Contract {
 		$documentation['allOf'][] = [
 			'type'        => 'object',
 			'title'       => 'Pro: Event Request Body',
-			'description' => __( 'The request body for the event endpoint, with Pro-specific properties', 'events-pro' ),
+			'description' => __( 'The request body for the event endpoint, with Pro-specific properties', 'tribe-events-calendar-pro' ),
 			'properties'  => $pro_properties,
 		];
 
@@ -192,14 +192,14 @@ class Pro_Extension extends Controller_Contract {
 		$pro_properties[] = (
 			new Number(
 				'lat',
-				fn() => __( 'The latitude of the venue', 'events-pro' ),
+				fn() => __( 'The latitude of the venue', 'tribe-events-calendar-pro' ),
 			)
 		)->set_example( 37.774929 );
 
 		$pro_properties[] = (
 			new Number(
 				'lng',
-				fn() => __( 'The longitude of the venue', 'events-pro' ),
+				fn() => __( 'The longitude of the venue', 'tribe-events-calendar-pro' ),
 			)
 		)->set_example( -122.419416 );
 
@@ -213,7 +213,7 @@ class Pro_Extension extends Controller_Contract {
 		$documentation['allOf'][] = [
 			'type'        => 'object',
 			'title'       => 'Pro: Venue Request Body',
-			'description' => __( 'The request body for the venue endpoint, with Pro-specific properties', 'events-pro' ),
+			'description' => __( 'The request body for the venue endpoint, with Pro-specific properties', 'tribe-events-calendar-pro' ),
 			'properties'  => $pro_properties,
 		];
 
@@ -235,14 +235,14 @@ class Pro_Extension extends Controller_Contract {
 		$pro_properties[] = (
 			new Number(
 				'latitude',
-				fn() => __( 'The latitude of the venue', 'events-pro' ),
+				fn() => __( 'The latitude of the venue', 'tribe-events-calendar-pro' ),
 			)
 		)->set_example( 37.774929 );
 
 		$pro_properties[] = (
 			new Number(
 				'longitude',
-				fn() => __( 'The longitude of the venue', 'events-pro' ),
+				fn() => __( 'The longitude of the venue', 'tribe-events-calendar-pro' ),
 			)
 		)->set_example( -122.419416 );
 
@@ -256,7 +256,7 @@ class Pro_Extension extends Controller_Contract {
 		$documentation['allOf'][] = [
 			'type'        => 'object',
 			'title'       => 'Pro: Venue',
-			'description' => __( 'The venue definition, with Pro-specific properties', 'events-pro' ),
+			'description' => __( 'The venue definition, with Pro-specific properties', 'tribe-events-calendar-pro' ),
 			'properties'  => $pro_properties,
 		];
 
@@ -278,14 +278,14 @@ class Pro_Extension extends Controller_Contract {
 		$pro_properties[] = (
 			new Integer(
 				'occurrence_id',
-				fn() => __( 'The occurrence ID of the event, if the event is a recurring event occurrence', 'events-pro' ),
+				fn() => __( 'The occurrence ID of the event, if the event is a recurring event occurrence', 'tribe-events-calendar-pro' ),
 			)
 		)->set_example( 0 );
 
 		$pro_properties[] = (
 			new Boolean(
 				'is_virtual',
-				fn() => __( 'Whether the event is virtual', 'events-pro' ),
+				fn() => __( 'Whether the event is virtual', 'tribe-events-calendar-pro' ),
 			)
 		)->set_example( false );
 
@@ -313,7 +313,7 @@ class Pro_Extension extends Controller_Contract {
 		$documentation['allOf'][] = [
 			'type'        => 'object',
 			'title'       => 'Pro: Event',
-			'description' => __( 'The event definition, with Pro-specific properties', 'events-pro' ),
+			'description' => __( 'The event definition, with Pro-specific properties', 'tribe-events-calendar-pro' ),
 			'properties'  => $pro_properties,
 		];
 
@@ -332,35 +332,35 @@ class Pro_Extension extends Controller_Contract {
 	 */
 	protected function get_geo_related_props( string $singular_entity = '', string $plural_entity = '' ): array {
 		if ( ! $singular_entity ) {
-			$singular_entity = __( 'event', 'events-pro' );
-			$plural_entity   = __( 'events', 'events-pro' );
+			$singular_entity = __( 'event', 'tribe-events-calendar-pro' );
+			$plural_entity   = __( 'events', 'tribe-events-calendar-pro' );
 		}
 
 		$props = [
 			( new Number(
 				'geoloc_lat',
 				// translators: %s is the singular entity name.
-				fn() => sprintf( __( 'The latitude of the %s', 'events-pro' ), $singular_entity ),
+				fn() => sprintf( __( 'The latitude of the %s', 'tribe-events-calendar-pro' ), $singular_entity ),
 			) )->set_example( 37.774929 ),
 			( new Number(
 				'geoloc_lng',
 				// translators: %s is the singular entity name.
-				fn() => sprintf( __( 'The longitude of the %s', 'events-pro' ), $singular_entity ),
+				fn() => sprintf( __( 'The longitude of the %s', 'tribe-events-calendar-pro' ), $singular_entity ),
 			) )->set_example( -122.419416 ),
 			( new Number(
 				'distance',
 				// translators: %s is the plural entity name.
-				fn() => sprintf( __( 'The distance of the %s relative to the geolocation', 'events-pro' ), $plural_entity ),
+				fn() => sprintf( __( 'The distance of the %s relative to the geolocation', 'tribe-events-calendar-pro' ), $plural_entity ),
 			) )->set_example( 10 ),
 			( new Boolean(
 				'has_geoloc',
 				// translators: %s is the plural entity name.
-				fn() => sprintf( __( 'Filter by %s that have geolocation data', 'events-pro' ), $plural_entity ),
+				fn() => sprintf( __( 'Filter by %s that have geolocation data', 'tribe-events-calendar-pro' ), $plural_entity ),
 			) )->set_example( true ),
 			( new Text(
 				'near',
 				// translators: %s is the plural entity name.
-				fn() => sprintf( __( 'Filter by %s near an address', 'events-pro' ), $plural_entity ),
+				fn() => sprintf( __( 'Filter by %s near an address', 'tribe-events-calendar-pro' ), $plural_entity ),
 			) )->set_example( 'San Francisco, CA' ),
 		];
 
