@@ -4,14 +4,20 @@
 }
 
 /* Page Builder */
-.acf-field-flexible-content[data-name="page_builder"] .no-value-message {
-    border-color: #1d2327;
-    border-width: 3px;
+@media (min-width: 1200px) {
+    .acf-field-flexible-content[data-name="page_builder"]>.acf-label {
+        margin-right: 375px;
+        z-index: 2;
+    }
 }
-@media (min-width: 600px) {
+@media (min-width: 1200px) {
     .acf-field-flexible-content[data-name="page_builder"] .acf-flexible-content .acf-fc-top-actions {
         margin-top: -34px;
     }
+}
+.acf-field-flexible-content[data-name="page_builder"] .no-value-message {
+    border-color: #1d2327;
+    border-width: 3px;
 }
 .acf-field-flexible-content[data-name="page_builder"] .acf-flexible-content .layout {
     border: 3px solid #1d2327;

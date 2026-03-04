@@ -9,8 +9,9 @@
  *
  * @link https://evnt.is/1aiy
  *
- * @since 5.0.1
+ * @since 7.7.13
  * @since 7.6.3 Add aria-label attribute to nav. [TEC-5222]
+ * @since 7.7.13 Update aria-label attribute to indicate bottom pagination. [TEC-5732]
  *
  * @var string $prev_url The URL to the previous page, if any, or an empty string.
  * @var string $next_url The URL to the next page, if any, or an empty string.
@@ -21,8 +22,8 @@
 
 $nav_aria_label = sprintf(
 	// Translators: %s: Events (plural).
-	__( '%s Pagination', 'tribe-events-calendar-pro' ),
-	tribe_get_event_label_plural()
+	__( 'Bottom %s list pagination', 'tribe-events-calendar-pro' ),
+	tribe_get_event_label_plural_lowercase()
 );
 ?>
 <nav class="tribe-events-pro-map__nav tribe-events-c-nav" aria-label="<?php echo esc_attr( $nav_aria_label ); ?>">
