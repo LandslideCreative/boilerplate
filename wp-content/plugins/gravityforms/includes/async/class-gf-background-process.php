@@ -978,6 +978,10 @@ abstract class GF_Background_Process extends WP_Async_Request {
 			if ( ! is_object( $batch ) ) {
 				$this->log_debug( __METHOD__ . '(): Aborting. Getting the next batch returned empty or an invalid value.' );
 				break;
+			} elseif ( empty( $batch->data ) || ! is_array( $batch->data ) ) {
+				$this->log_debug( __METHOD__ . sprintf( '(): Batch %s is empty.', $batch->key ) );
+				$this->delete( $batch->key );
+				continue;
 			}
 
 			if ( is_multisite() ) {
@@ -1410,7 +1414,7 @@ abstract class GF_Background_Process extends WP_Async_Request {
 
 		$pause_timestamp = get_site_option( $this->get_identifier() . '_pause_timestamp' );
 		if ( empty( $pause_timestamp ) || ! is_numeric( $pause_timestamp ) ) {
-			$this->log_error( __METHOD__ . '(): Processing is paused and the expiry timestamp is not set or contains an invalid value: ' . var_export( $pause_timestamp, true ) );
+			$this->log_error( __METHOD__ . '(): Processing is paused and the expiry timestamp is not set or contains an invalid value: ' . var_export( $pause_timestamp, true ) ); // phpcs:ignore QITStandard.PHP.DebugCode.DebugFunctionFound
 
 			return true;
 		}

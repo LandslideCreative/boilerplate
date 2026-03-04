@@ -67,7 +67,9 @@ function ls_add_page_specific_messages($field) {
     $archive_pages = ls_archive_pages();
 
     /*
-        $page_specific_messages['page'] - Page to display message on
+        $page_specific_messages['page'] - Page to display message on (i.e. 'about')
+        OR $page_specific_messages['page_template'] - Page template to display message on (i.e. 'templates/template-sample.php')
+        OR $page_specific_messages['post_type'] - Post type to display message on (i.e. 'staff')
         $page_specific_messages['pb_message'] - Message to display above page builder
         $page_specific_messages['ps_message'] - Message to display in page specific section
     */
@@ -94,7 +96,7 @@ function ls_add_page_specific_messages($field) {
         'pb_message' => 'The <strong>Page Specific Content</strong> section will display a calendar of upcoming events.',
         'ps_message' => 'This section displays a calendar of upcoming events.',
     );
-
+    
     // Sermon archive message
     $page_specific_messages[] = array(
         'page' => $archive_pages['sermon'],
@@ -102,15 +104,22 @@ function ls_add_page_specific_messages($field) {
         'ps_message' => 'This section displays an archive of sermons.',
     );
 
-    if( is_admin() && $page_specific_messages ) {
-        if( $post->post_type=='page' ) {
-            foreach( $page_specific_messages as $message) {
-                if( $post->post_name == $message['page'] ) {
-                    if( $field['type']== 'flexible_content' ) {
-                        $field['instructions'] = $message['pb_message'];
-                    } else if( $field['type']== 'message' ) {
-                        $field['message'] = $message['ps_message'].' No additional settings are required for this section.';
-                    }
+    if( is_admin() && $page_specific_messages && $post ) {
+        foreach( $page_specific_messages as $message) {
+            $display_message = false;
+            if( isset($message['page']) && $post->post_type=='page' && $post->post_name == $message['page'] ) {
+                $display_message = true;
+            } else if( isset($message['page_template']) && get_post_meta(get_the_ID(), '_wp_page_template', true)==$message['page_template'] ) {
+                $display_message = true;
+            } else if( isset($message['post_type']) && $post->post_type==$message['post_type'] ) {
+                $display_message = true;
+            }
+
+            if( $display_message ) {
+                if( $field['type']== 'flexible_content' ) {
+                    $field['instructions'] = $message['pb_message'];
+                } else if( $field['type']== 'message' ) {
+                    $field['message'] = $message['ps_message'].' No additional settings are required for this section.';
                 }
             }
         }
