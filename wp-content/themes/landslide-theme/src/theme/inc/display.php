@@ -220,10 +220,10 @@ function ls_sticky_nav( $position='' ) {
 	if( $sticky ) {
 		if( $position=='container' ) {
 			echo 'data-sticky-container';
-		} else {
-			echo 'data-sticky data-margin-top="0" data-sticky-on="small"';
+		} else if( $position=='element' ) {
+			echo 'data-sticky data-top-anchor="sticky-navigation:top" data-margin-top="0" data-sticky-on="small"';
 		}
 	}
 
-	return TRUE;
+	return $sticky;
 }

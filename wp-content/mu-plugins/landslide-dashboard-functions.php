@@ -97,3 +97,8 @@ function ls_mu_remove_wp_rocket_admin_bar() {
     }
 }
 add_action('admin_head', 'ls_mu_remove_wp_rocket_admin_bar');
+
+// Add SearchWP License Key
+add_filter( 'searchwp\license\key', function( $key ) {
+  return 'bf6bf9508fe55eb20e0fee18b10a74f0';
+} );

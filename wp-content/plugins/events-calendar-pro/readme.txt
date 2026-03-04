@@ -3,7 +3,7 @@
 Contributors: theeventscalendar, borkweb, bordoni, brianjessee, aguseo, camwynsp, GeoffBel, jentheo, leahkoerper, lucatume, neillmcshea, vicskf, zbtirrell, juanfra
 Tags: events, calendar, event, venue, organizer, dates, date, google maps, conference, workshop, concert, meeting, seminar, summit, class, the events calendar, widget, pro
 Donate link: https://evnt.is/29
-Stable tag: 7.7.12
+Stable tag: 7.7.13
 Requires at least: 6.7
 Tested up to: 6.9
 Requires PHP: 7.4
@@ -213,6 +213,13 @@ Previous versions of Events Calendar Pro are not cross-compatible with 6.X add-o
 Remember to always make a backup of your database and files before updating!
 
 == Changelog ==
+
+= [7.7.13] 2026-02-11 =
+
+* Tweak - Add aria-label attribute to events navigation. [TEC-5732]
+* Tweak - Add aria-label to month navigation for screen reader accessibility. [TEC-5230]
+* Tweak - Changed views: `v2/map/event-cards/nav`, `v2/map/top-bar/nav`, `v2/photo/nav`, `v2/photo/top-bar/nav`, `v2/summary/nav`, `v2/summary/top-bar/nav`, `v2/week/top-bar/nav`, `v2/widgets/shortcodes/components/top-bar/month-nav`
+* Language - 3 new strings added, 1 updated, 0 fuzzied, and 0 obsoleted.
 
 = [7.7.12] 2026-01-13 =
 

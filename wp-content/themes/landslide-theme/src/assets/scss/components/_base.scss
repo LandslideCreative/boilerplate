@@ -1,30 +1,40 @@
 // Body font sizes
 body {
 	@include breakpoint(medium) {
-		font-size: $medium-font-size;
+		font-size: map-get($font-size, "medium");
 	}
 	@include breakpoint(large) {
-		font-size: $large-font-size;
+		font-size: map-get($font-size, "large");
 	}
 }
 
 p.large {
-	font-size: rem-calc(18);
+	font-size: map-get($paragraph-large-font-size, "small");
 	@include breakpoint(medium) {
-		font-size: rem-calc(19);
+		font-size: map-get($paragraph-large-font-size, "medium");
 	}
 	@include breakpoint(large) {
-		font-size: rem-calc(20);
+		font-size: map-get($paragraph-large-font-size, "large")
 	}
 }
 
 ol, ul {
 	li {
-		margin-bottom: 10px;
+		margin-bottom: $list-item-margin-bottom;
 		&:last-child {
 			margin-bottom: 0;
 		}
+		ul, ol {
+			margin-top: $list-item-margin-bottom;
+			margin-bottom: $list-item-margin-bottom;
+		}
 	}
+}
+
+blockquote {
+	@include clean-last-child;
+	@include horizontal-margin(1, true, false);
+	@include horizontal-padding(.5, true, false);
 }
 
 // Vertical center class
@@ -56,7 +66,7 @@ ol, ul {
 	@include clean-last-child;
 }
 .match-height+* {
-	margin-top: 25px;
+	margin-top: $paragraph-margin-bottom;
 }
 
 // Reverse columns for mobile
@@ -81,21 +91,33 @@ ol, ul {
 
 // Text button
 .text-button {
-	text-transform: uppercase;
+	font-family: $text-button-font-family;
+	text-transform: $text-button-text-transform;
 	color: $primary-color;
-	font-weight: bold;
-	text-decoration: underline;
+	font-weight: $text-button-font-weight;
+	text-decoration: $text-button-text-decoration;
+	letter-spacing: $text-button-letter-spacing;
+	font-size: map-get($text-button-font-size, "small");	
+	@include breakpoint(medium) {
+		font-size: map-get($text-button-font-size, "medium");
+	}
+	@include breakpoint(large) {
+		font-size: map-get($text-button-font-size, "large")
+	}
 }
 
 // Additional button styles
 .button {
+	border-radius: $button-radius;
 	text-decoration: none;
-	text-transform: uppercase;
+	text-transform: $button-text-transform;
+	letter-spacing: $button-letter-spacing;
+	font-size: map-get($button-font-size, "small");
 	@include breakpoint(medium) {
-		font-size: $medium-font-size;
+		font-size: map-get($button-font-size, "medium");
 	}
 	@include breakpoint(large) {
-		font-size: $large-font-size;
+		font-size: map-get($button-font-size, "large")
 	}
 }
 
@@ -174,7 +196,7 @@ body .gform_wrapper.gravity-theme {
 		top: 50%;
 		transform: translateY(-50%);
 		right: 14px;
-		border-top: 6px $white solid;
+		border-top: 6px $select-container-triangle-color solid;
 		border-left: 6px transparent solid;
 		border-right: 6px transparent solid;
 		z-index: 2;
@@ -182,15 +204,16 @@ body .gform_wrapper.gravity-theme {
 	&::after {
 		content: '';
 		pointer-events: none;
-		background-color: $primary-color;
+		background-color: $select-container-triangle-background;
 		position: absolute;
 		top: 0;
 		bottom: 0;
 		right: 0;
 		width: 40px;
+		border-radius: 0 $select-container-border-radius $select-container-border-radius 0;
 	}
 	select {
-		border: 2px solid $primary-color;
+		border: $select-container-border;
 		margin-bottom: 0;
 		height: auto;
 		padding: 8px 12px;

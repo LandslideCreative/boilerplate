@@ -16,11 +16,15 @@
 	<body <?php body_class(); ?>>
 		<?php the_field('gtm_body', 'options'); ?>
 
-		<div class="off-canvas position-right" id="offCanvas" data-off-canvas data-trap-focus="true">
+		<div class="off-canvas position-right off-canvas-navigation-container" id="offCanvas" data-off-canvas data-trap-focus="true">
 			
 			<ul class="off-canvas-navigation dropdown-nav">
 	        	<?php display_simple_navigation('main-nav'); ?>
 	        </ul>
+
+	        <div class="mobile-search">
+				<?php get_template_part('searchform'); ?>
+			</div>
 
 	        <?php if( has_nav_menu( 'top-nav' ) ) { ?>
 	        	<ul class="off-canvas-navigation secondary dropdown-nav">
@@ -34,17 +38,13 @@
 
 		</div>
 		<div class="off-canvas-content" data-off-canvas-content>
-			<header class="header" role="banner" <?php ls_sticky_nav( 'container' ); ?>>
+			<header class="header" role="banner">
 
 				<div class="accessibility-nav">
 					<a href="#main-content" class="skip-to-main">Skip to Main Content</a>
 				</div>
 
-				<?php if( get_field('alert_toggle', 'options') ) { ?>
-					<div class="alert-bar">
-						<?php the_field('alert_copy', 'options'); ?>
-					</div>
-				<?php } ?>
+				<?php get_template_part('partials/header/alert'); ?>
 
 				<?php get_template_part('partials/header/navigation'); ?>
 
