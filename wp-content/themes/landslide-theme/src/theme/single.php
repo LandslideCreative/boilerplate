@@ -83,6 +83,8 @@ if (have_posts()): while (have_posts()) : the_post(); ?>
 			</div>
 		</section>
 
+		<?php get_template_part('partials/page', 'builder'); ?>
+
 		<?php // Show YARPP related posts
 		if( function_exists('yarpp_related') ) {
 			yarpp_related( array(
