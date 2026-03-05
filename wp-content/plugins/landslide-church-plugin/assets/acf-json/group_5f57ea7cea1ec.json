@@ -1233,7 +1233,7 @@
             {
                 "param": "post_type",
                 "operator": "==",
-                "value": "staff"
+                "value": "post"
             }
         ]
     ],
@@ -1247,5 +1247,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1772662373
+    "modified": 1772681217
 }
