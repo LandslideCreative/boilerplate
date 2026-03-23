@@ -1,18 +1,18 @@
 <?php // Sermon Filter
 
 $filters = array();
-
 $filters['topic'] = get_query_var('topic', '');
-$filters['speaker'] = get_query_var('speaker', '');
-$filters['bible'] = get_query_var('bible', ''); ?>
+$filters['speaker'] = get_query_var('speaker', ''); ?>
 
 <div class="grid-container intro-section filter-container sermon-filter-container">
-	<div class="grid-x grid-padding-x">
-		<div class="cell">
-			<p class="filter-label">Filter Sermons</p>
-			<form class="filter-form" id="sermon-filter" method="GET">
+	<div class="grid-x <?php ls_grid_class( 'sermon-filter' ); ?>">
+		<div class="cell <?php ls_cell_class( 'sermon-filter' ); ?>">
+			<form class="filter-form" id="sermon-filter" method="GET" action="<?php echo get_post_type_archive_link('sermon'); ?>#sermon-list">
+
+				<?php /* Topic */ ?>
+				<label class="sermon-filter-topic-label visually-hidden" for="topic">Topic</label>
 				<div class="select-container">
-					<select name="topic" aria-label="Topic">
+					<select name="topic" id="topic">
 						<option value="">
 							All Topics
 						</option>
@@ -29,8 +29,10 @@ $filters['bible'] = get_query_var('bible', ''); ?>
 					</select>
 				</div>
 
+				<?php /* Speaker */ ?>
+				<label class="sermon-filter-speaker-label visually-hidden" for="speaker">Speaker</label>
 				<div class="select-container">
-					<select name="speaker" aria-label="Speaker">
+					<select name="speaker" id="speaker">
 						<option value="">
 							All Speakers
 						</option>
@@ -47,8 +49,10 @@ $filters['bible'] = get_query_var('bible', ''); ?>
 					</select>
 				</div>
 
+				<?php /* Book of the Bible */ ?>
+				<label class="sermon-filter-bible-label visually-hidden" for="bible">Book of the Bible</label>
 				<div class="select-container">
-					<select name="bible" aria-label="Book of the Bible">
+					<select name="bible" id="bible">
 						<option value="">
 							All Books of the Bible
 						</option>
@@ -65,7 +69,12 @@ $filters['bible'] = get_query_var('bible', ''); ?>
 					</select>
 				</div>
 
-				<input type="submit" class="button hollow" value="Go">
+				<input type="submit" class="button hollow" value="Filter Sermons">
+
+				<?php if( array_filter($filters) ) { ?>
+					<a href="<?php echo get_post_type_archive_link('sermon'); ?>#sermon-list" class="clear-filters">Clear Filters</a>
+				<?php } ?>
+				
 			</form>
 		</div>
 	</div>
