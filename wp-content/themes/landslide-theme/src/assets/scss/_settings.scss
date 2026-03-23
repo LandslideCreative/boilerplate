@@ -28,12 +28,12 @@
 // 1. Global
 // ---------
 
+$global-font-size: rem-calc(16px);
 $font-size: (
   "small": rem-calc(16px),
   "medium": rem-calc(16px),
   "large": rem-calc(18px)
 );
-$global-font-size: map-get($font-size, "small");
 $global-width: rem-calc(1200);
 $global-lineheight: 1.6;
 $body-background: $white;
@@ -112,6 +112,15 @@ $header-styles: (
     'h6': ('font-size': 18),
   ),
 );
+$h5-label-font-size: (
+  "small": rem-calc(16px),
+  "medium": rem-calc(16px),
+  "large": rem-calc(18px)
+);
+$h5-label-color: inherit;
+$h5-label-font-family: $header-font-family;
+$h5-label-font-weight: $normal;
+$h5-label-text-transform: none;
 $small-font-size: 80%;
 $header-small-font-color: inherit;
 $paragraph-lineheight: 1.6;
@@ -125,6 +134,20 @@ $anchor-color: $primary-color;
 $anchor-color-hover: scale-color($anchor-color, $lightness: -14%);
 $anchor-text-decoration: underline;
 $anchor-text-decoration-hover: underline;
+$category-label-background-color: $secondary-color;
+$category-label-hover-background-color: $secondary-color;
+$category-label-color: $white;
+$category-label-hover-color: $white;
+$category-label-padding: 0 15px;
+$category-label-border-radius: 15px;
+$category-label-font-family: $header-font-family;
+$category-label-font-size: (
+  "small": rem-calc(14),
+  "medium": rem-calc(14),
+  "large": rem-calc(16)
+);
+$category-label-font-weight: $normal;
+$category-label-text-transform: none;
 $hr-width: $global-width;
 $hr-border: 2px solid $primary-color;
 $hr-margin: $paragraph-margin-bottom auto;
@@ -402,6 +425,8 @@ $sitewide-alert-link-color: $white;
 $top-bar-background-color: $primary-color;
 
 // Top Bar Navigation
+$top-bar-nav-font-family: $body-font-family;
+$top-bar-nav-font-weight: $bold;
 $top-bar-nav-color: $white;
 $top-bar-nav-color-hover: darken($top-bar-nav-color, 7);
 $top-bar-nav-font-size: (
@@ -416,7 +441,7 @@ $top-bar-nav-y-padding: (
   "medium": 5px,
   "large": 7px
 );
-// Main Navigation Arrows
+// Top Bar Navigation Arrows
 $top-bar-nav-arrow-caret: true;
 $top-bar-nav-arrow-size: 8px;
 $top-bar-nav-arrow-margin-left: 6px;
@@ -442,6 +467,7 @@ $top-bar-submenu-background-color-hover: darken($top-bar-submenu-background-colo
 $top-bar-submenu-color-hover: darken($top-bar-submenu-color, 7);
 $top-bar-submenu-border: 1px solid $primary-color;
 $top-bar-submenu-border-radius: $global-radius;
+$top-bar-submenu-font-weight: $normal;
 $top-bar-submenu-font-size: (
   "medium": rem-calc(13),
   "large": rem-calc(15)
@@ -501,6 +527,10 @@ $main-header-stuck-logo-width: (
   "medium": 150px,
   "large": 175px
 );
+$anchor-offset: (
+  "medium": 66px,
+  "large": 84px
+);
 
 
 // 18. Main Navigation
@@ -509,6 +539,8 @@ $main-header-stuck-logo-width: (
 // Main Navigation
 $main-nav-color: $primary-color;
 $main-nav-color-hover: darken($main-nav-color, 7);
+$main-navigation-font-family: $body-font-family;
+$main-navigation-font-weight: $bold;
 $main-nav-font-size: (
   "medium": rem-calc(16),
   "large": rem-calc(18)
@@ -553,6 +585,7 @@ $main-nav-submenu-background-color-hover: darken($main-nav-submenu-background-co
 $main-nav-submenu-color-hover: darken($main-nav-submenu-color, 7);
 $main-nav-submenu-border: 1px solid $primary-color;
 $main-nav-submenu-border-radius: $global-radius;
+$main-nav-submenu-font-weight: $normal;
 $main-nav-submenu-font-size: (
   "medium": rem-calc(15),
   "large": rem-calc(16)
@@ -588,6 +621,8 @@ $mobile-nav-arrow-margin-top: (
 
 // Mobile Navigation
 $mobile-nav-background-color: $primary-color;
+$mobile-nav-font-family: $body-font-family;
+$mobile-nav-font-weight: $bold;
 $mobile-nav-font-size: rem-calc(17);
 $mobile-nav-color: $white;
 $mobile-nav-margin-top: 15px;
@@ -604,6 +639,7 @@ $mobile-nav-button-letter-spacing: $button-letter-spacing;
 
 // Mobile Navigation Submenu
 $mobile-nav-submenu-background-color: $secondary-color;
+$mobile-nav-submenu-font-weight: $normal;
 $mobile-nav-submenu-font-size: rem-calc(15);
 $mobile-nav-submenu-color: $white;
 $mobile-nav-submenu-y-padding: 8px;

@@ -161,26 +161,81 @@ function button_from_link( $variable_name, $sub=FALSE, $options='', $class=''  )
 }
 
 // Display date(s)
-function ls_get_list_dates( $start, $end=NULL ) {
+function ls_get_list_dates( $start, $end=NULL, $date_array=array() ) {
+	$weekday = 'l';
+	$month = 'F';
+	$day = 'j';
+	$year = 'Y';
+
+	if( $date_array ) {
+		if( array_key_exists('weekday', $date_array) ) {
+			$weekday = $date_array['weekday'];
+		}
+		if( array_key_exists('month', $date_array) ) {
+			$month = $date_array['month'];
+		}
+		if( array_key_exists('day', $date_array) ) {
+			$day = $date_array['day'];
+		}
+		if( array_key_exists('year', $date_array) ) {
+			$year = $date_array['year'];
+		}
+	}
+
 	$date_string = '';
 
 	$start_date = DateTime::createFromFormat('Ymd G:i:s', $start);
 	if( $end ) {
 		$end_date = DateTime::createFromFormat('Ymd G:i:s', $end);
 	}
+
 	if( !$end || $start_date->format('Ymd')==$end_date->format('Ymd') ) {
-		$date_string .= $start_date->format('l, F j, Y');
+		if( $weekday ) {
+			$date_string .= '<span class="date-weekday">'.$start_date->format($weekday).'</span>';
+		}
+		if( $weekday && $month ) {
+			$date_string .= '<span class="date-weekday-comma">,</span> ';
+		}
+		if( $month ) {
+			$date_string .= '<span class="date-month">'.$start_date->format($month).'</span> ';
+		}
+		if( $day ) {
+			$date_string .= '<span class="date-day">'.$start_date->format($day).'</span>';
+		}
+		if( $day && $year ) {
+			$date_string .= '<span class="date-day-comma">,</span> ';
+		}
+		if( $year ) {
+			$date_string .= '<span class="date-year">'.$start_date->format($year).'</span>';
+		}
 	} else {
-		$date_string .= $start_date->format('F j');
-		if( $start_date->format('Y') != $end_date->format('Y') ) {
-			$date_string .= $start_date->format(', Y');
+		if( $month ) {
+			$date_string .= '<span class="date-month">'.$start_date->format($month).'</span> ';
+		}
+		if( $day ) {
+			$date_string .= '<span class="date-day">'.$start_date->format($day).'</span>';
+		}
+		if( $year && $start_date->format('Y') != $end_date->format('Y') ) {
+			if( $day ) {
+				$date_string .= '<span class="date-day-comma">,</span> ';
+			}
+			$date_string .= '<span class="date-year">'.$start_date->format($year).'</span>';
 		}
 		$date_string .= ' - ';
 		if( $start_date->format('n') != $end_date->format('n') ) {
-			$date_string .= $end_date->format('F ');
+			if( $month ) {
+				$date_string .= '<span class="date-month">'.$end_date->format($month).'</span> ';
+			}
 		}
-		$date_string .= $end_date->format('j');
-		$date_string .= $end_date->format(', Y');
+		if( $day ) {
+			$date_string .= '<span class="date-day">'.$end_date->format($day).'</span>';
+		}
+		if( $day && $year ) {
+			$date_string .= '<span class="date-day-comma">,</span> ';
+		}
+		if( $year ) {
+			$date_string .= '<span class="date-year">'.$end_date->format($year).'</span>';
+		}
 	}
 
 	return $date_string;

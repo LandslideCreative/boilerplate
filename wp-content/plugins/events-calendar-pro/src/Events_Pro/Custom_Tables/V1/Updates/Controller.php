@@ -490,6 +490,7 @@ class Controller {
 	 * Redirect an Occurrence when deleted or trashed.
 	 *
 	 * @since 6.0.0
+	 * @since 7.7.14 Redirect to the Events page when trashing a recurring event from the block editor.
 	 *
 	 * @param WP_Post          $post     A reference to the post object that is being deleted or trashed.
 	 * @param WP_REST_Response $response A reference to the REST response generated for the delete or trash request.
@@ -499,9 +500,14 @@ class Controller {
 	 */
 	public function redirect_deleted_occurrence( WP_Post $post, WP_REST_Response $response, WP_REST_Request $request ): void {
 		$occurrence_redirect_data = $this->occurrence_redirector->get_occurrence_redirect_response( $request->get_param( 'id' ) );
-		// Either redirect to the correct Occurrence, or to the Events list.
-		$location                            = $occurrence_redirect_data->location
-		                                       ?? admin_url( '/edit.php?post_type=' . TEC::POSTTYPE );
+		// Either redirect to the correct Occurrence, or to the Events list with a trash notice.
+		$location                            = $occurrence_redirect_data->location ?? add_query_arg(
+			[
+				'trashed' => 1,
+				'ids'     => $post->ID,
+			],
+			admin_url( 'edit.php?post_type=' . TEC::POSTTYPE )
+		);
 		$response->data['_tec_redirect_url'] = $location;
 	}
 

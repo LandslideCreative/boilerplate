@@ -22,7 +22,7 @@ get_header(); ?>
 					<div class="cell">
 						<?php while ( $wp_query->have_posts() ) { 
 							$wp_query->the_post();
-							get_template_part('partials/post/item');
+							get_template_part('partials/search/item');
 						} ?>
 					</div>
 				</div>

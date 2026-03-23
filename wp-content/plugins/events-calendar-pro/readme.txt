@@ -3,7 +3,7 @@
 Contributors: theeventscalendar, borkweb, bordoni, brianjessee, aguseo, camwynsp, GeoffBel, jentheo, leahkoerper, lucatume, neillmcshea, vicskf, zbtirrell, juanfra
 Tags: events, calendar, event, venue, organizer, dates, date, google maps, conference, workshop, concert, meeting, seminar, summit, class, the events calendar, widget, pro
 Donate link: https://evnt.is/29
-Stable tag: 7.7.13
+Stable tag: 7.7.14
 Requires at least: 6.7
 Tested up to: 6.9
 Requires PHP: 7.4
@@ -213,6 +213,11 @@ Previous versions of Events Calendar Pro are not cross-compatible with 6.X add-o
 Remember to always make a backup of your database and files before updating!
 
 == Changelog ==
+
+= [7.7.14] 2026-03-11 =
+
+* Fix - Redirect to the Events page when trashing a recurring event from the block editor. [ECP-1410]
+* Language - 0 new strings added, 0 updated, 0 fuzzied, and 0 obsoleted.
 
 = [7.7.13] 2026-02-11 =
 

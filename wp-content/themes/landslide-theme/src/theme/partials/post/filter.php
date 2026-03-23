@@ -1,16 +1,17 @@
 <?php // Post Filter
 
-// Get current filter(s)
 $filters = array();
 $filters['category'] = get_query_var('category_name', ''); ?>
 
 <div class="grid-container intro-section filter-container post-filter-container">
-	<div class="grid-x grid-padding-x">
-		<div class="cell">
-			<p class="filter-label">Filter Posts</p>
-			<form class="filter-form" id="post-filter" method="GET" action="<?php echo get_post_type_archive_link('post'); ?>">
+	<div class="grid-x <?php ls_grid_class( 'post-filter' ); ?>">
+		<div class="cell <?php ls_cell_class( 'post-filter' ); ?>">
+			<form class="filter-form" id="post-filter" method="GET" action="<?php echo get_post_type_archive_link('post'); ?>#post-list">
+
+				<?php /* Category */ ?>
+				<label class="post-filter-category-label visually-hidden" for="category">Category</label>
 				<div class="select-container">
-					<select name="category_name">
+					<select name="category_name" id="category">
 						<option value="">
 							All Categories
 						</option>
@@ -27,7 +28,12 @@ $filters['category'] = get_query_var('category_name', ''); ?>
 					</select>
 				</div>
 
-				<input type="submit" class="button hollow" value="Go">
+				<input type="submit" class="button hollow" value="Filter Posts">
+
+				<?php if( array_filter($filters) ) { ?>
+					<a href="<?php echo get_post_type_archive_link('post'); ?>#post-list" class="clear-filters">Clear Filters</a>
+				<?php } ?>
+
 			</form>
 		</div>
 	</div>
