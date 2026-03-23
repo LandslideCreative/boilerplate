@@ -22,4 +22,4 @@ if( $show_alert ) { ?>
 	<div class="alert-bar">
 		<?php the_field('alert_copy', 'options'); ?>
 	</div>
-<?php } ?>
+<?php }

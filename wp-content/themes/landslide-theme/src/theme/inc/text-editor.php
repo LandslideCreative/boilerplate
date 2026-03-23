@@ -82,6 +82,11 @@ function add_custom_formats( $init_array ) {
                     array(
                         'title' => 'Heading 5',
                         'block' => 'h5'
+                    ),
+                    array(
+                        'title' => 'Label',
+                        'block' => 'h5',
+                        'classes' => 'label'
                     )
                 )
             ),
@@ -157,6 +162,16 @@ function add_editor_styles() {
     add_editor_style( 'assets/admin-css/text-editor.css' );
 }
 add_action( 'admin_init', 'add_editor_styles' );
+
+// Add editor back on posts page
+/* function ls_fix_no_editor_on_posts_page( $post ) {
+    if( isset( $post ) && $post->ID != get_option('page_for_posts') ) {
+        return;
+    }
+
+    add_post_type_support( 'page', 'editor' );
+}
+add_action( 'edit_form_after_title', 'ls_fix_no_editor_on_posts_page', 0 ); */
 
 // Remove editor from admin for pages
 /* function ls_remove_editor() {

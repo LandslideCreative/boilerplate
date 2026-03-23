@@ -53,6 +53,8 @@ $top-bar-nav-difference-large: $top-bar-nav-x-padding-large - $top-bar-submenu-x
 
 // Top Bar
 .top-bar {
+	font-family: $top-bar-nav-font-family;
+	font-weight: $top-bar-nav-font-weight;
 	display: none;
 	background-color: $top-bar-background-color;
 	@include breakpoint(medium) {
@@ -183,7 +185,8 @@ $top-bar-nav-difference-large: $top-bar-nav-x-padding-large - $top-bar-submenu-x
 						a {
 							display: block;
 							background-color: $top-bar-submenu-background-color;
-							color: $top-bar-submenu-color;							
+							color: $top-bar-submenu-color;
+							font-weight: $top-bar-submenu-font-weight;
 							white-space: nowrap;
 							text-decoration: none;
 							padding: $top-bar-submenu-y-padding-medium $top-bar-submenu-x-padding-medium;
@@ -349,6 +352,9 @@ header.header {
 		@include breakpoint(large) {
 			padding: map-get($main-header-y-padding, "large") 0;
 		}
+		&.is-at-bottom {
+			top: 0 !important;
+		}
 		.logo {
 			transition: 200ms all;
 			max-width: 100%;
@@ -404,6 +410,8 @@ $main-nav-difference-large: $main-nav-x-padding-large - $main-nav-submenu-x-padd
 // Main Navigation
 nav.main-nav {
 	display: none;
+	font-family: $main-navigation-font-family;
+	font-weight: $main-navigation-font-weight;
 	@include breakpoint(medium) {
 		display: block;
 	}
@@ -535,8 +543,9 @@ nav.main-nav {
 				&>li {
 					&>a {
 						display: block;
-						background-color: $main-nav-submenu-background-color;						
-						color: $main-nav-color;
+						background-color: $main-nav-submenu-background-color;
+						font-weight: $main-nav-submenu-font-weight;
+						color: $main-nav-submenu-color;
 						white-space: nowrap;
 						text-decoration: none;
 						padding: $main-nav-submenu-y-padding-medium $main-nav-submenu-x-padding-medium;
@@ -638,6 +647,8 @@ nav.main-nav {
 // Mobile Navigation
 .off-canvas-navigation-container {
 	background-color: $mobile-nav-background-color;
+	font-family: $mobile-nav-font-family;
+	font-weight: $mobile-nav-font-weight;
 	ul.off-canvas-navigation {
 		@include clean-list;
 		margin-top: $mobile-nav-margin-top;		
@@ -701,6 +712,7 @@ nav.main-nav {
 					&>a {
 						display: block;
 						text-decoration: none;
+						font-weight: $mobile-nav-submenu-font-weight;
 						font-size: $mobile-nav-submenu-font-size;
 						padding: $mobile-nav-submenu-y-padding $mobile-nav-submenu-x-padding;
 						padding-right: $mobile-nav-x-padding;
@@ -746,6 +758,7 @@ nav.main-nav {
 		}
 	}
 	search {
+		display: block;
 		$mobile-search-button-icon-color: str-replace(#{$mobile-search-button-color}, "#", "%23");
 		padding: $mobile-nav-y-padding $mobile-nav-x-padding;
 		padding-top: $mobile-nav-y-padding*2;

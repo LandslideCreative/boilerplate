@@ -1,5 +1,13 @@
 <?php // Post Archive
-$page_slug = get_page_by_path(ls_get_archive_page_slug( 'post' ));
+
+// Redirect categories
+$filters = array();
+$filters['category'] = get_query_var('category_name', '');
+if( $filters['category']!='' ) {
+	wp_redirect( get_term_link($filters['category'], 'category').'#post-list', 301 );
+}
+
+$page_slug = get_post(get_option( 'page_for_posts' ));
 
 get_header();
 

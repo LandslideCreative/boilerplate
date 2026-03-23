@@ -1,3 +1,12 @@
+html.sticky-anchors {
+	@include breakpoint(medium) {
+		scroll-padding-top: map-get($anchor-offset, "medium");
+	}
+	@include breakpoint(large) {
+		scroll-padding-top: map-get($anchor-offset, "large");
+	}
+}
+
 // Body font sizes
 body {
 	@include breakpoint(medium) {
@@ -28,6 +37,45 @@ ol, ul {
 			margin-top: $list-item-margin-bottom;
 			margin-bottom: $list-item-margin-bottom;
 		}
+	}
+}
+
+h5.label {
+	margin-bottom: 0;
+	color: $h5-label-color;
+	font-family: $h5-label-font-family;
+	font-weight: $h5-label-font-weight;
+	text-transform: $h5-label-text-transform;
+	font-size: map-get($h5-label-font-size, "small");
+	@include breakpoint(medium) {
+		font-size: map-get($h5-label-font-size, "medium");
+	}
+	@include breakpoint(large) {
+		font-size: map-get($h5-label-font-size, "large");
+	}
+}
+
+a.category-label {
+	display: inline-block;
+	text-decoration: none;
+	padding: $category-label-padding;
+	border-radius: $category-label-border-radius;
+	background-color: $category-label-background-color;
+	color: $category-label-color;
+	font-family: $category-label-font-family;
+	font-weight: $category-label-font-weight;
+	text-transform: $category-label-text-transform;
+	transition: background-color 200ms ease-in-out;
+	font-size: map-get($category-label-font-size, "small");
+	@include breakpoint(medium) {
+		font-size: map-get($category-label-font-size, "medium");
+	}
+	@include breakpoint(large) {
+		font-size: map-get($category-label-font-size, "large");
+	}
+	&:hover {
+		background-color: $category-label-hover-background-color;
+		color: $category-label-hover-color;
 	}
 }
 
@@ -218,5 +266,33 @@ body .gform_wrapper.gravity-theme {
 		height: auto;
 		padding: 8px 12px;
 		padding-right: 45px;
+	}
+}
+
+// Filters
+.filter-container {
+	form.filter-form {
+		@include breakpoint(medium) {
+			display: flex;
+			align-items: center;
+		}		
+		.select-container{
+			margin-bottom: 10px;
+			@include breakpoint(medium) {
+				margin-bottom: 0;
+				margin-right: 10px;
+			}
+			select {
+				min-width: 200px;
+				margin-bottom: 0;
+				height: 100%;
+			}
+		}
+		.button {
+			margin-bottom: 0;
+		}
+		.clear-filters {
+			margin-left: 10px;
+		}
 	}
 }
