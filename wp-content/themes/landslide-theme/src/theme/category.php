@@ -1,5 +1,6 @@
 <?php // Category Archive
-$page_slug = get_page_by_path(ls_get_archive_page_slug( 'post' ));
+
+$page_slug = get_post(get_option( 'page_for_posts' ));
 $queried_object = get_queried_object();
 
 get_header();

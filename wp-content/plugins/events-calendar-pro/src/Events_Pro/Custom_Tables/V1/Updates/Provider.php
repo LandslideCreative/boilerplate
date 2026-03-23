@@ -512,7 +512,7 @@ class Provider extends Service_Provider implements Provider_Contract {
 		if ( ! (
 			$post instanceof WP_Post
 			&& $response instanceof WP_REST_Response
-			&& $response instanceof WP_REST_Request
+			&& $request instanceof WP_REST_Request
 		) ) {
 			return;
 		}

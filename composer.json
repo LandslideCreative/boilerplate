@@ -20,16 +20,8 @@
             "url": "https://composer.gravity.io"
         },        
         {
-            "type": "package",
-            "package": {
-                "name": "the-events-calendar/events-calendar-pro",
-                "version": "7.7.13",
-                "type": "wordpress-plugin",
-                "dist": {
-                    "url": "https://evnt.is/fetch-ecp?key=c4fee8a87aa0447ac0b7ae88398e2c32a7648238&amp;version=7.7.13",
-                    "type": "zip"
-                }
-            }
+           "type" : "vcs",
+           "url" : "git@github.com:jsjenkins/events-calendar-pro.git"
         },
         {
             "type":"composer",
@@ -60,12 +52,12 @@
         "wpackagist-plugin/safe-redirect-manager" : "2.2.2",
         "wpackagist-plugin/svg-support" : "2.5.14",
         "wpackagist-plugin/the-events-calendar" : "6.15.17",
-        "the-events-calendar/events-calendar-pro": "*",
+        "landslidecreative/events-calendar-pro" : "7.7.14",
         "wpackagist-plugin/user-switching" : "1.11.2",
         "wpackagist-plugin/wordfence" : "8.1.4",
         "wpackagist-plugin/wp-crontrol" : "1.21.0",
         "deliciousbrains-plugin/wp-migrate-db-pro": "2.7.7",
-        "wp-media/wp-rocket" : "3.20.3",
+        "landslidecreative/wp-rocket" : "3.20.3",
         "wpackagist-plugin/yet-another-related-posts-plugin" : "5.30.11",
         "wpackagist-plugin/duplicate-post" : "4.5",
         "wpackagist-plugin/wordpress-seo" : "27.1.1"
