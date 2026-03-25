@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "96b83c19c9c562c4959bed79aee7bd5f",
+    "content-hash": "a57e575e847b3320f8bb9ab6de7d15e6",
     "packages": [
         {
             "name": "composer/installers",
@@ -171,10 +171,10 @@
         },
         {
             "name": "gravity/gravityforms",
-            "version": "2.9.28",
+            "version": "2.9.30",
             "dist": {
                 "type": "zip",
-                "url": "https://composer.gravity.io/downloads/?plugin=gravityforms&version=2.9.28"
+                "url": "https://composer.gravity.io/downloads/?plugin=gravityforms&version=2.9.30"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -279,15 +279,15 @@
         },
         {
             "name": "wpackagist-plugin/duplicate-post",
-            "version": "4.5",
+            "version": "4.6",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/duplicate-post/",
-                "reference": "tags/4.5"
+                "reference": "tags/4.6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/duplicate-post.4.5.zip"
+                "url": "https://downloads.wordpress.org/plugin/duplicate-post.4.6.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -333,15 +333,15 @@
         },
         {
             "name": "wpackagist-plugin/query-monitor",
-            "version": "3.20.2",
+            "version": "3.20.4",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/query-monitor/",
-                "reference": "tags/3.20.2"
+                "reference": "tags/3.20.4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/query-monitor.3.20.2.zip"
+                "url": "https://downloads.wordpress.org/plugin/query-monitor.3.20.4.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -387,15 +387,15 @@
         },
         {
             "name": "wpackagist-plugin/the-events-calendar",
-            "version": "6.15.17",
+            "version": "6.15.17.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/the-events-calendar/",
-                "reference": "tags/6.15.17"
+                "reference": "tags/6.15.17.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/the-events-calendar.6.15.17.zip"
+                "url": "https://downloads.wordpress.org/plugin/the-events-calendar.6.15.17.1.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -441,15 +441,15 @@
         },
         {
             "name": "wpackagist-plugin/wordpress-seo",
-            "version": "27.1.1",
+            "version": "27.2",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wordpress-seo/",
-                "reference": "tags/27.1.1"
+                "reference": "tags/27.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wordpress-seo.27.1.1.zip"
+                "url": "https://downloads.wordpress.org/plugin/wordpress-seo.27.2.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"

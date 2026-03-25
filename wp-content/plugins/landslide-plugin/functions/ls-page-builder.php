@@ -127,12 +127,18 @@ add_filter( 'acf/settings/load_json', 'ls_page_builder_acf_json_load_path' );
 // Add LS Page Builder styles and scripts
 function ls_add_page_builder_scripts() {
 
+	if( defined('LS_BUILD_VERSION') ) {
+        $build_version = LS_BUILD_VERSION;
+    } else {
+        $build_version = '1.0.0';
+    }
+
 	// LS Page Builder Styles
-	wp_register_style('ls-page-builder', LS_PLUGIN_URL . '/assets/css/ls-page-builder.css', array(), LS_BUILD_VERSION);
+	wp_register_style('ls-page-builder', LS_PLUGIN_URL . '/assets/css/ls-page-builder.css', array(), $build_version);
     wp_enqueue_style('ls-page-builder');
 
     // LS Page Builder Scripts
-	wp_register_script('ls-page-builder', LS_PLUGIN_URL . '/assets/js/ls-page-builder.js', array(), LS_BUILD_VERSION, true);
+	wp_register_script('ls-page-builder', LS_PLUGIN_URL . '/assets/js/ls-page-builder.js', array(), $build_version, true);
     wp_enqueue_script('ls-page-builder');
 }
 add_action('acf/input/admin_enqueue_scripts', 'ls_add_page_builder_scripts');
@@ -188,4 +194,4 @@ add_action('init', 'ls_create_global_section_post_type');
 function ls_move_global_section_menu() {
     add_submenu_page('theme-settings', 'Global Sections', 'Global Sections', 'edit_pages' , 'edit.php?post_type=ls-global-section');
 }
-add_action('admin_menu', 'ls_move_global_section_menu', 99);
+add_action('admin_menu', 'ls_move_global_section_menu', 999);

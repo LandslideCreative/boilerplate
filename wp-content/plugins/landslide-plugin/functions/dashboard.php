@@ -50,12 +50,18 @@ add_filter('manage_edit-tribe_events_columns', 'ls_remove_comments_column');
 // Add dashboard styles
 function ls_add_dashboard_scripts() {
 
+    if( defined('LS_BUILD_VERSION') ) {
+        $build_version = LS_BUILD_VERSION;
+    } else {
+        $build_version = '1.0.0';
+    }
+
     // LS dashboard styles
-    wp_register_style('ls-dashboard', LS_PLUGIN_URL . '/assets/css/ls-dashboard.css', array(), LS_BUILD_VERSION);
+    wp_register_style('ls-dashboard', LS_PLUGIN_URL . '/assets/css/ls-dashboard.css', array(), $build_version);
     wp_enqueue_style('ls-dashboard');
 
     // LS dashboard javascript
-    wp_register_script('ls-dashboard', LS_PLUGIN_URL . '/assets/js/ls-dashboard.js', array(), LS_BUILD_VERSION, true);
+    wp_register_script('ls-dashboard', LS_PLUGIN_URL . '/assets/js/ls-dashboard.js', array(), $build_version, true);
     wp_enqueue_script('ls-dashboard');
 
 }
