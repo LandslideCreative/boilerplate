@@ -4,8 +4,8 @@ $filters = array();
 $filters['tribe_events_cat'] = get_query_var('tribe_events_cat', ''); ?>
 
 <div class="grid-container intro-section filter-container event-filter-container">
-	<div class="grid-x <?php ls_grid_class( 'event-filter' ); ?>">
-		<div class="cell <?php ls_cell_class( 'event-filter' ); ?>">
+	<div class="grid-x grid-padding-x">
+		<div class="cell">
 			<form class="filter-form" id="event-filter" method="GET" action="<?php echo get_post_type_archive_link('tribe_events'); ?>#event-list">
 
 				<?php /* Category */ ?>
