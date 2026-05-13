@@ -1,4 +1,13 @@
 <?php /* Template Name: Events Calendar */ 
+
+$filters = array();
+if( isset($_GET['tribe_events_cat']) ) {
+	$filters['tribe_events_cat'] = $_GET['tribe_events_cat'];
+	if( $filters['tribe_events_cat']!='' ) {
+		wp_redirect( get_term_link($filters['tribe_events_cat'], 'tribe_events_cat').'#event-list', 301 );
+	}
+}
+
 get_header();
 
 if (have_posts()): while (have_posts()) : the_post();
