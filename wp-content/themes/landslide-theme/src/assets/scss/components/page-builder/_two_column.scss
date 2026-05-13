@@ -1,0 +1,32 @@
+// Page Builder - Two Column
+
+$two-column-mobile-padding-mixin: .75;
+$two-column-image-padding-bottom: rem-calc(15);
+
+.page-section.two-column {
+	.two-column-content {
+		&>.cell {
+			@include clean-last-child;
+			&:first-child {
+				@include vertical-padding($two-column-mobile-padding-mixin, false, true);
+				@include breakpoint(medium) {
+					padding-bottom: 0;
+				}
+			}
+		}
+		&.reverse-mobile {
+			&>.cell:first-child {
+				padding-bottom: 0;
+			}
+			&>.cell:last-child {
+				@include vertical-padding($two-column-mobile-padding-mixin, false, true);
+				@include breakpoint(medium) {
+					padding-bottom: 0;
+				}
+			}
+		}
+		.two-column-image + .two-column-copy {
+			padding-top: $two-column-image-padding-bottom;
+		}
+	}
+}

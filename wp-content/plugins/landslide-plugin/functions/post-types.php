@@ -51,7 +51,9 @@ function ls_disable_archive_yoast() {
     global $post;
     $ls_archive_pages = ls_archive_pages();
 
-    if( is_admin() && $post->post_type=='page' && in_array($post->post_name, $ls_archive_pages) ) {
+    $posts_page_id = get_option('page_for_posts');
+
+    if( is_admin() && $post->post_type=='page' && $post->ID!=$posts_page_id && in_array(get_page_uri($post->ID), $ls_archive_pages) ) {
         remove_meta_box( 'wpseo_meta', 'page', 'normal' );
     }
     

@@ -1,0 +1,8 @@
+// Page Builder - CTA
+
+.page-section.cta {
+	@include white-text;
+	.cell {
+		@include clean-last-child;
+	}
+}

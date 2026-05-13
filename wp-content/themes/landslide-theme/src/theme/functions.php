@@ -79,7 +79,7 @@ add_action('init', 'ls_enqueue_scripts');
         wp_enqueue_script('script-name');
     }
 } 
-add_action('wp_print_scripts', 'ls_boilerplate_conditional_scripts'); */
+add_action('wp_print_scripts', 'ls_enqueue_conditional_scripts'); */
 
 // Add stylesheets
 function ls_enqueue_styles() {
