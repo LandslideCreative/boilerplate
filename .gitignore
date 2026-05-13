@@ -28,6 +28,7 @@ temp
 # Generated Files
 sitemap.xml
 sitemap.xml.gz
+llms.txt
 wp-content/blogs.dir/
 
 # License Files
