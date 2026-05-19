@@ -1,7 +1,20 @@
 /* Hide event extras */
 #tribe_events_event_details.postbox .eventBritePluginPlug,
-#postimagediv .howto {
+#postimagediv .howto,
+#tribe-virtual-events,
+#event_url,
+.tec-events-category-colors__wrap,
+.tec-events-category-colors__field,
+.form-field.tec-events-category-colors__wrap + tr,
+.form-field.tec-events-category-colors__wrap + tr + tr {
     display: none;
+}
+
+/* Hide event menu pages */
+.wp-submenu a[href="edit-tags.php?taxonomy=post_tag&post_type=tribe_events"],
+.wp-submenu a[href="edit-tags.php?taxonomy=tec_venue_category&post_type=tribe_events"],
+.wp-submenu a[href="edit-tags.php?taxonomy=tec_organizer_category&post_type=tribe_events"] {
+    display: none !important;
 }
 
 /* Landslide dashboard widget styles */
