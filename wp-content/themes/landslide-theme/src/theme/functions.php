@@ -228,10 +228,22 @@ function get_image_directory()
 require get_template_directory() . '/inc/acf.php';
 
 /*------------------------------------*\
+    Colors
+\*------------------------------------*/
+
+// require get_template_directory() . '/inc/colors.php';
+
+/*------------------------------------*\
     Display Functions
 \*------------------------------------*/
 
 require get_template_directory() . '/inc/display.php';
+
+/*------------------------------------*\
+    Events
+\*------------------------------------*/
+
+require get_template_directory() . '/inc/events.php';
 
 /*------------------------------------*\
     Navigation Menus
@@ -244,9 +256,3 @@ require get_template_directory() . '/inc/menus.php';
 \*------------------------------------*/
 
 require get_template_directory() . '/inc/text-editor.php';
-
-/*------------------------------------*\
-    Events
-\*------------------------------------*/
-
-require get_template_directory() . '/inc/events.php';
