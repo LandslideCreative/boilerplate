@@ -191,18 +191,33 @@ class GFCommon {
 		return $text;
 	}
 
-	public static function format_number( $number, $number_format, $currency = '', $include_thousands_sep = false ) {
+	/**
+	 * Formats the given value using currency or number formatting.
+	 *
+	 * @since unknown
+	 * @since 2.9.29 Updated the third parameter to accept the currency code or entry object.
+	 *
+	 * @param int|float|string $number                 The number to format.
+	 * @param string           $number_format          The field number format: decimal_comma, decimal_dot, or currency.
+	 * @param string|array     $currency_code_or_entry The currency code or entry object. Optional.
+	 * @param bool             $include_thousands_sep  Indicates if the thousands separator should be included. Optional.
+	 *
+	 * @return string
+	 */
+	public static function format_number( $number, $number_format, $currency_code_or_entry = '', $include_thousands_sep = false ) {
 		if ( ! is_numeric( $number ) ) {
 			return $number;
 		}
 
 		//replacing commas with dots and dots with commas
-		if ( $number_format == 'currency' ) {
-			if ( empty( $currency ) ) {
-				$currency = GFCommon::get_submission_currency();
+		if ( $number_format === 'currency' ) {
+			$currency_code = is_array( $currency_code_or_entry ) ? rgar( $currency_code_or_entry, 'currency' ) : $currency_code_or_entry;
+
+			if ( empty( $currency_code ) ) {
+				$currency_code = GFCommon::get_submission_currency();
 			}
 
-			$currency = new RGCurrency( $currency );
+			$currency = new RGCurrency( $currency_code );
 			$number   = $currency->to_money( $number );
 		} else {
 			if ( $number_format == 'decimal_comma' ) {
@@ -532,6 +547,63 @@ class GFCommon {
 	}
 
 	/**
+	 * Converts a relative path and any path symbols to the full resolved path.
+	 *
+	 * @since 2.10.1
+	 *
+	 * @param string $path - The path to process.
+	 *
+	 * @return string
+	 */
+	public static function get_absolute_path( $path ) {
+		$path      = str_replace( array( '/', '\\' ), DIRECTORY_SEPARATOR, $path );
+		$path      = str_replace( '://', '|%%protocol%%|', $path );
+		$parts     = array_filter( explode( DIRECTORY_SEPARATOR, $path ), 'strlen' );
+		$absolutes = array();
+
+		foreach ( $parts as $part ) {
+			if ( '.' == $part ) {
+				continue;
+			}
+
+			if ( '..' == $part ) {
+				array_pop( $absolutes );
+			} else {
+				$absolutes[] = $part;
+			}
+		}
+
+		$path = implode( DIRECTORY_SEPARATOR, $absolutes );
+
+		return str_replace( '|%%protocol%%|', '://', $path );
+	}
+
+	/**
+	 * Checks if the given file path is within the canonical uploads folder.
+	 *
+	 * @since 2.10.1
+	 *
+	 * @param string $file The file to check.
+	 *
+	 * @return bool
+	 */
+	public static function is_file_in_uploads( $file ) {
+		if ( strpos( $file, "\0" ) !== false ) {
+			return false;
+		}
+
+		$file      = rawurldecode( rawurldecode( rawurldecode( $file ) ) );
+		$file_path = self::get_absolute_path( $file );
+		$root_url  = trailingslashit( self::get_absolute_path( rgar( GF_Field_FileUpload::get_file_upload_path_info( '' ), 'url' ) ) );
+
+		if ( ! str_starts_with( $file_path, $root_url ) ) {
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
 	 * Returns an array of files/directories which match the supplied pattern.
 	 *
 	 * @since 2.4.15
@@ -649,6 +721,75 @@ class GFCommon {
 		$is_valid = apply_filters( 'gform_is_valid_url', $is_valid, $url );
 
 		return $is_valid;
+	}
+
+	/**
+	 * Validates a file URL for security concerns including scheme, traversal, null bytes, and file extension.
+	 *
+	 * Returns a WP_Error on failure with a specific error code, or true on success.
+	 *
+	 * @since 2.10.2
+	 *
+	 * @param string $url                The URL to validate.
+	 * @param array  $args {
+	 *     Optional. Validation arguments.
+	 *
+	 *     @type string[] $allowed_extensions  Array of allowed file extensions. If empty, disallowed extensions are checked instead.
+	 *     @type bool     $check_extensions    Whether to check file extensions. Default true.
+	 *     @type string   $file_name           The file name to use for extension checks. If not provided, the file name is derived from the URL path.
+	 * }
+	 *
+	 * @return true|WP_Error True if the URL passes all checks, WP_Error otherwise.
+	 */
+	public static function validate_file_url( $url, $args = array() ) {
+		// Null byte injection check on the original URL before sanitization, since esc_url_raw() may strip null bytes.
+		if ( str_contains( $url, '%00' ) || str_contains( $url, "\0" ) ) {
+			return new WP_Error( 'null_byte', __( 'The URL contains a null byte.', 'gravityforms' ) );
+		}
+
+		$sanitized_url = esc_url_raw( $url );
+
+		if ( empty( $sanitized_url ) || ! self::is_valid_url( $sanitized_url ) ) {
+			return new WP_Error( 'invalid_url', __( 'The URL is not valid.', 'gravityforms' ) );
+		}
+
+		// Scheme whitelist: only allow http and https.
+		$scheme = parse_url( $sanitized_url, PHP_URL_SCHEME );
+		if ( ! in_array( $scheme, array( 'http', 'https' ), true ) ) {
+			return new WP_Error( 'invalid_scheme', __( 'The URL scheme is not allowed.', 'gravityforms' ) );
+		}
+
+		// Directory traversal check on decoded URL to catch encoded variants (%2e%2e, %2f.., double-encoding, etc.).
+		$decoded_url = rawurldecode( rawurldecode( rawurldecode( $sanitized_url ) ) );
+		if ( str_contains( $decoded_url, '..' ) ) {
+			if ( ! GFCommon::is_file_in_uploads( $decoded_url ) ) {
+				return new WP_Error( 'directory_traversal', __( 'The URL contains directory traversal characters.', 'gravityforms' ) );
+			}
+		}
+
+		// File extension validation.
+		$check_extensions = isset( $args['check_extensions'] ) ? $args['check_extensions'] : true;
+
+		if ( $check_extensions ) {
+			$file_name          = isset( $args['file_name'] ) ? sanitize_file_name( $args['file_name'] ) : sanitize_file_name( wp_basename( parse_url( $sanitized_url, PHP_URL_PATH ) ) );
+			$allowed_extensions = isset( $args['allowed_extensions'] ) ? $args['allowed_extensions'] : array();
+
+			// Reject files with no extension.
+			$extension = pathinfo( $file_name, PATHINFO_EXTENSION );
+			if ( empty( $extension ) ) {
+				return new WP_Error( 'missing_extension', __( 'The file URL does not contain a file extension.', 'gravityforms' ) );
+			}
+
+			if ( empty( $allowed_extensions ) ) {
+				if ( self::file_name_has_disallowed_extension( $file_name ) ) {
+					return new WP_Error( 'disallowed_extension', __( 'The file has a disallowed extension.', 'gravityforms' ) );
+				}
+			} elseif ( ! self::match_file_extension( $file_name, $allowed_extensions ) ) {
+				return new WP_Error( 'extension_not_allowed', __( 'The file extension is not allowed.', 'gravityforms' ) );
+			}
+		}
+
+		return true;
 	}
 
 	public static function is_valid_email( $email ) {
@@ -1746,7 +1887,7 @@ class GFCommon {
 
 					$field->set_modifiers( $options_array );
 					$raw_field_value = RGFormsModel::get_lead_field_value( $lead, $field );
-					$field_value     = GFCommon::get_lead_field_display( $field, $raw_field_value, rgar( $lead, 'currency' ), $use_text, $format, 'email' );
+					$field_value     = $field->get_value_all_fields_merge_tag( $raw_field_value, $lead, $use_text, $format );
 
 					$display_field = true;
 					//depending on parameters, don't display adminOnly or hidden fields
@@ -1961,7 +2102,7 @@ class GFCommon {
 		} else {
 			$field     = RGFormsModel::get_field( $form, rgget( 'fromNameField', $form['notification'] ) );
 			$value     = RGFormsModel::get_lead_field_value( $lead, $field );
-			$from_name = GFCommon::get_lead_field_display( $field, $value );
+			$from_name = $field->get_value_entry_detail( $value, $lead, false, 'html', 'screen' );
 		}
 
 		$replyTo = rgempty( 'replyToField', $form['notification'] ) ? rgget( 'replyTo', $form['notification'] ) : rgget( $form['notification']['replyToField'], $lead );
@@ -2037,8 +2178,10 @@ class GFCommon {
 	}
 
 	public static function send_notification( $notification, $form, $lead, $data = array() ) {
+		$entry_id  = absint( rgar( $lead, 'id' ) );
+		$for_entry = $entry_id ? ' for entry #' . $entry_id : '';
 
-		GFCommon::log_debug( "GFCommon::send_notification(): Starting to process notification (#{$notification['id']} - {$notification['name']})." );
+		GFCommon::log_debug( __METHOD__ . sprintf( '(): Starting to process notification (#%s - %s)%s.', rgar( $notification, 'id', 'custom' ), rgar( $notification, 'name', 'custom' ), $for_entry ) );
 
 		$notification = gf_apply_filters( array( 'gform_notification', $form['id'] ), $notification, $form, $lead );
 
@@ -2082,7 +2225,7 @@ class GFCommon {
 
 		// Running through variable replacement
 		$to        = GFCommon::remove_extra_commas( GFCommon::replace_variables( $email_to, $form, $lead, false, false, false, 'text', $data ) );
-		$subject   = GFCommon::replace_variables( rgar( $notification, 'subject' ), $form, $lead, false, false, false, 'text', $data );
+		$subject   = html_entity_decode( GFCommon::replace_variables( rgar( $notification, 'subject' ), $form, $lead, false, false, false, 'text', $data ) );
 		$from      = GFCommon::replace_variables( rgar( $notification, 'from' ), $form, $lead, false, false, false, 'text', $data );
 		$from_name = GFCommon::replace_variables( rgar( $notification, 'fromName' ), $form, $lead, false, false, false, 'text', $data );
 		$bcc       = GFCommon::remove_extra_commas( GFCommon::replace_variables( rgar( $notification, 'bcc' ), $form, $lead, false, false, false, 'text', $data ) );
@@ -2150,6 +2293,17 @@ class GFCommon {
 						$root_url = rgar( GF_Field_FileUpload::get_file_upload_path_info( $file, $entry_id ), 'url' );
 						if ( ! str_starts_with( $file, $root_url ) ) {
 							self::log_debug( __METHOD__ . sprintf( '(): Not attaching file from URL: %s', $file ) );
+							continue;
+						}
+
+						$args = array(
+							'allowed_extensions' => GFCommon::clean_extensions( $upload_field->allowedExtensions ),
+						);
+
+						$validation = GFCommon::validate_file_url( $file, $args );
+
+						if ( is_wp_error( $validation ) ) {
+							self::log_error( __METHOD__ . sprintf( '(): Not attaching file; %s: %s', $validation->get_error_code(), $validation->get_error_message() ) );
 							continue;
 						}
 
@@ -3447,18 +3601,31 @@ Content-Type: text/html;
 		return $time_format ? $time_format : 'H:i';
 	}
 
-	public static function get_selection_value( $value ) {
-
+	/**
+	 * Returns the value of the selected item. For pricing fields, returns the selected value without the price.
+	 *
+	 * @since 2.10.5 Added the $field parameter
+	 *
+	 * @param array|string $value The raw selected field value.
+	 * @param GF_Field     $field The selected field object.
+	 *
+	 * @return string Returns the selected value.
+	 */
+	public static function get_selection_value( $value, $field = null ) {
 		if ( is_null( $value ) ) {
 			return $value;
 		}
 
-		if ( ! is_array( $value ) ) {
-			$value = explode( '|', $value );
+		if ( is_array( $value ) ) {
+			return $value[0];
 		}
 
-		return $value[0];
+		if ( $field instanceof GF_Field && self::is_pricing_field( $field->type ) ) {
+			list( $name, $price ) = rgexplode( '|', $value, 2, true );
+			return $name;
+		}
 
+		return $value;
 	}
 
 	public static function selection_display( $value, $field, $currency = '', $use_text = false ) {
@@ -3780,7 +3947,7 @@ Content-Type: text/html;
 		foreach ( $fields as $field ) {
 
 			$value = GFFormsModel::get_lead_field_value( $entry, $field );
-			$value = GFCommon::get_lead_field_display( $field, $value, rgar( $entry, 'currency' ) );
+			$value = $field->get_value_entry_detail( $value, $entry, false, 'html', 'screen' );
 
 			if ( rgblank( $value ) ) {
 				continue;
@@ -4261,7 +4428,20 @@ Content-Type: text/html;
 		return true;
 	}
 
-	public static function to_money( $number, $currency_code = '' ) {
+	/**
+	 * Returns the given number using currency formatting.
+	 *
+	 * @since unknown
+	 * @since 2.9.29 Updated the second parameter to accept the currency code or entry object.
+	 *
+	 * @param int|float|string $number                 The number to be formatted.
+	 * @param string|array     $currency_code_or_entry The currency code or entry object. Optional.
+	 *
+	 * @return string
+	 */
+	public static function to_money( $number, $currency_code_or_entry = '' ) {
+		$currency_code = is_array( $currency_code_or_entry ) ? rgar( $currency_code_or_entry, 'currency' ) : $currency_code_or_entry;
+
 		if ( empty( $currency_code ) ) {
 			$currency_code = self::get_submission_currency();
 		}
@@ -4271,7 +4451,20 @@ Content-Type: text/html;
 		return $currency->to_money( $number );
 	}
 
-	public static function to_number( $text, $currency_code = '' ) {
+	/**
+	 * Removes currency formatting from a value.
+	 *
+	 * @since unknown
+	 * @since 2.9.29 Updated the second parameter to accept the currency code or entry object.
+	 *
+	 * @param int|float|string $text                   The value to be cleaned of currency formatting.
+	 * @param string|array     $currency_code_or_entry The currency code or entry object. Optional.
+	 *
+	 * @return false|float|int
+	 */
+	public static function to_number( $text, $currency_code_or_entry = '' ) {
+		$currency_code = is_array( $currency_code_or_entry ) ? rgar( $currency_code_or_entry, 'currency' ) : $currency_code_or_entry;
+
 		if ( empty( $currency_code ) ) {
 			$currency_code = self::get_submission_currency();
 		}
@@ -4348,26 +4541,33 @@ Content-Type: text/html;
 	}
 
 	/**
-	 * @param GF_Field $field
-	 * @param          $value
-	 * @param string   $currency
-	 * @param bool     $use_text
-	 * @param string   $format
-	 * @param string   $media
+	 * Returns the value to be displayed on the entry detail page and for the {all_fields} merge tag.
 	 *
-	 * @return array|mixed|string
+	 * Post category values are prepared inside `GF_Field::get_value_entry_detail()` for relevant field subclasses.
+	 *
+	 * @since unknown
+	 * @since 2.9.29 Changed the third parameter $currency (string) to $entry (array).
+	 *
+	 * @param GF_Field     $field    The field.
+	 * @param string|array $value    The field value.
+	 * @param array        $entry    The entry.
+	 * @param bool|false   $use_text When processing choice based fields should the choice text be returned instead of the value.
+	 * @param string       $format   The format requested for the location the merge is being used. Possible values: html, text or url.
+	 * @param string       $media    The location where the value will be displayed. Possible values: screen or email.
+	 *
+	 * @return string|false
 	 */
-	public static function get_lead_field_display( $field, $value, $currency = '', $use_text = false, $format = 'html', $media = 'screen' ) {
-
+	public static function get_lead_field_display( $field, $value, $entry = array(), $use_text = false, $format = 'html', $media = 'screen' ) {
 		if ( ! $field instanceof GF_Field ) {
 			$field = GF_Fields::create( $field );
 		}
 
-		if ( $field->type == 'post_category' ) {
-			$value = self::prepare_post_category_value( $value, $field );
+		if ( ! is_array( $entry ) ) {
+			trigger_error( 'Since version 2.9.29 GFCommon::get_lead_field_display() expects the entry array as the third parameter. Trace: ' . esc_html( wp_debug_backtrace_summary( null, 1 ) ), E_USER_WARNING );
+			$entry = array( 'currency' => $entry );
 		}
 
-		return $field->get_value_entry_detail( $value, $currency, $use_text, $format, $media );
+		return $field->get_value_entry_detail( $value, $entry, $use_text, $format, $media );
 	}
 
 	public static function get_product_fields( $form, $lead, $use_choice_text = false, $use_admin_label = false ) {
@@ -4429,7 +4629,7 @@ Content-Type: text/html;
 								$name  = $field_label;
 								$price = $lead_value;
 							} else {
-								list( $name, $price ) = explode( '|', $lead_value );
+								list( $name, $price ) = rgexplode( '|', $lead_value, 2, true );
 
 								if ( $use_choice_text ) {
 									$name = RGFormsModel::get_choice_text( $field, $name );
@@ -4501,7 +4701,7 @@ Content-Type: text/html;
 				$shipping_name     = $use_admin_label && ! empty( $shipping_fields[0]->adminLabel ) ? $shipping_fields[0]->adminLabel : $shipping_fields[0]->label;
 				$shipping_field_id = $shipping_fields[0]->id;
 				if ( $shipping_fields[0]->inputType != 'singleshipping' && ! empty( $shipping_price ) ) {
-					list( $shipping_method, $shipping_price ) = explode( '|', $shipping_price );
+					list( $shipping_method, $shipping_price ) = rgexplode( '|', $shipping_price, 2, true );
 					if ( $use_choice_text ) {
 						$shipping_method = RGFormsModel::get_choice_text( $shipping_fields[0], $shipping_method );
 					}
@@ -4580,7 +4780,7 @@ Content-Type: text/html;
 			return array();
 		}
 
-		list( $name, $price ) = explode( '|', $value );
+		list( $name, $price ) = rgexplode( '|', $value, 2, true );
 		if ( $use_choice_text ) {
 			$name = RGFormsModel::get_choice_text( $option, $name );
 		}
@@ -4873,8 +5073,8 @@ Content-Type: text/html;
 
 		$value = RGFormsModel::get_lead_field_value( $lead, $fields[0] );
 		switch ( $field_type ) {
-			case 'name' :
-				$value = GFCommon::get_lead_field_display( $fields[0], $value );
+			case 'name':
+				$value = $fields[0]->get_value_entry_detail( $value, $lead, false, 'html', 'screen' );
 				break;
 		}
 
@@ -7061,23 +7261,28 @@ Content-Type: text/html;
 	/**
 	 * Checks for the existence of a MySQL table.
 	 *
-	 * @since  2.2
-	 * @access public
+	 * @since 2.2
+	 * @since 2.9.30 Added static caching and $bypass_cache param.
 	 *
-	 * @param string $table_name Table to check for.
-	 *
-	 * @uses wpdb::get_var()
+	 * @param string $table_name   Table to check for.
+	 * @param bool   $bypass_cache Whether to bypass the statically cached results of previous checks.
 	 *
 	 * @return bool
 	 */
-	public static function table_exists( $table_name ) {
+	public static function table_exists( $table_name, $bypass_cache = false ) {
+		$found  = false;
+		$result = ! $bypass_cache && (bool) GFCache::get( 'table_exists_' . $table_name, $found, false );
 
-		global $wpdb;
+		if ( ! $found ) {
+			global $wpdb;
 
-		$count = $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $table_name ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+			$count = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table_name ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 
-		return ! empty( $count );
+			$result = ! empty( $count );
+			GFCache::set( 'table_exists_' . $table_name, $result );
+		}
 
+		return $result;
 	}
 
 	/**
@@ -7330,15 +7535,24 @@ Content-Type: text/html;
 	 *
 	 * May return false if the algorithm is not available.
 	 *
+	 * @since 2.0
+	 * @since 2.9.29 Added the $entry_id param.
+	 *
 	 * @param int    $form_id  The Form ID.
 	 * @param int    $field_id The ID of the field used to upload the file.
 	 * @param string $file     The file url relative to the form's upload folder. E.g. 2016/04/my-file.pdf
+	 * @param int    $entry_id The entry ID. Optional.
 	 *
 	 * @return string|bool
 	 */
-	public static function generate_download_hash( $form_id, $field_id, $file ) {
+	public static function generate_download_hash( $form_id, $field_id, $file, $entry_id = 0 ) {
 
 		$key = absint( $form_id ) . ':' . absint( $field_id ) . ':' . urlencode( $file );
+
+		$entry_id = absint( $entry_id );
+		if ( $entry_id ) {
+			$key .= ':' . $entry_id;
+		}
 
 		$algo = 'sha256';
 
@@ -7602,6 +7816,7 @@ Content-Type: text/html;
 		if ( ! rgblank( $icon_namespace ) ) {
 			return sprintf( '<i class="'. $icon_namespace .'-icon %s"%s></i>', esc_attr( $icon ), $aria_hidden_attr );
 		} else if ( strpos( $icon, '<svg' ) !== false ) {
+			$icon = str_contains( $icon, 'aria-hidden' ) ? $icon : str_replace( '<svg', "<svg$aria_hidden_attr", $icon );
 			return $icon;
 		} else if ( filter_var( $icon, FILTER_VALIDATE_URL ) ) {
 			return sprintf( '<img src="%s"%s />', esc_attr( $icon ), $aria_hidden_attr );
@@ -8287,6 +8502,10 @@ Content-Type: text/html;
 	 * @return void
 	 */
 	public static function send_json( $response ) {
+		if ( ! headers_sent() ) {
+			header( 'Content-Type: application/json; charset=' . get_option( 'blog_charset' ) );
+		}
+
 		// Outputting JSON content with delimiters.
 		echo '<!-- gf:json_start -->' . wp_json_encode( $response ) . '<!-- gf:json_end -->';
 
@@ -8705,4 +8924,5 @@ class GF_Late_Static_Binding {
 	public function GFFormDisplay_footer_init_scripts() {
 		return GFFormDisplay::footer_init_scripts( $this->args['form_id'] );
 	}
+
 }

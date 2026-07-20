@@ -3,9 +3,9 @@
 Contributors: theeventscalendar, borkweb, bordoni, brianjessee, aguseo, camwynsp, GeoffBel, jentheo, leahkoerper, lucatume, neillmcshea, vicskf, zbtirrell, juanfra
 Tags: events, calendar, event, venue, organizer, dates, date, google maps, conference, workshop, concert, meeting, seminar, summit, class, the events calendar, widget, pro
 Donate link: https://evnt.is/29
-Stable tag: 7.7.14
-Requires at least: 6.7
-Tested up to: 6.9
+Stable tag: 7.8.0
+Requires at least: 6.8
+Tested up to: 7.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -213,6 +213,22 @@ Previous versions of Events Calendar Pro are not cross-compatible with 6.X add-o
 Remember to always make a backup of your database and files before updating!
 
 == Changelog ==
+
+= [7.8.0] 2026-07-08 =
+
+* Compatibility - Improved PHP compatibility for versions 7.4 and up to 8.4.
+* Language - 0 new strings added, 36 updated, 0 fuzzied, and 0 obsoleted.
+
+= [7.7.16] 2026-06-24 =
+
+* Security - Updated Swiper library v5.3.6 to v12.2.0 for security improvements.
+* Language - 0 new strings added, 0 updated, 0 fuzzied, and 0 obsoleted.
+
+= [7.7.15] 2026-06-15 =
+
+* Fix - Organizer and Venue views now correctly return a 404 response when an invalid slug is requested alongside an empty search query. [SMTNC-347]
+* Fix - Prevent fatal TypeError on the Organizer view when an invalid organizer slug is requested with a search query under themes that call the view bootstrap directly (e.g., Enfold). [SMTNC-347]
+* Language - 0 new strings added, 1 updated, 0 fuzzied, and 0 obsoleted.
 
 = [7.7.14] 2026-03-11 =
 

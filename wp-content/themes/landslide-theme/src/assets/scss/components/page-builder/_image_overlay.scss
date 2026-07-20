@@ -1,0 +1,65 @@
+// Page Builder - Image Overlay
+
+$image-overlay-vertical-padding-mixin: 2;
+$image-overlay-copy-background-color: $white;
+$image-overlay-copy-white-text: false;
+$image-overlay-copy-padding: (
+  "small": 25px 25px,
+  "medium": 30px 35px,
+  "large": 35px 40px
+);
+$image-overlay-mobile-top-margin: -40px;
+
+.page-section.image-overlay {
+	padding-top: 0;
+	position: relative;
+	background-color: $image-overlay-copy-background-color;
+	@include breakpoint(medium) {
+		@include vertical-padding($image-overlay-vertical-padding-mixin);
+	}	
+	.image-bg {
+		@include breakpoint(medium) {
+			position: absolute;
+			z-index: 1;
+			height: auto;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+		}
+		img {
+			@include breakpoint(medium) {
+				@include image-cover;
+			}
+		}
+	}
+	.cell {
+		z-index: 2;
+		.image-overlay-copy {
+			@include clean-last-child;			
+			margin-top: $image-overlay-mobile-top-margin;
+			background-color: $image-overlay-copy-background-color;
+			@if $image-overlay-copy-white-text {
+				@include white-text;
+			}
+			padding: map-get($image-overlay-copy-padding, "small");
+			@include breakpoint( medium ) {
+				margin-top: 0;
+				padding: map-get($image-overlay-copy-padding, "medium");
+			}
+			@include breakpoint( large ) {
+				padding: map-get($image-overlay-copy-padding, "large");
+			}
+		}
+	}
+	&.copy-center {
+		.grid-x {
+			justify-content: center;
+		}
+	}
+	&.copy-right {
+		.grid-x {
+			justify-content: right;
+		}
+	}
+}

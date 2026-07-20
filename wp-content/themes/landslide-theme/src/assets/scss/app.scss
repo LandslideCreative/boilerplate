@@ -104,7 +104,12 @@
 @import 'components/pagination';
 
 // Page Builder
-@import 'components/page-builder';
+@import 'components/page-builder/content_blocks';
+@import 'components/page-builder/cta';
+@import 'components/page-builder/expandable_content';
+@import 'components/page-builder/image_overlay';
+@import 'components/page-builder/one_column';
+@import 'components/page-builder/two_column';
 
 // Post Types
 @import 'components/post';

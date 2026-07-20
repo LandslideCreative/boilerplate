@@ -16,6 +16,10 @@
             "url":"https://connect.advancedcustomfields.com"
         },
         {
+           "type" : "vcs",
+           "url" : "git@github.com:jsjenkins/backup-backup-pro.git"
+        },
+        {
             "type": "composer",
             "url": "https://composer.gravity.io"
         },        
@@ -26,10 +30,6 @@
         {
             "type":"composer",
             "url":"https://composer.deliciousbrains.com"
-        },
-        {
-            "type" : "vcs",
-            "url" : "git@github.com:jsjenkins/wp-rocket.git"
         }
     ],
     "extra" : {
@@ -41,26 +41,27 @@
     "minimum-stability": "dev",
     "prefer-stable" : true,
     "require": {
-        "wpengine/advanced-custom-fields-pro": "6.7.1",
-        "wpackagist-plugin/akismet" : "5.6",
-        "wpackagist-plugin/classic-editor" : "1.6.7",
-        "gravity/gravityforms": "2.9.28",
+        "wpengine/advanced-custom-fields-pro": "6.8.6",
+        "wpackagist-plugin/akismet" : "5.7",
+        "wpackagist-plugin/backup-backup" : "2.1.6",
+        "landslidecreative/backup-backup-pro" : "2.1.6",
+        "wpackagist-plugin/classic-editor" : "1.7.0",
+        "gravity/gravityforms": "2.10.5",
         "gravity/gravityformsakismet": "1.1.0",
-        "wpackagist-plugin/imagify" : "2.2.7",
+        "wpackagist-plugin/imagify" : "2.3.0",
         "wpackagist-plugin/intuitive-custom-post-order" : "3.2.0",
-        "wpackagist-plugin/query-monitor" : "3.20.2",
+        "wpackagist-plugin/query-monitor" : "4.0.7",
         "wpackagist-plugin/safe-redirect-manager" : "2.2.2",
-        "wpackagist-plugin/svg-support" : "2.5.14",
-        "wpackagist-plugin/the-events-calendar" : "6.15.17",
-        "landslidecreative/events-calendar-pro" : "7.7.14",
-        "wpackagist-plugin/user-switching" : "1.11.2",
-        "wpackagist-plugin/wordfence" : "8.1.4",
+        "wpackagist-plugin/svg-support" : "2.5.17",
+        "wpackagist-plugin/the-events-calendar" : "6.17.0",
+        "landslidecreative/events-calendar-pro" : "7.8.0",
+        "wpackagist-plugin/user-switching" : "1.12.1",
+        "wpackagist-plugin/wordfence" : "8.2.2",
         "wpackagist-plugin/wp-crontrol" : "1.21.0",
-        "deliciousbrains-plugin/wp-migrate-db-pro": "2.7.7",
-        "landslidecreative/wp-rocket" : "3.20.3",
+        "deliciousbrains-plugin/wp-migrate-db-pro": "2.7.10",
         "wpackagist-plugin/yet-another-related-posts-plugin" : "5.30.11",
-        "wpackagist-plugin/duplicate-post" : "4.5",
-        "wpackagist-plugin/wordpress-seo" : "27.1.1"
+        "wpackagist-plugin/duplicate-post" : "4.7",
+        "wpackagist-plugin/wordpress-seo" : "28.0"
     },
     "config": {
         "allow-plugins": {

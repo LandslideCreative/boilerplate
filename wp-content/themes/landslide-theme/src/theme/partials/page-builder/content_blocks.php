@@ -25,27 +25,37 @@ if( have_rows('blocks') ): ?>
 		
 		<?php LSPB()->display_section_header(); ?>
 		
-		<div class="grid-container content-blocks-container">
+		<div class="grid-container content-blocks-container <?php echo $layout; ?>">
 			<div class="grid-x grid-padding-x <?php echo $block_grid; ?>">
 				
 				<?php // Ouput blocks ?>
 				<?php while ( have_rows('blocks') ) : the_row(); ?>
 					<div class="cell">
 						
-						<?php $image = get_sub_field('image');
-						if( $layout == 'images' && $image ) { ?>
-							<div class="content-blocks-image">
-								<?php acf_image_tag( 'image', $image_sizes, 'medium', TRUE ); ?>
-							</div>
-						<?php } else if( $layout == 'icons' && $image ) { 
-							$image = acf_image_single( 'image', 'thumbnail', TRUE ); ?>
-							<div class="content-blocks-image icon">
-								<img src="<?php echo $image; ?>" alt="" />
-							</div>
-						<?php } ?>
+						<div class="content-block" data-mh="content-block">
+							<?php $image = get_sub_field('image');
+							if( ($layout == 'images' || $layout == 'square') && $image ) { ?>
+								<div class="content-blocks-image">
+									<?php if( $layout == 'square' ) {
+										acf_image_tag( 'image', $image_sizes, 'square', TRUE );
+									} else {
+										acf_image_tag( 'image', $image_sizes, 'medium', TRUE );
+									} ?>
+								</div>
+							<?php } else if( $layout == 'icons' && $image ) { 
+								$image = acf_image_single( 'image', 'thumbnail', TRUE ); ?>
+								<div class="content-blocks-icon">
+									<img src="<?php echo $image; ?>" alt="" />
+								</div>
+							<?php } ?>
 
-						<?php the_sub_field('copy'); ?>
-					
+							<?php if( get_sub_field('copy') ) { ?>
+								<div class="content-blocks-copy">
+									<?php the_sub_field('copy'); ?>
+								</div>
+							<?php } ?>
+						</div>
+
 					</div>
 				<?php endwhile; ?>
 

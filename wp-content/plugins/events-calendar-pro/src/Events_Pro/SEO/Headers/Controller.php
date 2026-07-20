@@ -29,6 +29,7 @@ class Controller extends Controller_Contract {
 	public function do_register(): void {
 		$this->container->singleton( static::class, $this );
 		add_action( 'send_headers', [ $this, 'filter_headers' ] );
+		add_action( 'send_headers', [ $this, 'filter_organizer_venue_404' ] );
 	}
 
 	/**
@@ -38,6 +39,43 @@ class Controller extends Controller_Contract {
 	 */
 	public function unregister(): void {
 		remove_action( 'send_headers', [ $this, 'filter_headers' ] );
+		remove_action( 'send_headers', [ $this, 'filter_organizer_venue_404' ] );
+	}
+
+	/**
+	 * Set a 404 response when an organizer or venue slug is present in the query but resolves to no post.
+	 *
+	 * Covers the edge case where an empty search query (?s=) causes WordPress to treat the request as
+	 * is_search rather than a CPT single-post lookup, bypassing WordPress's own 404 detection for
+	 * unknown organizer/venue slugs.
+	 *
+	 * @since 7.7.15
+	 */
+	public function filter_organizer_venue_404(): void {
+		global $wp_query;
+
+		if ( $wp_query->is_404() ) {
+			return;
+		}
+
+		$tribe_organizer = $wp_query->get( 'tribe_organizer', '' );
+		if ( ! empty( $tribe_organizer ) ) {
+			$found = tribe_organizers()->by( 'name', $tribe_organizer )->fields( 'ids' )->first();
+			if ( empty( $found ) ) {
+				$wp_query->set_404();
+				status_header( 404 );
+			}
+			return;
+		}
+
+		$tribe_venue = $wp_query->get( 'tribe_venue', '' );
+		if ( ! empty( $tribe_venue ) ) {
+			$found = tribe_venues()->where( 'name', $tribe_venue )->fields( 'ids' )->first();
+			if ( empty( $found ) ) {
+				$wp_query->set_404();
+				status_header( 404 );
+			}
+		}
 	}
 
 	/**

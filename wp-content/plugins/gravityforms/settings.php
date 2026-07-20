@@ -221,6 +221,7 @@ class GFSettings {
 			delete_option( 'gform_custom_choices' );
 			delete_option( 'gform_recaptcha_keys_status' );
 			delete_option( 'gform_upload_page_slug' );
+			delete_option( 'gform_enable_async_notifications' );
 
 			delete_option( 'gravityformsaddon_gravityformswebapi_version' );
 			delete_option( 'gravityformsaddon_gravityformswebapi_settings' );
@@ -279,26 +280,22 @@ class GFSettings {
 				</p>
 				<form action="" method="post">
 					<?php
-						if ( GFCommon::current_user_can_uninstall() ) {
+					if ( GFCommon::current_user_can_uninstall() ) {
 
-							wp_nonce_field( 'gform_uninstall', 'gform_uninstall_nonce' );
+						wp_nonce_field( 'gform_uninstall', 'gform_uninstall_nonce' );
 
-							$uninstall_button = sprintf(
-								'<input type="submit" name="uninstall" class="button red" value="%1$s" onclick="return confirm( \'%2$s\' );" onkeypress="return confirm( \'%2$s\' );" />',
-								esc_attr__( 'Uninstall Gravity Forms', 'gravityforms' ),
-								esc_js( __( "Warning! ALL Gravity Forms data, including form entries will be deleted. This cannot be undone. 'OK' to delete, 'Cancel' to stop", 'gravityforms' ) )
-							);
+						$alert_title   = esc_html__( 'Uninstall Gravity Forms', 'gravityforms' );
+						$alert_message = esc_html__( 'Warning! ALL Gravity Forms data, including form entries, will be deleted. This action cannot be undone. \'OK\' to delete, \'Cancel\' to stop.', 'gravityforms' );
 
-							/**
-							 * Allows for the modification of the Gravity Forms uninstall button.
-							 *
-							 * @since Unknown
-							 *
-							 * @param string $uninstall_button The HTML of the uninstall button.
-							 */
-							echo apply_filters( 'gform_uninstall_button', $uninstall_button ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						$uninstall_button = sprintf(
+							'<input type="submit" name="uninstall" id="uninstall-button" data-dialog-title="%1$s" data-dialog-confirm="%2$s" class="button red" value="%3$s" />',
+							esc_attr( $alert_title ),
+							esc_attr( $alert_message ),
+							esc_attr__( 'Uninstall Gravity Forms', 'gravityforms' )
+						);
 
-						}
+						echo $uninstall_button; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					}
 					?>
 				</form>
 			</div>
@@ -424,6 +421,7 @@ class GFSettings {
 	 * Prepare Plugin Settings fields.
 	 *
 	 * @since 2.5
+	 * @since 2.10.0 Added the background notifications setting.
 	 *
 	 * @return array
 	 */
@@ -530,6 +528,24 @@ class GFSettings {
 						'after_select'  => self::currency_message_callback(),
 						'save_callback' => function( $field, $value ) {
 							update_option( 'rg_gforms_currency', $value );
+
+							return $value;
+						},
+					),
+				),
+			),
+			'async_notifications' => array(
+				'id'          => 'section_enable_async_notifications',
+				'title'       => esc_html__( 'Background Notifications', 'gravityforms' ),
+				'description' => esc_html__( 'Enable background (asynchronous) notifications to improve form submission performance by using a separate request to send the notifications, so the user can see the confirmation before notification sending has completed.', 'gravityforms' ),
+				'class'       => 'gform-settings-panel--half',
+				'fields'      => array(
+					array(
+						'name'          => 'enable_async_notifications',
+						'type'          => 'toggle',
+						'toggle_label'  => esc_html__( 'Enable Background Notifications', 'gravityforms' ),
+						'save_callback' => function ( $field, $value ) {
+							update_option( 'gform_enable_async_notifications', $value ? 1 : 0, false );
 
 							return $value;
 						},
@@ -978,21 +994,23 @@ class GFSettings {
 	 * Initialize Plugin Settings fields renderer.
 	 *
 	 * @since 2.5
+	 * @since 2.10.0 Added the background notifications setting.
 	 */
 	public static function initialize_plugin_settings() {
 
 		require_once( GFCommon::get_base_path() . '/tooltips.php' );
 
 		$initial_values = array(
-			'license_key'               => GFCommon::get_key(),
-			'default_theme'             => get_option( 'rg_gforms_default_theme', 'gravity-theme' ),
-			'currency'                  => GFCommon::get_currency(),
-			'disable_css'               => ! (bool) get_option( 'rg_gforms_disable_css' ),
-			'enable_noconflict'         => (bool) get_option( 'gform_enable_noconflict' ),
-			'enable_akismet'            => (bool) get_option( 'rg_gforms_enable_akismet', true ),
-			'enable_background_updates' => (bool) get_option( 'gform_enable_background_updates' ),
-			'enable_toolbar'            => (bool) get_option( 'gform_enable_toolbar_menu' ),
-			'enable_logging'            => (bool) get_option( 'gform_enable_logging' ),
+			'license_key'                => GFCommon::get_key(),
+			'default_theme'              => get_option( 'rg_gforms_default_theme', 'gravity-theme' ),
+			'currency'                   => GFCommon::get_currency(),
+			'disable_css'                => ! (bool) get_option( 'rg_gforms_disable_css' ),
+			'enable_noconflict'          => (bool) get_option( 'gform_enable_noconflict' ),
+			'enable_akismet'             => (bool) get_option( 'rg_gforms_enable_akismet', true ),
+			'enable_background_updates'  => (bool) get_option( 'gform_enable_background_updates' ),
+			'enable_toolbar'             => (bool) get_option( 'gform_enable_toolbar_menu' ),
+			'enable_logging'             => (bool) get_option( 'gform_enable_logging' ),
+			'enable_async_notifications' => (bool) get_option( 'gform_enable_async_notifications' ),
 		);
 
 		$renderer = new Settings(

@@ -243,9 +243,11 @@ class Day_View extends View {
 	}
 
 	/**
+	 * @since 6.17.0 Made $context explicitly nullable.
+	 *
 	 * {@inheritDoc}
 	 */
-	protected function setup_repository_args( \Tribe__Context $context = null ) {
+	protected function setup_repository_args( ?\Tribe__Context $context = null ) {
 
 		$context = null !== $context ? $context : $this->context;
 
@@ -339,6 +341,9 @@ class Day_View extends View {
 		$template_vars['events']   = $sorted_events;
 		$template_vars['next_rel'] = $next_rel;
 		$template_vars['prev_rel'] = $prev_rel;
+
+		$enabled_views                      = tribe_get_option( 'tribeEnableViews', [ static::$view_slug ] );
+		$template_vars['day_view_disabled'] = ! in_array( static::$view_slug, $enabled_views, true );
 
 		return $template_vars;
 	}

@@ -3,7 +3,7 @@
 Plugin Name: 	SVG Support
 Plugin URI:		http://wordpress.org/plugins/svg-support/
 Description: 	Upload SVG files to the Media Library and render SVG files inline for direct styling/animation of an SVG's internal elements using CSS/JS.
-Version: 		2.5.14
+Version: 		2.5.17
 Author URI: 	https://benbodhi.com
 Text Domain: 	svg-support
 Domain Path:	/languages
@@ -60,7 +60,6 @@ include( BODHI_SVGS_PLUGIN_PATH . 'functions/mime-types.php' );				// setup mime
 include( BODHI_SVGS_PLUGIN_PATH . 'functions/thumbnail-display.php' );		// make SVG thumbnails display correctly in media library
 include( BODHI_SVGS_PLUGIN_PATH . 'functions/attachment.php' );				// make SVG thumbnails display correctly in attachment modals and generate attachment sizes
 include( BODHI_SVGS_PLUGIN_PATH . 'functions/enqueue.php' );				// enqueue js & css for inline replacement & admin
-include( BODHI_SVGS_PLUGIN_PATH . 'functions/localization.php' );			// setup localization & languages
 include( BODHI_SVGS_PLUGIN_PATH . 'functions/attribute-control.php' );		// auto set SVG class & remove dimensions during insertion
 include( BODHI_SVGS_PLUGIN_PATH . 'functions/featured-image.php' );			// allow inline SVG for featured images
 include( BODHI_SVGS_PLUGIN_PATH . 'functions/meta-cleanup.php' );			// cleanup duplicate meta entries
