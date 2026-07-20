@@ -144,7 +144,8 @@ class From_Event_Recurrence_Converter {
 	/**
 	 * From_Event_Recurrence_Converter constructor.
 	 *
-	 * since 6.0.0
+	 * @since 6.0.0
+	 * @since 7.8.0 Made $dtstart and $dtend explicitly nullable.
 	 *
 	 * @param DateTimeInterface|null $dtstart An optional DTSTART object reference to initialize the
 	 *                                        converter on.
@@ -152,7 +153,7 @@ class From_Event_Recurrence_Converter {
 	 *                                        converter on; it will be ignored if the `$dtstart` parameter
 	 *                                        is not provided.
 	 */
-	public function __construct( DateTimeInterface $dtstart = null, DateTimeInterface $dtend = null ) {
+	public function __construct( ?DateTimeInterface $dtstart = null, ?DateTimeInterface $dtend = null ) {
 		if ( null === $dtstart || null === $dtend ) {
 			return;
 		}

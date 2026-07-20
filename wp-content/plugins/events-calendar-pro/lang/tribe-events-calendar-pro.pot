@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: The Events Calendar Pro 7.7.14\n"
+"Project-Id-Version: The Events Calendar Pro 7.8.0\n"
 "Report-Msgid-Bugs-To: https://evnt.is/191x\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-03-10T22:15:05+00:00\n"
+"POT-Creation-Date: 2026-07-07T22:35:02+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: tribe-events-calendar-pro\n"
@@ -1750,35 +1750,35 @@ msgctxt "The label shown when no Series is available for selection."
 msgid "Create or Find a Series"
 msgstr ""
 
-#: src/Events_Pro/Custom_Tables/V1/Editors/Classic/Occurrences_List.php:74
+#: src/Events_Pro/Custom_Tables/V1/Editors/Classic/Occurrences_List.php:75
 msgid "No events are associated with this Series yet."
 msgstr ""
 
-#: src/Events_Pro/Custom_Tables/V1/Editors/Classic/Occurrences_List.php:169
+#: src/Events_Pro/Custom_Tables/V1/Editors/Classic/Occurrences_List.php:170
 #: src/Tribe/APM_Filters/APM_Filters.php:91
 #: src/Tribe/Integrations/Elementor/Widgets/Widget_Event_Single_Legacy.php:356
 msgid "Title"
 msgstr ""
 
-#: src/Events_Pro/Custom_Tables/V1/Editors/Classic/Occurrences_List.php:170
+#: src/Events_Pro/Custom_Tables/V1/Editors/Classic/Occurrences_List.php:171
 msgid "Actions"
 msgstr ""
 
-#: src/Events_Pro/Custom_Tables/V1/Editors/Classic/Occurrences_List.php:273
-#: src/Events_Pro/Custom_Tables/V1/Editors/Classic/Occurrences_List.php:276
+#: src/Events_Pro/Custom_Tables/V1/Editors/Classic/Occurrences_List.php:274
+#: src/Events_Pro/Custom_Tables/V1/Editors/Classic/Occurrences_List.php:277
 msgid "Upcoming"
 msgstr ""
 
-#: src/Events_Pro/Custom_Tables/V1/Editors/Classic/Occurrences_List.php:281
-#: src/Events_Pro/Custom_Tables/V1/Editors/Classic/Occurrences_List.php:284
+#: src/Events_Pro/Custom_Tables/V1/Editors/Classic/Occurrences_List.php:282
+#: src/Events_Pro/Custom_Tables/V1/Editors/Classic/Occurrences_List.php:285
 msgid "All"
 msgstr ""
 
-#: src/Events_Pro/Custom_Tables/V1/Editors/Classic/Occurrences_List.php:304
+#: src/Events_Pro/Custom_Tables/V1/Editors/Classic/Occurrences_List.php:305
 msgid "Edit"
 msgstr ""
 
-#: src/Events_Pro/Custom_Tables/V1/Editors/Classic/Occurrences_List.php:305
+#: src/Events_Pro/Custom_Tables/V1/Editors/Classic/Occurrences_List.php:306
 #: src/Tribe/Integrations/Elementor/Widgets/Widget_Events_View.php:204
 msgid "View"
 msgstr ""
@@ -3020,7 +3020,7 @@ msgid "Add New %s"
 msgstr ""
 
 #: src/Events_Pro/Custom_Tables/V1/Series/Post_Type.php:127
-#: src/Tribe/Admin/Manager/Page.php:443
+#: src/Tribe/Admin/Manager/Page.php:444
 #, php-format
 msgid "Edit %s"
 msgstr ""
@@ -3196,12 +3196,12 @@ msgctxt "The text shown before indicating the Series the Event is in relation wi
 msgid "Event Series:"
 msgstr ""
 
-#: src/Events_Pro/Custom_Tables/V1/Updates/Post_Actions.php:91
+#: src/Events_Pro/Custom_Tables/V1/Updates/Post_Actions.php:93
 msgctxt "Confirmation message"
 msgid "Are you sure you want to convert this recurring event instance into a single event? This cannot be undone."
 msgstr ""
 
-#: src/Events_Pro/Custom_Tables/V1/Updates/Post_Actions.php:93
+#: src/Events_Pro/Custom_Tables/V1/Updates/Post_Actions.php:95
 msgctxt "Link title"
 msgid "Convert to Single"
 msgstr ""
@@ -3954,46 +3954,46 @@ msgstr ""
 msgid "The current default phone is: %1$s%2$s%3$s"
 msgstr ""
 
-#: src/functions/template-tags/virtual.php:74
+#: src/functions/template-tags/virtual.php:77
 msgctxt "Capitalized version of the \"virtual\" term."
 msgid "Virtual"
 msgstr ""
 
-#: src/functions/template-tags/virtual.php:102
+#: src/functions/template-tags/virtual.php:105
 msgctxt "Lowercase version of the \"virtual\" term."
 msgid "virtual"
 msgstr ""
 
-#: src/functions/template-tags/virtual.php:131
+#: src/functions/template-tags/virtual.php:134
 #, php-format
 msgctxt "Capitalized \"virtual\" term, capitalized singular event term."
 msgid "%1$s %2$s"
 msgstr ""
 
-#: src/functions/template-tags/virtual.php:165
+#: src/functions/template-tags/virtual.php:168
 #, php-format
 msgctxt "Lowercase \"virtual\" term, singular lowercase event term."
 msgid "%1$s %2$s"
 msgstr ""
 
-#: src/functions/template-tags/virtual.php:199
+#: src/functions/template-tags/virtual.php:202
 #, php-format
 msgctxt "Capitalized \"virtual\" term, capitalized plural event term."
 msgid "%1$s %2$s"
 msgstr ""
 
-#: src/functions/template-tags/virtual.php:233
+#: src/functions/template-tags/virtual.php:236
 #, php-format
 msgctxt "Lowercase \"virtual\" term, lowercase plural event term."
 msgid "%1$s %2$s"
 msgstr ""
 
-#: src/functions/template-tags/virtual.php:266
+#: src/functions/template-tags/virtual.php:269
 msgctxt "Capitalized version of the \"hybrid\" term."
 msgid "Hybrid"
 msgstr ""
 
-#: src/functions/template-tags/virtual.php:295
+#: src/functions/template-tags/virtual.php:298
 #, php-format
 msgctxt "Capitalized \"hybrid\" term, capitalized singular event term."
 msgid "%1$s %2$s"
@@ -4209,13 +4209,13 @@ msgstr ""
 
 #: src/Tribe/Geo_Loc.php:232
 #: src/Tribe/Geo_Loc_Filter.php:23
-#: src/Tribe/Views/V2/Views/Map_View.php:563
+#: src/Tribe/Views/V2/Views/Map_View.php:565
 msgid "Miles"
 msgstr ""
 
 #: src/Tribe/Geo_Loc.php:233
 #: src/Tribe/Geo_Loc_Filter.php:26
-#: src/Tribe/Views/V2/Views/Map_View.php:559
+#: src/Tribe/Views/V2/Views/Map_View.php:561
 msgid "Kilometers"
 msgstr ""
 
@@ -5736,22 +5736,22 @@ msgstr ""
 msgid " months"
 msgstr ""
 
-#: src/Tribe/Recurrence/Queue_Realtime.php:81
+#: src/Tribe/Recurrence/Queue_Realtime.php:83
 msgid "Completed!"
 msgstr ""
 
-#: src/Tribe/Recurrence/Queue_Realtime.php:83
-#: src/Tribe/Recurrence/Queue_Realtime.php:106
-#: src/Tribe/Recurrence/Queue_Realtime.php:185
+#: src/Tribe/Recurrence/Queue_Realtime.php:85
+#: src/Tribe/Recurrence/Queue_Realtime.php:108
+#: src/Tribe/Recurrence/Queue_Realtime.php:187
 #, php-format
 msgid "%d%% complete"
 msgstr ""
 
-#: src/Tribe/Recurrence/Queue_Realtime.php:103
+#: src/Tribe/Recurrence/Queue_Realtime.php:105
 msgid "Recurring event data is still being generated for this event. Don&#146;t worry, you can safely navigate away &ndash; the process will resume in a bit in the background."
 msgstr ""
 
-#: src/Tribe/Recurrence/Queue_Realtime.php:168
+#: src/Tribe/Recurrence/Queue_Realtime.php:170
 msgid "Unable to continue processing recurring event data. Please reload this page to continue/try again."
 msgstr ""
 
@@ -6377,12 +6377,12 @@ msgstr ""
 msgid "summary"
 msgstr ""
 
-#: src/Tribe/Views/V2/Hooks.php:1005
+#: src/Tribe/Views/V2/Hooks.php:1007
 msgctxt "The default text label for the \"today\" button on the Week View."
 msgid "This Week"
 msgstr ""
 
-#: src/Tribe/Views/V2/Hooks.php:1025
+#: src/Tribe/Views/V2/Hooks.php:1027
 msgctxt "The default text for the 'today' button's title and aria-label on the Week View."
 msgid "Click to select the current week"
 msgstr ""
@@ -6536,26 +6536,26 @@ msgstr ""
 msgid "Map of %1$s from %2$s"
 msgstr ""
 
-#: src/Tribe/Views/V2/Views/Map_View.php:97
+#: src/Tribe/Views/V2/Views/Map_View.php:98
 msgctxt "The text label for the Map View."
 msgid "Map"
 msgstr ""
 
 #. Translators: %1$s is the lowercase pluralized label for events.
-#: src/Tribe/Views/V2/Views/Map_View.php:112
+#: src/Tribe/Views/V2/Views/Map_View.php:113
 #, php-format
 msgctxt "Label for link to map view."
 msgid "View %1s on a map."
 msgstr ""
 
 #. Translators: %1$s is the lowercase pluralized label for events.
-#: src/Tribe/Views/V2/Views/Organizer_View.php:125
+#: src/Tribe/Views/V2/Views/Organizer_View.php:126
 #, php-format
 msgctxt "Label for link to map view."
 msgid "View %1s."
 msgstr ""
 
-#: src/Tribe/Views/V2/Views/Organizer_View.php:550
+#: src/Tribe/Views/V2/Views/Organizer_View.php:557
 #, php-format
 msgctxt "Content title for the View, displays right above the date selector on the Organizer View."
 msgid "%1$s from this %2$s"
@@ -6566,17 +6566,17 @@ msgctxt "The text label for the Photo View."
 msgid "Photo"
 msgstr ""
 
-#: src/Tribe/Views/V2/Views/Summary_View.php:56
+#: src/Tribe/Views/V2/Views/Summary_View.php:58
 msgctxt "The text label for the Summary View."
 msgid "Summary"
 msgstr ""
 
-#: src/Tribe/Views/V2/Views/Venue_View.php:115
+#: src/Tribe/Views/V2/Views/Venue_View.php:116
 msgctxt "The text label for the Venue View."
 msgid "Venue"
 msgstr ""
 
-#: src/Tribe/Views/V2/Views/Venue_View.php:539
+#: src/Tribe/Views/V2/Views/Venue_View.php:542
 #, php-format
 msgctxt "Content title for the View, displays right above the date selector on the Venue View."
 msgid "%1$s at this %2$s"
@@ -6587,12 +6587,12 @@ msgctxt "The text label for the Week View."
 msgid "Week"
 msgstr ""
 
-#: src/Tribe/Views/V2/Views/Widgets/Venue_View.php:64
+#: src/Tribe/Views/V2/Views/Widgets/Venue_View.php:65
 msgid "View More"
 msgstr ""
 
 #. Translators: 1: lowercase plural event term 2: venue name
-#: src/Tribe/Views/V2/Views/Widgets/Venue_View.php:103
+#: src/Tribe/Views/V2/Views/Widgets/Venue_View.php:104
 #, php-format
 msgid "View more %1$s at %2$s."
 msgstr ""
@@ -8243,7 +8243,7 @@ msgctxt "The name of the autodetect source."
 msgid "Zoom"
 msgstr ""
 
-#: src/Tribe/Virtual/Metabox.php:83
+#: src/Tribe/Virtual/Metabox.php:84
 msgctxt "Meta box title for the Virtual Event controls"
 msgid "Virtual Event"
 msgstr ""

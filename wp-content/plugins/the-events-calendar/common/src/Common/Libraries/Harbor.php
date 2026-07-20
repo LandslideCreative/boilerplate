@@ -56,6 +56,14 @@ class Harbor extends Controller_Contract {
 	 * @since 6.11.0
 	 */
 	public function do_register(): void {
+		if ( defined( 'WP_SANDBOX_SCRAPING' ) && WP_SANDBOX_SCRAPING ) {
+			return;
+		}
+
+		if ( did_action( 'activate_plugin' ) ) {
+			return;
+		}
+
 		$common = Common::instance();
 
 		Config::set_container( $this->container );
@@ -71,11 +79,17 @@ class Harbor extends Controller_Contract {
 		 */
 		do_action( 'tec_common_harbor_pre_init' );
 
+		add_filter( 'lw-harbor/legacy_licenses', [ $this,'register_legacy_licenses' ] );
+		add_filter( 'lw_harbor/premium_plugin_exists', [ $this, 'register_premium_plugin_exists' ] );
+
 		Harbor_Provider::init();
 
-		add_filter( 'lw-harbor/legacy_licenses', [ $this,'register_legacy_licenses' ] );
 		// Uplink is being initialized in init with prio 8 - so we want to decorate it with our own decorator later.
 		add_action( 'init', [ $this, 'decorate_uplinks_auth_url' ] );
+
+		if ( ! did_action( 'lw_harbor/loaded' ) ) {
+			return;
+		}
 
 		$this->container->register( PUE::class );
 		$this->container->register( EventAggregator::class );
@@ -90,6 +104,7 @@ class Harbor extends Controller_Contract {
 	 */
 	public function unregister(): void {
 		remove_filter( 'lw-harbor/legacy_licenses', [ $this,'register_legacy_licenses' ] );
+		remove_filter( 'lw_harbor/premium_plugin_exists', [ $this, 'register_premium_plugin_exists' ] );
 		remove_action( 'init', [ $this, 'decorate_uplinks_auth_url' ] );
 	}
 
@@ -105,6 +120,40 @@ class Harbor extends Controller_Contract {
 	}
 
 	/**
+	 * Get the premium plugin existence callbacks.
+	 *
+	 * @since 6.11.2
+	 *
+	 * @param bool $exists Whether a premium plugin exists.
+	 *
+	 * @return bool
+	 */
+	public function register_premium_plugin_exists( bool $exists ): bool {
+		if ( $exists ) {
+			// It already exists.
+			return true;
+		}
+
+		$premium_constants = [
+			'EVENTS_CALENDAR_PRO_FILE',
+			'EVENT_TICKETS_PLUS_FILE',
+			'EVENTS_COMMUNITY_FILE',
+			'EVENTBRITE_PLUGIN_FILE',
+			'TRIBE_EVENTS_FILTERBAR_FILE',
+		];
+
+		foreach ( $premium_constants as $premium_constant ) {
+			if ( ! defined( $premium_constant ) ) {
+				continue;
+			}
+
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
 	 * Register the legacy licenses.
 	 *
 	 * @since 6.11.0
@@ -114,6 +163,12 @@ class Harbor extends Controller_Contract {
 	 * @return array
 	 */
 	public function register_legacy_licenses( array $licenses ): array {
+		// The imported get_plugins() is Uplink's, only declared once Uplink::init() requires its functions.php on `init`.
+		// This filter can fire earlier (e.g. a Promoter PUE license lookup on `plugins_loaded`), so bail until it is loaded.
+		if ( ! function_exists( '\TEC\Common\StellarWP\Uplink\get_plugins' ) ) {
+			return $licenses;
+		}
+
 		$plugins = get_plugins();
 
 		$filters_removed = false;

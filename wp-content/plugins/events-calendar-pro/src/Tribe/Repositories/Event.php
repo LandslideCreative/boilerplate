@@ -784,6 +784,7 @@ class Tribe__Events__Pro__Repositories__Event extends Tribe__Events__Repositorie
 	 * recurrences.
 	 *
 	 * @since 4.7
+	 * @since 7.8.0 Made $postarr explicitly nullable.
 	 *
 	 * @param int   $event_id              The post ID of the event that is currently being saved.
 	 * @param mixed $recurrence_payload    The recurrence data payload; there is no guarantee on the format
@@ -792,7 +793,7 @@ class Tribe__Events__Pro__Repositories__Event extends Tribe__Events__Repositorie
 	 *
 	 * @return callable The recurrence creation callback.
 	 */
-	protected function get_recurrence_creation_callback( $event_id, $recurrence_payload, array $postarr = null ) {
+	protected function get_recurrence_creation_callback( $event_id, $recurrence_payload, ?array $postarr = null ) {
 		/**
 		 * Filters the callback the Event repository should use to create recurrences.
 		 *

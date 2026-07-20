@@ -371,12 +371,13 @@ class Page {
 	 * Check if the current screen is the calendar manager class.
 	 *
 	 * @since 5.9.0
+	 * @since 7.8.0 Made $screen explicitly nullable.
 	 *
 	 * @param WP_Screen $screen Current screen being tested.
 	 *
 	 * @return bool If a current screen is the calendar manager.
 	 */
-	public function is_current_screen( WP_Screen $screen = null ) {
+	public function is_current_screen( ?WP_Screen $screen = null ) {
 		if ( null === $screen ) {
 			if ( ! function_exists( 'get_current_screen' ) ) {
 				return false;

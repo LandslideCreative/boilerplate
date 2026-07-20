@@ -43,6 +43,8 @@ wp-content/managewp/*
 wp-content/backup-db/*
 wp-content/backups/*
 wp-snapshots/*
+wp-content/.analyst_analyst_*
+wp-content/backup-migration-*
 
 # Dev Plugins
 wp-content/plugins/query-monitor/
