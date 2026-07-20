@@ -267,10 +267,11 @@ class View implements View_Interface {
 	 * View constructor.
 	 *
 	 * @since 4.9.11
+	 * @since 6.17.0 Made $messages explicitly nullable.
 	 *
 	 * @param Messages|null $messages An instance of the messages collection.
 	 */
-	public function __construct( Messages $messages = null ) {
+	public function __construct( ?Messages $messages = null ) {
 		$this->messages = $messages ?: new Messages();
 		$this->rewrite  = TEC_Rewrite::instance();
 		$this->slug     = static::$view_slug; // @todo Kept for back-compat, remove when we finally remove the non-static prop.
@@ -428,6 +429,7 @@ class View implements View_Interface {
 	 * Builds and returns an instance of a View by slug or class.
 	 *
 	 * @since  4.9.2
+	 * @since 6.17.0 Made $context explicitly nullable.
 	 *
 	 * @param string       $view       The view slug, as registered in the `tribe_events_views` filter, or class.
 	 * @param Context|null $context    The context this view should render from; if not set then the global
@@ -435,7 +437,7 @@ class View implements View_Interface {
 	 *
 	 * @return View_Interface An instance of the built view.
 	 */
-	public static function make( $view = null, Context $context = null ) {
+	public static function make( $view = null, ?Context $context = null ) {
 		$manager = tribe( Manager::class );
 
 		$default_view = $manager->get_default_view();
@@ -817,9 +819,11 @@ class View implements View_Interface {
 	}
 
 	/**
+	 * @since 6.17.0 Made $context explicitly nullable.
+	 *
 	 * {@inheritDoc}
 	 */
-	public function set_context( Context $context = null ) {
+	public function set_context( ?Context $context = null ) {
 		$this->context = $context;
 	}
 
@@ -1026,7 +1030,7 @@ class View implements View_Interface {
 			$query_args[ $this->page_key ] = $this->url->get_current_page() + 1;
 
 			// Default to the current URL.
-			$url = $url ?: home_url( add_query_arg( [] ) );
+			$url = $url ?: Url::get_current_url();
 
 			$query_args = $this->filter_query_args( $query_args, $url );
 			$query_args = array_filter( $query_args );
@@ -1089,7 +1093,7 @@ class View implements View_Interface {
 			$query_args = array_merge( $query_args, $page_query_args );
 
 			// Default to the current URL.
-			$url = $url ?: home_url( add_query_arg( [] ) );
+			$url = $url ?: Url::get_current_url();
 
 			if ( $paged === 1 ) {
 				$url = remove_query_arg( $this->page_key, $url );
@@ -1159,9 +1163,11 @@ class View implements View_Interface {
 	}
 
 	/**
+	 * @since 6.17.0 Made $repository explicitly nullable.
+	 *
 	 * {@inheritDoc}
 	 */
-	public function set_repository( Repository $repository = null ) {
+	public function set_repository( ?Repository $repository = null ) {
 		$this->repository = $repository;
 	}
 
@@ -1223,12 +1229,13 @@ class View implements View_Interface {
 	 * Sets a View URL object either from some arguments or from the current URL.
 	 *
 	 * @since 4.9.3
+	 * @since 6.17.0 Made $args explicitly nullable.
 	 *
 	 * @param array|null $args   An associative array of arguments that will be mapped to the corresponding query
 	 *                           arguments by the View, or `null` to use the current URL.
 	 * @param bool       $merge  Whether to merge the arguments or override them.
 	 */
-	public function set_url( array $args = null, $merge = false ) {
+	public function set_url( ?array $args = null, $merge = false ) {
 		if ( ! isset( $this->url ) ) {
 			$this->url = new Url();
 		}
@@ -1254,12 +1261,13 @@ class View implements View_Interface {
 	 * Maps a set of arguments to query arguments, ready to be appended to a URL.
 	 *
 	 * @since 4.9.3
+	 * @since 6.17.0 Made $args explicitly nullable.
 	 *
 	 * @param array $args An associative array of arguments to map (translate) to query arguments.
 	 *
 	 * @return array An associative array of query arguments mapped from the input ones.
 	 */
-	protected function map_args_to_query_args( array $args = null ) {
+	protected function map_args_to_query_args( ?array $args = null ) {
 		if ( empty( $args ) ) {
 			return [];
 		}
@@ -1331,12 +1339,13 @@ class View implements View_Interface {
 	 * @since 4.9.3
 	 * @since 6.0.5 Now will merge a "global" repository arg filter, which will be applied elsewhere as well as this
 	 *                primary repository query.
+	 * @since 6.17.0 Made $context explicity nullable.
 	 *
 	 * @param Context|null $context A context to use to setup the args, or `null` to use the View Context.
 	 *
 	 * @return array The arguments, ready to be set on the View repository instance.
 	 */
-	protected function setup_repository_args( Context $context = null ) {
+	protected function setup_repository_args( ?Context $context = null ) {
 		$context = null !== $context ? $context : $this->context;
 
 		$context_arr = $context->to_array();
@@ -1609,6 +1618,7 @@ class View implements View_Interface {
 	 * @since 5.2.1 Add the `rest_method` to the template variables.
 	 * @since 6.14.0 Added filter `tec_events_views_v2_view_template_vars` to filter the template variables.
 	 * @since 6.15.7 Added `backlink` support to template variables, allowing views to display a back link instead of breadcrumbs.
+	 * @since 6.15.20 Added the `day_view_disabled` to the template variables.
 	 *
 	 * @return array An array of Template variables for the View Template.
 	 */
@@ -1850,13 +1860,14 @@ class View implements View_Interface {
 	 * Filters the repository arguments that will be used to set up the View repository instance.
 	 *
 	 * @since 4.9.5
+	 * @since 6.17.0 Made $context explicitly nullable.
 	 *
 	 * @param array        $repository_args The repository arguments that will be used to set up the View repository instance.
 	 * @param Context|null $context         Either a specific Context or `null` to use the View current Context.
 	 *
 	 * @return array The filtered repository arguments.
 	 */
-	protected function filter_repository_args( array $repository_args, Context $context = null ) {
+	protected function filter_repository_args( array $repository_args, ?Context $context = null ) {
 		$context = null !== $context ? $context : $this->context;
 
 		/**

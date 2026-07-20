@@ -4,8 +4,8 @@ $filters = array();
 $filters['category'] = get_query_var('category_name', ''); ?>
 
 <div class="grid-container intro-section filter-container post-filter-container">
-	<div class="grid-x <?php ls_grid_class( 'post-filter' ); ?>">
-		<div class="cell <?php ls_cell_class( 'post-filter' ); ?>">
+	<div class="grid-x grid-padding-x">
+		<div class="cell">
 			<form class="filter-form" id="post-filter" method="GET" action="<?php echo get_post_type_archive_link('post'); ?>#post-list">
 
 				<?php /* Category */ ?>

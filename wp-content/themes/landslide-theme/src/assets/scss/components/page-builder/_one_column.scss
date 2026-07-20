@@ -1,0 +1,7 @@
+// Page Builder - One Column
+
+.page-section.one-column {
+	.cell {
+		@include clean-last-child;
+	}
+}

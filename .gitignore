@@ -28,6 +28,7 @@ temp
 # Generated Files
 sitemap.xml
 sitemap.xml.gz
+llms.txt
 wp-content/blogs.dir/
 
 # License Files
@@ -42,6 +43,8 @@ wp-content/managewp/*
 wp-content/backup-db/*
 wp-content/backups/*
 wp-snapshots/*
+wp-content/.analyst_analyst_*
+wp-content/backup-migration-*
 
 # Dev Plugins
 wp-content/plugins/query-monitor/

@@ -1,5 +1,79 @@
 # Changelog
 
+### [6.17.0] 2026-07-08
+
+* Compatibility - Improved PHP compatibility for versions 7.4 and up to 8.4.
+* Language - 0 new strings added, 59 updated, 0 fuzzied, and 0 obsoleted.
+
+### [6.16.5.1] 2026-07-01
+
+* Security - Expanded validation of Event Aggregator imports for all statuses.
+* Language - 0 new strings added, 0 updated, 0 fuzzied, and 0 obsoleted.
+
+### [6.16.5] 2026-06-24
+
+* Feature - Added "SEO & URL Handling" settings, allowing site owners to configure out-of-range URL behavior.
+* Fix - Dated List view URLs carrying ?tribe-bar-date outside the known event range now return HTTP 404 by default, and can be configured to use a soft noindex response instead, helping prevent accumulation of low-value indexed pages in search engines.
+* Fix - Removed bottom padding from "Event Venue" block to be compatible with Wordpress 7 styles.
+* Fix - URLs specifying a disabled view slug via ?eventDisplay now return HTTP 404 instead of 200.
+* Language - 0 new strings added, 2 updated, 0 fuzzied, and 0 obsoleted.
+* Language - 13 new strings added, 0 updated, 0 fuzzied, and 0 obsoleted.
+
+### [6.16.4.1] 2026-06-19
+
+* Security - Make the iCal export feed produce deterministic output and harden calendar header values against line-break injection.
+
+### [6.16.4] 2026-06-15
+
+* Tweak - Resolve license key validation server not available message on licenses screen. [CONS-478]
+* Language - 0 new strings added, 0 updated, 0 fuzzied, and 0 obsoleted.
+
+### [6.16.3] 2026-05-28
+
+* Fix - Ensure no past Event dates are shown in the Title meta tag on Events archive and single views. [TEC-5759]
+* Fix - Resolved an issue where the category legend superpowers filter would not apply in a day with multiple events from different categories. [ECP-2016]
+* Language - 1 new strings added, 65 updated, 1 fuzzied, and 4 obsoleted.
+
+### [6.16.2] 2026-05-14
+
+* Tweak - Update Harbor to 1.2.0, removing the Liquid Web Products page when there are no premium plugins present.
+
+### [6.16.1] 2026-05-12
+
+* Tweak - Update Harbor to version 1.1.0 to remove the top level Liquid Web page added to the dashboard.
+
+### [6.16.0] 2026-05-11
+
+* Feature - Integrate with Nexcess Licensing and Portal.
+* Tweak - Added filters: `tec_events_aggregator_harbor_took_over`
+* Tweak - Updated branding references from StellarWP to Nexcess.
+
+### [6.15.20] 2026-04-08
+
+* Fix - Make SSR respect AJAX pagination so direct page URLs no longer return 404s. [TEC-5754]
+* Fix - Prevent 404 errors for paginated TEC list view requests on MariaDB. [TEC-5056]
+* Fix - Rewrite the day view URL to query-param form and fall back to the default view when day view is disabled, preventing a 404 after a page refresh. [TEC-5765]
+* Language - 0 new strings added, 13 updated, 0 fuzzied, and 0 obsoleted.
+
+### [6.15.19] 2026-04-07
+
+* Tweak - Added filters: `tec_events_views_v2_url_allowed_query_args`
+* Security - Ensure Venues and Organizers linked to an event, are still honoring their individual capabilities. [SVUL-61]
+* Security - Strengthen capability checks for categories and terms. [SVUL-64]
+* Security - Tighten capability checks and server-side validation for Event Aggregator scheduled import edits. [SVUL-63]
+* Language - 2 new strings added, 20 updated, 0 fuzzied, and 0 obsoleted.
+
+### [6.15.18] 2026-03-25
+
+* Fix - Add `is_array` verification to guard against non-array values passed by Elementor in some contexts. [TEC-5762]
+* Fix - Improve the URL compatibility with non-ASCII languages. [TEC-4848]
+* Fix - Verify if Elementor CSS exists before adding it to avoid a 404 response. [TEC-5752]
+* Language - 0 new strings added, 0 updated, 0 fuzzied, and 0 obsoleted.
+
+### [6.15.17.1] 2026-03-09
+
+* Security - Strengthen file type and location checks during aggregator imports. [SVUL-54]
+
 ### [6.15.17] 2026-02-25
 
 * Tweak - Changed views: `modules/meta/organizer`, `v2/components/content-title`, `v2/components/header`, `v2/day/nav`, `v2/day/top-bar/nav`, `v2/month/calendar-body/day/cell-title`, `v2/month/calendar-body/day/date`, `v2/month/top-bar/nav`

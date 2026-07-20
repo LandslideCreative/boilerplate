@@ -1,0 +1,186 @@
+// Page Builder - Expandable Content
+
+$expandable-content-margin-bottom: (
+  "small": 15px,
+  "medium": 15px,
+  "large": 15px
+);
+
+// Labels
+$expandable-content-label-background-color: $light-gray;
+$expandable-content-label-hover-background-color: $light-gray;
+$expandable-content-label-color: inherit;
+$expandable-content-label-hover-color: inherit;
+$expandable-content-label-padding: (
+  "small": 15px 60px 15px 15px,
+  "medium": 20px 85px 20px 25px,
+  "large": 20px 100px 20px 30px
+);
+
+// Toggles
+$expandable-content-toggle-size: (
+  "small": 30px,
+  "medium": 35px,
+  "large": 40px
+);
+$expandable-content-toggle-background-color: inherit;
+$expandable-content-toggle-hover-background-color: inherit;
+$expandable-content-toggle-margin-right: (
+  "small": 15px,
+  "medium": 25px,
+  "large": 30px
+);
+$expandable-content-arrow-caret: true;
+$expandable-content-arrow-color: $black;
+$expandable-content-arrow-hover-color: $primary-color;
+$expandable-content-arrow-size: (
+  "small": 15px,
+  "medium": 17.5px,
+  "large": 20px
+);
+
+// Content
+$expandable-content-content-background-color: inherit;
+$expandable-content-content-padding: (
+  "small": 15px 15px,
+  "medium": 20px 25px,
+  "large": 20px 30px
+);
+
+.page-section.expandable-content {
+	.accordion {
+		margin-bottom: 0;
+		.accordion-item {
+			margin-bottom: map-get($expandable-content-margin-bottom, "small");
+			@include breakpoint( medium ) {
+				margin-bottom: map-get($expandable-content-margin-bottom, "medium");
+			}
+			@include breakpoint( large ) {
+				margin-bottom: map-get($expandable-content-margin-bottom, "large");
+			}
+			&:last-child {
+				margin-bottom: 0;
+			}
+			a.accordion-title {
+				background-color: $expandable-content-label-background-color;
+				text-decoration: none;
+				padding: map-get($expandable-content-label-padding, "small");
+				transition: background-color 200ms ease-in-out;
+				@include breakpoint( medium ) {
+					padding: map-get($expandable-content-label-padding, "medium");
+				}
+				@include breakpoint( large ) {
+					padding: map-get($expandable-content-label-padding, "large");
+				}
+				h2, h3,	h4, h5 {
+					margin-bottom: 0;
+					color: $expandable-content-label-color;
+				}
+				.accordion-toggle {
+					position: absolute;
+					right: map-get($expandable-content-toggle-margin-right, "small");
+					top: 50%;
+					transform: translateY(-50%);
+					border-radius: 100%;
+					background-color: $expandable-content-toggle-background-color;
+					width: map-get($expandable-content-toggle-size, "small");
+					height: map-get($expandable-content-toggle-size, "small");
+					transition: background-color 200ms ease-in-out, transform 200ms ease-in-out;
+					@include breakpoint( medium ) {
+						right: map-get($expandable-content-toggle-margin-right, "medium");
+						width: map-get($expandable-content-toggle-size, "medium");
+						height: map-get($expandable-content-toggle-size, "medium");
+					}
+					@include breakpoint( large ) {
+						right: map-get($expandable-content-toggle-margin-right, "large");
+						width: map-get($expandable-content-toggle-size, "large");
+						height: map-get($expandable-content-toggle-size, "large");
+					}
+					&::before {
+						content: '';
+						display: block;
+						position: absolute;
+						top: 50%;
+						left: 50%;
+						transform: translate(-50%, -50%);				  						  	
+					  	@if $expandable-content-arrow-caret {
+					  		$expandable-content-arrow-color: str-replace(#{$expandable-content-arrow-color}, "#", "%23");
+					  		width: map-get($expandable-content-arrow-size, "small");
+					  		height: map-get($expandable-content-arrow-size, "small");
+					  		background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' fill='currentColor' width='32' height='32' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cpolygon points='16 5.5 14 3.5 8 9.5 2 3.5 0 5.5 7.999969 13.5' fill='#{$expandable-content-arrow-color}' /%3E%3C/svg%3E");
+					  		background-size: contain;
+					  		background-repeat: no-repeat;
+					  		transition: background-image 200ms ease-in-out;
+					  		@include breakpoint( medium ) {
+								width: map-get($expandable-content-arrow-size, "medium");
+						  		height: map-get($expandable-content-arrow-size, "medium");
+							}
+							@include breakpoint( large ) {
+								width: map-get($expandable-content-arrow-size, "large");
+						  		height: map-get($expandable-content-arrow-size, "large");
+							}
+					  	} @else {
+					  		width: 0;
+							height: 0;
+							border-left: calc(map-get($expandable-content-arrow-size, "small")/2) solid transparent;
+						  	border-right: calc(map-get($expandable-content-arrow-size, "small")/2) solid transparent;
+						  	border-top: calc(map-get($expandable-content-arrow-size, "small")/2) solid $expandable-content-arrow-color;
+						  	transition: border-top-color 200ms ease-in-out;
+						  	@include breakpoint( medium ) {
+								border-left: calc(map-get($expandable-content-arrow-size, "medium")/2) solid transparent;
+						  		border-right: calc(map-get($expandable-content-arrow-size, "medium")/2) solid transparent;
+						  		border-top: calc(map-get($expandable-content-arrow-size, "medium")/2) solid $expandable-content-arrow-color;
+							}
+							@include breakpoint( large ) {
+								border-left: calc(map-get($expandable-content-arrow-size, "large")/2) solid transparent;
+						  		border-right: calc(map-get($expandable-content-arrow-size, "large")/2) solid transparent;
+						  		border-top: calc(map-get($expandable-content-arrow-size, "large")/2) solid $expandable-content-arrow-color;
+							}				  	
+					  	}
+					}
+				}
+				&::before {
+					content: '';
+				}
+				&:hover, &:focus {
+					color: inherit;
+					background-color: $expandable-content-label-hover-background-color;
+					h3 {
+						color: $expandable-content-label-hover-color;
+					}
+					.accordion-toggle {
+						background-color: $expandable-content-toggle-hover-background-color;
+						&::before {
+							@if $expandable-content-arrow-caret {
+						  		$expandable-content-arrow-hover-color: str-replace(#{$expandable-content-arrow-hover-color}, "#", "%23");
+						  		background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' fill='currentColor' width='32' height='32' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cpolygon points='16 5.5 14 3.5 8 9.5 2 3.5 0 5.5 7.999969 13.5' fill='#{$expandable-content-arrow-hover-color}' /%3E%3C/svg%3E");
+						  	} else {
+						  		border-top-color: $expandable-content-arrow-hover-color;	
+						  	}
+						}
+					}
+				}
+			}
+			&.is-active {
+				a.accordion-title {
+					.accordion-toggle {
+						&::before {
+							transform: translate(-50%, -50%) rotateZ(180deg);
+						}
+					}
+				}
+			}
+		}
+		.accordion-content {
+			@include clean-last-child;
+			background-color: $expandable-content-content-background-color;
+			padding: map-get($expandable-content-content-padding, "small");
+			@include breakpoint( medium ) {
+				padding: map-get($expandable-content-content-padding, "medium");
+			}
+			@include breakpoint( large ) {
+				padding: map-get($expandable-content-content-padding, "large");
+			}
+		}
+	}
+}

@@ -50,12 +50,18 @@ add_filter('manage_edit-tribe_events_columns', 'ls_remove_comments_column');
 // Add dashboard styles
 function ls_add_dashboard_scripts() {
 
+    if( defined('LS_BUILD_VERSION') ) {
+        $build_version = LS_BUILD_VERSION;
+    } else {
+        $build_version = '1.0.0';
+    }
+
     // LS dashboard styles
-    wp_register_style('ls-dashboard', LS_PLUGIN_URL . '/assets/css/ls-dashboard.css', array(), LS_BUILD_VERSION);
+    wp_register_style('ls-dashboard', LS_PLUGIN_URL . '/assets/css/ls-dashboard.css', array(), $build_version);
     wp_enqueue_style('ls-dashboard');
 
     // LS dashboard javascript
-    wp_register_script('ls-dashboard', LS_PLUGIN_URL . '/assets/js/ls-dashboard.js', array(), LS_BUILD_VERSION, true);
+    wp_register_script('ls-dashboard', LS_PLUGIN_URL . '/assets/js/ls-dashboard.js', array(), $build_version, true);
     wp_enqueue_script('ls-dashboard');
 
 }
@@ -126,5 +132,52 @@ function ls_dashboard_widget_acf_json_save_path( $path ) {
 }
 add_filter('acf/settings/save_json/name=Dashboard Widget', 'ls_dashboard_widget_acf_json_save_path');
 
+// The Events Calendar - Remove metaboxes from single event
+function ls_remove_event_metaboxes() {
 
+    // Tags
+    remove_meta_box( 'tagsdiv-post_tag', 'tribe_events', 'side' );
+
+    // Event Options
+    remove_meta_box('tribe_events_event_options', 'tribe_events', 'side');
+
+    // Event Status
+    remove_meta_box('tribe-events-status', 'tribe_events', 'side');
+}
+add_action('add_meta_boxes', 'ls_remove_event_metaboxes', 999);
+
+// The Events Calendar - Remove menu items
+function ls_remove_events_menu_items() { 
+
+    // Calendar Embeds
+    remove_submenu_page('edit.php?post_type=tribe_events', 'edit.php?post_type=tec_calendar_embed');
+
+     // Import
+    remove_submenu_page('edit.php?post_type=tribe_events', 'aggregator');
+
+    // Event Add-Ons
+    remove_submenu_page('edit.php?post_type=tribe_events', 'tribe-app-shop');
+
+    // Help
+    remove_submenu_page('edit.php?post_type=tribe_events', 'tec-events-help-hub');
+
+    // Troubleshooting
+    remove_submenu_page('edit.php?post_type=tribe_events', 'tec-troubleshooting');
+
+    // Setup Guide
+    remove_submenu_page('edit.php?post_type=tribe_events', 'first-time-setup');
+
+}
+add_action('admin_menu', 'ls_remove_events_menu_items', 999);
+
+// The Events Calendar - Remove taxonomy from venues and organizers
+function ls_remove_extra_tec_taxonomies() {
+
+    // Venue Category
+    unregister_taxonomy_for_object_type('tec_venue_category', 'tribe_venue');
+
+    // Organizer Category
+    unregister_taxonomy_for_object_type('tec_organizer_category', 'tribe_organizer');
+}
+add_action('init', 'ls_remove_extra_tec_taxonomies', 999);
 

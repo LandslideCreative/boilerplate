@@ -2321,8 +2321,12 @@ class GFFormsModel {
 
 		if ( is_array( $fields ) ) {
 			foreach ( $fields as $field ) {
-
-				if ( $field->multipleFiles ) {
+				if ( $field instanceof GF_Field_FileUpload ) {
+					$files = $field->to_array( self::get_lead_field_value( $lead, $field ) );
+					foreach ( $files as $file ) {
+						self::delete_physical_file( $file, $lead_id );
+					}
+				} elseif ( $field->multipleFiles ) {
 					$value_json = self::get_lead_field_value( $lead, $field );
 					if ( ! empty( $value_json ) ) {
 						$files = json_decode( $value_json, true );
@@ -2441,19 +2445,34 @@ class GFFormsModel {
 			return;
 		}
 
-		$entry          = self::get_lead( $entry_id );
+		$entry = self::get_lead( $entry_id );
+		if ( empty( $entry ) ) {
+			return;
+		}
+
+		$entry_value = rgar( $entry, $field_id );
+		if ( empty( $entry_value ) ) {
+			return;
+		}
+
 		$form_id        = $entry['form_id'];
 		$form           = self::get_form_meta( $form_id );
 		$field          = self::get_field( $form, $field_id );
 		$multiple_files = $field->multipleFiles;
-		if ( $multiple_files ) {
-			$file_urls = json_decode( $entry[ $field_id ], true );
+
+		if ( $field instanceof GF_Field_FileUpload ) {
+			$files    = $field->to_array( $entry_value );
+			$file_url = rgar( $files, $file_index );
+			unset( $files[ $file_index ] );
+			$field_value = $field->to_string( $files );
+		} elseif ( $multiple_files ) {
+			$file_urls = json_decode( $entry_value, true );
 			$file_url  = $file_urls[ $file_index ];
 			unset( $file_urls[ $file_index ] );
 			$file_urls   = array_values( $file_urls );
 			$field_value = empty( $file_urls ) ? '' : json_encode( $file_urls );
 		} else {
-			$file_url    = $entry[ $field_id ];
+			$file_url    = $entry_value;
 			$field_value = '';
 		}
 
@@ -2488,12 +2507,40 @@ class GFFormsModel {
 		 */
 		$file_path = apply_filters( 'gform_file_path_pre_delete_file', $file_path, $url );
 
-		if ( file_exists( $file_path ) ) {
-			unlink( $file_path );
-			gform_delete_meta( $entry_id, GF_Field_FileUpload::get_file_upload_path_meta_key_hash( $url ) );
+		// If the file URL is outside the uploads folder, something nefarious is up, so bail.
+		if ( ! GFCommon::is_file_in_uploads( $url ) ) {
+			GFCommon::log_debug( __METHOD__ . sprintf( '(): Not deleting file from URL: %s', $file_path ) );
+			return;
 		}
 
+		// Verify the resolved file path is within the uploads root (defense-in-depth against filter manipulation).
+		$resolved_path = GFCommon::get_absolute_path( $file_path );
+		$upload_root   = trailingslashit( GFCommon::get_absolute_path( self::get_upload_root() ) );
+		if ( ! str_starts_with( $resolved_path, $upload_root ) ) {
+			GFCommon::log_debug( __METHOD__ . sprintf( '(): Not deleting file; resolved path is outside the uploads root: %s', $file_path ) );
+			return;
+		}
 
+		// if file path contains traversal characters or null bytes, something nefarious is up, so bail.
+		$path_validation = GF_Download::validate_file_path( $file_path );
+		if ( is_wp_error( $path_validation ) ) {
+			GFCommon::log_debug( __METHOD__ . sprintf( '(): Not deleting file (%s): %s', $path_validation->get_error_code(), $file_path ) );
+			return;
+		}
+
+		if ( file_exists( $file_path ) ) {
+			$result = unlink( $file_path );
+
+			if ( $result ) {
+				GFCommon::log_debug( __METHOD__ . "(): File {$file_path} for entry #{$entry_id} was successfully deleted." );
+			} else {
+				GFCommon::log_debug( __METHOD__ . "(): File {$file_path} for entry #{$entry_id} could not be deleted even though it exists. This is likely due to server permissions, ownership, or another file system error." );
+			}
+
+			gform_delete_meta( $entry_id, GF_Field_FileUpload::get_file_upload_path_meta_key_hash( $url ) );
+		} else {
+			GFCommon::log_debug( __METHOD__ . "(): File {$file_path} for entry #{$entry_id} is inaccessible, likely because it no longer exists or due to issues with server permissions or ownership, or another file system error." );
+		}
 	}
 
 	/**
@@ -3680,6 +3727,7 @@ class GFFormsModel {
 					}
 
 					$name    = rgar( $file, 'temp_filename' );
+					$name    = ! empty( $name ) ? sanitize_file_name( wp_basename( $name ) ) : '';
 					$value[] = array(
 						'tmp_path'      => $name ? $tmp_path . $name : '',
 						'tmp_url'       => rgar( $file, 'url', $name ? $tmp_url . $name : '' ),
@@ -3709,9 +3757,10 @@ class GFFormsModel {
 					}
 
 					$name    = rgar( $file_info, 'temp_filename' );
+					$name    = ! empty( $name ) ? sanitize_file_name( wp_basename( $name ) ) : '';
 					$value[] = array(
-						'tmp_path'      => $tmp_path . $name,
-						'tmp_url'       => $tmp_url . $name,
+						'tmp_path'      => $name ? $tmp_path . $name : '',
+						'tmp_url'       => $name ? $tmp_url . $name : '',
 						'tmp_name'      => $name,
 						'uploaded_name' => rgar( $file_info, 'uploaded_filename' ),
 					);
@@ -3929,7 +3978,7 @@ class GFFormsModel {
 			$field_value = array_values( $field_value ); // Returning array values, ignoring keys if array is associative.
 			$match_count = 0;
 			foreach ( $field_value as $val ) {
-				$val = GFFormsModel::maybe_trim_input( GFCommon::get_selection_value( $val ), $form_id, $source_field );
+				$val = GFFormsModel::maybe_trim_input( GFCommon::get_selection_value( $val, $source_field ), $form_id, $source_field );
 				if ( self::matches_conditional_operation( $val, $target_value, $operation ) ) {
 					$match_count ++;
 				}
@@ -3940,7 +3989,7 @@ class GFFormsModel {
 			$must_match_all = ( $operation == 'isnot' && ! rgblank( $target_value ) ) || ( $operation == 'is' && rgblank( $target_value ) );
 			$is_match = $must_match_all ? $match_count == count( $field_value ) : $match_count > 0;
 
-		} else if ( self::matches_conditional_operation( GFFormsModel::maybe_trim_input( GFCommon::get_selection_value( $field_value ), $form_id, $source_field ), $target_value, $operation ) ) {
+		} else if ( self::matches_conditional_operation( GFFormsModel::maybe_trim_input( GFCommon::get_selection_value( $field_value, $source_field ), $form_id, $source_field ), $target_value, $operation ) ) {
 			$is_match = true;
 		}
 
@@ -4810,9 +4859,11 @@ class GFFormsModel {
 
 				case 'post_custom_field' :
 
-					$type = self::get_input_type( $field );
-					if ( 'fileupload' === $type && $field->multipleFiles ) {
-						$value = json_decode( $value, true );
+					if ( $field instanceof GF_Field_FileUpload ) {
+						$value = $field->to_array( $value );
+						if ( ! $field->multipleFiles ) {
+							$value = rgar( $value, 0 );
+						}
 					}
 
 					$meta_name = $field->postCustomFieldName;
@@ -4976,9 +5027,7 @@ class GFFormsModel {
 
 		//do not save price fields with blank price
 		if ( $field->enablePrice ) {
-			$ary   = explode( '|', $value );
-			$label = count( $ary ) > 0 ? $ary[0] : '';
-			$price = count( $ary ) > 1 ? $ary[1] : '';
+			list( $label, $price ) = rgexplode( '|', $value, 2, true );
 
 			$is_empty = ( strlen( trim( $price ) ) <= 0 );
 			if ( $is_empty ) {
@@ -5005,9 +5054,7 @@ class GFFormsModel {
 							if ( $choice['value'] == $lead[ $field_id ] ) {
 								return $choice['value'];
 							} else if ( $field->enablePrice ) {
-								$ary   = explode( '|', $lead[ $field_id ] );
-								$val   = count( $ary ) > 0 ? $ary[0] : '';
-								$price = count( $ary ) > 1 ? $ary[1] : '';
+								list( $val, $price ) = rgexplode( '|', $lead[ $field_id ], 2, true );
 
 								if ( $val == $choice['value'] ) {
 									return $choice['value'];
@@ -5129,12 +5176,9 @@ class GFFormsModel {
 		if ( $choice_value == $value || $choice_value == $sanitized_value ) {
 			return true;
 		} else if ( $field->enablePrice ) {
-			$ary = explode( '|', $value );
+			list( $val, $price ) = rgexplode( '|', $value, 2, true );
 
-			$val           = count( $ary ) > 0 ? $ary[0] : '';
 			$sanitized_val = wp_kses( $val, $allowed_html );
-
-			$price = count( $ary ) > 1 ? $ary[1] : '';
 
 			if ( $choice['value'] == $val || $choice['value'] == $sanitized_val ) {
 				return true;
@@ -7330,8 +7374,9 @@ class GFFormsModel {
 	 * Returns a default confirmation.
 	 *
 	 * @since 2.4.15
+	 * @since 2.10.0 Updated to include the default spam confirmation.
 	 *
-	 * @param string $event The confirmation event. form_saved, form_save_email_sent, or an empty string for the default form submission event.
+	 * @param string $event The confirmation event. form_saved, form_save_email_sent, spam, or an empty string for the default form submission event.
 	 *
 	 * @return array
 	 */
@@ -7373,6 +7418,12 @@ class GFFormsModel {
 					'queryString' => '',
 				);
 
+			case 'spam':
+				$confirmation          = self::get_default_confirmation();
+				$confirmation['name']  = __( 'Spam Confirmation', 'gravityforms' );
+				$confirmation['event'] = 'spam';
+
+				return $confirmation;
 			default:
 				return array(
 					'id'          => uniqid(),
@@ -8537,7 +8588,8 @@ class GFFormsModel {
 	 * $_POST['gform_uploaded_files'] and caches them in GFFormsModel::$uploaded_files.
 	 *
 	 * @since 2.4.3.5
-	 * @since 2.9.18 Deprecated the string-based (file/basename) input value. Added support for dynamically populated file URLs using the `url` key.
+	 * @since 2.9.18 Added support for dynamically populated file URLs using the `url` key.
+	 * @since 2.10.3 Deprecated the string-based (file/basename) input value.
 	 *
 	 * @param int $form_id The ID of the form the submission is being processed for.
 	 *
@@ -8555,38 +8607,62 @@ class GFFormsModel {
 				continue;
 			}
 
+			$field = null;
+			if ( preg_match( '/^input_(\d+)$/', $input_name, $matches ) ) {
+				$field = GFFormsModel::get_field( $form_id, $matches[1] );
+				if ( $field instanceof GF_Field_FileUpload ) {
+					$field->formId = (int) $form_id;
+				}
+			}
+
 			if ( is_array( $input_files ) ) {
-				if ( isset( $input_files[0] ) && is_array( $input_files[0] ) ) {
-					foreach ( $input_files as $key => &$file ) {
-						if ( empty( $file ) ) {
+				foreach ( $input_files as $key => &$file ) {
+					if ( empty( $file ) || ! is_array( $file ) ) {
+						unset( $input_files[ $key ] );
+						continue;
+					}
+
+					// All files regardless of upload or population method should have this.
+					if ( isset( $file['uploaded_filename'] ) ) {
+						$file['uploaded_filename'] = sanitize_file_name( wp_basename( $file['uploaded_filename'] ) );
+					}
+
+					// All multi-file uploads should have this. Single file uploads should have it once a submission or pagination request has been processed.
+					if ( isset( $file['temp_filename'] ) ) {
+						$file['temp_filename'] = sanitize_file_name( wp_basename( $file['temp_filename'] ) );
+					}
+
+					// Sanitize or generate the UUID to be used by the file preview and error messages markup.
+					if ( isset( $file['id'] ) ) {
+						$file['id'] = sanitize_key( $file['id'] );
+					} else {
+						$file['id'] = GFFormsModel::get_uuid();
+					}
+
+					if ( isset( $file['url'] ) ) {
+						$file['url']  = esc_url_raw( $file['url'] );
+						$file['hash'] = isset( $file['hash'] ) ? sanitize_text_field( $file['hash'] ) : '';
+
+						if ( ! $field instanceof GF_Field_FileUpload || ! $field->is_valid_populated_file_url( $file ) ) {
+							GFCommon::log_debug( __METHOD__ . sprintf( '(): Removing URL %s. File uploads must be submitted as binary uploads.', $input_name ) );
 							unset( $input_files[ $key ] );
 							continue;
 						}
-
-						// All files regardless of upload or population method should have this.
-						if ( isset( $file['uploaded_filename'] ) ) {
-							$file['uploaded_filename'] = sanitize_file_name( wp_basename( $file['uploaded_filename'] ) );
-						}
-
-						// All multi-file uploads should have this. Single file uploads should have it once a submission or pagination request has been processed.
-						if ( isset( $file['temp_filename'] ) ) {
-							$file['temp_filename'] = sanitize_file_name( wp_basename( $file['temp_filename'] ) );
-						}
-
-						// Used when the field is dynamically populated on initial form display.
-						if ( isset( $file['url'] ) ) {
-							$file['url'] = esc_url_raw( $file['url'] );
-						}
-
-						// Sanitize or generate the UUID to be used by the file preview and error messages markup.
-						if ( isset( $file['id'] ) ) {
-							$file['id'] = sanitize_key( $file['id'] );
-						} else {
-							$file['id'] = GFFormsModel::get_uuid();
-						}
 					}
 				}
+				unset( $file );
+
+				$input_files = array_values( $input_files );
+				if ( empty( $input_files ) ) {
+					unset( $files[ $input_name ] );
+				}
 			} else {
+				if ( GFCommon::is_valid_url( $input_files ) ) {
+					GFCommon::log_debug( __METHOD__ . sprintf( '(): Removing URL %s. File uploads must be submitted as binary uploads.', $input_name ) );
+					unset( $files[ $input_name ] );
+					continue;
+				}
+
 				// Deprecated, retaining for backwards compatibility with third-party integrations.
 				$input_files = wp_basename( $input_files );
 			}

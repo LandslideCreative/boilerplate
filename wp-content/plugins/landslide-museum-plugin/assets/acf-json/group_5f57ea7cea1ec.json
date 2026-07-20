@@ -344,13 +344,16 @@
                                 "id": ""
                             },
                             "choices": {
-                                "images": "Images",
-                                "icons": "Icons"
+                                "images": "Images (16:9)",
+                                "square": "Images (Square)",
+                                "icons": "Icons",
+                                "text": "Text Only"
                             },
                             "default_value": false,
                             "return_format": "value",
                             "multiple": 0,
                             "allow_null": 0,
+                            "allow_in_bindings": 1,
                             "ui": 0,
                             "ajax": 0,
                             "placeholder": "",
@@ -408,14 +411,21 @@
                                     "type": "image",
                                     "instructions": "",
                                     "required": 0,
-                                    "conditional_logic": 0,
+                                    "conditional_logic": [
+                                        [
+                                            {
+                                                "field": "field_5f57ef81783e4",
+                                                "operator": "!=",
+                                                "value": "text"
+                                            }
+                                        ]
+                                    ],
                                     "wrapper": {
                                         "width": "35",
                                         "class": "",
                                         "id": ""
                                     },
                                     "return_format": "array",
-                                    "preview_size": "small",
                                     "library": "all",
                                     "min_width": "",
                                     "min_height": "",
@@ -424,6 +434,8 @@
                                     "max_height": "",
                                     "max_size": "",
                                     "mime_types": "",
+                                    "allow_in_bindings": 1,
+                                    "preview_size": "small",
                                     "parent_repeater": "field_5f57f7ad783e7"
                                 },
                                 {
@@ -1323,5 +1335,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1772681217
+    "modified": 1778692689
 }

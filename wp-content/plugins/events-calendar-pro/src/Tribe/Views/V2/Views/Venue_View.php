@@ -91,10 +91,11 @@ class Venue_View extends List_View {
 	 * Overrides the base View constructor to use PRO Rewrite handler.
 	 *
 	 * @since 5.0.1
+	 * @since 7.8.0 Made $messages explicitly nullable.
 	 *
 	 * {@inheritDoc}
 	 */
-	public function __construct( Messages $messages = null ) {
+	public function __construct( ?Messages $messages = null ) {
 		parent::__construct( $messages );
 		$this->rewrite = new Pro_Rewrite();
 	}
@@ -324,8 +325,10 @@ class Venue_View extends List_View {
 
 	/**
 	 * {@inheritDoc}
+	 *
+	 * @since 7.8.0 Made $context explicitly nullable.
 	 */
-	protected function setup_repository_args( Context $context = null ) {
+	protected function setup_repository_args( ?Context $context = null ) {
 		$args = parent::setup_repository_args( $context );
 
 		$context = null !== $context ? $context : $this->context;
@@ -602,10 +605,11 @@ class Venue_View extends List_View {
 	 * Updates the URL query arguments for the Venue View to correctly build its URls.
 	 *
 	 * @since 5.0.1
+	 * @since 7.8.0 Made $args explicitly nullable.
 	 *
 	 * {@inheritDoc}
 	 */
-	public function set_url( array $args = null, $merge = false ) {
+	public function set_url( ?array $args = null, $merge = false ) {
 		parent::set_url( $args, $merge );
 		$url_query_args = $this->url->get_query_args();
 

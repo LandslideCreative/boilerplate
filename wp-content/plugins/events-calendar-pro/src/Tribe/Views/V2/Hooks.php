@@ -436,6 +436,7 @@ class Hooks extends Service_Provider {
 	 * Filters the View repository args to parse and apply PRO specific View filters.
 	 *
 	 * @since 4.7.5
+	 * @since 7.8.0 Made $context explicitly nullable.
 	 *
 	 * @param array        $repository_args The current repository args.
 	 * @param Context|null $context         An instance of the context the View is using or `null` to use the
@@ -443,7 +444,7 @@ class Hooks extends Service_Provider {
 	 *
 	 * @return array The filtered repository args.
 	 */
-	public function filter_events_views_v2_view_repository_args( array $repository_args = [], Context $context = null ) {
+	public function filter_events_views_v2_view_repository_args( array $repository_args = [], ?Context $context = null ) {
 		return $this->container->make( View_Filters::class )->filter_repository_args( $repository_args, $context );
 	}
 
@@ -451,13 +452,14 @@ class Hooks extends Service_Provider {
 	 * Filters the ignored params to add the `hide_subsequent_recurrences` item.
 	 *
 	 * @since 5.3.0
+	 * @since 7.8.0 Made $view explicitly nullable.
 	 *
 	 * @param array<string> $arguments Which arguments we are ignoring.
 	 * @param View|null     $view      Current view that we are filtering.
 	 *
 	 * @return array Array of params with the hide_subsequent_recurrences added.
 	 */
-	public function filter_page_reset_ignored_params( array $arguments = [], View $view = null ) {
+	public function filter_page_reset_ignored_params( array $arguments = [], ?View $view = null ) {
 		return $this->container->make( View_Filters::class )->add_recurrence_hide_to_page_reset_ignored_params( $arguments, $view );
 	}
 
