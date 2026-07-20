@@ -115,7 +115,7 @@ function ls_add_page_specific_messages($field) {
 
     // Artists archive message
     $page_specific_messages[] = array(
-        'page' => $archive_pages['artists'],
+        'page' => $archive_pages['artist'],
         'pb_message' => 'The <strong>Page Specific Content</strong> section will display an archive of artists.',
         'ps_message' => 'This section displays an an archive of artists.',
     );
