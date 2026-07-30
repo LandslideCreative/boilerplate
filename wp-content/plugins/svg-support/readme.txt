@@ -5,7 +5,7 @@ Tags: svg, vector, safe svg, sanitization, mime type
 Requires at least: 5.8
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 2.5.17
+Stable tag: 2.6.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -136,8 +136,8 @@ You need to add the mime type for svg and svgz to: "MLA Settings > Media Library
 
 == Screenshots ==
 
-1. Basic Settings
-2. Advanced Settings
+1. Settings screen
+2. Advanced Mode settings
 3. Featured Image checkbox to render SVG inline
 4. SVG used in WP native Image Widget
 5. Inline SVG in the front end markup
@@ -150,6 +150,24 @@ You need to add the mime type for svg and svgz to: "MLA Settings > Media Library
 
 
 == Changelog ==
+
+= 2.6.1 =
+* **Fixed**:
+    - Fatal error when uploading SVGs through WP-CLI (`wp media import`, migration and hosting tooling) — the sanitizer instance never reached global scope in CLI contexts. No security impact: affected uploads crashed rather than skipping sanitization (failed closed). The sanitizer is now resolved through a defensive accessor, with regression tests covering the CLI loading context. Props to Cal from Toolshed for the excellent report.
+
+= 2.6.0 =
+* **New Features**:
+    - Completely redesigned settings screen with the new SVG Support brand — cleaner panels, real toggle switches, role picker chips, and a live code sample
+    - Settings now auto-save as you change them, with a save-state indicator (the classic Save button remains as a no-JS fallback)
+    - Advanced Mode now reveals its options instantly when toggled — no more save-and-reload
+    - Scannable QR codes for the BTC and ETH donation addresses (tap the QR icon next to each address)
+    - New brand site at https://svg.support with tutorials and documentation
+
+* **Code Improvements**:
+    - Removed the third-party jQuery dropdown multiselect (~1,000 lines) — role pickers are now dependency-free native checkboxes
+    - Fixed admin/front-end asset cache-busting: enqueued styles/scripts are now versioned with the plugin version (previously the version was empty, so browser caches never refreshed on update)
+    - Settings screen assets (fonts, icons, styles, JS) only load on the SVG Support settings page
+    - Removed the CodeKit build dependency — stylesheets are now plain CSS edited directly, and minified JS is regenerated with a simple in-repo script
 
 = 2.5.17 =
 * **Security Enhancements**:
@@ -521,6 +539,12 @@ You need to add the mime type for svg and svgz to: "MLA Settings > Media Library
 
 
 == Upgrade Notice ==
+
+= 2.6.1 =
+Fixes a fatal error on SVG uploads via WP-CLI (wp media import and similar tooling). Tiny, safe update — no settings or behavior changes.
+
+= 2.6.0 =
+Completely redesigned settings screen with auto-save and instant Advanced Mode reveal. No settings or behavior changes — everything keeps working exactly as before. Also removes ~1,000 lines of third-party JS and fixes asset cache-busting on updates.
 
 = 2.5.17 =
 Important security patch. Fixes a stored XSS vulnerability where .svgz uploads bypassed SVG sanitization (CVE-2024-10222 / CVE-2023-6708). Please update immediately.

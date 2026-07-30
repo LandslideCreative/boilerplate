@@ -181,3 +181,36 @@ function ls_remove_extra_tec_taxonomies() {
 }
 add_action('init', 'ls_remove_extra_tec_taxonomies', 999);
 
+// Add Edit Page to admin bar if a page concides with the slug
+function ls_add_archive_page_edit_link( WP_Admin_Bar $wp_admin_bar ) {
+
+    if ( is_admin() || !is_user_logged_in() || !is_post_type_archive() || !is_admin_bar_showing() ) {
+        return;
+    }
+
+    $post_type = get_query_var( 'post_type' );
+
+    if ( is_array( $post_type ) ) {
+        $post_type = reset( $post_type );
+    }
+
+    $archive_path = trim(
+        wp_parse_url( get_post_type_archive_link( $post_type ), PHP_URL_PATH ),
+        '/'
+    );
+
+    $page = get_page_by_path( $archive_path );
+
+    if ( ! $page || ! current_user_can( 'edit_post', $page->ID ) ) {
+        return;
+    }
+
+    $wp_admin_bar->add_node( array(
+        'id'    => 'edit-archive-page',
+        'title' => 'Edit Page',
+        'href'  => get_edit_post_link( $page->ID ),
+    ) );
+
+}
+add_action( 'admin_bar_menu', 'ls_add_archive_page_edit_link', 90 );
+
