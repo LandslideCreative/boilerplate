@@ -39,7 +39,7 @@ function ls_disable_archive_permalink_changes( $html ) {
     $ls_archive_pages = ls_archive_pages();
 
     if( is_admin() && $post->post_type=='page' && in_array($post->post_name, $ls_archive_pages) ) {
-        return '<p><strong>Permalink:</strong> <a href="'.get_permalink($post).'">'.get_permalink($post).'</a><br />Changes to the permalink are disabled because this is an archive page.</p>';
+        return '';
     } else {
         return $html;
     }
@@ -93,11 +93,13 @@ function ls_add_page_specific_messages($field) {
     );
 
     // Events archive message
-    $page_specific_messages[] = array(
-        'page' => $archive_pages['tribe_events'],
-        'pb_message' => 'The <strong>Page Specific Content</strong> section will display a calendar of upcoming events.',
-        'ps_message' => 'This section displays a calendar of upcoming events.',
-    );
+    if( function_exists('tribe_is_event') ) {
+        $page_specific_messages[] = array(
+            'page' => $archive_pages['tribe_events'],
+            'pb_message' => 'The <strong>Page Specific Content</strong> section will display a calendar of upcoming events.',
+            'ps_message' => 'This section displays a calendar of upcoming events.',
+        );
+    }
     
     // Sermon archive message
     $page_specific_messages[] = array(
@@ -221,7 +223,6 @@ function ls_create_staff_post_type()
     register_taxonomy( 'department', array( $name ), $args );
 
 }
-
 add_action('init', 'ls_create_staff_post_type');
 
 // Authors
