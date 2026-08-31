@@ -556,6 +556,28 @@
                     "display": "block",
                     "sub_fields": [
                         {
+                            "key": "field_6a95e20991da6",
+                            "label": "Content Width",
+                            "name": "width",
+                            "aria-label": "",
+                            "type": "range",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "66",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": 10,
+                            "min": 6,
+                            "max": 12,
+                            "allow_in_bindings": 1,
+                            "step": 1,
+                            "prepend": "",
+                            "append": "\/12"
+                        },
+                        {
                             "key": "field_636b28aa69a14",
                             "label": "Background Color",
                             "name": "background_color",
@@ -594,8 +616,8 @@
                             "layout": "block",
                             "min": 1,
                             "max": 0,
-                            "collapsed": "",
-                            "button_label": "Add Row",
+                            "collapsed": "field_636b290669a16",
+                            "button_label": "Add Content",
                             "rows_per_page": 20,
                             "sub_fields": [
                                 {
@@ -1259,5 +1281,7 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1778692689
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1788208006
 }

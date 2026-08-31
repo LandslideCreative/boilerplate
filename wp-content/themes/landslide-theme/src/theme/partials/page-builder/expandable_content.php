@@ -1,7 +1,20 @@
 <?php // Page Builder - Expandable Content
 
 // Background color
-$background_color = get_sub_field('background_color'); ?>
+$background_color = get_sub_field('background_color'); 
+
+// Column width
+$large_width = get_sub_field('width');
+if( $large_width>10 ) {
+	$medium_width = 12;
+	$small_width = 12;
+} else if( $large_width>8 ) {
+	$medium_width = 11;
+	$small_width = 12;
+} else {
+	$medium_width = 10;
+	$small_width = 11;
+} ?>
 
 <section class="page-section <?php echo $background_color; ?>-bg expandable-content" <?php LSPB()->display_section_id(); ?>>
 
@@ -10,7 +23,7 @@ $background_color = get_sub_field('background_color'); ?>
 	<?php if( have_rows('content') ): ?>
 		<div class="grid-container expandable-content-container">
 			<div class="grid-x grid-padding-x align-center">
-				<div class="cell medium-10 large-8">
+				<div class="cell small-<?php echo $small_width; ?> medium-<?php echo $medium_width; ?> large-<?php echo $large_width; ?>">
 					<ul class="accordion" data-accordion data-allow-all-closed="true" data-multi-expand="true">
 
 						<?php $item_counter = 1;
