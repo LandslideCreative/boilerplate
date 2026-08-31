@@ -92,11 +92,13 @@ function ls_add_page_specific_messages($field) {
     );
 
     // Events archive message
-    $page_specific_messages[] = array(
-        'page' => $archive_pages['tribe_events'],
-        'pb_message' => 'The <strong>Page Specific Content</strong> section will display a calendar of upcoming events.',
-        'ps_message' => 'This section displays a calendar of upcoming events.',
-    );
+    if( function_exists('tribe_is_event') ) {
+        $page_specific_messages[] = array(
+            'page' => $archive_pages['tribe_events'],
+            'pb_message' => 'The <strong>Page Specific Content</strong> section will display a calendar of upcoming events.',
+            'ps_message' => 'This section displays a calendar of upcoming events.',
+        );
+    }
 
     if( is_admin() && $page_specific_messages && $post ) {
         foreach( $page_specific_messages as $message) {
