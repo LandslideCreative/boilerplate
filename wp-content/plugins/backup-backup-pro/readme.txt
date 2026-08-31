@@ -2,8 +2,8 @@
 Contributors: Migrate
 Tags: Migration, Backup, Staging, Migrate, Backups
 Requires at least: 4.6
-Tested up to: 7.0
-Stable tag: 2.1.6
+Tested up to: 7.0.3
+Stable tag: 2.1.7
 Requires PHP: 7.0
 
 Backup, migrate, and create staging sites with free cloud storage and support.
@@ -161,99 +161,63 @@ Vietnamese: [Tạo sao lưu, khôi phục các bản sao lưu và di chuyển c�
 5. The plugin should be shown below the settings menu.
 
 == Changelog ==
-= 2.1.6 =
-* Tested with WordPress 7.0
-* [FEATURE] Introduced direct-to-cloud backup streaming configuration with validation and setup checks.
-* [FEATURE] Added memory-efficient batch ZIP streaming engine for backup creation.
-* [FEATURE] Implemented direct cloud streaming support for BackupBliss.
-* [FEATURE] Added storage strategy options to choose how backups are stored and uploaded.
-* [FEATURE] Added direct cloud streaming validation with alerts and configuration checks.
-* [FEATURE] Added configurable cloud-only backup mode with direct streaming support.
-* [FEATURE] Added BackupBliss and local writable stream implementations for streaming backups.
-* [FEATURE] Added automatic space requirement checks for streaming backup providers.
-* [FEATURE] Added streaming backup provider labels and improved provider selection handling.
-* [FEATURE] Added cleanup tasks for temporary streaming files and leftover uploaded backups.
-* [FEATURE] Added upload cooldown handling to prevent duplicate streaming upload operations.
-* [ENHANCEMENT] Enhanced external storage management during automatic cleanup operations.
-* [ENHANCEMENT] Improved lifecycle and task management with dedicated activation and deactivation handling.
-* [FIX] Correctly handle `.tar.gz` file extensions during backup processing.
-* [FIX] Resolved cURL resource deprecation warnings in OneDrive integrations.
-* [FIX] Added error handling for missing or unsupported cloud storage provider selections.
-* [FIX] Corrected local backup deletion checks after successful uploads.
-* [FIX] Improved exception handling during task deactivation and cleanup.
-* [FIX] Removed redundant error logging in request processing logic.
-* [MISC] Various performance improvements, stability enhancements, and internal code cleanups throughout the streaming backup system.
-
-= 2.1.5 =
-* [FEATURE] Enhanced SFTP connection handling with lazy initialization and retry logic.  
-* [FEATURE] Instantiated SFTP connections only when issues are detected to optimize performance.  
-* [ENHANCEMENT] Reused existing SFTP instance to avoid multiple initializations and reduce overhead.  
-* [ENHANCEMENT] Refactored file explorer selection logic for improved usability and consistency.  
-* [FIX] Updated dismiss button class for notices to ensure consistent behavior.
-
-= 2.1.4 =
-* [MISC] Compatibility update.
-
-= 2.1.3 =
-* [ENHANCEMENT] Increased size of pCloud storage image for better visibility.  
-
-= 2.1.2 =
-* Tested with WordPress 6.9.4
-* [FEATURE] Introducing pCloud as new cloud storage option.
-* [ENHANCEMENT] Replaced hardcoded memory limits with dynamic memory retrieval for better adaptability.
-* [ENHANCEMENT] Updated authentication to use Bearer token instead of query parameters for improved security.
-* [FIX] Prevented re-uploading of recently uploaded backups.
-* [FIX] Removed redundant session ID conditional check.
-
-= 2.1.1 =
-* Tested with WordPress 6.9.1
-* [FEATURE] Updated license verification logic to prioritize the new offer code with a fallback to the legacy offer for compatibility.
-
-= 2.1.0 =
-* Tested with WordPress 6.9
-* [FIX] Corrected license status typo from suspected to suspended to ensure accurate license state handling.
-
-= 2.0.0 =
-* Tested with WordPress 6.8.3
-* [FEATURE] Added manual upload functionality for backups.  
-* [FEATURE] Introduced file filtering settings with updated UI instructions for exclusions.  
-* [FEATURE] Enabled file path filtering in backup settings.  
-* [ENHANCEMENT] Improved auto backup enabling conditions for more reliable scheduling.  
-* [ENHANCEMENT] Enhanced double-click instruction visibility in the file browser for better usability.  
-* [ENHANCEMENT] Updated file explorer instructions for clarity and organization.  
-* [ENHANCEMENT] Improved OneDrive and SFTP connection verification logic.  
-* [ENHANCEMENT] Updated event handler to include parameter arguments for better compatibility.  
-* [FIX] Corrected SQL query during uninstallation to properly match transient option names.  
-* [FIX] Added recommendations for manual backup upload during restoration for improved compatibility.  
-* [FIX] Improved error messages for SFTP file operations for clearer debugging.
-* [DOCS] Improved clarity of backup activation and trigger instructions.  
-* [... and more ...]
-
-= previous =
-Old changelog has been removed due to WordPress limitation of 5000 characters.
+= 2.1.7 =
+* Tested with WordPress 7.0.3
+* [FEATURE] Introduced backup encryption and decryption with password protection.
+* [FEATURE] Added AES-256 encryption support for ZIP backups.
+* [FEATURE] Added WinZip AES and Traditional Zip encryption support for improved archive compatibility.
+* [FEATURE] Added encryption password management with secure display, copy, and password change functionality.
+* [FEATURE] Added encryption configuration validation and improved encryption settings UI.
+* [FEATURE] Added disk space validation and improved error handling during encrypted backup creation and extraction.
+* [FEATURE] Added remote execution support for scheduled backups with ping server integration.
+* [FEATURE] Added keepalive protection to prevent premature termination of backup requests.
+* [FEATURE] Added support for authenticated token and refresh actions during backup operations.
+* [ENHANCEMENT] Optimized backup batch processing with increased batch limits and execution time thresholds based on server configuration.
+* [ENHANCEMENT] Improved encryption and decryption batch processing, backup naming, and manifest handling.
+* [ENHANCEMENT] Improved encryption password validation and archive verification.
+* [ENHANCEMENT] Improved cleanup and logging for encrypted and decrypted backup files.
+* [ENHANCEMENT] Optimized backup scanning using singleton instance management.
+* [FIX] Prevented encryption of internal .backup_name files during ZIP batch processing.
+* [FIX] Improved cron token validation for POST requests.
+* [FIX] Removed secret key dependency from URL-triggered backup requests.
+* [FIX] Deferred premium cron actions until core data initialization is complete.
+* [FIX] Restricted plugin visibility to network admin in WordPress multisite installations.
+* [FIX] Improved cross-platform file path handling in cron cleanup tasks.
+* [REFACTOR] Encapsulated backup encryption and decryption logic into a dedicated service for improved maintainability.
+* [REFACTOR] Modernized encryption settings layout and separated its template.
+* [REFACTOR] Improved final backup batch processing to reduce unnecessary requests.
+* [REFACTOR] Simplified scheduled backup continuation logic.
+* [REFACTOR] Standardized external backup deletion handling across OneDrive, pCloud, and SFTP.
+* [MISC] Various performance improvements, cleanup enhancements, and internal code optimizations.
 
 == Upgrade Notice ==
 
-= 2.1.6 =
-What's new in 2.1.6?
-* Tested with WordPress 7.0
-* [FEATURE] Introduced direct-to-cloud backup streaming configuration with validation and setup checks.
-* [FEATURE] Added memory-efficient batch ZIP streaming engine for backup creation.
-* [FEATURE] Implemented direct cloud streaming support for BackupBliss.
-* [FEATURE] Added storage strategy options to choose how backups are stored and uploaded.
-* [FEATURE] Added direct cloud streaming validation with alerts and configuration checks.
-* [FEATURE] Added configurable cloud-only backup mode with direct streaming support.
-* [FEATURE] Added BackupBliss and local writable stream implementations for streaming backups.
-* [FEATURE] Added automatic space requirement checks for streaming backup providers.
-* [FEATURE] Added streaming backup provider labels and improved provider selection handling.
-* [FEATURE] Added cleanup tasks for temporary streaming files and leftover uploaded backups.
-* [FEATURE] Added upload cooldown handling to prevent duplicate streaming upload operations.
-* [ENHANCEMENT] Enhanced external storage management during automatic cleanup operations.
-* [ENHANCEMENT] Improved lifecycle and task management with dedicated activation and deactivation handling.
-* [FIX] Correctly handle `.tar.gz` file extensions during backup processing.
-* [FIX] Resolved cURL resource deprecation warnings in OneDrive integrations.
-* [FIX] Added error handling for missing or unsupported cloud storage provider selections.
-* [FIX] Corrected local backup deletion checks after successful uploads.
-* [FIX] Improved exception handling during task deactivation and cleanup.
-* [FIX] Removed redundant error logging in request processing logic.
-* [MISC] Various performance improvements, stability enhancements, and internal code cleanups throughout the streaming backup system.
+= 2.1.7 =
+What's new in 2.1.7?
+* Tested with WordPress 7.0.3
+* [FEATURE] Introduced backup encryption and decryption with password protection.
+* [FEATURE] Added AES-256 encryption support for ZIP backups.
+* [FEATURE] Added WinZip AES and Traditional Zip encryption support for improved archive compatibility.
+* [FEATURE] Added encryption password management with secure display, copy, and password change functionality.
+* [FEATURE] Added encryption configuration validation and improved encryption settings UI.
+* [FEATURE] Added disk space validation and improved error handling during encrypted backup creation and extraction.
+* [FEATURE] Added remote execution support for scheduled backups with ping server integration.
+* [FEATURE] Added keepalive protection to prevent premature termination of backup requests.
+* [FEATURE] Added support for authenticated token and refresh actions during backup operations.
+* [ENHANCEMENT] Optimized backup batch processing with increased batch limits and execution time thresholds based on server configuration.
+* [ENHANCEMENT] Improved encryption and decryption batch processing, backup naming, and manifest handling.
+* [ENHANCEMENT] Improved encryption password validation and archive verification.
+* [ENHANCEMENT] Improved cleanup and logging for encrypted and decrypted backup files.
+* [ENHANCEMENT] Optimized backup scanning using singleton instance management.
+* [FIX] Prevented encryption of internal .backup_name files during ZIP batch processing.
+* [FIX] Improved cron token validation for POST requests.
+* [FIX] Removed secret key dependency from URL-triggered backup requests.
+* [FIX] Deferred premium cron actions until core data initialization is complete.
+* [FIX] Restricted plugin visibility to network admin in WordPress multisite installations.
+* [FIX] Improved cross-platform file path handling in cron cleanup tasks.
+* [REFACTOR] Encapsulated backup encryption and decryption logic into a dedicated service for improved maintainability.
+* [REFACTOR] Modernized encryption settings layout and separated its template.
+* [REFACTOR] Improved final backup batch processing to reduce unnecessary requests.
+* [REFACTOR] Simplified scheduled backup continuation logic.
+* [REFACTOR] Standardized external backup deletion handling across OneDrive, pCloud, and SFTP.
+* [MISC] Various performance improvements, cleanup enhancements, and internal code optimizations.

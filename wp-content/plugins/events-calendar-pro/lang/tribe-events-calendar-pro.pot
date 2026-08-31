@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: The Events Calendar Pro 7.8.0\n"
+"Project-Id-Version: The Events Calendar Pro 7.8.1\n"
 "Report-Msgid-Bugs-To: https://evnt.is/191x\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-07T22:35:02+00:00\n"
+"POT-Creation-Date: 2026-08-05T00:08:00+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: tribe-events-calendar-pro\n"
@@ -3244,6 +3244,49 @@ msgstr ""
 #, php-format
 msgctxt "Notice message for the forced deactivation of the Virtual Events plugin after attempting to activate, and the plugin was merged to Events Pro."
 msgid "%1$s could not be activated. The %2$s functionality has been merged into %3$s. %4$sLearn More%5$s."
+msgstr ""
+
+#. translators: 1: The AIOSEO plugin short name.
+#: src/Events_Pro/Integrations/Plugins/AIOSEO/Controller.php:121
+#: src/modules/blocks/additional-fields/elements/settings/template.js:23
+#, php-format,js-format
+msgid "%1$s Settings"
+msgstr ""
+
+#: src/Events_Pro/Integrations/Plugins/AIOSEO/Controller.php:124
+msgid "AIOSEO Settings"
+msgstr ""
+
+#: src/Events_Pro/Integrations/Plugins/AIOSEO/Controller.php:187
+msgid "edit the Series"
+msgstr ""
+
+#. translators: %s: link to edit the Series post.
+#: src/Events_Pro/Integrations/Plugins/AIOSEO/Controller.php:204
+#, php-format
+msgid "You are editing a single occurrence of a recurring event. To manage SEO settings, please %s."
+msgstr ""
+
+#. translators: %s: link to edit the Series post.
+#: src/Events_Pro/Integrations/Plugins/AIOSEO/Controller.php:213
+#, php-format
+msgid "SEO Title — %s to set the SEO title for this event."
+msgstr ""
+
+#. translators: %s: link to edit the Series post.
+#: src/Events_Pro/Integrations/Plugins/AIOSEO/Controller.php:222
+#, php-format
+msgid "Meta Description — %s to set the meta description."
+msgstr ""
+
+#. translators: %s: link to edit the Series post.
+#: src/Events_Pro/Integrations/Plugins/AIOSEO/Controller.php:231
+#, php-format
+msgid "Focus Keyphrase — %s to configure focus keyphrases and SEO analysis."
+msgstr ""
+
+#: src/Events_Pro/Integrations/Plugins/AIOSEO/Controller.php:238
+msgid "Edit Series SEO Settings"
 msgstr ""
 
 #: src/Events_Pro/Integrations/Plugins/Elementor/Widgets/Event_Additional_Fields.php:55
@@ -8854,11 +8897,6 @@ msgstr ""
 #: src/modules/blocks/additional-fields/elements/field-container/element.js:32
 #, js-format
 msgid "Add %1$s"
-msgstr ""
-
-#: src/modules/blocks/additional-fields/elements/settings/template.js:23
-#, js-format
-msgid "%1$s Settings"
 msgstr ""
 
 #: src/modules/blocks/additional-fields/elements/settings/template.js:26

@@ -14,6 +14,9 @@ use BMI\Plugin\BMI_Logger as Logger;
 use BMI\Plugin\Dashboard as Dashboard;
 use BMI\Plugin\Backup_Migration_Plugin as BMP;
 use BMI\Plugin\Scanner\BMI_BackupsScanner as Backups;
+use BMI\Plugin\External\Contracts\DeleteBackup;
+
+require_once BMI_INCLUDES . DIRECTORY_SEPARATOR . 'external' . DIRECTORY_SEPARATOR . 'contracts' . DIRECTORY_SEPARATOR . 'interface-delete-backup.php';
 
 /**
  * BMI_External_PCloud
@@ -22,7 +25,7 @@ use BMI\Plugin\Scanner\BMI_BackupsScanner as Backups;
  * Delegates API calls to BMI_PCloud_SDK.
  */
 
-class BMI_External_PCloud
+class BMI_External_PCloud implements DeleteBackup
 {
     public $id = 'bmip_pcloud';
     public $authCodeOption = 'bmip_pcloud_auth_code';
@@ -292,6 +295,10 @@ class BMI_External_PCloud
     /************************************************************************************************************* */
     /*********************  DELETE PCLOUD BACKUP  **************************************************************** */
     /************************************************************************************************************* */
+
+    /**
+     * @inheritDoc
+     */
     public function deleteBackup($md5){
 
         $manifestFile = $md5;
@@ -313,6 +320,9 @@ class BMI_External_PCloud
         return false;    
     }
 
+    /**
+     * @deprecated Use deleteBackup() instead.
+     */
     public function deleteBackupJson($manifestFile){
         $deleteManifest = $this->deleteFile('/' . $manifestFile);
         if ($deleteManifest) {
@@ -444,8 +454,8 @@ class BMI_External_PCloud
         ]);
     
         require_once BMI_INCLUDES . DIRECTORY_SEPARATOR . 'scanner' . DIRECTORY_SEPARATOR . 'backups.php';
-        $backups = new Backups();
-        $backupsAvailable = $backups->getAvailableBackups();
+        $backups = Backups::getInstance();
+        $backupsAvailable = $backups->getAvailableBackups('local');
         $localBackups = $backupsAvailable['local'];
         $parsedPCloudFiles = $this->getParsedFiles();
         if($parsedPCloudFiles === false) return ['status' => 'error'];

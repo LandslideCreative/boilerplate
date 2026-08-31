@@ -172,19 +172,27 @@ add_action('admin_enqueue_scripts', function () {
     wp_enqueue_script('bmi-pro-before-update', (BMI_PRO_ASSETS . 'js/before-update-interceptor.min.js'), ['jquery'], BMI_PRO_VERSION, true);
   }
 
-  if ($screenId != 'toplevel_page_backup-migration') return;
+  if (!in_array($screenId, ['toplevel_page_backup-migration', 'toplevel_page_backup-migration-network'])) return;
   wp_enqueue_script('backup-migration-pro-script', (BMI_PRO_ASSETS . 'js/backup-migration-pro.min.js'), ['jquery'], BMI_PRO_VERSION, true);
   wp_enqueue_style('backup-migration-pro-style', (BMI_PRO_ASSETS . 'css/bmi-premium.min.css'), [], BMI_PRO_VERSION);
 }, 2000);
 
-add_filter('plugin_action_links_' . plugin_basename(BMI_PRO_ROOT_FILE), function ($links) {
+$bmi_pro_action_links = function ($links) {
   if (is_plugin_active('backup-backup/backup-backup.php')) {
     $text = __('Manage', 'backup-backup');
-    $links['bmi-settings-link'] = '<a href="' . admin_url('/admin.php?page=backup-migration') . '">' . $text . '</a>';
+    $url = (function_exists('is_multisite') && is_multisite()) ? network_admin_url('/admin.php?page=backup-migration') : admin_url('/admin.php?page=backup-migration');
+    $links['bmi-settings-link'] = '<a href="' . $url . '">' . $text . '</a>';
   } else {
     $text = __('Free version is missing', 'backup-backup');
     $links['bmi-settings-link'] = '<span style="color: #666;">' . $text . '</span>';
   }
 
   return $links;
-});
+};
+
+if (function_exists('is_multisite') && is_multisite()) {
+  add_filter('network_admin_plugin_action_links_' . plugin_basename(BMI_PRO_ROOT_FILE), $bmi_pro_action_links);
+} else {
+  add_filter('plugin_action_links_' . plugin_basename(BMI_PRO_ROOT_FILE), $bmi_pro_action_links);
+}
+

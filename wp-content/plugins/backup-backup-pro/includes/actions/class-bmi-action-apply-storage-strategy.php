@@ -27,7 +27,7 @@ class ApplyStorageStrategy extends BMI_Action
     {
         parent::__construct($parameters);
         $this->backupLifecycleManager = $backupLifecycleManager === null ? BackupLifecycleManager::getInstance() : $backupLifecycleManager;
-        $this->backupsScanner = $backupsScanner === null ? new Backups() : $backupsScanner;
+        $this->backupsScanner = $backupsScanner === null ? Backups::getInstance() : $backupsScanner;
 
     }
 

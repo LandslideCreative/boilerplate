@@ -30,6 +30,7 @@
       add_action('bmi_pro_db_exclude_tables', [&$this, 'exclude_tables_from_backup']);
       add_action('bmi_pro_files_exclude', [&$this, 'exclude_files_from_backup']);
       add_action('bmi_pro_backup_triggers', [&$this, 'bmi_pro_backup_triggers']);
+      add_action('bmip_encryption_settings', [&$this, 'bmip_encryption_settings']);
 
     }
 
@@ -220,7 +221,7 @@
                             $key = wp_generate_password(16, false);
                             Dashboard\bmi_set_config('BACKUP:URL:TRIGGER:KEY', $key);
                           }
-                          $url = get_home_url(null, sprintf('/?backup-migration=BACKUP_BY_URL_REQUEST&_wpnonce=%s&sk=%s&uk=%s', 'AIo32MMfe', Dashboard\bmi_get_config('REQUEST:SECRET'), $key));
+                          $url = get_home_url(null, sprintf('/?backup-migration=BACKUP_BY_URL_REQUEST&_wpnonce=%s&uk=%s', 'AIo32MMfe', $key));
                         ?>
                         <input type="text" autocomplete="off" class="bmi-text-input backup-url-trigger small" readonly id="backup-url-trigger" value="<?php esc_attr_e($url); ?>">
                       </div>
@@ -260,6 +261,10 @@
       <?php
     }
 
+
+    public function bmip_encryption_settings() {
+      require_once BMI_PRO_INC . 'dashboard/encryption_settings.php';
+    }
     
 
   }

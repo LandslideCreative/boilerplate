@@ -46,6 +46,7 @@ class Controller extends Controller_Base {
 	 * {@inheritDoc}
 	 *
 	 * @since 6.4.0
+	 * @since 7.8.1 Added support for AIOSEO integration.
 	 */
 	public function do_register(): void {
 		$this->boot();
@@ -54,6 +55,7 @@ class Controller extends Controller_Base {
 		$this->container->register_on_action( 'tec_events_elementor_loaded', Plugins\Elementor\Controller::class );
 		$this->container->register( Themes\Kadence\Provider::class );
 		$this->container->register( Plugins\WP_All_Export\Controller::class );
+		$this->container->register( Plugins\AIOSEO\Controller::class );
 
 		add_action( 'before_woocommerce_init', [ $this, 'declare_woo_hpos_support' ] );
 	}

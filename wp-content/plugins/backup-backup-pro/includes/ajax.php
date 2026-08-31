@@ -78,9 +78,93 @@ class BMI_Ajax_Premium
       BMP::res($this->verifySftpConnection());
     } elseif ($this->post['f'] == 'download-sftp-backup') {
       BMP::res($this->downloadCloudBackupV2());
+    } elseif ($this->post['f'] == 'get-encryption-password') {
+      BMP::res($this->getEncryptionPassword());
+    } elseif ($this->post['f'] == 'is-encryption-configurable') {
+      BMP::res($this->isEncryptionConfigurable());
+    } elseif ($this->post['f'] == 'is-remote-connection-method-configurable') {
+      BMP::res($this->isRemoteConnectionMethodConfigurable());
     } elseif ($this->post['f'] == 'is-storage-strategy-configurable') {
       BMP::res($this->isStorageStrategyConfigurable());
+    } elseif ($this->post['f'] == 'encrypt-backup') {
+      BMP::res($this->encryptBackup());
+    } elseif ($this->post['f'] == 'decrypt-backup') {
+      BMP::res($this->decryptBackup());
+    } elseif ($this->post['f'] == 'validate-decrypt-password') {
+      BMP::res($this->validateDecryptPassword());
     }
+  }
+
+  /**
+   * getEncryptionPassword - Returns the encryption password
+   *
+   * @return array status
+   */
+  private function getEncryptionPassword()
+  {
+    $password = Dashboard\bmi_get_config('ENCRYPTION:PASSWORD');
+    if (!$password) $password = '';
+    return ['status' => 'success', 'password' => $password];
+  }
+
+  /**
+   * isEncryptionConfigurable - Checks if encryption is configurable
+   *
+   * @return array status
+   */
+  private function isEncryptionConfigurable()
+  {
+
+    if (!class_exists('ZipArchive')) {
+      $message = 'ZipArchive class does not exist. Please make sure you have the PHP Zip extension installed.';
+      Logger::log("[BMI PRO] " . $message);
+      return ['status' => 'msg', 'why' => $message, 'level' => 'error', 'code' => 'ZIPARCHIVE_NOT_FOUND'];
+    }
+
+    $zipArchive = new \ZipArchive();
+
+    if (!defined('ZipArchive::EM_AES_256') || !method_exists($zipArchive, 'setEncryptionName')) {
+      $message = 'Encryption is not supported on this server. PHP >= 7.2 and the latest Zip extension are required.';
+      Logger::log("[BMI PRO] " . $message);
+      return ['status' => 'msg', 'why' => $message, 'level' => 'error', 'code' => 'ENCRYPTION_NOT_SUPPORTED'];
+    }
+
+    if (method_exists('ZipArchive', 'isEncryptionMethodSupported')) {
+      $supported = \ZipArchive::isEncryptionMethodSupported(\ZipArchive::EM_AES_256);
+      if (!$supported) {
+        $message = 'Encryption method is not supported on this server. Please make sure you have the latest Zip extension installed.';
+        Logger::log("[BMI PRO] " . $message);
+        return ['status' => 'msg', 'why' => $message, 'level' => 'error', 'code' => 'ENCRYPTION_METHOD_NOT_SUPPORTED'];
+      }
+      return ['status' => 'success'];
+    }
+
+    if (defined('ZipArchive::LIBZIP_VERSION')) {
+      $libzipVersion = \ZipArchive::LIBZIP_VERSION;
+      if (version_compare($libzipVersion, '1.2.0', '<')) {
+        $message = "Libzip version is {$libzipVersion}. Please make sure you have libzip >= 1.2.0 to use the encryption feature.";
+        Logger::log("[BMI PRO] " . $message);
+        return ['status' => 'msg', 'why' => $message, 'level' => 'error', 'code' => 'LIBZIP_VERSION_NOT_SUPPORTED'];
+      }
+      return ['status' => 'success'];
+    }
+
+    return ['status' => 'success'];
+  }
+  /**
+   * isRemoteConnectionMethodConfigurable - Checks if the remote connection method is configurable
+   *
+   * @return array status
+   */
+  private function isRemoteConnectionMethodConfigurable()
+  {
+
+    if (get_option('bmi_cron_new_domain_done')) {
+      return ['status' => 'success'];
+    }
+    $message = __("This method will be available once the External Keep-Alive Server detects your domain. Your site must be publicly reachable. If you believe it is reachable, please click %shere%s to resync. If the issue persists, please contact support.", 'backup-backup');
+    $message = sprintf($message, '<a href="#" class="resync-with-ping-server ">', '</a>');
+    return ['status' => 'msg', 'why' => $message, 'level' => 'info'];
   }
 
   /**
@@ -1118,7 +1202,7 @@ class BMI_Ajax_Premium
     require_once BMI_INCLUDES . '/scanner/files.php';
     require_once BMI_INCLUDES . '/scanner/backups.php';
 
-    $backups = new Backups();
+    $backups = Backups::getInstance();
     $availableBackups = $backups->getAvailableBackups("local");
 
     // Initialize required variables
@@ -1270,6 +1354,33 @@ class BMI_Ajax_Premium
       }
 
       return ['status' => 'success'];
+  }
+
+  public function validateDecryptPassword() {
+    require_once BMI_INCLUDES . '/zipper/zipping.php';
+    $backupName = sanitize_file_name($this->post['backup'] ?? '');
+    $password = $this->post['password'] ?? '';
+    if (empty($backupName) || empty($password)) {
+      return ['status' => 'error', 'msg' => 'Backup name and password are required.'];
+    }
+    $backupPath = BMI_BACKUPS . DIRECTORY_SEPARATOR . $backupName;
+    if (!file_exists($backupPath)) {
+      return ['status' => 'error', 'msg' => 'Backup file does not exist locally.'];
+    }
+    if (!\BMI\Plugin\Zipper\BMI_Zipper::validateZipPassword($backupPath, $password)) {
+      return ['status' => 'error', 'msg' => 'Invalid backup password provided.'];
+    }
+    return ['status' => 'success'];
+  }
+
+  public function encryptBackup() {
+    require_once BMI_PRO_INC . 'services/class-bmi-pro-backup-encryption-manager.php';
+    return \BMI\Plugin\Services\BackupEncryptionManager::getInstance()->encryptBackup($this->post);
+  }
+
+  public function decryptBackup() {
+    require_once BMI_PRO_INC . 'services/class-bmi-pro-backup-encryption-manager.php';
+    return \BMI\Plugin\Services\BackupEncryptionManager::getInstance()->decryptBackup($this->post);
   }
 
 

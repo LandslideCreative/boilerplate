@@ -29,6 +29,9 @@ use BMI\Plugin\BMI_Logger as Logger;
 use phpseclib\Crypt\RSA;
 use BMI\Plugin\Scanner\BMI_BackupsScanner as Backups;
 use BMI\Plugin\Backup_Migration_Plugin as BMP;
+use BMI\Plugin\External\Contracts\DeleteBackup;
+
+require_once BMI_INCLUDES . DIRECTORY_SEPARATOR . 'external' . DIRECTORY_SEPARATOR . 'contracts' . DIRECTORY_SEPARATOR . 'interface-delete-backup.php';
 
 // Exception Class for SFTP Client Errors
 class SftpClientException extends \Exception
@@ -475,7 +478,7 @@ class RemoteFileTransferFactory
 }
 
 
-class BMI_External_SFTP {
+class BMI_External_SFTP implements DeleteBackup {
 
     private $sftpClient;
 
@@ -531,7 +534,7 @@ class BMI_External_SFTP {
         ]);
 
         require_once BMI_INCLUDES . DIRECTORY_SEPARATOR . 'scanner' . DIRECTORY_SEPARATOR . 'backups.php';
-        $backups = new Backups();
+        $backups = Backups::getInstance();
         $backupsAvailable = $backups->getAvailableBackups("local");
         $localBackups = $backupsAvailable['local'];
         $parsedSftpFiles = $this->getParsedFiles();
@@ -867,10 +870,7 @@ class BMI_External_SFTP {
     }
 
     /**
-     * Deletes a backup from the SFTP server
-     *
-     * @param string $md5 MD5 of the backup to delete
-     * @return bool
+     * @inheritDoc
      */
     public function deleteBackup($md5)
     {
@@ -891,7 +891,10 @@ class BMI_External_SFTP {
         }
         $deleteManifest = $this->sftpClient->deleteFile($manifestFile);
         $deleteBackup = $this->sftpClient->deleteFile($backupName);
-        return $deleteManifest && $deleteBackup;
+        if ($deleteManifest && $deleteBackup) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -899,6 +902,9 @@ class BMI_External_SFTP {
      *
      * @param string $md5 MD5 of the backup to delete
      * @return bool
+     */
+    /**
+     * @deprecated Use deleteBackup() instead.
      */
     public function deleteBackupJson($md5)
     {

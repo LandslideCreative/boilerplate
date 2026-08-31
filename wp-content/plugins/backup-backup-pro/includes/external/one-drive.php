@@ -10,16 +10,18 @@ use BMI\Plugin\BMI_Pro_Core;
 use BMI\Plugin\BMProAjax as BMProAjax;
 use BMI\Plugin\Scanner\BMI_BackupsScanner as Backups;
 use BMI\Plugin\Dashboard as Dashboard;
+use BMI\Plugin\External\Contracts\DeleteBackup;
 
-// Exit on direct access
 if (!defined('ABSPATH')) {
   exit;
 }
 
+require_once BMI_INCLUDES . DIRECTORY_SEPARATOR . 'external' . DIRECTORY_SEPARATOR . 'contracts' . DIRECTORY_SEPARATOR . 'interface-delete-backup.php';
+
 /**
  * BMI_External_onedrive
  */
-class BMI_External_OneDrive
+class BMI_External_OneDrive implements DeleteBackup
 {
 
   private $onedrive_secret = false;
@@ -53,7 +55,7 @@ class BMI_External_OneDrive
 
     // Local Backups
     require_once BMI_INCLUDES . DIRECTORY_SEPARATOR . 'scanner' . DIRECTORY_SEPARATOR . 'backups.php';
-    $backups = new Backups();
+    $backups = Backups::getInstance();
     $backupsAvailable = $backups->getAvailableBackups("local");
     $localBackups = $backupsAvailable['local'];
     $localBackups = array_reverse($localBackups);
@@ -485,6 +487,9 @@ class BMI_External_OneDrive
     }
   }
 
+  /**
+   * @inheritDoc
+   */
   public function deleteBackup($md5)
   {
 
@@ -494,8 +499,14 @@ class BMI_External_OneDrive
 
     $manifest = $this->getManifest($md5);
     if ($manifest) {
-      $this->deleteFile($manifest->name);
+      $deleteBackup = $this->deleteFile($manifest->name);
+      $deleteManifest = $this->deleteFile($md5 . '.json');
+      if ($deleteBackup && $deleteManifest) {
+        return true;
+      }
+      return false;
     }
+    return false;
   }
 
   public function getManifest($md5)
@@ -518,6 +529,9 @@ class BMI_External_OneDrive
     return $manifest;
   }
 
+  /**
+   * @deprecated Use deleteBackup() instead.
+   */
   public function deleteBackupManifest($md5_json)
   {
     if (BMI_PRO_DEBUG) {

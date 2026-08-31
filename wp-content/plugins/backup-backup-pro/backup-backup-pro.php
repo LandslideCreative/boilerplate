@@ -7,7 +7,7 @@
    *  Author URI: https://inisev.com
    *  Plugin URI: https://backupbliss.com
    * Text Domain: backup-backup
-   *     Version: 2.1.6
+   *     Version: 2.1.7
    * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
   // Default namespace
@@ -19,7 +19,7 @@
 
   // Not dynamic constants
   if (!defined('BMI_PRO_VERSION')) {
-    define('BMI_PRO_VERSION', '2.1.6');
+    define('BMI_PRO_VERSION', '2.1.7');
   }
   if (!defined('BMI_PRO_DEBUG')) {
     define('BMI_PRO_DEBUG', false);
@@ -60,12 +60,6 @@
     }
   });
 
-  function bmip_uninstall_handler() {
-    require_once BMI_PRO_ROOT_DIR . '/uninstall.php';
-  }
-
-  register_uninstall_hook(BMI_PRO_ROOT_DIR, 'bmip_uninstall_handler');
-
   // Load plugin after all
   add_action('init', function () {
 
@@ -82,6 +76,8 @@
     $isCLI = (defined('STDIN') || (defined('PHP_SAPI') && PHP_SAPI == 'cli') || php_sapi_name() === 'cli') ? true : false;
     $isCurlBackup = strpos($_SERVER['REQUEST_URI'], '?backup-migration=CURL_BACKUP' ) !== false;
     $isBackupByURL = strpos($_SERVER['REQUEST_URI'], '?backup-migration=BACKUP_BY_URL') !== false;
+    $isKeepAlive = strpos($_SERVER['REQUEST_URI'], '?action=bmip_keepalive') !== false;
+    if ($isKeepAlive) define('BMI_KEEPALIVE', true);
     if ($isCurlBackup) define('BMI_CURL_REQUEST', true);
 
     // Check requirements
@@ -99,7 +95,7 @@
         require_once BMI_PRO_INC . 'class-before-update-controller.php';
 
         // Disabled POST functions
-        $disabled = ['is-running-backup', 'scan-directory', 'calculate-cron', 'get-dynamic-names'];
+        $disabled = ['is-running-backup', 'scan-directory', 'get-dynamic-names'];
 
         // Verify (Don't use this plugin outside BMI Settings)
         $method = '';
@@ -129,6 +125,7 @@
               || defined('BMI_DOING_SCHEDULED_BACKUP') 
             )
             || defined('DOING_CRON')
+            || defined('BMI_KEEPALIVE')
           ) {
             require_once BMI_PRO_CORE_FILE;
             $bmi_pro_instance = new BMI_Pro_Core($scheduled_cron);

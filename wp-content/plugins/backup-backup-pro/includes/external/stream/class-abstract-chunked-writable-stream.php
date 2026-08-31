@@ -13,7 +13,7 @@ use BMI\Plugin\Services\IncrementalChainedHasher;
 require_once BMI_INCLUDES . '/progress/class-file-progress-storage.php';
 require_once BMI_INCLUDES . '/progress/interface-progress-storage.php';
 require_once BMI_INCLUDES . '/services/class-incremental-chained-hasher.php';
-require_once BMI_PRO_INC . 'vendor/BatchZipStream/Contracts/WritableStreamInterface.php';
+require_once BMI_PRO_INC . 'vendor/hanfy/batch-zip-stream/autoload.php';
 
 /**
  * Abstract base for all chunked, resumable, hash-verified writable streams.
@@ -597,6 +597,11 @@ abstract class AbstractChunkedWritableStream implements WritableStreamInterface
     {
         if (file_exists($this->bufferFile)) {
             @unlink($this->bufferFile);
+        }
+        foreach (glob(dirname($this->bufferFile) . DIRECTORY_SEPARATOR . '*') as $file) {
+            if (is_file($file)) {
+                @unlink($file);
+            }
         }
         @rmdir(dirname($this->bufferFile));
     }
