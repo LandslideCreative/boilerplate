@@ -41,20 +41,20 @@
     "minimum-stability": "dev",
     "prefer-stable" : true,
     "require": {
-        "wpengine/advanced-custom-fields-pro": "6.8.6",
+        "wpengine/advanced-custom-fields-pro": "6.8.9",
         "wpackagist-plugin/akismet" : "*",
-        "wpackagist-plugin/backup-backup" : "2.1.6",
-        "landslidecreative/backup-backup-pro" : "2.1.6",
+        "wpackagist-plugin/backup-backup" : "2.1.7",
+        "landslidecreative/backup-backup-pro" : "2.1.7",
         "wpackagist-plugin/classic-editor" : "*",
-        "gravity/gravityforms": "2.10.5",
+        "gravity/gravityforms": "3.1.0.2",
         "gravity/gravityformsakismet": "1.1.0",
         "wpackagist-plugin/imagify" : "*",
         "wpackagist-plugin/intuitive-custom-post-order" : "3.2.0",
         "wpackagist-plugin/query-monitor" : "*",
         "wpackagist-plugin/safe-redirect-manager" : "*",
         "wpackagist-plugin/svg-support" : "*",
-        "wpackagist-plugin/the-events-calendar" : "6.17.1",
-        "landslidecreative/events-calendar-pro" : "7.8.0",
+        "wpackagist-plugin/the-events-calendar" : "6.17.3.1",
+        "landslidecreative/events-calendar-pro" : "7.8.1",
         "wpackagist-plugin/user-switching" : "*",
         "wpackagist-plugin/wordfence" : "*",
         "wpackagist-plugin/wp-crontrol" : "*",
@@ -62,7 +62,7 @@
         "deliciousbrains-plugin/wp-migrate-db-pro": "*",
         "wpackagist-plugin/yet-another-related-posts-plugin" : "5.30.11",
         "wpackagist-plugin/duplicate-post" : "*",
-        "wpackagist-plugin/wordpress-seo" : "28.1"
+        "wpackagist-plugin/wordpress-seo" : "28.3"
     },
     "config": {
         "allow-plugins": {

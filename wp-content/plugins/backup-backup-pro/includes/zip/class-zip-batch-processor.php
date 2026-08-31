@@ -6,6 +6,7 @@ namespace BMI\Plugin\Pro\Zip;
 
 use BMI\Plugin\Backup_Migration_Plugin as BMP;
 use BMI\Plugin\Heart\BMI_Backup_Heart;
+use BMI\Plugin\Dashboard as Dashboard;
 
 /**
  * BMIZipBatchProcessor — Backup batch orchestration for streaming ZIP.
@@ -85,7 +86,9 @@ class BMIZipBatchProcessor
         }
 
         try {
-            $zipStream = new BMIZipStream($stateDirectory, $heartbeat->backupname);
+            $encryptionAllowed = Dashboard\bmi_get_config('ENCRYPTION:ENABLED');
+            $encryptionPassword = $encryptionAllowed ? Dashboard\bmi_get_config('ENCRYPTION:PASSWORD') : null;
+            $zipStream = new BMIZipStream($stateDirectory, $heartbeat->backupname, $encryptionPassword);
         } catch (\Throwable $e) {
             $heartbeat->send_error('ZipStream initialization failed: ' . $e->getMessage());
             return;
@@ -98,16 +101,16 @@ class BMIZipBatchProcessor
             return;
         }
 
+        if ($heartbeat->final_batch === true) {
+            self::processFinalBatch($zipStream, $heartbeat);
+            return;
+        }
+
         if ($heartbeat->it === 1 && self::processDatabaseBatch($zipStream, $heartbeat)) {
             return;
         }
 
         if (!self::processFileBatch($zipStream, $heartbeat)) {
-            return;
-        }
-
-        if ($heartbeat->final_batch === true) {
-            self::processFinalBatch($zipStream, $heartbeat);
             return;
         }
 
@@ -259,7 +262,11 @@ class BMIZipBatchProcessor
 
         try {
             foreach ($heartbeat->get_final_batch() as $file) {
-                $zipStream->addPath($heartbeat->cutDir($file), $file);
+                $skipEncryption = true;
+                if (basename($file) === '.backup_name') {
+                    $skipEncryption = false;
+                }
+                $zipStream->addPath($heartbeat->cutDir($file), $file, $skipEncryption);
             }
             $heartbeat->final_made = true;
         } catch (\Throwable $e) {

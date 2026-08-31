@@ -237,6 +237,60 @@ class BackupService {
     }
 
     /**
+     * Activate the external ping server to start 10s polling for the active backup.
+     */
+    public static function activatePingServer() {
+        if (\BMI\Plugin\Dashboard\bmi_get_config('CRON:REMOTE_PING') === true) {
+            $domain = network_home_url();
+            $sk = get_option('bmi_sk_keepalive');
+            
+            wp_remote_post('https://authentication.backupbliss.com/v2/crons/active-process', [
+                'blocking' => false,
+                'timeout' => 5,
+                'body' => [
+                    'site' => $domain,
+                    'sk' => $sk
+                ]
+            ]);
+        }
+    }
+
+    /**
+     * Resumes the backup batch safely when triggered by KeepAlive Ping Server.
+     */
+    public function continueBackupBatch() {
+        // Try early connection closing to prevent ping server timeouts (30s limits)
+        if (ob_get_level()) @ob_end_clean();
+        header('Content-Type: application/json');
+        header('Connection: close');
+        @ignore_user_abort(true);
+        ob_start();
+        echo json_encode(['status' => 'success']);
+        $size = ob_get_length();
+        header("Content-Length: $size");
+        @ob_end_flush();
+        @flush();
+        if (function_exists('fastcgi_finish_request')) {
+            @fastcgi_finish_request();
+        }
+        $GLOBALS['BMI::RESPONSE::SENT'] = true;
+
+        // Load the bypasser with 'false' identity to load from currentBackupConfig.php
+        require_once BMI_INCLUDES . '/backup-process.php';
+        $request = new \BMI\Plugin\Heart\BMI_Backup_Heart(false, BMI_CONFIG_DIR, trailingslashit(WP_CONTENT_DIR), BMI_BACKUPS, trailingslashit(ABSPATH), plugin_dir_path(BMI_ROOT_FILE));
+        
+        if (sizeof($request->remote_settings) > 0) {
+            $request->handle_batch();
+        }
+
+        // We already outputted the response and terminated the connection if possible.
+        // If not, we just exit since we already echoed json earlier.
+        exit;
+    }
+  
+
+
+    /**
      * Get the debug code.
      *
      * @return string
@@ -248,6 +302,5 @@ class BackupService {
             $debugCode = $response['code'];
         }
         return $debugCode;    
-      }
-  
+    }
 }

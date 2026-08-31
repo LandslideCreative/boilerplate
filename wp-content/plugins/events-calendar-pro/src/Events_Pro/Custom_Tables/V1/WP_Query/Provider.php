@@ -498,6 +498,12 @@ class Provider extends Service_Provider implements \TEC\Events\Custom_Tables\V1\
 	 * Filters the SQL required to select distinct Occurrences in the context
 	 * of a Custom Tables Query.
 	 *
+	 * This hook being registered is also the signal TEC uses, via
+	 * `Custom_Tables_Query::recurring_occurrences_supported()`, to decide whether it can trust
+	 * that multiple Occurrences of the same Event will be correctly redirected to distinct
+	 * identifiers and rendered as distinct entries. Do not remove this registration, or its
+	 * counterpart in `unregister()`, without keeping that guarantee true.
+	 *
 	 * @since 6.0.0
 	 *
 	 * @param string $select_fields The input SQL required to select distinct Occurrences in the context

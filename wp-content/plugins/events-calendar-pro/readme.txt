@@ -3,7 +3,7 @@
 Contributors: theeventscalendar, borkweb, bordoni, brianjessee, aguseo, camwynsp, GeoffBel, jentheo, leahkoerper, lucatume, neillmcshea, vicskf, zbtirrell, juanfra
 Tags: events, calendar, event, venue, organizer, dates, date, google maps, conference, workshop, concert, meeting, seminar, summit, class, the events calendar, widget, pro
 Donate link: https://evnt.is/29
-Stable tag: 7.8.0
+Stable tag: 7.8.1
 Requires at least: 6.8
 Tested up to: 7.0
 Requires PHP: 7.4
@@ -213,6 +213,11 @@ Previous versions of Events Calendar Pro are not cross-compatible with 6.X add-o
 Remember to always make a backup of your database and files before updating!
 
 == Changelog ==
+
+= [7.8.1] 2026-08-05 =
+
+* Language - 7 new strings added, 1 updated, 0 fuzzied, and 0 obsoleted.
+* Tweak - Switched changelog tooling from jetpack-changelogger to @stellarwp/changelogger.
 
 = [7.8.0] 2026-07-08 =
 

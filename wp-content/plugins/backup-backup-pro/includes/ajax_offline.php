@@ -355,4 +355,16 @@ class BMI_Ajax_Offline_Premium
 
     return ["status"  => "no_tasks"];
   }
+
+  public function keepAliveDueToBackup() {
+    return Dashboard\bmi_get_config('CRON:REMOTE_PING') === true && 
+      file_exists(BMI_BACKUPS . '/.running') && 
+      file_exists(BMI_BACKUPS . '/.cron');
+  }
+
+  public function executeKeepAliveBatch() {
+    require_once BMI_PRO_INC . 'services/class-bmi-pro-service.php';
+    $backupService = new \BMI\Plugin\Services\BackupService();
+    $backupService->continueBackupBatch();
+  }
 }

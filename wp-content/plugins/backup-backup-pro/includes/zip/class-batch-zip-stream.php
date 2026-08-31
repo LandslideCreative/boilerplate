@@ -46,7 +46,7 @@ use BMI\Plugin\Services\BackupLifecycleManager as BackupLifecycleManager;
 
 
 // Require BatchZipStream autoloader
-require_once BMI_PRO_INC . 'vendor/BatchZipStream/autoload.php';
+require_once BMI_PRO_INC . 'vendor/hanfy/batch-zip-stream/autoload.php';
 require_once BMI_PRO_INC . 'external/stream/autoload.php';
 
 /**
@@ -117,11 +117,17 @@ class BMIZipStream
     /** @var array<string, WritableStreamFactoryInterface> Stream factory registry */
     private static array $factoryRegistry = [];
 
+    /** @var ?string Password for AES encryption */
+    private ?string $password = null;
+    /** @var string EncryptionMethod */
+    private int $encryptionMethod = ZipFormat::ENC_NONE;
+
     /**
      * Create a new BMIZipStream instance.
      *
      * @param string $stateDirectory  Directory for session state persistence.
      * @param string $filename        Target filename for the ZIP archive.
+     * @param null|string $password    Password for AES encryption.
      * @param int    $compressionLevel Deflate compression level (0–9).
      * @param int    $readChunkSize   Read-buffer size for ZIP file reading (bytes).
      * @throws BMIZipStreamException If provider is not supported or not implemented.
@@ -129,15 +135,21 @@ class BMIZipStream
     public function __construct(
         string $stateDirectory,
         string $filename,
+        ?string $password = null,
         int $compressionLevel = 6,
         int $readChunkSize = 65536
     ) {
         $this->stateDirectory  = $stateDirectory;
         $this->filename        = $filename;
+        $this->password        = $password;
         $this->compressionLevel = $compressionLevel;
         $this->readChunkSize   = $readChunkSize;
         $this->uploadChunkSize = 10485760; // 10 MB default
-        $this->debug = defined('BMI_DEBUG') && BMI_DEBUG;
+        $this->debug           = defined('BMI_DEBUG') && BMI_DEBUG;
+
+        if ($password !== null) {
+            $this->encryptionMethod = ZipFormat::ENC_AES_256;
+        }
 
         // Resolve provider from configuration
         $this->provider = $this->resolveProvider();
@@ -271,14 +283,16 @@ class BMIZipStream
                     $this->statePersistence,
                     $this->stream,
                     $this->compressionLevel,
-                    $this->readChunkSize
+                    $this->readChunkSize,
+                    $this->password
                 );
             } else {
                 $this->session = BatchZipSession::withStream(
                     $this->stateDirectory,
                     $this->stream,
                     $this->compressionLevel,
-                    $this->readChunkSize
+                    $this->readChunkSize,
+                    $this->password
                 );
             }
 
@@ -318,13 +332,14 @@ class BMIZipStream
     public function addPath(
         string $archivePath,
         string $sourcePath,
+        bool $skipEncryption = false,
         ?int $compressionMethod = null
     ): self {
         if (is_dir($sourcePath)) {
             return $this->addEmptyDirectory($archivePath);
         }
 
-        return $this->addFile($archivePath, $sourcePath, $compressionMethod);
+        return $this->addFile($archivePath, $sourcePath, $skipEncryption, $compressionMethod);
     }
 
     /**
@@ -339,14 +354,16 @@ class BMIZipStream
     public function addFile(
         $archivePath,
         $sourcePath,
+        $skipEncryption = false,
         $compressionMethod = null
     ) {
         $this->ensureSessionStarted();
 
         $compressionMethod ??= ZipFormat::COMPRESSION_DEFLATE;
+        $encryptionMethod = $skipEncryption ? ZipFormat::ENC_NONE : $this->encryptionMethod;
 
         try {
-            $this->session->addFile($archivePath, $sourcePath, $compressionMethod);
+            $this->session->addFile($archivePath, $sourcePath, $compressionMethod, $encryptionMethod);
 
             return $this;
 
