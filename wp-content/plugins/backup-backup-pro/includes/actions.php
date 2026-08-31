@@ -50,6 +50,13 @@
 
 
   /**
+   * Filter to check if backup is encrypted.
+   */
+  add_filter('bmip_is_backup_encrypted', function($is_encrypted){
+    return bmi_get_config('ENCRYPTION:ENABLED') && !empty(bmi_get_config('ENCRYPTION:PASSWORD'));
+  });
+
+  /**
    * Filter to check if streaming backup method is enabled and can be used.
    * 
    * all streaming backup filters, action and functions should be wrapped by the check of this filter to make sure they are only applied when streaming backup is enabled and can be used.
@@ -348,6 +355,21 @@
     else return $name . '.zip';
   });
 
+  add_filter('bmip_backup_name', function ($name) {
+    // in case encryption enabled: add -enc as suffix to the name of the backup
+    if (apply_filters('bmip_is_backup_encrypted', false)) {
+      $firstDot = strpos($name, '.');
+      if ($firstDot !== false) {
+        $base = substr($name, 0, $firstDot);
+        $ext = substr($name, $firstDot);
+        $name = $base . '-enc' . $ext;
+      } else {
+        $name .= '-enc';
+      }
+    }
+    return $name;
+  });
+
   add_action('bmi_premium_errors', function() {
     
     if (file_exists(BMI_PRO_INC . 'notices/one-drive.php'))
@@ -483,6 +505,41 @@
   <?php
   });
 
+  add_filter('bmi_premium_store_encryption_configuration', function($response, $encryptionEnabled, $encryptionPassword) {
+    if ($encryptionEnabled) {
+      $existingPassword = bmi_get_config('ENCRYPTION:PASSWORD');
+
+      if (empty($encryptionPassword)) {
+        if (!empty($existingPassword)) {
+            $encryptionPassword = $existingPassword;
+        } else {
+            return [
+              'status' => 'msg',
+              'level' => 'error',
+              'why' => esc_html__('Encryption password cannot be empty when encryption is enabled.', 'backup-backup')
+            ];
+        }
+      } else {
+        // Validate the password strength and complexity
+        if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/', $encryptionPassword)) {
+          return [
+            'status' => 'msg',
+            'level' => 'error',
+            'why' => esc_html__('Encryption password must be at least 8 characters long and contain at least one lowercase letter, one uppercase letter, one number, and one special character.', 'backup-backup')
+          ];
+        }
+      }
+
+      bmi_set_config('ENCRYPTION:ENABLED', true);
+      bmi_set_config('ENCRYPTION:PASSWORD', $encryptionPassword);
+
+    } else {
+      bmi_set_config('ENCRYPTION:ENABLED', false);
+      bmi_set_config('ENCRYPTION:PASSWORD', '');
+    }
+    return $response;
+  }, 10, 3);
+  
   add_filter('bmi_premium_store_streaming_configuration', function($response, $direct_cloud_streaming, $direct_cloud_provider) {
     if ($direct_cloud_streaming) {
       $storageStrategy = bmi_get_config('STORAGE:STRATEGY');
@@ -679,3 +736,59 @@
   require_once BMI_PRO_INC . 'cron/bootstrap.php';
   \BMI\Plugin\CRON\TaskManager::boot();
 
+  add_action('bmip_cron_settings_updated', function ($post) {
+      if (isset($post['remote_ping'])) {
+        $remote_ping_val = ($post['remote_ping'] === 'true' || $post['remote_ping'] === true) ? true : false;
+        Dashboard\bmi_set_config('CRON:REMOTE_PING', $remote_ping_val);
+      }
+  });
+
+  add_action('bmip_backup_methods', function () {
+    $remotePing = __('This option makes the backup process rely on our external ping server instead of internal loopback requests. It is ideal for sites that block loopback requests, though it may cause a slight delay in the backup process.', 'backup-backup');
+
+    ?>
+    <div class="cron-ping-wrap" style="margin-left: 35px; margin-top: 15px;">
+      <label for="remote-ping">
+        <input type="checkbox" id="remote-ping" name="backup-method" <?php echo (bmi_get_config('CRON:REMOTE_PING') === true ? 'checked' : ''); ?>>
+        <span>
+          <?php esc_html_e('Use remote server assistance for scheduled backups', 'backup-backup'); ?>
+          &nbsp;<span class="bmi-info-icon tooltip" tooltip="<?php echo esc_attr($remotePing); ?>"></span>
+
+        </span>
+        <span class="inline premium-function is-pro" >
+          <span class="premium premium-img premium-ntt"></span>
+        </span>
+      </label>
+    </div>
+    <?php
+
+  });
+
+  add_action('bmip_cron_backup_beat', function ($backup_id) {
+    try {
+      BMI_Logger::debug('Handling cron backup beat for backup ID: ' . $backup_id);
+      // Load bypasser
+      require_once BMI_INCLUDES . '/backup-process.php';
+      $request = new Bypasser($backup_id, BMI_CONFIG_DIR, trailingslashit(WP_CONTENT_DIR), BMI_BACKUPS, trailingslashit(ABSPATH), plugin_dir_path(BMI_ROOT_FILE));
+      
+      if (sizeof($request->remote_settings) === 0) return;
+
+      // Handle request
+      $request->handle_batch();
+
+    } catch (\Throwable $t) {
+      
+      error_log('There was an error with Backup Migration plugin: ' . $t->getMessage());
+      BMI_Logger::error(__('Error handler: ', 'backup-backup') . 'ajax#01' . '|' . $t->getMessage());
+      error_log(strval($t));
+
+    }
+
+  });
+  require_once BMI_PRO_INC . DIRECTORY_SEPARATOR . 'services' . DIRECTORY_SEPARATOR . 'class-bmi-pro-service.php';  
+  add_action('bmip_backup_initialized', ['BMI\Plugin\Services\BackupService', 'activatePingServer']);
+
+  add_filter('bmip_should_schedule_next_beat', function ($shouldSchedule) {
+    return Dashboard\bmi_get_config('CRON:REMOTE_PING') && file_exists(BMI_BACKUPS . '/.cron');
+
+  }, 10, 1);

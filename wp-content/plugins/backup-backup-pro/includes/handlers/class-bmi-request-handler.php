@@ -159,6 +159,10 @@ class RequestHandler {
      * @return bool
      */
     public function isValid() {
+        if ($this->action instanceof \BMI\Plugin\Actions\URLBackupRequest || $this->action instanceof \BMI\Plugin\Actions\UrlBackup) {
+            return $this->action !== null;
+        }
+
         $secretKey = $this->getParameter('sk');
         return $this->action !== null && $secretKey !== null && $this->secretKey === $secretKey;
     }

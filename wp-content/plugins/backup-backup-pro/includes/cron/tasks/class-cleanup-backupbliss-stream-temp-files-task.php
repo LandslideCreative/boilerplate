@@ -68,7 +68,7 @@ class CleanupBackupblissStreamTempFilesTask extends AbstractTask {
   public function run() {
     $tmpDir = $this->get_tmp_dir();
     if (is_dir($tmpDir)) {
-        foreach (glob($tmpDir . 'backupbliss-bb*') as $file) {
+        foreach (glob($tmpDir . DIRECTORY_SEPARATOR . 'backupbliss-bb*') as $file) {
             if (filemtime($file) < time() - self::FILE_AGE_THRESHOLD) {
                 @unlink($file);
             }
@@ -76,7 +76,7 @@ class CleanupBackupblissStreamTempFilesTask extends AbstractTask {
     }
     $streamDir = $this->get_zip_stream_temp_dir();
     if (is_dir($streamDir)){
-      foreach (glob($streamDir . '/BMI*') as $file) {
+      foreach (glob($streamDir . DIRECTORY_SEPARATOR . 'BMI*') as $file) {
           if (filemtime($file) < time() - self::FILE_AGE_THRESHOLD) {
               @unlink($file);
           }
@@ -85,7 +85,7 @@ class CleanupBackupblissStreamTempFilesTask extends AbstractTask {
     }
     $bufferDir = $this->get_zip_stream_buffer_dir();
     if (is_dir($bufferDir)) {
-        foreach (glob($bufferDir . '/*.bmi') as $file) {
+        foreach (glob($bufferDir . DIRECTORY_SEPARATOR . '*.bmi') as $file) {
             if (filemtime($file) < time() - self::FILE_AGE_THRESHOLD) {
                 @unlink($file);
             }
@@ -103,7 +103,7 @@ class CleanupBackupblissStreamTempFilesTask extends AbstractTask {
    * @return string
    */
   protected function get_zip_stream_temp_dir() {
-    return BMI_TMP . '/zip_stream_state';
+    return BMI_TMP . DIRECTORY_SEPARATOR . 'zip_stream_state';
   }
 
   /** Get the dir where backupbliss stream buffer files are stored.
@@ -111,7 +111,7 @@ class CleanupBackupblissStreamTempFilesTask extends AbstractTask {
    * @return string
    */
   protected function get_zip_stream_buffer_dir() {
-    return BMI_TMP . '/stream_buffer';
+    return BMI_TMP . DIRECTORY_SEPARATOR . 'stream_buffer';
   }
 
   protected function get_tmp_dir() {
