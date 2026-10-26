@@ -70,8 +70,11 @@ $top-bar-nav-difference-large: $top-bar-nav-x-padding-large - $top-bar-submenu-x
 			display: flex;
 			&>li {
 				position: relative;
-				&>a {
+				&>:is(a, button.submenu-toggle) {
 					display: block;
+					font-family: inherit;
+					font-weight: inherit;
+					line-height: inherit;
 					font-size: $top-bar-font-size-medium;
 					color: $top-bar-nav-color;
 					text-decoration: none;
@@ -117,7 +120,7 @@ $top-bar-nav-difference-large: $top-bar-nav-x-padding-large - $top-bar-submenu-x
 						}
 					}				
 				}
-				&.menu-item-has-children>a {
+				&.menu-item-has-children>:is(a, button.submenu-toggle) {
 					&::after {
 						content: '';
 						display: block;
@@ -150,7 +153,7 @@ $top-bar-nav-difference-large: $top-bar-nav-x-padding-large - $top-bar-submenu-x
 						}
 					}
 				}
-				&.menu-item-has-children.nav-open>a {
+				&.menu-item-has-children.nav-open>:is(a, button.submenu-toggle) {
 					&::after {
 						transform: rotateZ(180deg);
 					}
@@ -265,7 +268,8 @@ $top-bar-nav-difference-large: $top-bar-nav-x-padding-large - $top-bar-submenu-x
 
 // Top Bar Search
 .top-bar-search {
-	a.top-bar-search-toggle {
+	.top-bar-search-toggle {
+		cursor: pointer;
 		height: 100%;
 		display: flex;
 		align-items: center;
@@ -294,7 +298,7 @@ $top-bar-nav-difference-large: $top-bar-nav-x-padding-large - $top-bar-submenu-x
 				}
 			}
 		}
-	}
+	}	
 	search {
 		display: none;
 		position: absolute;
@@ -421,9 +425,12 @@ nav.main-nav {
 		align-items: center;
 		&>li {
 			position: relative;
-			&>a {
+			&>:is(a, button.submenu-toggle) {
 				display: block;							
-				transition: color 200ms;
+				transition: color 200ms;				
+				font-family: inherit;
+				font-weight: inherit;
+				line-height: inherit;
 				font-size: $main-nav-font-size-medium;
 				color: $main-nav-color;	
 				text-decoration: none;
@@ -472,7 +479,7 @@ nav.main-nav {
 					}
 				}
 			}
-			&.menu-item-has-children>a {
+			&.menu-item-has-children>:is(a, button.submenu-toggle) {
 				&::after {
 					content: '';
 					display: block;
@@ -510,7 +517,7 @@ nav.main-nav {
 					}
 				}
 			}
-			&.menu-item-has-children.nav-open>a {
+			&.menu-item-has-children.nav-open>:is(a, button.submenu-toggle) {
 				&::after {
 					transform: rotateZ(180deg);
 				}
@@ -573,7 +580,7 @@ nav.main-nav {
 				}
 			}
 			&:first-child:not(.nav-button) {
-				&>a {
+				&>:is(a, button.submenu-toggle) {
 					padding-left: 0;
 				}
 				ul.sub-menu {
@@ -594,7 +601,7 @@ nav.main-nav {
 				}
 			}
 			&:last-child:not(.nav-button) {
-				&>a {
+				&>:is(a, button.submenu-toggle) {
 					padding-right: 0;
 				}
 				ul.sub-menu {
@@ -624,7 +631,7 @@ nav.main-nav {
 	@include breakpoint(medium) {
 		display: none;
 	}
-	a {
+	.off-canvas-toggle {
 		display: flex;
 		flex-direction: column;
 		align-items: flex-end;
@@ -632,7 +639,7 @@ nav.main-nav {
 		padding-top: $mobile-nav-toggle-padding-top;
 		min-height: 44px;
 		min-width: 44px;
-		div {
+		span {
 			height: $mobile-nav-toggle-thickness;
 			width: $mobile-nav-toggle-width;
 			margin-bottom: $mobile-nav-toggle-spacing;
@@ -653,12 +660,19 @@ nav.main-nav {
 		@include clean-list;
 		margin-top: $mobile-nav-margin-top;		
 		&>li{
-			&>a {
+			&>:is(a, button.submenu-toggle) {
 				display: block;
 				text-decoration: none;
 				padding: $mobile-nav-y-padding $mobile-nav-x-padding;
-				color: $mobile-nav-color;
+				color: $mobile-nav-color;				
+				font-family: inherit;
+				font-weight: inherit;
+				line-height: inherit;
 				font-size: $mobile-nav-font-size;
+			}
+			&>button.submenu-toggle {
+				text-align: left;
+				width: 100%;
 			}
 			&.nav-button {
 				a {
@@ -673,7 +687,7 @@ nav.main-nav {
 					letter-spacing: $mobile-nav-button-letter-spacing;
 				}
 			}
-			&.menu-item-has-children>a {
+			&.menu-item-has-children>:is(a, button.submenu-toggle) {
 				&::after {
 					content: '';
 					display: block;
@@ -700,7 +714,7 @@ nav.main-nav {
 				  	}
 				}
 			}
-			&.menu-item-has-children.nav-open>a {
+			&.menu-item-has-children.nav-open>:is(a, button.submenu-toggle) {
 				&::after {
 					transform: rotateZ(180deg);
 				}
@@ -735,7 +749,7 @@ nav.main-nav {
 		&.secondary {
 			margin-top: $mobile-nav-secondary-margin-top;	
 			&>li{
-				&>a {
+				&>:is(a, button.submenu-toggle) {
 					font-size: $mobile-nav-secondary-font-size;
 					padding: $mobile-nav-secondary-y-padding $mobile-nav-secondary-x-padding;
 				}

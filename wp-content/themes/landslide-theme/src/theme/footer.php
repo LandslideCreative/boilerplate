@@ -22,7 +22,7 @@
 							</div>
 
 							<div class="cell medium-4 footer-navigation">
-								<nav class="footer-nav">
+								<nav class="footer-nav" aria-label="Footer">
 									<?php display_navigation('footer-nav'); ?>
 								</nav>
 							</div>

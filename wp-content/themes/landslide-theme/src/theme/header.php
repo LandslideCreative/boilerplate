@@ -14,25 +14,30 @@
 		<?php the_field('gtm_head', 'options'); ?>
 	</head>
 	<body <?php body_class(); ?>>
+		<?php wp_body_open(); ?>
 		<?php the_field('gtm_body', 'options'); ?>
 
 		<div class="off-canvas position-right off-canvas-navigation-container" id="offCanvas" data-off-canvas data-trap-focus="true">
 			
-			<ul class="off-canvas-navigation dropdown-nav">
-	        	<?php display_simple_navigation('main-nav'); ?>
-	        </ul>
+			<nav aria-label="Main">
+				<ul class="off-canvas-navigation dropdown-nav">
+		        	<?php display_simple_navigation('main-nav'); ?>
+		        </ul>
+		    </nav>
 
 	        <div class="mobile-search">
 				<?php get_template_part('searchform'); ?>
 			</div>
 
 	        <?php if( has_nav_menu( 'top-nav' ) ) { ?>
-	        	<ul class="off-canvas-navigation secondary dropdown-nav">
-	        		<?php display_simple_navigation('top-nav'); ?>
-	        	</ul>
+	        	<nav aria-label="Secondary">
+		        	<ul class="off-canvas-navigation secondary dropdown-nav">
+		        		<?php display_simple_navigation('top-nav'); ?>
+		        	</ul>
+		        </nav>
 	        <?php } ?>
 
-	        <button class="close-off-canvas" aria-label="Close menu" type="button" data-close>
+	        <button class="close-off-canvas" type="button" data-close>
 				Close Menu
 		    </button>
 

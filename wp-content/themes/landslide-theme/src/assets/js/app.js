@@ -9,6 +9,58 @@ import './lib/foundation-explicit-pieces';
 require('./lib/jquery.fitVids.js');
 require('./lib/jquery.matchHeight.js');
 
+// Close navigation submenus.
+function close_navigation_submenus(exceptItem = null, animate = true) {
+	$('.dropdown-nav .menu-item-has-children.nav-open').each(function() {
+		if (this === exceptItem) {
+			return;
+		}
+
+		const item = $(this);
+		const toggle = item.children('.submenu-toggle');
+		const submenu = item.children('.sub-menu');
+
+		if (submenu.find(document.activeElement).length) {
+			toggle.trigger('focus');
+		}
+
+		toggle.attr('aria-expanded', 'false');
+		item.removeClass('nav-open');
+		submenu.stop(true, false);
+
+		if (animate || item.closest('.off-canvas-navigation-container').length) {
+			submenu.slideUp('fast');
+		} else {
+			submenu.hide();
+		}
+	});
+}
+
+// Close header search.
+function close_header_search(returnFocus = false, animate = true) {
+	const container = $('.top-bar-search');
+	const toggle = container.find('.top-bar-search-toggle');
+	const search = container.find('#header-search');
+
+	if (toggle.attr('aria-expanded') !== 'true') {
+		return;
+	}
+
+	if (returnFocus || search.find(document.activeElement).length) {
+		toggle.trigger('focus');
+	}
+
+	toggle.attr('aria-expanded', 'false');
+	container.removeClass('nav-open');
+	search.stop(true, false);
+
+	if (animate) {
+		search.slideUp('fast');
+	} else {
+		search.hide();
+	}
+}
+
 $(document).ready(function() {
 
 	$(document).foundation();
@@ -18,59 +70,98 @@ $(document).ready(function() {
 		customSelector: 'iframe[src*="facebook"], iframe[src^="https://livestream.com"]'
 	});
 
-	// Dropdown Navigation
-	$('.dropdown-nav .menu-item-has-children>a').attr('aria-expanded', "false");
-	$('.dropdown-nav .menu-item-has-children>a').click(function(event) {
-		event.stopPropagation();
-		event.preventDefault();
-		if ($(this).parent().hasClass('nav-open')) {
-			$('.nav-open .sub-menu').slideUp('fast', function() {
-				$('.nav-open>a').attr('aria-expanded', "false");
-			    $('.nav-open').removeClass('nav-open');
-			});
-		} else {
-			$('.nav-open .sub-menu').hide();
-			$('.nav-open>a').attr('aria-expanded', 'false');
-			$('.nav-open').removeClass('nav-open');
-			$('.top-bar-search search').hide();
-			$('.top-bar-search-toggle').attr('aria-expanded', 'false');
+	// Connect each submenu toggle to its submenu.
+	$('.dropdown-nav .submenu-toggle').each(function(index) {
+		const submenu = $(this).siblings('.sub-menu');
 
-			$(this).parent().addClass('nav-open');
-			$(this).parent().find('.sub-menu').slideDown('fast');
-			$(this).attr('aria-expanded', 'true');
+		if (!submenu.attr('id')) {
+			submenu.attr('id', 'navigation-submenu-' + index);
+		}
+
+		$(this).attr('aria-controls', submenu.attr('id'));
+	});
+
+	// Toggle navigation submenus.
+	$('.dropdown-nav .submenu-toggle').on('click', function(event) {
+		event.stopPropagation();
+
+		const item = $(this).parent();
+		const submenu = item.children('.sub-menu');
+
+		if ($(this).attr('aria-expanded') === 'true') {
+			close_navigation_submenus(null, true);
+			return;
+		}
+
+		close_navigation_submenus(item[0], false);
+		close_header_search(false, false);
+
+		item.addClass('nav-open');
+		$(this).attr('aria-expanded', 'true');
+		submenu.stop(true, false).slideDown('fast');
+	});
+
+	// Escape closes the current submenu and returns focus to its toggle.
+	$('.dropdown-nav').on('keydown', function(event) {
+		if (event.key !== 'Escape') {
+			return;
+		}
+
+		const item = $(event.target).closest('.menu-item-has-children.nav-open');
+
+		if (!item.length) {
+			return;
+		}
+
+		event.preventDefault();
+		event.stopPropagation();
+
+		item.children('.submenu-toggle').trigger('focus');
+		close_navigation_submenus(null, true);
+	});
+
+	// Toggle header search.
+	$('.top-bar-search-toggle').on('click', function(event) {
+		event.stopPropagation();
+
+		const container = $(this).closest('.top-bar-search');
+		const search = container.find('#header-search');
+
+		if ($(this).attr('aria-expanded') === 'true') {
+			close_header_search(true);
+			return;
+		}
+
+		close_navigation_submenus(null, false);
+
+		container.addClass('nav-open');
+		$(this).attr('aria-expanded', 'true');
+
+		search.stop(true, false).slideDown('fast', function() {
+			if (container.find('.top-bar-search-toggle').attr('aria-expanded') === 'true') {
+				$(this).find('.search-input').trigger('focus');
+			}
+		});
+	});
+
+	// Keep clicks inside search from closing it.
+	$('.top-bar-search').on('click', function(event) {
+		event.stopPropagation();
+	});
+
+	// Escape closes search and returns focus to the toggle.
+	$('.top-bar-search').on('keydown', function(event) {
+		if (event.key === 'Escape' && $(this).find('.top-bar-search-toggle').attr('aria-expanded') === 'true') {
+			event.preventDefault();
+			event.stopPropagation();
+			close_header_search(true);
 		}
 	});
 
-	$('.top-bar-search-toggle').click(function(event) {
-		event.stopPropagation();
-		event.preventDefault();
-		if( $('.top-bar-search').hasClass('nav-open') ) {
-			$('.top-bar-search search').slideUp('fast', function() {
-				$(this).attr('aria-expanded', 'false');
-			    $('.top-bar-search').removeClass('nav-open');
-			});
-		} else {
-			$('.nav-open .sub-menu').hide();
-			$('.nav-open>a').attr('aria-expanded', 'false');
-			$('.nav-open').removeClass('nav-open');
-
-			$('.top-bar-search').addClass('nav-open');
-			$('.top-bar-search search').slideDown('fast');
-			$(this).attr('aria-expanded', 'true');
-			$('.top-bar-search form .search-input').focus();
-		}
-	});
-
-	$('.top-bar-search form .search-input').on('click', function(event) {
-		event.stopPropagation();
-	});
-
-	$('*:not(.dropdown-nav .menu-item-has-children>a):not(.top-bar-search-toggle):not(.top-bar-search form .search-input)').on('click', function() {
-		$('.nav-open .sub-menu').hide();
-		$('.nav-open>a').attr('aria-expanded', 'false');
-		$('.nav-open').removeClass('nav-open');
-		$('.top-bar-search search').hide();
-		$('.top-bar-search-toggle').attr('aria-expanded', 'false');
+	// Close menus and search when clicking elsewhere.
+	$(document).on('click', function() {
+		close_navigation_submenus();
+		close_header_search();
 	});
 
 

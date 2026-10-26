@@ -63,3 +63,13 @@ function my_wp_nav_menu_args($args = '')
     return $args;
 }
 add_filter('wp_nav_menu_args', 'my_wp_nav_menu_args');
+
+// Output submenu parent items as buttons.
+function ls_submenu_toggle_buttons( $item_output, $item, $depth, $args ) {
+    if ( !in_array( $args->theme_location, array( 'main-nav', 'top-nav' ), true ) || !in_array( 'menu-item-has-children', $item->classes, true ) ) {
+        return $item_output;
+    }
+
+    return preg_replace( '/<a\b[^>]*>(.*?)<\/a>/s', '<button type="button" class="submenu-toggle" aria-expanded="false">$1</button>', $item_output, 1 );
+}
+add_filter( 'walker_nav_menu_start_el', 'ls_submenu_toggle_buttons', 10, 4 );
