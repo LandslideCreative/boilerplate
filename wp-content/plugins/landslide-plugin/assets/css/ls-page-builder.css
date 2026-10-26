@@ -137,9 +137,6 @@
 }
 
 /* Two-Column Section */
-.acf-field .layout[data-layout="two_column"] .acf-editor-wrap iframe{
-    height: 250px;
-}
 .acf-field-flexible-content[data-name="page_builder"] .acf-flexible-content .layout[data-layout="two_column"] .acf-field[data-name="columns"]>.acf-label {
     display: none;
 }

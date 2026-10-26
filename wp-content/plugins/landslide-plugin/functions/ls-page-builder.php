@@ -143,21 +143,6 @@ function ls_add_page_builder_scripts() {
 }
 add_action('acf/input/admin_enqueue_scripts', 'ls_add_page_builder_scripts');
 
-// Remove ACF WYSIWYG inline styles
-function ls_remove_acf_wysiwyg_styles() { ?>
-    <script type="text/javascript">
-        (function($) {
-            acf.add_action('wysiwyg_tinymce_init', function( ed, id, mceInit, $field ){
-                $(".acf-field .acf-editor-wrap iframe").removeAttr("style");
-            });
-            acf.add_action('sortstop', function( ed, id, mceInit, $field ){
-                $(".acf-field .acf-editor-wrap iframe").removeAttr("style");
-            });
-        })(jQuery); 
-    </script>
-<?php }
-add_action('acf/input/admin_footer', 'ls_remove_acf_wysiwyg_styles');
-
 // Create Global Section post type
 function ls_create_global_section_post_type()
 {

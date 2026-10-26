@@ -58,3 +58,13 @@ jQuery(document).ready(function() {
     });
 
 });
+
+// Enable autoresize for TinyMCE when initialized by ACF
+(function($) {    
+    acf.add_filter('wysiwyg_tinymce_settings', function( mceInit, id, $field ){
+        mceInit.wp_autoresize_on = true;
+        mceInit.autoresize_min_height = 225;
+        mceInit.autoresize_max_height = 800;
+        return mceInit;
+    });
+})(jQuery);
